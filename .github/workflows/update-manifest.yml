@@ -1,0 +1,50 @@
+name: Update Digest Manifest
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'digests/**.html'
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rebuild manifest.json
+        run: |
+          python3 - <<'EOF'
+          import os, re, json
+
+          entries = []
+          digest_dir = 'digests'
+
+          for fname in sorted(os.listdir(digest_dir), reverse=True):
+              if not fname.endswith('.html'):
+                  continue
+              date = fname.replace('.html', '')
+              if not re.match(r'^\d{4}-\d{2}-\d{2}$', date):
+                  continue
+              with open(os.path.join(digest_dir, fname), encoding='utf-8') as f:
+                  content = f.read()
+              m = re.search(r'<h1[^>]*>(.*?)</h1>', content, re.IGNORECASE | re.DOTALL)
+              title = re.sub(r'<[^>]+>', '', m.group(1)).strip() if m else 'Polkadot Daily Digest'
+              entries.append({'date': date, 'title': title})
+
+          with open(os.path.join(digest_dir, 'manifest.json'), 'w') as f:
+              json.dump(entries, f, indent=2)
+
+          print(f'Manifest updated: {len(entries)} entries')
+          EOF
+
+      - name: Commit manifest
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add digests/manifest.json
+          git diff --staged --quiet || git commit -m "chore: update manifest for $(date +%Y-%m-%d)"
+          git push

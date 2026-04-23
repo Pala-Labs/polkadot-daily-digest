@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Polkadot Daily Digest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:        #f5f5f7;
+  --card:      #ffffff;
+  --nav:       rgba(255,255,255,0.88);
+  --t1:        #1d1d1f;
+  --t2:        #6e6e73;
+  --t3:        #aeaeb2;
+  --sep:       rgba(0,0,0,0.09);
+  --accent:    #e6007a;
+  --green:     #34c759;
+  --orange:    #ff9f0a;
+  --blue:      #007aff;
+  --gray:      #8e8e93;
+  --r:         14px;
+  --shadow:    0 1px 4px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--t1);
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ── Nav ── */
+.nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--nav);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--sep);
+}
+.nav-inner {
+  max-width: 800px; margin: 0 auto; padding: 0 20px;
+  height: 50px; display: flex; align-items: center; gap: 0;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 9px;
+  text-decoration: none; color: var(--t1); margin-right: auto;
+  cursor: pointer; border: none; background: none; font-size: inherit;
+}
+.nav-dot {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--accent); flex-shrink: 0;
+}
+.nav-brand { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; }
+.nav-tabs  { display: flex; }
+.nav-tab {
+  padding: 0 14px; height: 50px; display: flex; align-items: center;
+  font-size: 14px; font-weight: 500; color: var(--t2);
+  cursor: pointer; border: none; background: none;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s; letter-spacing: -0.1px;
+}
+.nav-tab:hover  { color: var(--t1); }
+.nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ── Layout ── */
+.wrap { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+.page { display: none; padding-bottom: 64px; }
+.page.active { display: block; }
+
+/* ── Section label ── */
+.eyebrow {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.7px; color: var(--t3); margin-bottom: 10px;
+}
+
+/* ── Stat chips ── */
+.chips { display: flex; gap: 10px; flex-wrap: wrap; }
+.chip {
+  flex: 1; min-width: 90px;
+  background: var(--card); border-radius: var(--r);
+  box-shadow: var(--shadow); padding: 16px 12px; text-align: center;
+}
+.chip-num {
+  font-size: 26px; font-weight: 700; letter-spacing: -0.8px;
+  color: var(--accent); line-height: 1; margin-bottom: 4px;
+}
+.chip-lbl { font-size: 11px; color: var(--t2); font-weight: 500; }
+
+/* ── Home ── */
+.home-hero { padding: 44px 0 32px; }
+.home-hero h1 {
+  font-size: 30px; font-weight: 700; letter-spacing: -0.8px; margin-bottom: 6px;
+}
+.home-hero p { font-size: 15px; color: var(--t2); }
+.accent { color: var(--accent); }
+.home-block { margin-bottom: 36px; }
+
+/* Digest list row */
+.d-row {
+  background: var(--card); border-radius: var(--r); box-shadow: var(--shadow);
+  padding: 16px 18px; display: flex; align-items: center; gap: 14px;
+  cursor: pointer; border: none; width: 100%; text-align: left; color: inherit;
+  margin-bottom: 8px; transition: box-shadow 0.15s, transform 0.12s;
+}
+.d-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-1px); }
+.d-row-info { flex: 1; min-width: 0; }
+.d-row-date { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; }
+.d-row-sub  { font-size: 13px; color: var(--t2); margin-top: 2px; }
+.d-arrow    { font-size: 18px; color: var(--t3); flex-shrink: 0; }
+
+/* ── Digests list page ── */
+.page-header { padding: 36px 0 22px; }
+.page-header h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.6px; }
+
+/* ── Detail page ── */
+.detail-top {
+  padding: 24px 0 18px;
+  display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap;
+}
+.back-btn {
+  display: flex; align-items: center; gap: 3px;
+  color: var(--accent); font-size: 14px; font-weight: 500;
+  cursor: pointer; border: none; background: none; padding: 0;
+  flex-shrink: 0; margin-top: 3px;
+}
+.back-btn:hover { opacity: 0.7; }
+.detail-heading h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+.detail-heading p  { font-size: 13px; color: var(--t2); margin-top: 3px; }
+
+/* Report body */
+.report-section { margin-bottom: 28px; }
+.report-section-title {
+  font-size: 18px; font-weight: 700; letter-spacing: -0.4px;
+  margin-bottom: 12px; display: flex; align-items: center; gap: 7px;
+}
+
+/* News card */
+.news-card {
+  background: var(--card); border-radius: var(--r); box-shadow: var(--shadow);
+  margin-bottom: 8px; overflow: hidden;
+}
+.news-inner {
+  padding: 15px 18px; border-left: 3px solid transparent;
+}
+.news-inner.tech      { border-color: var(--blue); }
+.news-inner.ecosystem { border-color: var(--green); }
+.news-inner.other     { border-color: var(--orange); }
+.news-title { font-size: 13px; font-weight: 600; margin-bottom: 5px; line-height: 1.4; }
+.news-body  { font-size: 13px; color: var(--t2); line-height: 1.65; }
+.news-body code {
+  font-family: 'SF Mono', 'Menlo', monospace; font-size: 12px;
+  background: rgba(0,0,0,0.05); padding: 1px 5px; border-radius: 4px; color: var(--t1);
+}
+.news-body a {
+  color: var(--accent); text-decoration: none; font-size: 11px; font-weight: 600;
+  background: rgba(230,0,122,0.07); padding: 1px 6px; border-radius: 4px;
+  margin: 0 1px; display: inline-block; transition: background 0.12s;
+}
+.news-body a:hover { background: rgba(230,0,122,0.14); }
+
+/* OpenGov sub-label */
+.gov-sub-label {
+  font-size: 11px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.6px; color: var(--t3); margin: 16px 0 8px;
+}
+.gov-sub-label:first-child { margin-top: 0; }
+
+/* Referendum card — full-width inline */
+.ref-card {
+  background: var(--card); border-radius: var(--r); box-shadow: var(--shadow);
+  margin-bottom: 8px; padding: 14px 18px;
+}
+.ref-top {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 7px; flex-wrap: wrap;
+}
+.ref-id { font-size: 12px; font-weight: 700; color: var(--accent); text-decoration: none; }
+.ref-id:hover { text-decoration: underline; }
+.ref-badge {
+  font-size: 11px; font-weight: 600; padding: 2px 8px;
+  border-radius: 6px; white-space: nowrap;
+}
+.b-submitted { background: rgba(0,122,255,0.1);   color: var(--blue); }
+.b-decision  { background: rgba(255,159,10,0.1);  color: var(--orange); }
+.b-executed  { background: rgba(52,199,89,0.1);   color: var(--green); }
+.b-timeout   { background: rgba(142,142,147,0.12);color: var(--gray); }
+.b-confirmed { background: rgba(52,199,89,0.1);   color: var(--green); }
+.ref-title-text { font-size: 13px; font-weight: 500; color: var(--t1); line-height: 1.4; margin-bottom: 9px; }
+.ref-foot {
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 12px;
+}
+.aye-row { display: flex; align-items: center; gap: 6px; }
+.aye-track { width: 44px; height: 3px; background: rgba(0,0,0,0.08); border-radius: 2px; overflow: hidden; }
+.aye-fill  { height: 100%; background: var(--green); border-radius: 2px; }
+.aye-pct   { font-weight: 600; color: var(--green); }
+.ref-by    { color: var(--t2); }
+.ref-by a  { color: var(--accent); text-decoration: none; }
+.ref-by a:hover { text-decoration: underline; }
+.ref-dl    { font-weight: 600; color: var(--orange); }
+
+/* Processing log chips at bottom */
+.log-block {
+  margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--sep);
+  padding-bottom: 12px;
+}
+.log-block h3 { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; margin-bottom: 3px; }
+.log-block p  { font-size: 13px; color: var(--t2); margin-bottom: 14px; }
+.log-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.log-chip {
+  background: var(--card); border-radius: 12px; box-shadow: var(--shadow);
+  padding: 12px 14px; text-align: center; min-width: 72px;
+}
+.log-chip-num { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; color: var(--t1); line-height: 1; }
+.log-chip-lbl { font-size: 10px; color: var(--t2); font-weight: 500; margin-top: 3px; }
+
+/* Loading */
+.loading { text-align: center; padding: 48px 0; color: var(--t3); font-size: 14px; }
+.spinner {
+  width: 26px; height: 26px; border-radius: 50%; margin: 0 auto 12px;
+  border: 2px solid rgba(230,0,122,0.15); border-top-color: var(--accent);
+  animation: spin 0.75s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--sep); padding: 20px 0;
+  text-align: center; font-size: 12px; color: var(--t3);
+}
+.footer a { color: var(--accent); text-decoration: none; }
+
+@media (max-width: 480px) {
+  .chip { min-width: 72px; }
+  .chip-num { font-size: 20px; }
+  .nav-brand { display: none; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <button class="nav-logo" onclick="nav('home')">
+      <div class="nav-dot"></div>
+      <span class="nav-brand">Polkadot Digest</span>
+    </button>
+    <div class="nav-tabs">
+      <button class="nav-tab active" id="tab-home"    onclick="nav('home')">Home</button>
+      <button class="nav-tab"        id="tab-digests" onclick="nav('digests')">Digests</button>
+    </div>
+  </div>
+</nav>
+
+<!-- HOME -->
+<div id="page-home" class="page active">
+  <div class="wrap">
+    <div class="home-hero">
+      <h1><span class="accent">Polkadot</span> Daily Digest</h1>
+      <p>Ecosystem intelligence, curated daily by Pala Labs</p>
+    </div>
+    <div class="home-block">
+      <div class="eyebrow">Cumulative Data Points</div>
+      <div class="chips" id="home-stats"><div class="loading"><div class="spinner"></div></div></div>
+    </div>
+    <div class="home-block">
+      <div class="eyebrow">Recent Digests</div>
+      <div id="home-recent"><div class="loading"><div class="spinner"></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- DIGESTS LIST -->
+<div id="page-digests" class="page">
+  <div class="wrap">
+    <div class="page-header"><h1>All Digests</h1></div>
+    <div id="list-body"><div class="loading"><div class="spinner"></div></div></div>
+  </div>
+</div>
+
+<!-- DIGEST DETAIL -->
+<div id="page-detail" class="page">
+  <div class="wrap">
+    <div class="detail-top">
+      <button class="back-btn" id="back-btn">&#8249; Back</button>
+      <div class="detail-heading">
+        <h1 id="detail-title"></h1>
+        <p  id="detail-sub"></p>
+      </div>
+    </div>
+    <div id="detail-body"><div class="loading"><div class="spinner"></div></div></div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="wrap">
+    Auto-generated by <a href="https://palalabs.io" target="_blank">Pala Labs</a> ·
+    Governance data via <a href="https://openshore.io" target="_blank">OpenShore</a>
+  </div>
+</footer>
+
+<script>
+// ─────────────────────────── Config ───────────────────────────
+const STAT_DEFS = [
+  { key: 'Polkadot Forum',         label: 'Forum' },
+  { key: 'Medium',                 label: 'Articles' },
+  { key: 'X(Twitter)',             label: 'Tweets' },
+  { key: 'GitHub (Release only)',  label: 'Releases' },
+  { key: 'OpenGov',                label: 'Proposals' },
+];
+
+const SECTION_ICONS = {
+  'technical': '⚙️', 'ecosystem': '🌐', 'other': '📋', 'opengov updates': '🗳️'
+};
+const SECTION_CLS = {
+  'technical': 'tech', 'ecosystem': 'ecosystem', 'other': 'other'
+};
+const BADGE_CLS = {
+  submitted: 'b-submitted', decision: 'b-decision',
+  executed:  'b-executed',  timeout: 'b-timeout', confirmed: 'b-confirmed'
+};
+
+// ─────────────────────────── State ────────────────────────────
+let manifests  = [];
+let docCache   = {};
+let prevPage   = 'home';
+
+// ─────────────────────────── Navigation ───────────────────────
+function nav(page) {
+  ['home','digests','detail'].forEach(p => {
+    document.getElementById('page-'+p).classList.toggle('active', p === page);
+  });
+  ['home','digests'].forEach(t => {
+    const el = document.getElementById('tab-'+t);
+    if (el) el.classList.toggle('active', t === page);
+  });
+  if (page !== 'detail') prevPage = page;
+  window.scrollTo(0, 0);
+}
+
+// ─────────────────────────── Data ─────────────────────────────
+async function fetchDigest(date) {
+  if (docCache[date]) return docCache[date];
+  const res = await fetch('digests/' + date + '.html');
+  if (!res.ok) throw new Error('Not found');
+  const html = await res.text();
+  const doc  = new DOMParser().parseFromString(html, 'text/html');
+  docCache[date] = doc;
+  return doc;
+}
+
+// Extract stats only from the Processing Logs h2 section
+function extractStats(doc) {
+  const stats = {};
+  let inLogs  = false;
+  doc.querySelectorAll('h2, ul').forEach(el => {
+    if (el.tagName === 'H2') {
+      inLogs = el.textContent.trim().toLowerCase() === 'processing logs';
+      return;
+    }
+    if (!inLogs) return;
+    el.querySelectorAll('li').forEach(li => {
+      const m = li.textContent.trim().match(/^(.+?):\s*(\d+)$/);
+      if (m) stats[m[1].trim()] = parseInt(m[2]);
+    });
+  });
+  return stats;
+}
+
+function mergeStats(allStats) {
+  const out = {};
+  allStats.forEach(s => {
+    Object.entries(s).forEach(([k, v]) => { out[k] = (out[k] || 0) + v; });
+  });
+  return out;
+}
+
+async function loadManifest() {
+  try {
+    const res = await fetch('digests/manifest.json');
+    if (!res.ok) throw new Error();
+    manifests = await res.json();
+  } catch {
+    const today = new Date().toISOString().split('T')[0];
+    manifests = [{ date: today, title: 'Polkadot Daily Digest' }];
+  }
+  manifests.sort((a, b) => b.date.localeCompare(a.date));
+}
+
+// ─────────────────────────── Formatting ───────────────────────
+function fmtDate(iso) {
+  return new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  });
+}
+
+function badgeCls(status) {
+  return BADGE_CLS[(status || '').toLowerCase()] || 'b-submitted';
+}
+
+// ─────────────────────────── Render helpers ───────────────────
+function renderChips(totals, reportCount) {
+  const cols = STAT_DEFS.map(d => {
+    const n = totals[d.key] || 0;
+    return '<div class="chip"><div class="chip-num">' + n + '</div><div class="chip-lbl">' + d.label + '</div></div>';
+  });
+  const total = STAT_DEFS.reduce((s, d) => s + (totals[d.key] || 0), 0);
+  cols.push('<div class="chip"><div class="chip-num">' + total + '</div><div class="chip-lbl">Total</div></div>');
+  if (reportCount != null) {
+    cols.push('<div class="chip"><div class="chip-num">' + reportCount + '</div><div class="chip-lbl">Reports</div></div>');
+  }
+  return cols.join('');
+}
+
+function renderDigestRow(m) {
+  return '<button class="d-row" onclick="openDigest(\'' + m.date + '\')">' +
+    '<div class="d-row-info">' +
+      '<div class="d-row-date">' + fmtDate(m.date) + '</div>' +
+      '<div class="d-row-sub">' + (m.title || 'Polkadot Daily Digest') + '</div>' +
+    '</div>' +
+    '<div class="d-arrow">&#8250;</div>' +
+  '</button>';
+}
+
+// Parse a referendum <p> element
+function parseRef(p) {
+  const links   = p.querySelectorAll('a');
+  const refLink = links[0];
+  const prLink  = links[1];
+  const text    = p.textContent;
+
+  const id     = (text.match(/Referendum\s+(\d+)/)                    || [])[1] || '';
+  const rawT   = (text.match(/Referendum\s+\d+[:\s]+([^➖\n]+)/)       || [])[1] || '';
+  const aye    = (text.match(/Current Aye:\s*([\d.]+%)/)               || [])[1] || '0%';
+  const status = (text.match(/Status:\s*([^➖\n]+?)(?:\s*➖|$)/)        || [])[1]?.trim() || '';
+  const dl     = (text.match(/Decision In:\s*([^➖\n]+?)(?:\s*➖|$)/)   || [])[1]?.trim() || '';
+
+  return {
+    id, status, dl,
+    aye:    aye,
+    ayePct: parseFloat(aye) || 0,
+    title:  rawT.replace(/[:\s]+$/, '').trim(),
+    refUrl: refLink ? refLink.href : '#',
+    prName: prLink  ? prLink.textContent.trim() : '',
+    prUrl:  prLink  ? prLink.href : '#',
+  };
+}
+
+function renderRef(r) {
+  const w = Math.min(r.ayePct, 100);
+  return '<div class="ref-card">' +
+    '<div class="ref-top">' +
+      '<a class="ref-id" href="' + r.refUrl + '" target="_blank">#' + r.id + '</a>' +
+      '<span class="ref-badge ' + badgeCls(r.status) + '">' + r.status + '</span>' +
+    '</div>' +
+    '<div class="ref-title-text">' + r.title + '</div>' +
+    '<div class="ref-foot">' +
+      '<div class="aye-row">' +
+        '<div class="aye-track"><div class="aye-fill" style="width:' + w + '%"></div></div>' +
+        '<span class="aye-pct">' + r.aye + '</span>' +
+        '<span style="color:var(--t2)">Aye</span>' +
+      '</div>' +
+      (r.prName ? '<div class="ref-by">by <a href="' + r.prUrl + '" target="_blank">' + r.prName + '</a></div>' : '') +
+      (r.dl     ? '<div class="ref-dl">⏱ ' + r.dl + '</div>' : '') +
+    '</div>' +
+  '</div>';
+}
+
+// Walk siblings to find the next blockquote (skip any intervening <p>)
+function nextBlockquote(el) {
+  let cur = el ? el.nextElementSibling : null;
+  while (cur && cur.tagName !== 'BLOCKQUOTE' && cur.tagName !== 'H3' && cur.tagName !== 'H2') {
+    cur = cur.nextElementSibling;
+  }
+  return cur && cur.tagName === 'BLOCKQUOTE' ? cur : null;
+}
+
+function renderNewsItem(li, cls) {
+  const strong = li.querySelector('strong');
+  const title  = strong ? strong.textContent.replace(/:$/, '').trim() : '';
+  const clone  = li.cloneNode(true);
+  clone.querySelector('strong') && clone.querySelector('strong').remove();
+  const body = clone.innerHTML.replace(/^\s*:\s*/, '').trim();
+  return '<div class="news-card"><div class="news-inner ' + (cls || '') + '">' +
+    '<div class="news-title">' + title + '</div>' +
+    '<div class="news-body">'  + body  + '</div>' +
+  '</div></div>';
+}
+
+// Render a news section (Technical / Ecosystem / Other)
+function renderNewsSection(h2) {
+  const key   = h2.textContent.trim().toLowerCase();
+  const icon  = SECTION_ICONS[key] || '📌';
+  const cls   = SECTION_CLS[key]   || '';
+  const items = [];
+
+  let el = h2.nextElementSibling;
+  while (el && el.tagName !== 'H2') {
+    if (el.tagName === 'UL') el.querySelectorAll('li').forEach(li => items.push(li));
+    el = el.nextElementSibling;
+  }
+  if (!items.length) return '';
+
+  return '<div class="report-section">' +
+    '<div class="report-section-title"><span>' + icon + '</span> ' + h2.textContent.trim() + '</div>' +
+    items.map(li => renderNewsItem(li, cls)).join('') +
+  '</div>';
+}
+
+// Render OpenGov section — both h3 subsections
+function renderGovSection(h2) {
+  let out = '<div class="report-section">' +
+    '<div class="report-section-title"><span>🗳️</span> ' + h2.textContent.trim() + '</div>';
+
+  let el = h2.nextElementSibling;
+  while (el && el.tagName !== 'H2') {
+    if (el.tagName === 'H3') {
+      const label = el.textContent.trim();
+      const bq    = nextBlockquote(el);
+      if (bq) {
+        const refs = Array.from(bq.querySelectorAll('p')).map(parseRef);
+        out += '<div class="gov-sub-label">' + label + '</div>';
+        out += refs.map(renderRef).join('');
+      }
+    }
+    el = el.nextElementSibling;
+  }
+  return out + '</div>';
+}
+
+// Render the Processing Logs as stat chips (at the bottom)
+function renderLogChips(stats) {
+  if (!Object.keys(stats).length) return '';
+  const chips = STAT_DEFS
+    .filter(d => stats[d.key] != null)
+    .map(d => '<div class="log-chip"><div class="log-chip-num">' + stats[d.key] + '</div><div class="log-chip-lbl">' + d.label + '</div></div>');
+  const total = STAT_DEFS.reduce((s, d) => s + (stats[d.key] || 0), 0);
+  chips.push('<div class="log-chip"><div class="log-chip-num">' + total + '</div><div class="log-chip-lbl">Total</div></div>');
+
+  return '<div class="log-block">' +
+    '<h3>Processing Logs</h3>' +
+    '<p>Data points curated &amp; analysed for this report</p>' +
+    '<div class="log-chips">' + chips.join('') + '</div>' +
+  '</div>';
+}
+
+// Build the full report HTML from a parsed digest document
+function renderReport(doc) {
+  let out     = '';
+  let govHTML = '';
+
+  doc.querySelectorAll('h2').forEach(h2 => {
+    const key = h2.textContent.trim().toLowerCase();
+    if (key === 'processing logs') return;
+    if (key === 'opengov updates') { govHTML = renderGovSection(h2); return; }
+    out += renderNewsSection(h2);
+  });
+
+  // OpenGov always at end
+  out += govHTML;
+
+  // Processing logs stat chips at very bottom
+  out += renderLogChips(extractStats(doc));
+
+  return out || '<div class="loading">No content found.</div>';
+}
+
+// ─────────────────────────── Page actions ─────────────────────
+async function openDigest(date) {
+  nav('detail');
+  document.getElementById('detail-title').textContent = fmtDate(date);
+  document.getElementById('detail-sub').textContent   = 'Polkadot Daily Digest';
+  document.getElementById('detail-body').innerHTML    = '<div class="loading"><div class="spinner"></div></div>';
+
+  document.getElementById('back-btn').onclick = () => nav(prevPage);
+
+  try {
+    const doc = await fetchDigest(date);
+    document.getElementById('detail-body').innerHTML = renderReport(doc);
+  } catch {
+    document.getElementById('detail-body').innerHTML =
+      '<div class="loading">Could not load digest for ' + date + '.</div>';
+  }
+}
+
+// ─────────────────────────── Init ─────────────────────────────
+async function init() {
+  await loadManifest();
+
+  // Home: aggregate stats from all digests in parallel
+  const allDocs  = await Promise.allSettled(manifests.map(m => fetchDigest(m.date)));
+  const allStats = allDocs
+    .filter(r => r.status === 'fulfilled')
+    .map(r => extractStats(r.value));
+  const totals   = mergeStats(allStats);
+
+  document.getElementById('home-stats').innerHTML =
+    renderChips(totals, manifests.length);
+
+  // Home recent (up to 5)
+  const recent = manifests.slice(0, 5);
+  document.getElementById('home-recent').innerHTML =
+    recent.map(renderDigestRow).join('') || '<div class="loading">No digests found.</div>';
+
+  // Digests list (all)
+  document.getElementById('list-body').innerHTML =
+    manifests.map(renderDigestRow).join('') || '<div class="loading">No digests found.</div>';
+}
+
+init();
+</script>
+</body>
+</html>

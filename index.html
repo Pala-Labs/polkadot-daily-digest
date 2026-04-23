@@ -6,222 +6,390 @@
 <title>Polkadot Daily Digest</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:        #f5f5f7;
-  --card:      #ffffff;
-  --nav:       rgba(255,255,255,0.88);
-  --t1:        #1d1d1f;
-  --t2:        #6e6e73;
-  --t3:        #aeaeb2;
-  --sep:       rgba(0,0,0,0.09);
+  --newsprint: #f2ede3;
+  --paper:     #faf8f2;
+  --ink:       #191714;
+  --ink2:      #5a5650;
+  --ink3:      #9a9690;
+  --rule-lt:   rgba(25,23,20,0.14);
   --accent:    #e6007a;
-  --green:     #34c759;
-  --orange:    #ff9f0a;
-  --blue:      #007aff;
-  --gray:      #8e8e93;
-  --r:         14px;
-  --shadow:    0 1px 4px rgba(0,0,0,0.07), 0 4px 16px rgba(0,0,0,0.05);
+  --green:     #2d7a47;
+  --orange:    #b85c00;
+  --blue:      #1a5fa8;
+  --gray:      #6e6e6e;
+  --col-gap:   28px;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--bg);
-  color: var(--t1);
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--newsprint);
+  color: var(--ink);
+  font-family: 'Crimson Pro', Georgia, 'Times New Roman', serif;
   -webkit-font-smoothing: antialiased;
-  line-height: 1.5;
+  line-height: 1.6;
   min-height: 100vh;
+}
+
+/* ── Masthead ── */
+.masthead {
+  background: var(--paper);
+  border-bottom: 3px double var(--ink);
+}
+.masthead-rule-top {
+  height: 4px;
+  background: var(--accent);
+}
+.masthead-inner {
+  max-width: 960px; margin: 0 auto;
+  padding: 16px 24px 18px;
+  text-align: center;
+}
+.masthead-meta {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 1.3px;
+  color: var(--ink3); margin-bottom: 8px;
+}
+.masthead-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 5.5vw, 60px);
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1;
+  color: var(--ink);
+  margin-bottom: 7px;
+}
+.masthead-brand .dot-word { color: var(--accent); }
+.masthead-tagline {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--ink2);
+}
+.masthead-rule-double {
+  height: 3px;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  margin: 14px 0 0;
 }
 
 /* ── Nav ── */
 .nav {
+  background: var(--paper);
+  border-bottom: 1px solid var(--ink);
   position: sticky; top: 0; z-index: 100;
-  background: var(--nav);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid var(--sep);
 }
 .nav-inner {
-  max-width: 800px; margin: 0 auto; padding: 0 20px;
-  height: 50px; display: flex; align-items: center; gap: 0;
+  max-width: 960px; margin: 0 auto; padding: 0 24px;
+  height: 40px; display: flex; align-items: center; justify-content: center;
 }
-.nav-logo {
-  display: flex; align-items: center; gap: 9px;
-  text-decoration: none; color: var(--t1); margin-right: auto;
-  cursor: pointer; border: none; background: none; font-size: inherit;
-}
-.nav-dot {
-  width: 26px; height: 26px; border-radius: 50%;
-  background: var(--accent); flex-shrink: 0;
-}
-.nav-brand { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; }
-.nav-tabs  { display: flex; }
+.nav-tabs { display: flex; }
 .nav-tab {
-  padding: 0 14px; height: 50px; display: flex; align-items: center;
-  font-size: 14px; font-weight: 500; color: var(--t2);
+  padding: 0 22px; height: 40px;
+  display: flex; align-items: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.4px;
+  color: var(--ink2);
   cursor: pointer; border: none; background: none;
-  border-bottom: 2px solid transparent; margin-bottom: -1px;
-  transition: color 0.15s, border-color 0.15s; letter-spacing: -0.1px;
+  border-right: 1px solid var(--rule-lt);
+  transition: color 0.1s, background 0.1s;
 }
-.nav-tab:hover  { color: var(--t1); }
-.nav-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.nav-tab:first-child { border-left: 1px solid var(--rule-lt); }
+.nav-tab:hover  { color: var(--ink); background: rgba(25,23,20,0.04); }
+.nav-tab.active { color: var(--paper); background: var(--ink); }
 
 /* ── Layout ── */
-.wrap { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+.wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
 .page { display: none; padding-bottom: 64px; }
 .page.active { display: block; }
 
-/* ── Section label ── */
+/* ── Eyebrow ── */
 .eyebrow {
-  font-size: 11px; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.7px; color: var(--t3); margin-bottom: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.6px;
+  color: var(--ink3); margin-bottom: 10px;
 }
 
 /* ── Stat chips ── */
-.chips { display: flex; gap: 10px; flex-wrap: wrap; }
-.chip {
-  flex: 1; min-width: 90px;
-  background: var(--card); border-radius: var(--r);
-  box-shadow: var(--shadow); padding: 16px 12px; text-align: center;
+.chips {
+  display: flex; gap: 0; flex-wrap: nowrap;
+  border: 1px solid var(--rule-lt);
+  background: var(--paper);
 }
+.chip {
+  flex: 1; min-width: 72px;
+  padding: 14px 10px; text-align: center;
+  border-right: 1px solid var(--rule-lt);
+}
+.chip:last-child { border-right: none; }
 .chip-num {
-  font-size: 26px; font-weight: 700; letter-spacing: -0.8px;
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 700; letter-spacing: -0.5px;
   color: var(--accent); line-height: 1; margin-bottom: 4px;
 }
-.chip-lbl { font-size: 11px; color: var(--t2); font-weight: 500; }
+.chip-lbl {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--ink2);
+}
 
 /* ── Home ── */
-.home-hero { padding: 44px 0 32px; }
-.home-hero h1 {
-  font-size: 30px; font-weight: 700; letter-spacing: -0.8px; margin-bottom: 6px;
+.home-intro {
+  padding: 32px 0 24px;
+  border-bottom: 3px double var(--ink);
+  margin-bottom: 32px;
 }
-.home-hero p { font-size: 15px; color: var(--t2); }
+.home-intro-date {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; font-size: 17px; color: var(--ink2);
+  margin-bottom: 6px;
+}
+.home-intro-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px; font-weight: 900; letter-spacing: -0.5px;
+  line-height: 1.1;
+}
 .accent { color: var(--accent); }
 .home-block { margin-bottom: 36px; }
 
 /* Digest list row */
 .d-row {
-  background: var(--card); border-radius: var(--r); box-shadow: var(--shadow);
-  padding: 16px 18px; display: flex; align-items: center; gap: 14px;
-  cursor: pointer; border: none; width: 100%; text-align: left; color: inherit;
-  margin-bottom: 8px; transition: box-shadow 0.15s, transform 0.12s;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule-lt);
+  padding: 15px 18px 15px 20px;
+  display: flex; align-items: center; gap: 14px;
+  cursor: pointer;
+  border-left: 3px solid transparent;
+  width: 100%; text-align: left; color: inherit;
+  font-family: inherit;
+  transition: border-left-color 0.15s, background 0.12s;
 }
-.d-row:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1), 0 8px 24px rgba(0,0,0,0.08); transform: translateY(-1px); }
+.d-row:first-child { border-top: 2px solid var(--ink); }
+.d-row:last-child  { border-bottom: 2px solid var(--ink); }
+.d-row:hover { border-left-color: var(--accent); background: #ece8dc; }
 .d-row-info { flex: 1; min-width: 0; }
-.d-row-date { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; }
-.d-row-sub  { font-size: 13px; color: var(--t2); margin-top: 2px; }
-.d-arrow    { font-size: 18px; color: var(--t3); flex-shrink: 0; }
+.d-row-date {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 700; letter-spacing: -0.3px;
+}
+.d-row-sub {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; color: var(--ink2); margin-top: 2px;
+  text-transform: uppercase; letter-spacing: 0.6px;
+}
+.d-arrow { font-size: 18px; color: var(--ink3); flex-shrink: 0; }
 
 /* ── Digests list page ── */
-.page-header { padding: 36px 0 22px; }
-.page-header h1 { font-size: 26px; font-weight: 700; letter-spacing: -0.6px; }
+.page-header {
+  padding: 30px 0 18px;
+  border-bottom: 3px double var(--ink);
+  margin-bottom: 22px;
+}
+.page-header h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px; font-weight: 900; letter-spacing: -0.5px;
+}
 
 /* ── Detail page ── */
-.detail-top {
-  padding: 24px 0 18px;
-  display: flex; align-items: flex-start; gap: 14px; flex-wrap: wrap;
-}
 .back-btn {
-  display: flex; align-items: center; gap: 3px;
-  color: var(--accent); font-size: 14px; font-weight: 500;
-  cursor: pointer; border: none; background: none; padding: 0;
-  flex-shrink: 0; margin-top: 3px;
+  display: inline-flex; align-items: center; gap: 3px;
+  color: var(--ink2);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  cursor: pointer; border: none; background: none; padding: 20px 0 0;
 }
-.back-btn:hover { opacity: 0.7; }
-.detail-heading h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
-.detail-heading p  { font-size: 13px; color: var(--t2); margin-top: 3px; }
+.back-btn:hover { color: var(--accent); }
 
-/* Report body */
-.report-section { margin-bottom: 28px; }
-.report-section-title {
-  font-size: 18px; font-weight: 700; letter-spacing: -0.4px;
-  margin-bottom: 12px; display: flex; align-items: center; gap: 7px;
+.detail-masthead {
+  padding: 16px 0 22px;
+  border-bottom: 3px double var(--ink);
+  margin-bottom: 28px;
+  text-align: center;
+}
+.detail-edition {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.8px;
+  color: var(--ink3); margin-bottom: 10px;
+}
+.detail-masthead h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(24px, 4vw, 42px);
+  font-weight: 900; letter-spacing: -0.5px; line-height: 1.1;
 }
 
-/* News card */
+/* ── Section banner ── */
+.section-banner {
+  display: flex; align-items: center; gap: 10px;
+  margin: 36px 0 14px;
+}
+.section-banner-line { flex: 1; height: 2px; background: var(--ink); }
+.section-banner-icon { font-size: 13px; flex-shrink: 0; }
+.section-banner-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--ink); white-space: nowrap;
+}
+
+/* ── News grid (2-column newspaper layout) ── */
+.news-grid {
+  column-count: 2;
+  column-gap: var(--col-gap);
+  column-rule: 1px solid var(--rule-lt);
+}
+
+/* News item — no cards, pure typography */
 .news-card {
-  background: var(--card); border-radius: var(--r); box-shadow: var(--shadow);
-  margin-bottom: 8px; overflow: hidden;
+  break-inside: avoid;
+  border-top: 1.5px solid var(--ink);
+  padding: 13px 0 16px;
+  background: none; box-shadow: none; border-radius: 0;
+  margin-bottom: 0;
 }
-.news-inner {
-  padding: 15px 18px; border-left: 3px solid transparent;
+.news-inner { padding: 0; border-left: none !important; }
+.news-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15.5px; font-weight: 700;
+  line-height: 1.35; margin-bottom: 6px; color: var(--ink);
 }
-.news-inner.tech      { border-color: var(--blue); }
-.news-inner.ecosystem { border-color: var(--green); }
-.news-inner.other     { border-color: var(--orange); }
-.news-title { font-size: 13px; font-weight: 600; margin-bottom: 5px; line-height: 1.4; }
-.news-body  { font-size: 13px; color: var(--t2); line-height: 1.65; }
+.news-body {
+  font-family: 'Crimson Pro', serif;
+  font-size: 15px; color: var(--ink2); line-height: 1.65;
+}
 .news-body code {
   font-family: 'SF Mono', 'Menlo', monospace; font-size: 12px;
-  background: rgba(0,0,0,0.05); padding: 1px 5px; border-radius: 4px; color: var(--t1);
+  background: rgba(25,23,20,0.07); padding: 1px 5px;
+  border-radius: 2px; color: var(--ink);
 }
 .news-body a {
-  color: var(--accent); text-decoration: none; font-size: 11px; font-weight: 600;
-  background: rgba(230,0,122,0.07); padding: 1px 6px; border-radius: 4px;
-  margin: 0 1px; display: inline-block; transition: background 0.12s;
+  color: var(--accent); text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(230,0,122,0.35);
+  padding-bottom: 1px; margin: 0 2px;
+  display: inline; transition: border-color 0.1s;
 }
-.news-body a:hover { background: rgba(230,0,122,0.14); }
+.news-body a:hover { border-color: var(--accent); }
 
-/* OpenGov sub-label */
+/* ── Gov sub-label ── */
 .gov-sub-label {
-  font-size: 11px; font-weight: 600; text-transform: uppercase;
-  letter-spacing: 0.6px; color: var(--t3); margin: 16px 0 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.2px;
+  color: var(--ink3); margin: 22px 0 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--rule-lt);
 }
 .gov-sub-label:first-child { margin-top: 0; }
 
-/* Referendum card — full-width inline */
+/* ── Gov grid ── */
+.gov-grid {
+  column-count: 2;
+  column-gap: var(--col-gap);
+  column-rule: 1px solid var(--rule-lt);
+}
+
+/* Referendum card — newspaper brief */
 .ref-card {
-  background: var(--card); border-radius: var(--r); box-shadow: var(--shadow);
-  margin-bottom: 8px; padding: 14px 18px;
+  break-inside: avoid;
+  border-top: 1px solid var(--rule-lt);
+  padding: 11px 0 13px;
+  background: none; box-shadow: none; border-radius: 0;
 }
 .ref-top {
-  display: flex; align-items: center; gap: 8px; margin-bottom: 7px; flex-wrap: wrap;
+  display: flex; align-items: center; gap: 7px;
+  margin-bottom: 4px; flex-wrap: wrap;
 }
-.ref-id { font-size: 12px; font-weight: 700; color: var(--accent); text-decoration: none; }
+.ref-id {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px; font-weight: 700;
+  color: var(--accent); text-decoration: none;
+}
 .ref-id:hover { text-decoration: underline; }
 .ref-badge {
-  font-size: 11px; font-weight: 600; padding: 2px 8px;
-  border-radius: 6px; white-space: nowrap;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.6px;
+  padding: 2px 6px; border-radius: 2px; white-space: nowrap;
 }
-.b-submitted { background: rgba(0,122,255,0.1);   color: var(--blue); }
-.b-decision  { background: rgba(255,159,10,0.1);  color: var(--orange); }
-.b-executed  { background: rgba(52,199,89,0.1);   color: var(--green); }
-.b-timeout   { background: rgba(142,142,147,0.12);color: var(--gray); }
-.b-confirmed { background: rgba(52,199,89,0.1);   color: var(--green); }
-.ref-title-text { font-size: 13px; font-weight: 500; color: var(--t1); line-height: 1.4; margin-bottom: 9px; }
+.b-submitted { background: rgba(26,95,168,0.1);   color: var(--blue);   }
+.b-decision  { background: rgba(184,92,0,0.1);    color: var(--orange); }
+.b-executed  { background: rgba(45,122,71,0.1);   color: var(--green);  }
+.b-timeout   { background: rgba(110,110,110,0.1); color: var(--gray);   }
+.b-confirmed { background: rgba(45,122,71,0.1);   color: var(--green);  }
+.ref-title-text {
+  font-family: 'Crimson Pro', serif;
+  font-size: 14px; color: var(--ink);
+  line-height: 1.4; margin-bottom: 7px;
+}
 .ref-foot {
-  display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 12px;
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  font-family: 'DM Sans', sans-serif; font-size: 11px;
 }
-.aye-row { display: flex; align-items: center; gap: 6px; }
-.aye-track { width: 44px; height: 3px; background: rgba(0,0,0,0.08); border-radius: 2px; overflow: hidden; }
-.aye-fill  { height: 100%; background: var(--green); border-radius: 2px; }
-.aye-pct   { font-weight: 600; color: var(--green); }
-.ref-by    { color: var(--t2); }
-.ref-by a  { color: var(--accent); text-decoration: none; }
+.aye-row { display: flex; align-items: center; gap: 5px; }
+.aye-track { width: 40px; height: 3px; background: rgba(25,23,20,0.1); border-radius: 1px; overflow: hidden; }
+.aye-fill  { height: 100%; background: var(--green); border-radius: 1px; }
+.aye-pct   { font-weight: 700; color: var(--green); }
+.ref-by    { color: var(--ink2); }
+.ref-by a  { color: var(--accent); text-decoration: none; font-weight: 600; }
 .ref-by a:hover { text-decoration: underline; }
-.ref-dl    { font-weight: 600; color: var(--orange); }
+.ref-dl    { font-weight: 700; color: var(--orange); }
 
-/* Processing log chips at bottom */
+/* ── Processing log ── */
 .log-block {
-  margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--sep);
-  padding-bottom: 12px;
+  margin-top: 36px; padding-top: 20px;
+  border-top: 3px double var(--ink);
 }
-.log-block h3 { font-size: 15px; font-weight: 600; letter-spacing: -0.3px; margin-bottom: 3px; }
-.log-block p  { font-size: 13px; color: var(--t2); margin-bottom: 14px; }
-.log-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.log-block h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px; font-weight: 700;
+  letter-spacing: -0.2px; margin-bottom: 3px;
+}
+.log-block p {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px; color: var(--ink2); margin-bottom: 14px;
+}
+.log-chips {
+  display: flex; gap: 0; flex-wrap: nowrap;
+  border: 1px solid var(--rule-lt);
+}
 .log-chip {
-  background: var(--card); border-radius: 12px; box-shadow: var(--shadow);
-  padding: 12px 14px; text-align: center; min-width: 72px;
+  flex: 1;
+  background: var(--paper);
+  padding: 12px 10px; text-align: center;
+  border-right: 1px solid var(--rule-lt);
+  border-radius: 0; box-shadow: none;
 }
-.log-chip-num { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; color: var(--t1); line-height: 1; }
-.log-chip-lbl { font-size: 10px; color: var(--t2); font-weight: 500; margin-top: 3px; }
+.log-chip:last-child { border-right: none; }
+.log-chip-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px; font-weight: 700; letter-spacing: -0.3px;
+  color: var(--ink); line-height: 1;
+}
+.log-chip-lbl {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 9px; color: var(--ink2); font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px; margin-top: 3px;
+}
 
 /* Loading */
-.loading { text-align: center; padding: 48px 0; color: var(--t3); font-size: 14px; }
+.loading {
+  text-align: center; padding: 48px 0;
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink3); font-size: 13px;
+}
 .spinner {
-  width: 26px; height: 26px; border-radius: 50%; margin: 0 auto 12px;
+  width: 24px; height: 24px; border-radius: 50%; margin: 0 auto 12px;
   border: 2px solid rgba(230,0,122,0.15); border-top-color: var(--accent);
   animation: spin 0.75s linear infinite;
 }
@@ -229,29 +397,48 @@ body {
 
 /* Footer */
 .footer {
-  border-top: 1px solid var(--sep); padding: 20px 0;
-  text-align: center; font-size: 12px; color: var(--t3);
+  border-top: 3px double var(--ink);
+  background: var(--paper);
+  padding: 20px 0; text-align: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px; color: var(--ink3);
 }
 .footer a { color: var(--accent); text-decoration: none; }
 
+@media (max-width: 640px) {
+  .news-grid { column-count: 1; }
+  .gov-grid  { column-count: 1; }
+}
 @media (max-width: 480px) {
-  .chip { min-width: 72px; }
-  .chip-num { font-size: 20px; }
-  .nav-brand { display: none; }
+  .chips, .log-chips { flex-wrap: wrap; }
+  .chip, .log-chip { min-width: 45%; border-bottom: 1px solid var(--rule-lt); }
+  .masthead-brand { font-size: 26px; }
+  .masthead-meta  { font-size: 9px; }
 }
 </style>
 </head>
 <body>
 
+<!-- Masthead -->
+<header class="masthead">
+  <div class="masthead-rule-top"></div>
+  <div class="masthead-inner">
+    <div class="masthead-meta">
+      <span>Est. 2025</span>
+      <span id="masthead-date">By Pala Labs</span>
+    </div>
+    <div class="masthead-brand"><span class="dot-word">Polkadot</span> Daily Digest</div>
+    <div class="masthead-tagline">Ecosystem intelligence, curated daily</div>
+    <div class="masthead-rule-double"></div>
+  </div>
+</header>
+
+<!-- Nav -->
 <nav class="nav">
   <div class="nav-inner">
-    <button class="nav-logo" onclick="nav('home')">
-      <div class="nav-dot"></div>
-      <span class="nav-brand">Polkadot Digest</span>
-    </button>
     <div class="nav-tabs">
-      <button class="nav-tab active" id="tab-home"    onclick="nav('home')">Home</button>
-      <button class="nav-tab"        id="tab-digests" onclick="nav('digests')">Digests</button>
+      <button class="nav-tab active" id="tab-home"    onclick="nav('home')">Front Page</button>
+      <button class="nav-tab"        id="tab-digests" onclick="nav('digests')">All Editions</button>
     </div>
   </div>
 </nav>
@@ -259,16 +446,16 @@ body {
 <!-- HOME -->
 <div id="page-home" class="page active">
   <div class="wrap">
-    <div class="home-hero">
-      <h1><span class="accent">Polkadot</span> Daily Digest</h1>
-      <p>Ecosystem intelligence, curated daily by Pala Labs</p>
+    <div class="home-intro">
+      <div class="home-intro-date" id="home-date"></div>
+      <div class="home-intro-headline">Polkadot <span class="accent">Ecosystem</span> Briefing</div>
     </div>
     <div class="home-block">
       <div class="eyebrow">Cumulative Data Points</div>
       <div class="chips" id="home-stats"><div class="loading"><div class="spinner"></div></div></div>
     </div>
     <div class="home-block">
-      <div class="eyebrow">Recent Digests</div>
+      <div class="eyebrow">Recent Editions</div>
       <div id="home-recent"><div class="loading"><div class="spinner"></div></div></div>
     </div>
   </div>
@@ -277,7 +464,7 @@ body {
 <!-- DIGESTS LIST -->
 <div id="page-digests" class="page">
   <div class="wrap">
-    <div class="page-header"><h1>All Digests</h1></div>
+    <div class="page-header"><h1>All Editions</h1></div>
     <div id="list-body"><div class="loading"><div class="spinner"></div></div></div>
   </div>
 </div>
@@ -285,12 +472,10 @@ body {
 <!-- DIGEST DETAIL -->
 <div id="page-detail" class="page">
   <div class="wrap">
-    <div class="detail-top">
-      <button class="back-btn" id="back-btn">&#8249; Back</button>
-      <div class="detail-heading">
-        <h1 id="detail-title"></h1>
-        <p  id="detail-sub"></p>
-      </div>
+    <button class="back-btn" id="back-btn">&#8249; Back</button>
+    <div class="detail-masthead">
+      <div class="detail-edition">Polkadot Daily Digest</div>
+      <h1 id="detail-title"></h1>
     </div>
     <div id="detail-body"><div class="loading"><div class="spinner"></div></div></div>
   </div>
@@ -353,7 +538,6 @@ async function fetchDigest(date) {
   return doc;
 }
 
-// Extract stats only from the Processing Logs h2 section
 function extractStats(doc) {
   const stats = {};
   let inLogs  = false;
@@ -398,6 +582,12 @@ function fmtDate(iso) {
   });
 }
 
+function fmtDateLong(iso) {
+  return new Date(iso + 'T12:00:00').toLocaleDateString('en-GB', {
+    weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+  });
+}
+
 function badgeCls(status) {
   return BADGE_CLS[(status || '').toLowerCase()] || 'b-submitted';
 }
@@ -411,7 +601,7 @@ function renderChips(totals, reportCount) {
   const total = STAT_DEFS.reduce((s, d) => s + (totals[d.key] || 0), 0);
   cols.push('<div class="chip"><div class="chip-num">' + total + '</div><div class="chip-lbl">Total</div></div>');
   if (reportCount != null) {
-    cols.push('<div class="chip"><div class="chip-num">' + reportCount + '</div><div class="chip-lbl">Reports</div></div>');
+    cols.push('<div class="chip"><div class="chip-num">' + reportCount + '</div><div class="chip-lbl">Editions</div></div>');
   }
   return cols.join('');
 }
@@ -420,13 +610,12 @@ function renderDigestRow(m) {
   return '<button class="d-row" onclick="openDigest(\'' + m.date + '\')">' +
     '<div class="d-row-info">' +
       '<div class="d-row-date">' + fmtDate(m.date) + '</div>' +
-      '<div class="d-row-sub">' + (m.title || 'Polkadot Daily Digest') + '</div>' +
+      '<div class="d-row-sub">Polkadot Daily Digest</div>' +
     '</div>' +
     '<div class="d-arrow">&#8250;</div>' +
   '</button>';
 }
 
-// Parse a referendum <p> element
 function parseRef(p) {
   const links   = p.querySelectorAll('a');
   const refLink = links[0];
@@ -462,7 +651,7 @@ function renderRef(r) {
       '<div class="aye-row">' +
         '<div class="aye-track"><div class="aye-fill" style="width:' + w + '%"></div></div>' +
         '<span class="aye-pct">' + r.aye + '</span>' +
-        '<span style="color:var(--t2)">Aye</span>' +
+        '<span style="color:var(--ink3)">Aye</span>' +
       '</div>' +
       (r.prName ? '<div class="ref-by">by <a href="' + r.prUrl + '" target="_blank">' + r.prName + '</a></div>' : '') +
       (r.dl     ? '<div class="ref-dl">⏱ ' + r.dl + '</div>' : '') +
@@ -470,7 +659,6 @@ function renderRef(r) {
   '</div>';
 }
 
-// Walk siblings to find the next blockquote (skip any intervening <p>)
 function nextBlockquote(el) {
   let cur = el ? el.nextElementSibling : null;
   while (cur && cur.tagName !== 'BLOCKQUOTE' && cur.tagName !== 'H3' && cur.tagName !== 'H2') {
@@ -491,7 +679,15 @@ function renderNewsItem(li, cls) {
   '</div></div>';
 }
 
-// Render a news section (Technical / Ecosystem / Other)
+function sectionBanner(icon, label) {
+  return '<div class="section-banner">' +
+    '<div class="section-banner-line"></div>' +
+    '<span class="section-banner-icon">' + icon + '</span>' +
+    '<div class="section-banner-title">' + label + '</div>' +
+    '<div class="section-banner-line"></div>' +
+  '</div>';
+}
+
 function renderNewsSection(h2) {
   const key   = h2.textContent.trim().toLowerCase();
   const icon  = SECTION_ICONS[key] || '📌';
@@ -506,15 +702,16 @@ function renderNewsSection(h2) {
   if (!items.length) return '';
 
   return '<div class="report-section">' +
-    '<div class="report-section-title"><span>' + icon + '</span> ' + h2.textContent.trim() + '</div>' +
-    items.map(li => renderNewsItem(li, cls)).join('') +
+    sectionBanner(icon, h2.textContent.trim()) +
+    '<div class="news-grid">' +
+      items.map(li => renderNewsItem(li, cls)).join('') +
+    '</div>' +
   '</div>';
 }
 
-// Render OpenGov section — both h3 subsections
 function renderGovSection(h2) {
   let out = '<div class="report-section">' +
-    '<div class="report-section-title"><span>🗳️</span> ' + h2.textContent.trim() + '</div>';
+    sectionBanner('🗳️', h2.textContent.trim());
 
   let el = h2.nextElementSibling;
   while (el && el.tagName !== 'H2') {
@@ -524,7 +721,7 @@ function renderGovSection(h2) {
       if (bq) {
         const refs = Array.from(bq.querySelectorAll('p')).map(parseRef);
         out += '<div class="gov-sub-label">' + label + '</div>';
-        out += refs.map(renderRef).join('');
+        out += '<div class="gov-grid">' + refs.map(renderRef).join('') + '</div>';
       }
     }
     el = el.nextElementSibling;
@@ -532,7 +729,6 @@ function renderGovSection(h2) {
   return out + '</div>';
 }
 
-// Render the Processing Logs as stat chips (at the bottom)
 function renderLogChips(stats) {
   if (!Object.keys(stats).length) return '';
   const chips = STAT_DEFS
@@ -548,7 +744,6 @@ function renderLogChips(stats) {
   '</div>';
 }
 
-// Build the full report HTML from a parsed digest document
 function renderReport(doc) {
   let out     = '';
   let govHTML = '';
@@ -560,10 +755,7 @@ function renderReport(doc) {
     out += renderNewsSection(h2);
   });
 
-  // OpenGov always at end
   out += govHTML;
-
-  // Processing logs stat chips at very bottom
   out += renderLogChips(extractStats(doc));
 
   return out || '<div class="loading">No content found.</div>';
@@ -572,8 +764,7 @@ function renderReport(doc) {
 // ─────────────────────────── Page actions ─────────────────────
 async function openDigest(date) {
   nav('detail');
-  document.getElementById('detail-title').textContent = fmtDate(date);
-  document.getElementById('detail-sub').textContent   = 'Polkadot Daily Digest';
+  document.getElementById('detail-title').textContent = fmtDateLong(date);
   document.getElementById('detail-body').innerHTML    = '<div class="loading"><div class="spinner"></div></div>';
 
   document.getElementById('back-btn').onclick = () => nav(prevPage);
@@ -589,9 +780,13 @@ async function openDigest(date) {
 
 // ─────────────────────────── Init ─────────────────────────────
 async function init() {
+  // Set masthead date
+  const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  document.getElementById('masthead-date').textContent = today;
+  document.getElementById('home-date').textContent     = today;
+
   await loadManifest();
 
-  // Home: aggregate stats from all digests in parallel
   const allDocs  = await Promise.allSettled(manifests.map(m => fetchDigest(m.date)));
   const allStats = allDocs
     .filter(r => r.status === 'fulfilled')
@@ -601,14 +796,12 @@ async function init() {
   document.getElementById('home-stats').innerHTML =
     renderChips(totals, manifests.length);
 
-  // Home recent (up to 5)
   const recent = manifests.slice(0, 5);
   document.getElementById('home-recent').innerHTML =
-    recent.map(renderDigestRow).join('') || '<div class="loading">No digests found.</div>';
+    recent.map(renderDigestRow).join('') || '<div class="loading">No editions found.</div>';
 
-  // Digests list (all)
   document.getElementById('list-body').innerHTML =
-    manifests.map(renderDigestRow).join('') || '<div class="loading">No digests found.</div>';
+    manifests.map(renderDigestRow).join('') || '<div class="loading">No editions found.</div>';
 }
 
 init();

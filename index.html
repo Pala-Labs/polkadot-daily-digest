@@ -539,7 +539,10 @@ function nav(page) {
     const el = document.getElementById('tab-'+t);
     if (el) el.classList.toggle('active', t === page);
   });
-  if (page !== 'detail') prevPage = page;
+  if (page !== 'detail') {
+    prevPage = page;
+    history.replaceState(null, '', location.pathname + location.search);
+  }
   window.scrollTo(0, 0);
 }
 
@@ -779,11 +782,12 @@ function renderReport(doc) {
 
 // ─────────────────────────── Page actions ─────────────────────
 async function openDigest(date) {
+  history.pushState({date}, '', '#' + date);
   nav('detail');
   document.getElementById('detail-title').textContent = fmtDateLong(date);
   document.getElementById('detail-body').innerHTML    = '<div class="loading"><div class="spinner"></div></div>';
 
-  document.getElementById('back-btn').onclick = () => nav(prevPage);
+  document.getElementById('back-btn').onclick = () => { history.back(); };
 
   try {
     const doc = await fetchDigest(date);
@@ -793,6 +797,15 @@ async function openDigest(date) {
       '<div class="loading">Could not load digest for ' + date + '.</div>';
   }
 }
+
+window.addEventListener('popstate', e => {
+  const hash = location.hash.slice(1);
+  if (hash.match(/^\d{4}-\d{2}-\d{2}$/)) {
+    openDigest(hash);
+  } else {
+    nav(prevPage);
+  }
+});
 
 // ─────────────────────────── Init ─────────────────────────────
 async function init() {
@@ -818,6 +831,12 @@ async function init() {
 
   document.getElementById('list-body').innerHTML =
     manifests.map(renderDigestRow).join('') || '<div class="loading">No editions found.</div>';
+
+  // Open digest from URL hash on initial load
+  const hash = location.hash.slice(1);
+  if (hash.match(/^\d{4}-\d{2}-\d{2}$/)) {
+    openDigest(hash);
+  }
 }
 
 init();

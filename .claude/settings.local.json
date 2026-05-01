@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:polkadot.com)",
+      "WebFetch(domain:brandpalettes.com)"
+    ]
+  }
+}

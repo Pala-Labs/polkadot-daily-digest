@@ -1,0 +1,40 @@
+<h1 id="polkadotdailydigest20260522">Polkadot Daily Digest: 2026-05-22</h1>
+<h2 id="technical">Technical</h2>
+<ul>
+<li><strong>Polkadot SDK Patch Release:</strong> The latest patch release, <strong>polkadot-stable2512-5</strong>, updates multiple crates including <code>pallet-revive</code>, <code>frame-support</code>, <code>staging-xcm</code>, and <code>pallet-multi-asset-bounties</code>. Notable fixes include improved sync handling for non-archive nodes, a fix for <code>pallet-revive-fixtures</code> compatibility with Rust 1.92, removal of unused code in <code>pallet-revive</code>, a non-destructive payout calculation in <code>pallet-multi-asset-bounties</code>, and enforcement of authorization in <code>unassign_curator</code> for child bounties. The release does not provide new binaries or Docker images and is relevant for both client and runtime developers (via <a href="https://api.github.com/repos/paritytech/polkadot-sdk/releases/327010633">1</a>).</li>
+<li><strong>Polkadot People Chain Post-Mortem:</strong> A post-mortem details a 23-minute block production halt and subsequent degraded blocktimes on the <strong>People Polkadot</strong> parachain following the 2.2.1 runtime upgrade that enabled elastic scaling. The incident was caused by missing runtime configurations and a required CLI flag. The resolution involved configuration adjustments to allow multiple blocks per slot and set the minimum period to zero. Action items include adding integration tests and always specifying enactment dates for runtime upgrades (via <a href="https://forum.polkadot.network/t/polkadot-people-chain-stall-degradation-postmortem/17729">2</a>).</li>
+<li><strong>JAM Implementation Fuzzing:</strong> The voluntary JAM implementer team at Parity has completed stage 2 of 5 in their process, running 12 hours of fuzzing and testing approximately 740,000 blocks. The fuzzer is designed to ensure the client correctly rejects invalid blocks (via <a href="https://x.com/paritytech/status/2057382640441844178">3</a>).</li>
+</ul>
+<h2 id="ecosystem">Ecosystem</h2>
+<ul>
+<li><strong>Polkadot Ecosystem Tests (PET) Expansion:</strong> The <strong>PET</strong> suite now provides end-to-end (E2E) test coverage for Polkadot and Kusama relay chains, system parachains, and select ecosystem parachains such as Acala, Hydration, and Bifrost. PET tests governance, staking, XCM, proxy, multisig, and more, running against both production and proposed runtimes to catch regressions and bugs before upgrades are enacted. Most ecosystem parachains are not yet covered, and teams are encouraged to contribute and integrate PET for critical flow testing (via <a href="https://forum.polkadot.network/t/re-introducing-polkadot-ecosystem-tests-pet/17723">1</a>).</li>
+<li><strong>Node Operation Inquiry:</strong> A community discussion explores the feasibility of running a Polkadot node on regular home hardware for learning purposes, with participants sharing experiences and requirements (via <a href="https://forum.polkadot.network/t/running-a-polkadot-node-on-home-hardware/17733">2</a>).</li>
+</ul>
+<h2 id="other">Other</h2>
+<ul>
+<li>No additional sections met the threshold for inclusion.</li>
+</ul>
+<h2 id="opengovupdates">OpenGov Updates</h2>
+<h3 id="newreferendumslast24h">New Referendums (Last 24H)</h3>
+<p>No new referendums in last 24 Hours</p>
+<h3 id="referendumsapproachingdecision">Referendums Approaching Decision</h3>
+<p>Please vote on these proposals if you haven't.</p>
+<blockquote>
+  <p><strong><a href="https://polkadot.subsquare.io/referenda/1889">Referendum 1889</a>:</strong> [Big Tipper] Acuity Index Event Indexer for Polkadot Dapps (1000 DOT) ➖
+  <strong>Proposer:</strong> <a href="https://openshore.io/govern/voting-tool?address=16LmE2fwVe3RvbsxoVVhTwo7LjBnXduU2VUaViHwRADLxLfv">Jonathan Brown</a> ➖ <strong>Requested Amount:</strong> $1,320 DOT ➖ <strong>Current Aye:</strong> 1.43% ➖ <strong>Decision In:</strong> 1.2 days</p>
+  <p><strong><a href="https://polkadot.subsquare.io/referenda/1892">Referendum 1892</a>:</strong> Orbinum Network — Identity Verification via CertiK KYC  ➖
+  <strong>Proposer:</strong> <a href="https://openshore.io/govern/voting-tool?address=15Lyf1inrKiNU3vVgfeupnkDt2bSCJMHR5cxzsQW9SJz6dww">15Lyf1inrKiNU3vVgfeupnkDt2bSCJMHR5cxzsQW9SJz6dww</a> ➖ <strong>Requested Amount:</strong> $1,998 USDt ➖ <strong>Current Aye:</strong> 0.00% ➖ <strong>Decision In:</strong> 4.4 days</p>
+</blockquote>
+<hr />
+<h2 id="processinglogs">Processing Logs</h2>
+<p><strong>Report Generated:</strong> 2026-05-22</p>
+<p><strong>Data Source (Data points curated & analysed):</strong></p>
+<ul>
+<li>Polkadot Forum: 62</li>
+<li>Medium: 15</li>
+<li>X(Twitter): 836</li>
+<li>GitHub (Release only): 1</li>
+<li>OpenGov: 3</li>
+</ul>
+<hr />
+<p>This is an auto-generated report by <strong>Pala Labs</strong></p>

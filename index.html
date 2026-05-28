@@ -593,6 +593,66 @@ body {
 }
 .footer a { color: var(--on-surface); text-decoration: none; font-weight: 600; }
 
+/* ── Pagination (All Editions) ── */
+.pagi {
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid var(--outline-var);
+}
+.pagi-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.pagi-nums {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.pagi-arrow, .pagi-num, .pagi-ellipsis {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--outline);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+.pagi-arrow { padding: 8px 18px; }
+.pagi-arrow:hover:not(.pagi-disabled),
+.pagi-num:hover:not(.pagi-current) {
+  color: var(--on-surface);
+}
+.pagi-current {
+  color: var(--on-surface);
+  border-bottom-color: var(--accent);
+  cursor: default;
+}
+.pagi-disabled {
+  color: var(--outline-var);
+  cursor: default;
+}
+.pagi-ellipsis { cursor: default; padding: 8px 4px; }
+.pagi-meta {
+  text-align: center;
+  margin-top: 14px;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--outline);
+}
+
 /* ── Methodology page ── */
 .method-section { margin-bottom: 72px; }
 .method-section:last-child { margin-bottom: 0; }
@@ -804,6 +864,8 @@ body {
   .method-stage { grid-template-columns: 48px 1fr; gap: 16px; }
   .method-stage-num { font-size: 32px; }
   .method-arch { padding: 10px; }
+  .pagi-arrow, .pagi-num { padding: 6px 8px; }
+  .pagi-arrow { padding: 6px 12px; }
   .theme-toggle { right: var(--margin-page); }
 }
 </style>
@@ -1029,9 +1091,11 @@ const BADGE_CLS = {
 };
 
 // ─────────────────────────── State ────────────────────────────
-let manifests  = [];
-let docCache   = {};
-let prevPage   = 'home';
+let manifests    = [];
+let docCache     = {};
+let prevPage     = 'home';
+let digestsPage  = 1;
+const DIGESTS_PER_PAGE = 7;
 
 // ─────────────────────────── Theme ────────────────────────────
 function resolvedTheme() {
@@ -1175,6 +1239,61 @@ function renderDigestRow(m) {
     '</div>' +
     '<div class="d-arrow">&#8250;</div>' +
   '</button>';
+}
+
+function paginationNumbers(current, total) {
+  if (total <= 7) {
+    return Array.from({ length: total }, (_, i) => i + 1);
+  }
+  const set = new Set([1, 2, total - 1, total, current - 1, current, current + 1]);
+  const nums = [...set].filter(n => n >= 1 && n <= total).sort((a, b) => a - b);
+  const out = [];
+  let prev = 0;
+  for (const n of nums) {
+    if (n - prev > 1) out.push('…');
+    out.push(n);
+    prev = n;
+  }
+  return out;
+}
+
+function renderPagination(current, total) {
+  if (total <= 1) return '';
+  const prev = current > 1
+    ? '<button class="pagi-arrow" onclick="goToDigestsPage(' + (current - 1) + ')">&lsaquo;&nbsp;Prev</button>'
+    : '<span  class="pagi-arrow pagi-disabled">&lsaquo;&nbsp;Prev</span>';
+  const next = current < total
+    ? '<button class="pagi-arrow" onclick="goToDigestsPage(' + (current + 1) + ')">Next&nbsp;&rsaquo;</button>'
+    : '<span  class="pagi-arrow pagi-disabled">Next&nbsp;&rsaquo;</span>';
+  const nums = paginationNumbers(current, total).map(n => {
+    if (n === '…')      return '<span class="pagi-ellipsis">&hellip;</span>';
+    if (n === current)  return '<span class="pagi-num pagi-current">' + n + '</span>';
+    return '<button class="pagi-num" onclick="goToDigestsPage(' + n + ')">' + n + '</button>';
+  }).join('');
+  return '<div class="pagi">' +
+    '<div class="pagi-inner">' + prev + '<div class="pagi-nums">' + nums + '</div>' + next + '</div>' +
+    '<div class="pagi-meta">Page ' + current + ' of ' + total + '</div>' +
+  '</div>';
+}
+
+function renderDigestsList() {
+  const total      = manifests.length;
+  const totalPages = Math.max(1, Math.ceil(total / DIGESTS_PER_PAGE));
+  if (digestsPage > totalPages) digestsPage = totalPages;
+  if (digestsPage < 1)          digestsPage = 1;
+
+  const start = (digestsPage - 1) * DIGESTS_PER_PAGE;
+  const slice = manifests.slice(start, start + DIGESTS_PER_PAGE);
+  const rows  = slice.map(renderDigestRow).join('') ||
+                '<div class="loading">No editions found.</div>';
+
+  document.getElementById('list-body').innerHTML = rows + renderPagination(digestsPage, totalPages);
+}
+
+function goToDigestsPage(p) {
+  digestsPage = p;
+  renderDigestsList();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function parseRef(p) {
@@ -1382,8 +1501,7 @@ async function init() {
   document.getElementById('home-recent').innerHTML =
     recent.map(renderDigestRow).join('') || '<div class="loading">No editions found.</div>';
 
-  document.getElementById('list-body').innerHTML =
-    manifests.map(renderDigestRow).join('') || '<div class="loading">No editions found.</div>';
+  renderDigestsList();
 
   const hash = location.hash.slice(1);
   if (hash.match(/^\d{4}-\d{2}-\d{2}$/)) {

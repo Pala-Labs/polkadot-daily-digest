@@ -697,11 +697,11 @@ body {
 <script>
 // ─────────────────────────── Config ───────────────────────────
 const STAT_DEFS = [
-  { key: 'Polkadot Forum',         label: 'Forum' },
-  { key: 'Medium',                 label: 'Articles' },
-  { key: 'X(Twitter)',             label: 'Tweets' },
-  { key: 'GitHub (Release only)',  label: 'Releases' },
-  { key: 'OpenGov',                label: 'Proposals' },
+  { key: 'Polkadot Forum',         label: 'Polkadot Forum' },
+  { key: 'Medium',                 label: 'Medium Articles' },
+  { key: 'X(Twitter)',             label: 'X Posts' },
+  { key: 'GitHub (Release only)',  label: 'Polkadot SDK Releases' },
+  { key: 'OpenGov',                label: 'OpenGov Referendums' },
 ];
 
 const SECTION_ICONS = {
@@ -836,17 +836,11 @@ function badgeCls(status) {
 }
 
 // ─────────────────────────── Render helpers ───────────────────
-function renderChips(totals, reportCount) {
-  const cols = STAT_DEFS.map(d => {
+function renderChips(totals) {
+  return STAT_DEFS.map(d => {
     const n = totals[d.key] || 0;
     return '<div class="chip"><div class="chip-num">' + n + '</div><div class="chip-lbl">' + d.label + '</div></div>';
-  });
-  const total = STAT_DEFS.reduce((s, d) => s + (totals[d.key] || 0), 0);
-  cols.push('<div class="chip"><div class="chip-num">' + total + '</div><div class="chip-lbl">Total</div></div>');
-  if (reportCount != null) {
-    cols.push('<div class="chip"><div class="chip-num">' + reportCount + '</div><div class="chip-lbl">Editions</div></div>');
-  }
-  return cols.join('');
+  }).join('');
 }
 
 function renderDigestRow(m) {
@@ -975,8 +969,6 @@ function renderLogChips(stats) {
   const chips = STAT_DEFS
     .filter(d => stats[d.key] != null)
     .map(d => '<div class="log-chip"><div class="log-chip-num">' + stats[d.key] + '</div><div class="log-chip-lbl">' + d.label + '</div></div>');
-  const total = STAT_DEFS.reduce((s, d) => s + (stats[d.key] || 0), 0);
-  chips.push('<div class="log-chip"><div class="log-chip-num">' + total + '</div><div class="log-chip-lbl">Total</div></div>');
 
   return '<div class="log-block">' +
     '<h3>Processing Logs</h3>' +
@@ -1046,7 +1038,7 @@ async function init() {
   const totals   = mergeStats(allStats);
 
   document.getElementById('home-stats').innerHTML =
-    renderChips(totals, manifests.length);
+    renderChips(totals);
 
   const recent = manifests.slice(0, 5);
   document.getElementById('home-recent').innerHTML =

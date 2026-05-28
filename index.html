@@ -593,6 +593,194 @@ body {
 }
 .footer a { color: var(--on-surface); text-decoration: none; font-weight: 600; }
 
+/* ── Methodology page ── */
+.method-section { margin-bottom: 72px; }
+.method-section:last-child { margin-bottom: 0; }
+.method-title {
+  font-family: 'Newsreader', serif;
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  color: var(--on-surface);
+  margin-bottom: 20px;
+  max-width: 720px;
+}
+.method-body {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--on-surface-var);
+  line-height: 1.75;
+  max-width: 720px;
+  margin-bottom: 16px;
+}
+.method-body:last-child { margin-bottom: 0; }
+.method-body strong { color: var(--on-surface); font-weight: 600; }
+.method-body code {
+  font-family: 'SF Mono', 'Menlo', monospace;
+  font-size: 13px;
+  background: var(--surface-container);
+  padding: 1px 6px;
+  color: var(--on-surface);
+}
+.method-body a {
+  color: var(--on-surface);
+  text-decoration: none;
+  border-bottom: 1px solid var(--outline);
+  padding-bottom: 1px;
+  font-weight: 500;
+  transition: opacity 0.1s, border-color 0.1s;
+}
+.method-body a:hover { opacity: 0.7; border-color: var(--on-surface); }
+
+/* Architecture plate */
+.method-arch {
+  margin: 24px 0 12px;
+  border: 1px solid var(--outline-var);
+  background: #100e0d;
+  padding: 28px;
+  cursor: zoom-in;
+  transition: border-color 0.15s;
+}
+.method-arch:hover  { border-color: var(--on-surface); }
+.method-arch:focus  { outline: none; border-color: var(--on-surface); }
+.method-arch img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.method-arch-caption {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--outline);
+}
+.method-arch-caption strong { color: var(--on-surface-var); font-weight: 700; }
+
+/* Sources grid */
+.method-sources {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 28px;
+}
+.method-source {
+  border: 1px solid var(--outline-var);
+  background: var(--surface-lowest);
+  padding: 24px 28px;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.method-source-eyebrow {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--outline);
+  margin-bottom: 10px;
+}
+.method-source-title {
+  font-family: 'Newsreader', serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--on-surface);
+  margin-bottom: 10px;
+  line-height: 1.2;
+}
+.method-source-desc {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  color: var(--on-surface-var);
+  line-height: 1.65;
+}
+.method-source-desc code {
+  font-family: 'SF Mono', 'Menlo', monospace;
+  font-size: 12px;
+  background: var(--surface-container);
+  padding: 1px 5px;
+  color: var(--on-surface);
+}
+
+/* Pipeline stages */
+.method-stages {
+  margin-top: 28px;
+  border-top: 1px solid var(--outline-var);
+}
+.method-stage {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 32px;
+  align-items: baseline;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--outline-var);
+}
+.method-stage-num {
+  font-family: 'Newsreader', serif;
+  font-size: 56px;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--on-surface);
+  line-height: 1;
+}
+.method-stage-body { padding-top: 6px; }
+.method-stage-title {
+  font-family: 'Newsreader', serif;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--on-surface);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+.method-stage-desc {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 15px;
+  color: var(--on-surface-var);
+  line-height: 1.7;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(16, 14, 13, 0.95);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 32px 32px;
+  cursor: zoom-out;
+}
+.lightbox.active { display: flex; }
+.lightbox img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  color: #ede8e2;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  padding: 8px 14px;
+  border: 1px solid rgba(237, 232, 226, 0.35);
+  transition: border-color 0.15s, background 0.15s;
+}
+.lightbox-close:hover { border-color: #ede8e2; background: rgba(237, 232, 226, 0.08); }
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   :root { --margin-page: 40px; }
@@ -600,6 +788,10 @@ body {
 @media (max-width: 768px) {
   :root { --margin-page: 24px; }
   .theme-toggle span { display: none; }
+  .method-sources { grid-template-columns: 1fr; }
+  .method-stage   { grid-template-columns: 64px 1fr; gap: 20px; padding: 24px 0; }
+  .method-stage-num { font-size: 40px; }
+  .method-arch    { padding: 16px; }
 }
 @media (max-width: 480px) {
   :root { --margin-page: 16px; }
@@ -608,6 +800,10 @@ body {
   .masthead-brand { font-size: 36px; }
   .page-top { padding: 40px 0 24px; margin-bottom: 32px; }
   .home-block { margin-bottom: 40px; }
+  .method-section { margin-bottom: 48px; }
+  .method-stage { grid-template-columns: 48px 1fr; gap: 16px; }
+  .method-stage-num { font-size: 32px; }
+  .method-arch { padding: 10px; }
   .theme-toggle { right: var(--margin-page); }
 }
 </style>
@@ -631,8 +827,9 @@ body {
 <nav class="nav">
   <div class="nav-inner">
     <div class="nav-tabs">
-      <button class="nav-tab active" id="tab-home"    onclick="nav('home')">Front Page</button>
-      <button class="nav-tab"        id="tab-digests" onclick="nav('digests')">All Editions</button>
+      <button class="nav-tab active" id="tab-home"        onclick="nav('home')">Front Page</button>
+      <button class="nav-tab"        id="tab-digests"     onclick="nav('digests')">All Editions</button>
+      <button class="nav-tab"        id="tab-methodology" onclick="nav('methodology')">Methodology</button>
     </div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
       <svg id="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -683,6 +880,122 @@ body {
     </div>
     <div id="detail-body"><div class="loading"><div class="spinner"></div></div></div>
   </div>
+</div>
+
+<!-- METHODOLOGY -->
+<div id="page-methodology" class="page">
+  <div class="wrap">
+    <div class="page-top">
+      <div class="home-intro-date">Editorial Methodology</div>
+      <div class="home-intro-headline">How the Digest <span class="accent">Is Made</span></div>
+      <div class="home-intro-sub">A look at the sources, pipeline, and editorial standards behind every edition of the Polkadot Daily Digest.</div>
+    </div>
+
+    <section class="method-section">
+      <div class="eyebrow">The Workflow</div>
+      <h2 class="method-title">From signal to story, in five stages.</h2>
+      <p class="method-body">Every morning the same workflow runs end-to-end &mdash; gathering material from across the Polkadot ecosystem, filtering noise, and shaping the result into a single, readable briefing. The diagram below is the production pipeline itself, reproduced unaltered.</p>
+      <div class="method-arch" id="method-arch" role="button" tabindex="0" aria-label="View architecture diagram full size" onclick="openLightbox()">
+        <img src="architecture.png" alt="Polkadot Daily Digest workflow architecture">
+      </div>
+      <div class="method-arch-caption"><strong>Plate I.</strong>&nbsp; Production pipeline &middot; Click to view full size</div>
+    </section>
+
+    <section class="method-section">
+      <div class="eyebrow">Sources</div>
+      <h2 class="method-title">Where the signal comes from.</h2>
+      <p class="method-body">Five primary streams feed the digest. Together they cover the venues where Polkadot&rsquo;s technical and governance conversations actually happen.</p>
+      <div class="method-sources">
+        <div class="method-source">
+          <div class="method-source-eyebrow">Community</div>
+          <div class="method-source-title">Polkadot Forum</div>
+          <div class="method-source-desc">Threads and replies from the official forum &mdash; Daily, Top, and Latest feeds &mdash; the primary venue for technical discussion and governance debate.</div>
+        </div>
+        <div class="method-source">
+          <div class="method-source-eyebrow">Long-form</div>
+          <div class="method-source-title">Medium Articles</div>
+          <div class="method-source-desc">Editorial posts from the Web3 Foundation and Pala Labs publications &mdash; research notes, announcements, and analysis.</div>
+        </div>
+        <div class="method-source">
+          <div class="method-source-eyebrow">Social</div>
+          <div class="method-source-title">X (Twitter) Posts</div>
+          <div class="method-source-desc">Updates from a curated list of official ecosystem accounts. Promotional and low-signal posts are filtered out at the ingest stage.</div>
+        </div>
+        <div class="method-source">
+          <div class="method-source-eyebrow">Development</div>
+          <div class="method-source-title">Polkadot SDK Releases</div>
+          <div class="method-source-desc">New version tags from the <code>paritytech/polkadot-sdk</code> repository &mdash; the canonical signal for protocol-level releases.</div>
+        </div>
+        <div class="method-source">
+          <div class="method-source-eyebrow">Governance</div>
+          <div class="method-source-title">OpenGov Referenda</div>
+          <div class="method-source-desc">On-chain governance data &mdash; newly created referenda and those approaching a decision deadline &mdash; sourced directly from the chain.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="method-section">
+      <div class="eyebrow">Pipeline Stages</div>
+      <h2 class="method-title">A repeatable, automated process.</h2>
+      <p class="method-body">The same five steps run every day, on the same schedule, in the same order. No manual selection, no per-day adjustments. The process is the editor.</p>
+      <div class="method-stages">
+        <div class="method-stage">
+          <div class="method-stage-num">01</div>
+          <div class="method-stage-body">
+            <div class="method-stage-title">Ingest</div>
+            <div class="method-stage-desc">A scheduled trigger fans out to every source in parallel. Feeds, APIs, and on-chain queries are pulled in a single fetch wave.</div>
+          </div>
+        </div>
+        <div class="method-stage">
+          <div class="method-stage-num">02</div>
+          <div class="method-stage-body">
+            <div class="method-stage-title">Deduplicate</div>
+            <div class="method-stage-desc">Overlapping items across feeds &mdash; a forum thread surfaced on X, a release linked from Medium &mdash; are collapsed to a single canonical entry.</div>
+          </div>
+        </div>
+        <div class="method-stage">
+          <div class="method-stage-num">03</div>
+          <div class="method-stage-body">
+            <div class="method-stage-title">Normalise</div>
+            <div class="method-stage-desc">Heterogeneous source formats are mapped into a uniform internal structure &mdash; title, body, link, timestamp, category &mdash; ready for downstream synthesis.</div>
+          </div>
+        </div>
+        <div class="method-stage">
+          <div class="method-stage-num">04</div>
+          <div class="method-stage-body">
+            <div class="method-stage-title">Synthesise</div>
+            <div class="method-stage-desc">AI-assisted summarisation drafts each section. The structure, taxonomy, and tone are defined by Pala Labs; the model condenses the normalised material into the briefing format.</div>
+          </div>
+        </div>
+        <div class="method-stage">
+          <div class="method-stage-num">05</div>
+          <div class="method-stage-body">
+            <div class="method-stage-title">Publish</div>
+            <div class="method-stage-desc">The finished edition is rendered to static HTML, committed to the public archive, and distributed by email and chat. A GitHub Action rebuilds the manifest this site reads from.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="method-section">
+      <div class="eyebrow">Synthesis</div>
+      <h2 class="method-title">Editorial assistance, not autonomous reporting.</h2>
+      <p class="method-body">AI-assisted summarisation condenses raw material into the briefing format &mdash; but it does not decide what counts as news. The taxonomy, the section structure, and the editorial standards are set by humans and applied uniformly across every edition. Every claim links back to its primary source; readers can verify each item in a single click.</p>
+    </section>
+
+    <section class="method-section">
+      <div class="eyebrow">Publication</div>
+      <h2 class="method-title">Open and verifiable.</h2>
+      <p class="method-body">Each edition is a static HTML file, committed to a public GitHub repository the moment it is generated. The manifest that powers this site is rebuilt automatically by a GitHub Action. Nothing about the archive is locked behind an account or a paywall &mdash; the full history is fetchable, scriptable, and self-hostable.</p>
+      <p class="method-body">If something looks off, the source is one click away from every claim. If something looks like it shouldn&rsquo;t be &mdash; <a href="https://github.com/Pala-Labs/polkadot-daily-digest/issues" target="_blank" rel="noopener">open an issue</a>.</p>
+    </section>
+  </div>
+</div>
+
+<!-- Lightbox for architecture diagram -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-label="Architecture diagram full size">
+  <button class="lightbox-close" onclick="closeLightbox(event)" aria-label="Close">Close &times;</button>
+  <img src="architecture.png" alt="Polkadot Daily Digest workflow architecture (full size)">
 </div>
 
 <footer class="footer">
@@ -756,10 +1069,10 @@ function initTheme() {
 
 // ─────────────────────────── Navigation ───────────────────────
 function nav(page) {
-  ['home','digests','detail'].forEach(p => {
+  ['home','digests','detail','methodology'].forEach(p => {
     document.getElementById('page-'+p).classList.toggle('active', p === page);
   });
-  ['home','digests'].forEach(t => {
+  ['home','digests','methodology'].forEach(t => {
     const el = document.getElementById('tab-'+t);
     if (el) el.classList.toggle('active', t === page);
   });
@@ -768,6 +1081,17 @@ function nav(page) {
     history.replaceState(null, '', location.pathname + location.search);
   }
   window.scrollTo(0, 0);
+}
+
+// ─────────────────────────── Lightbox ─────────────────────────
+function openLightbox() {
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox(e) {
+  if (e) e.stopPropagation();
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
 }
 
 // ─────────────────────────── Data ─────────────────────────────
@@ -1024,6 +1348,20 @@ window.addEventListener('popstate', e => {
 // ─────────────────────────── Init ─────────────────────────────
 async function init() {
   initTheme();
+
+  // Lightbox: Escape closes, Enter/Space on plate opens
+  document.addEventListener('keydown', e => {
+    const box = document.getElementById('lightbox');
+    if (e.key === 'Escape' && box && box.classList.contains('active')) {
+      closeLightbox();
+    }
+  });
+  const arch = document.getElementById('method-arch');
+  if (arch) {
+    arch.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(); }
+    });
+  }
 
   const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   document.getElementById('masthead-date').textContent = today;

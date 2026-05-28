@@ -593,6 +593,49 @@ body {
 }
 .footer a { color: var(--on-surface); text-decoration: none; font-weight: 600; }
 
+/* ── Search bar (All Editions) ── */
+.search-bar {
+  margin-bottom: 32px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--outline-var);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.search-label {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--outline);
+}
+.search-input {
+  font-family: 'Newsreader', serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--on-surface);
+  background: var(--surface-lowest);
+  border: 1px solid var(--outline-var);
+  padding: 9px 14px;
+  cursor: pointer;
+  color-scheme: light dark;
+  transition: border-color 0.15s;
+  min-width: 200px;
+}
+[data-theme="dark"] .search-input { color-scheme: dark; }
+[data-theme="light"] .search-input { color-scheme: light; }
+.search-input:hover { border-color: var(--outline); }
+.search-input:focus { outline: none; border-color: var(--on-surface); }
+.search-msg {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  color: var(--orange);
+  font-weight: 500;
+}
+.search-msg:empty { display: none; }
+
 /* ── Pagination (All Editions) ── */
 .pagi {
   margin-top: 40px;
@@ -925,6 +968,11 @@ body {
   <div class="wrap">
     <div class="page-top">
       <h1 class="page-header-title">All Editions</h1>
+    </div>
+    <div class="search-bar">
+      <label class="search-label" for="search-date">Jump to Date</label>
+      <input type="date" id="search-date" class="search-input" aria-describedby="search-msg">
+      <div class="search-msg" id="search-msg" role="status" aria-live="polite"></div>
     </div>
     <div id="list-body"><div class="loading"><div class="spinner"></div></div></div>
   </div>
@@ -1296,6 +1344,31 @@ function goToDigestsPage(p) {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+function initDigestSearch() {
+  const input = document.getElementById('search-date');
+  const msg   = document.getElementById('search-msg');
+  if (!input || !msg) return;
+
+  if (manifests.length) {
+    const dates = manifests.map(m => m.date).sort();
+    input.min = dates[0];
+    input.max = dates[dates.length - 1];
+  }
+
+  input.addEventListener('change', () => {
+    const date = input.value;
+    if (!date) { msg.textContent = ''; return; }
+    const found = manifests.some(m => m.date === date);
+    if (found) {
+      msg.textContent = '';
+      input.value = '';
+      openDigest(date);
+    } else {
+      msg.textContent = 'No edition for ' + fmtDate(date) + '.';
+    }
+  });
+}
+
 function parseRef(p) {
   const links   = p.querySelectorAll('a');
   const refLink = links[0];
@@ -1502,6 +1575,7 @@ async function init() {
     recent.map(renderDigestRow).join('') || '<div class="loading">No editions found.</div>';
 
   renderDigestsList();
+  initDigestSearch();
 
   const hash = location.hash.slice(1);
   if (hash.match(/^\d{4}-\d{2}-\d{2}$/)) {

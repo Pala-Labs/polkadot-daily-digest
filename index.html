@@ -283,8 +283,8 @@ body {
   border-bottom: 1px solid var(--outline-var);
   padding: 24px 32px;
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  align-items: stretch;
   cursor: pointer;
   border-left: 3px solid transparent;
   width: 100%;
@@ -296,6 +296,7 @@ body {
 .d-row:first-child { border-top: 1px solid var(--outline-var); }
 .d-row:last-child  { border-bottom: 1px solid var(--outline-var); }
 .d-row:hover { border-left-color: var(--accent); background: var(--surface-low); }
+.d-row-main { display: flex; align-items: center; gap: 16px; }
 .d-row-info { flex: 1; min-width: 0; }
 .d-row-date {
   font-family: 'Newsreader', serif;
@@ -312,6 +313,23 @@ body {
   letter-spacing: 0.1em;
 }
 .d-arrow { font-size: 20px; color: var(--outline); flex-shrink: 0; }
+.d-row-summary {
+  font-family: 'Newsreader', serif;
+  font-size: 14px;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--on-surface-var);
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  transition: max-height 0.4s ease, opacity 0.35s ease, margin-top 0.3s ease;
+}
+.d-row-summary.visible {
+  max-height: 80px;
+  opacity: 1;
+  margin-top: 10px;
+}
 
 /* ── Digests list page header ── */
 .page-header-title {
@@ -891,6 +909,10 @@ body {
 @media (max-width: 768px) {
   :root { --margin-page: 24px; }
   .theme-toggle span { display: none; }
+  /* Switch from absolute-right to flex space-between so toggle never overlaps tabs */
+  .nav-inner    { justify-content: space-between; }
+  .theme-toggle { position: static; padding: 0 12px; }
+  .nav-tab      { padding: 0 14px; }
   .method-sources { grid-template-columns: 1fr; }
   .method-stage   { grid-template-columns: 64px 1fr; gap: 20px; padding: 24px 0; }
   .method-stage-num { font-size: 40px; }
@@ -898,6 +920,7 @@ body {
 }
 @media (max-width: 480px) {
   :root { --margin-page: 16px; }
+  .nav-tab { padding: 0 10px; letter-spacing: 0.06em; }
   .chips, .log-chips { flex-wrap: wrap; }
   .chip, .log-chip { min-width: 45%; border-bottom: 1px solid var(--outline-var); }
   .masthead-brand { font-size: 36px; }
@@ -909,7 +932,6 @@ body {
   .method-arch { padding: 10px; }
   .pagi-arrow, .pagi-num { padding: 6px 8px; }
   .pagi-arrow { padding: 6px 12px; }
-  .theme-toggle { right: var(--margin-page); }
 }
 </style>
 </head>
@@ -1217,6 +1239,30 @@ async function fetchDigest(date) {
   return doc;
 }
 
+function extractSummary(doc) {
+  const h1s = doc.querySelectorAll('h1');
+  for (const h1 of h1s) {
+    if (h1.textContent.trim().toLowerCase() !== 'summary') continue;
+    const parts = [];
+    let el = h1.nextElementSibling;
+    while (el && el.tagName !== 'H1') {
+      if (el.tagName === 'P') parts.push(el.textContent.trim());
+      el = el.nextElementSibling;
+    }
+    const text = parts.join(' ').trim();
+    return text.length > 220 ? text.slice(0, 217) + '…' : text;
+  }
+  return '';
+}
+
+function populateSummaries(container) {
+  const els = container.querySelectorAll('.d-row-summary[data-text]');
+  els.forEach((el, i) => {
+    el.textContent = el.dataset.text;
+    setTimeout(() => requestAnimationFrame(() => el.classList.add('visible')), i * 45);
+  });
+}
+
 function extractStats(doc) {
   const stats = {};
   let inLogs  = false;
@@ -1280,12 +1326,20 @@ function renderChips(totals) {
 }
 
 function renderDigestRow(m) {
+  const doc     = docCache[m.date];
+  const summary = doc ? extractSummary(doc) : '';
+  const summaryHtml = summary
+    ? '<div class="d-row-summary" data-text="' + summary.replace(/&/g, '&amp;').replace(/"/g, '&quot;') + '"></div>'
+    : '';
   return '<button class="d-row" onclick="openDigest(\'' + m.date + '\')">' +
-    '<div class="d-row-info">' +
-      '<div class="d-row-date">' + fmtDate(m.date) + '</div>' +
-      '<div class="d-row-sub">Polkadot Daily Digest</div>' +
+    '<div class="d-row-main">' +
+      '<div class="d-row-info">' +
+        '<div class="d-row-date">' + fmtDate(m.date) + '</div>' +
+        '<div class="d-row-sub">Polkadot Daily Digest</div>' +
+      '</div>' +
+      '<div class="d-arrow">&#8250;</div>' +
     '</div>' +
-    '<div class="d-arrow">&#8250;</div>' +
+    summaryHtml +
   '</button>';
 }
 
@@ -1335,7 +1389,9 @@ function renderDigestsList() {
   const rows  = slice.map(renderDigestRow).join('') ||
                 '<div class="loading">No editions found.</div>';
 
-  document.getElementById('list-body').innerHTML = rows + renderPagination(digestsPage, totalPages);
+  const listBody = document.getElementById('list-body');
+  listBody.innerHTML = rows + renderPagination(digestsPage, totalPages);
+  populateSummaries(listBody);
 }
 
 function goToDigestsPage(p) {
@@ -1461,8 +1517,7 @@ function renderNewsSection(h2) {
 }
 
 function renderGovSection(h2) {
-  let out = '<div class="report-section">' +
-    sectionBanner('🗳️', h2.textContent.trim());
+  let inner = '';
 
   let el = h2.nextElementSibling;
   while (el && el.tagName !== 'H2') {
@@ -1471,13 +1526,18 @@ function renderGovSection(h2) {
       const bq    = nextBlockquote(el);
       if (bq) {
         const refs = Array.from(bq.querySelectorAll('p')).map(parseRef);
-        out += '<div class="gov-sub-label">' + label + '</div>';
-        out += '<div class="gov-grid">' + refs.map(renderRef).join('') + '</div>';
+        inner += '<div class="gov-sub-label">' + label + '</div>';
+        inner += '<div class="gov-grid">' + refs.map(renderRef).join('') + '</div>';
       }
     }
     el = el.nextElementSibling;
   }
-  return out + '</div>';
+  if (!inner) return '';
+
+  return '<div class="report-section">' +
+    sectionBanner('🗳️', h2.textContent.trim()) +
+    inner +
+  '</div>';
 }
 
 function renderLogChips(stats) {
@@ -1570,9 +1630,11 @@ async function init() {
   document.getElementById('home-stats').innerHTML =
     renderChips(totals);
 
-  const recent = manifests.slice(0, 5);
-  document.getElementById('home-recent').innerHTML =
+  const recent     = manifests.slice(0, 5);
+  const homeRecent = document.getElementById('home-recent');
+  homeRecent.innerHTML =
     recent.map(renderDigestRow).join('') || '<div class="loading">No editions found.</div>';
+  populateSummaries(homeRecent);
 
   renderDigestsList();
   initDigestSearch();

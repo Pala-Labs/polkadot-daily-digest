@@ -1,0 +1,32 @@
+<h1 id="polkadotdailydigest20260604">Polkadot Daily Digest: 2026-06-04</h1>
+<h1 id="summary">Summary</h1>
+<p>A comprehensive forum post reviews critical vulnerabilities and governance issues in Kusama Society (Kappa Sigma Mu), proposing fixes and calling for community input on its future role, while Parity Technologies releases the polkadot-unstable2604-rc4 SDK pre-release with significant updates for developers.</p>
+<h1 id="report">Report</h1>
+<h2 id="governance">Governance</h2>
+<ul>
+<li>A detailed forum post by <strong>laurogripa</strong> reviews the current state and future direction of the <strong>Kusama Society (Kappa Sigma Mu)</strong> in light of the upcoming Proof of Personhood initiative. The post highlights several exploits and operational issues in Society V2, including the "bid/claim gap" that could allow the treasury (&gt;180K KSM) to be drained much faster than intended, Proof-of-Ink (PoI) bypasses, and the concentration of emergency powers in the Founder via the <code>kick_member</code> function. Proposed fixes for a potential Society V2.1 include automatic claim mechanisms, quorum requirements for approvals, stronger PoI evidence, adding missing events, and delegating member removal to Society members. The post calls for community discussion on the Society's continued role and utility, especially as a potential curator for art bounties or as a collective participant in OpenGov (via <a href="https://forum.polkadot.network/t/let-s-talk-about-kusama-society-s-future/17771">forum</a>).</li>
+<li><strong>dandan</strong> requests a consolidated public progress report from the <strong>Polkadot Community Foundation (PCF)</strong> on all treasury-funded initiatives it is executing, including the status, deliverables, budget usage, and any delays or changes for proposals such as the Polkadot Giveaway &lt;&gt; Ledger, Polkadot API, Polkadot App Treasury Funding, Parity Mobile Apps, and others (via <a href="https://forum.polkadot.network/t/for-polkadot-community-foundation-what-has-been-delivered-for-referenda-1573-and-1608/17770">forum</a>).</li>
+</ul>
+<h2 id="technical">Technical</h2>
+<ul>
+<li><strong>Parity Technologies</strong> has published <strong>polkadot-unstable2604-rc4</strong>, a pre-release version of the Polkadot SDK. This release is for testing only and not recommended for production. Key changes include: fixes for statement network peer metrics, doubled max memory allocation on block import, updated async backing documentation, fixes for runtime upgrade tests, updated wasmtime to 36.0.7, improvements to statement-store (including bounded eviction maps, flooding detection, and topic affinity for light clients), enhancements to the experimental collator protocol, increased relay-chain block size limits on test runtimes, support for Geth-compatible state overrides in <code>eth_call</code>, and many other bug fixes and optimizations across the node, runtime, and developer tooling. Several breaking changes and new APIs are included, especially for parachain and runtime developers (via <a href="https://api.github.com/repos/paritytech/polkadot-sdk/releases/333683346">github</a>).</li>
+<li><strong>Parity Technologies</strong> highlighted the efficiency of Polkadot's light clients, which verify state using cryptographic proofs and block headers, enabling mobile wallets built with PAPI and smoldot to securely verify accounts without storing the full chain history (via <a href="https://x.com/paritytech/status/2062159583498686646">x</a>).</li>
+</ul>
+<h2 id="ecosystem">Ecosystem</h2>
+<p><em>(No qualifying items for this section in the provided sources.)</em></p>
+<h2 id="marketadoption">Market &amp; Adoption</h2>
+<p><em>(No qualifying items for this section in the provided sources.)</em></p>
+<h2 id="opengovupdates">OpenGov Updates</h2>
+<hr />
+<h2 id="processinglogs">Processing Logs</h2>
+<p><strong>Report Generated:</strong> 2026-06-04</p>
+<p><strong>Data Source (Data points curated & analysed):</strong></p>
+<ul>
+<li>Polkadot Forum: 62</li>
+<li>Medium: 15</li>
+<li>X(Twitter): 2</li>
+<li>GitHub (Release only): 1</li>
+<li>OpenGov: 4</li>
+</ul>
+<hr />
+<p>This is an auto-generated report by <strong>Pala Labs</strong></p>

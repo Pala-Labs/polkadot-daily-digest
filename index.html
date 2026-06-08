@@ -956,6 +956,7 @@ body {
     <div class="nav-tabs">
       <button class="nav-tab active" id="tab-home"        onclick="nav('home')">Front Page</button>
       <button class="nav-tab"        id="tab-digests"     onclick="nav('digests')">All Editions</button>
+      <button class="nav-tab"        id="tab-community"   onclick="nav('community')">Community</button>
       <button class="nav-tab"        id="tab-methodology" onclick="nav('methodology')">Methodology</button>
     </div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
@@ -1000,13 +1001,29 @@ body {
   </div>
 </div>
 
+<!-- COMMUNITY LIST -->
+<div id="page-community" class="page">
+  <div class="wrap">
+    <div class="page-top">
+      <h1 class="page-header-title">Community Edition</h1>
+      <div class="home-intro-sub">Community voices from across X — ecosystem chatter, developer activity, and grassroots signal, curated daily.</div>
+    </div>
+    <div class="search-bar">
+      <label class="search-label" for="community-search-date">Jump to Date</label>
+      <input type="date" id="community-search-date" class="search-input" aria-describedby="community-search-msg">
+      <div class="search-msg" id="community-search-msg" role="status" aria-live="polite"></div>
+    </div>
+    <div id="community-list-body"><div class="loading"><div class="spinner"></div></div></div>
+  </div>
+</div>
+
 <!-- DIGEST DETAIL -->
 <div id="page-detail" class="page">
   <div class="wrap">
     <div class="page-top">
       <button class="back-btn" id="back-btn">&#8249; Back</button>
       <div class="detail-header">
-        <div class="detail-edition">Polkadot Daily Digest</div>
+        <div class="detail-edition" id="detail-edition">Polkadot Daily Digest</div>
         <h1 id="detail-title"></h1>
       </div>
     </div>
@@ -1160,11 +1177,31 @@ const BADGE_CLS = {
   executed:  'b-executed',  timeout: 'b-timeout', confirmed: 'b-confirmed'
 };
 
+// Editions ("collections"). Each is a parallel stream of dated digests with its
+// own directory + manifest, and its own stat definitions / section icons.
+const COLLECTIONS = {
+  daily: {
+    dir: 'digests', label: 'Polkadot Daily Digest', editionLabel: 'Polkadot Daily Digest',
+    listBody: 'list-body', searchInput: 'search-date', searchMsg: 'search-msg',
+    statDefs: STAT_DEFS,
+    sectionIcons: SECTION_ICONS,
+  },
+  community: {
+    dir: 'community_digests', label: 'Polkadot Community Digest', editionLabel: 'Community Edition',
+    listBody: 'community-list-body', searchInput: 'community-search-date', searchMsg: 'community-search-msg',
+    statDefs: [
+      { key: 'Total X posts curated',       label: 'X Posts Curated' },
+      { key: 'Posts Filtered and Analysed', label: 'Filtered & Analysed' },
+    ],
+    sectionIcons: { 'ecosystem & community': '🌐', 'technical & developer activity': '⚙️' },
+  },
+};
+
 // ─────────────────────────── State ────────────────────────────
-let manifests    = [];
 let docCache     = {};
 let prevPage     = 'home';
-let digestsPage  = 1;
+const manifestsBy = { daily: [], community: [] };
+const pageBy      = { daily: 1, community: 1 };
 const DIGESTS_PER_PAGE = 7;
 
 // ─────────────────────────── Theme ────────────────────────────
@@ -1203,10 +1240,10 @@ function initTheme() {
 
 // ─────────────────────────── Navigation ───────────────────────
 function nav(page) {
-  ['home','digests','detail','methodology'].forEach(p => {
+  ['home','digests','community','detail','methodology'].forEach(p => {
     document.getElementById('page-'+p).classList.toggle('active', p === page);
   });
-  ['home','digests','methodology'].forEach(t => {
+  ['home','digests','community','methodology'].forEach(t => {
     const el = document.getElementById('tab-'+t);
     if (el) el.classList.toggle('active', t === page);
   });
@@ -1229,13 +1266,14 @@ function closeLightbox(e) {
 }
 
 // ─────────────────────────── Data ─────────────────────────────
-async function fetchDigest(date) {
-  if (docCache[date]) return docCache[date];
-  const res = await fetch('digests/' + date + '.html');
+async function fetchDigest(dir, date) {
+  const cacheKey = dir + '/' + date;
+  if (docCache[cacheKey]) return docCache[cacheKey];
+  const res = await fetch(dir + '/' + date + '.html');
   if (!res.ok) throw new Error('Not found');
   const html = await res.text();
   const doc  = new DOMParser().parseFromString(html, 'text/html');
-  docCache[date] = doc;
+  docCache[cacheKey] = doc;
   return doc;
 }
 
@@ -1268,7 +1306,7 @@ function extractStats(doc) {
   let inLogs  = false;
   doc.querySelectorAll('h2, ul').forEach(el => {
     if (el.tagName === 'H2') {
-      inLogs = el.textContent.trim().toLowerCase() === 'processing logs';
+      inLogs = el.textContent.trim().toLowerCase().startsWith('processing log');
       return;
     }
     if (!inLogs) return;
@@ -1288,16 +1326,17 @@ function mergeStats(allStats) {
   return out;
 }
 
-async function loadManifest() {
+async function loadManifest(dir) {
+  let list = [];
   try {
-    const res = await fetch('digests/manifest.json');
+    const res = await fetch(dir + '/manifest.json');
     if (!res.ok) throw new Error();
-    manifests = await res.json();
+    list = await res.json();
   } catch {
-    const today = new Date().toISOString().split('T')[0];
-    manifests = [{ date: today, title: 'Polkadot Daily Digest' }];
+    list = [];
   }
-  manifests.sort((a, b) => b.date.localeCompare(a.date));
+  list.sort((a, b) => b.date.localeCompare(a.date));
+  return list;
 }
 
 // ─────────────────────────── Formatting ───────────────────────
@@ -1318,24 +1357,25 @@ function badgeCls(status) {
 }
 
 // ─────────────────────────── Render helpers ───────────────────
-function renderChips(totals) {
-  return STAT_DEFS.map(d => {
+function renderChips(totals, statDefs) {
+  return (statDefs || STAT_DEFS).map(d => {
     const n = totals[d.key] || 0;
     return '<div class="chip"><div class="chip-num">' + n + '</div><div class="chip-lbl">' + d.label + '</div></div>';
   }).join('');
 }
 
-function renderDigestRow(m) {
-  const doc     = docCache[m.date];
+function renderDigestRow(colKey, m) {
+  const col     = COLLECTIONS[colKey];
+  const doc     = docCache[col.dir + '/' + m.date];
   const summary = doc ? extractSummary(doc) : '';
   const summaryHtml = summary
     ? '<div class="d-row-summary" data-text="' + summary.replace(/&/g, '&amp;').replace(/"/g, '&quot;') + '"></div>'
     : '';
-  return '<button class="d-row" onclick="openDigest(\'' + m.date + '\')">' +
+  return '<button class="d-row" onclick="openDigest(\'' + colKey + '\',\'' + m.date + '\')">' +
     '<div class="d-row-main">' +
       '<div class="d-row-info">' +
         '<div class="d-row-date">' + fmtDate(m.date) + '</div>' +
-        '<div class="d-row-sub">Polkadot Daily Digest</div>' +
+        '<div class="d-row-sub">' + col.label + '</div>' +
       '</div>' +
       '<div class="d-arrow">&#8250;</div>' +
     '</div>' +
@@ -1359,18 +1399,18 @@ function paginationNumbers(current, total) {
   return out;
 }
 
-function renderPagination(current, total) {
+function renderPagination(colKey, current, total) {
   if (total <= 1) return '';
   const prev = current > 1
-    ? '<button class="pagi-arrow" onclick="goToDigestsPage(' + (current - 1) + ')">&lsaquo;&nbsp;Prev</button>'
+    ? '<button class="pagi-arrow" onclick="goToDigestsPage(\'' + colKey + '\',' + (current - 1) + ')">&lsaquo;&nbsp;Prev</button>'
     : '<span  class="pagi-arrow pagi-disabled">&lsaquo;&nbsp;Prev</span>';
   const next = current < total
-    ? '<button class="pagi-arrow" onclick="goToDigestsPage(' + (current + 1) + ')">Next&nbsp;&rsaquo;</button>'
+    ? '<button class="pagi-arrow" onclick="goToDigestsPage(\'' + colKey + '\',' + (current + 1) + ')">Next&nbsp;&rsaquo;</button>'
     : '<span  class="pagi-arrow pagi-disabled">Next&nbsp;&rsaquo;</span>';
   const nums = paginationNumbers(current, total).map(n => {
     if (n === '…')      return '<span class="pagi-ellipsis">&hellip;</span>';
     if (n === current)  return '<span class="pagi-num pagi-current">' + n + '</span>';
-    return '<button class="pagi-num" onclick="goToDigestsPage(' + n + ')">' + n + '</button>';
+    return '<button class="pagi-num" onclick="goToDigestsPage(\'' + colKey + '\',' + n + ')">' + n + '</button>';
   }).join('');
   return '<div class="pagi">' +
     '<div class="pagi-inner">' + prev + '<div class="pagi-nums">' + nums + '</div>' + next + '</div>' +
@@ -1378,33 +1418,36 @@ function renderPagination(current, total) {
   '</div>';
 }
 
-function renderDigestsList() {
+function renderDigestsList(colKey) {
+  const manifests  = manifestsBy[colKey];
   const total      = manifests.length;
   const totalPages = Math.max(1, Math.ceil(total / DIGESTS_PER_PAGE));
-  if (digestsPage > totalPages) digestsPage = totalPages;
-  if (digestsPage < 1)          digestsPage = 1;
+  if (pageBy[colKey] > totalPages) pageBy[colKey] = totalPages;
+  if (pageBy[colKey] < 1)          pageBy[colKey] = 1;
 
-  const start = (digestsPage - 1) * DIGESTS_PER_PAGE;
+  const start = (pageBy[colKey] - 1) * DIGESTS_PER_PAGE;
   const slice = manifests.slice(start, start + DIGESTS_PER_PAGE);
-  const rows  = slice.map(renderDigestRow).join('') ||
+  const rows  = slice.map(m => renderDigestRow(colKey, m)).join('') ||
                 '<div class="loading">No editions found.</div>';
 
-  const listBody = document.getElementById('list-body');
-  listBody.innerHTML = rows + renderPagination(digestsPage, totalPages);
+  const listBody = document.getElementById(COLLECTIONS[colKey].listBody);
+  listBody.innerHTML = rows + renderPagination(colKey, pageBy[colKey], totalPages);
   populateSummaries(listBody);
 }
 
-function goToDigestsPage(p) {
-  digestsPage = p;
-  renderDigestsList();
+function goToDigestsPage(colKey, p) {
+  pageBy[colKey] = p;
+  renderDigestsList(colKey);
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function initDigestSearch() {
-  const input = document.getElementById('search-date');
-  const msg   = document.getElementById('search-msg');
+function initDigestSearch(colKey) {
+  const col   = COLLECTIONS[colKey];
+  const input = document.getElementById(col.searchInput);
+  const msg   = document.getElementById(col.searchMsg);
   if (!input || !msg) return;
 
+  const manifests = manifestsBy[colKey];
   if (manifests.length) {
     const dates = manifests.map(m => m.date).sort();
     input.min = dates[0];
@@ -1418,7 +1461,7 @@ function initDigestSearch() {
     if (found) {
       msg.textContent = '';
       input.value = '';
-      openDigest(date);
+      openDigest(colKey, date);
     } else {
       msg.textContent = 'No edition for ' + fmtDate(date) + '.';
     }
@@ -1481,7 +1524,9 @@ function renderNewsItem(li, cls) {
   const title  = strong ? strong.textContent.replace(/:$/, '').trim() : '';
   const clone  = li.cloneNode(true);
   clone.querySelector('strong') && clone.querySelector('strong').remove();
-  const body = clone.innerHTML.replace(/^\s*:\s*/, '').trim();
+  // Strip the leading ": " separator, whether inline (daily) or inside a
+  // markdown-wrapped paragraph (community: "<li><p><strong>..</strong>: ..</p>").
+  const body = clone.innerHTML.replace(/^(\s*<p[^>]*>)?\s*:\s*/i, '$1').trim();
   return '<div class="news-card"><div class="news-inner ' + (cls || '') + '">' +
     '<div class="news-title">' + title + '</div>' +
     '<div class="news-body">'  + body  + '</div>' +
@@ -1495,9 +1540,9 @@ function sectionBanner(icon, label) {
   '</div>';
 }
 
-function renderNewsSection(h2) {
+function renderNewsSection(h2, sectionIcons) {
   const key   = h2.textContent.trim().toLowerCase();
-  const icon  = SECTION_ICONS[key] || '📌';
+  const icon  = (sectionIcons || SECTION_ICONS)[key] || '📌';
   const cls   = SECTION_CLS[key]   || '';
   const items = [];
 
@@ -1540,11 +1585,12 @@ function renderGovSection(h2) {
   '</div>';
 }
 
-function renderLogChips(stats) {
+function renderLogChips(stats, statDefs) {
   if (!Object.keys(stats).length) return '';
-  const chips = STAT_DEFS
+  const chips = (statDefs || STAT_DEFS)
     .filter(d => stats[d.key] != null)
     .map(d => '<div class="log-chip"><div class="log-chip-num">' + stats[d.key] + '</div><div class="log-chip-lbl">' + d.label + '</div></div>');
+  if (!chips.length) return '';
 
   return '<div class="log-block">' +
     '<h3>Processing Logs</h3>' +
@@ -1553,35 +1599,49 @@ function renderLogChips(stats) {
   '</div>';
 }
 
-function renderReport(doc) {
+function renderReport(doc, colKey) {
+  const col   = COLLECTIONS[colKey] || COLLECTIONS.daily;
   let out     = '';
   let govHTML = '';
 
   doc.querySelectorAll('h2').forEach(h2 => {
     const key = h2.textContent.trim().toLowerCase();
-    if (key === 'processing logs') return;
+    if (key.startsWith('processing log')) return;
     if (key === 'opengov updates') { govHTML = renderGovSection(h2); return; }
-    out += renderNewsSection(h2);
+    out += renderNewsSection(h2, col.sectionIcons);
   });
 
   out += govHTML;
-  out += renderLogChips(extractStats(doc));
+  out += renderLogChips(extractStats(doc), col.statDefs);
 
   return out || '<div class="loading">No content found.</div>';
 }
 
 // ─────────────────────────── Page actions ─────────────────────
-async function openDigest(date) {
-  history.pushState({date}, '', '#' + date);
+// Hash scheme: daily editions are "#YYYY-MM-DD" (back-compat); other collections
+// are prefixed, e.g. "#community/YYYY-MM-DD".
+function parseHash(hash) {
+  const m = hash.match(/^(?:([a-z_]+)\/)?(\d{4}-\d{2}-\d{2})$/);
+  if (!m) return null;
+  const colKey = m[1] || 'daily';
+  if (!COLLECTIONS[colKey]) return null;
+  return { colKey, date: m[2] };
+}
+
+async function openDigest(colKey, date) {
+  const col  = COLLECTIONS[colKey] || COLLECTIONS.daily;
+  const hash = colKey === 'daily' ? date : colKey + '/' + date;
+  history.pushState({ colKey, date }, '', '#' + hash);
   nav('detail');
-  document.getElementById('detail-title').textContent = fmtDateLong(date);
-  document.getElementById('detail-body').innerHTML    = '<div class="loading"><div class="spinner"></div></div>';
+  document.getElementById('detail-edition').textContent = col.editionLabel;
+  document.getElementById('detail-title').textContent   = fmtDateLong(date);
+  document.getElementById('detail-body').innerHTML       = '<div class="loading"><div class="spinner"></div></div>';
 
   document.getElementById('back-btn').onclick = () => { history.back(); };
 
   try {
-    const doc = await fetchDigest(date);
-    document.getElementById('detail-body').innerHTML = renderReport(doc);
+    const doc = await fetchDigest(col.dir, date);
+    document.getElementById('detail-body').innerHTML = renderReport(doc, colKey);
   } catch {
     document.getElementById('detail-body').innerHTML =
       '<div class="loading">Could not load digest for ' + date + '.</div>';
@@ -1589,9 +1649,9 @@ async function openDigest(date) {
 }
 
 window.addEventListener('popstate', e => {
-  const hash = location.hash.slice(1);
-  if (hash.match(/^\d{4}-\d{2}-\d{2}$/)) {
-    openDigest(hash);
+  const ref = parseHash(location.hash.slice(1));
+  if (ref) {
+    openDigest(ref.colKey, ref.date);
   } else {
     nav(prevPage);
   }
@@ -1619,29 +1679,37 @@ async function init() {
   document.getElementById('masthead-date').textContent = today;
   document.getElementById('home-date').textContent     = today;
 
-  await loadManifest();
+  // Load both editions in parallel.
+  [manifestsBy.daily, manifestsBy.community] = await Promise.all([
+    loadManifest(COLLECTIONS.daily.dir),
+    loadManifest(COLLECTIONS.community.dir),
+  ]);
 
-  const allDocs  = await Promise.allSettled(manifests.map(m => fetchDigest(m.date)));
+  // Front page (cumulative stats + recent editions) is the official daily edition only.
+  const allDocs  = await Promise.allSettled(
+    manifestsBy.daily.map(m => fetchDigest(COLLECTIONS.daily.dir, m.date)));
   const allStats = allDocs
     .filter(r => r.status === 'fulfilled')
     .map(r => extractStats(r.value));
   const totals   = mergeStats(allStats);
 
   document.getElementById('home-stats').innerHTML =
-    renderChips(totals);
+    renderChips(totals, COLLECTIONS.daily.statDefs);
 
-  const recent     = manifests.slice(0, 5);
+  const recent     = manifestsBy.daily.slice(0, 5);
   const homeRecent = document.getElementById('home-recent');
   homeRecent.innerHTML =
-    recent.map(renderDigestRow).join('') || '<div class="loading">No editions found.</div>';
+    recent.map(m => renderDigestRow('daily', m)).join('') || '<div class="loading">No editions found.</div>';
   populateSummaries(homeRecent);
 
-  renderDigestsList();
-  initDigestSearch();
+  renderDigestsList('daily');
+  initDigestSearch('daily');
+  renderDigestsList('community');
+  initDigestSearch('community');
 
-  const hash = location.hash.slice(1);
-  if (hash.match(/^\d{4}-\d{2}-\d{2}$/)) {
-    openDigest(hash);
+  const ref = parseHash(location.hash.slice(1));
+  if (ref) {
+    openDigest(ref.colKey, ref.date);
   }
 }
 

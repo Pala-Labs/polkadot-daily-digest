@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'digests/**.html'
+      - 'community_digests/**.html'
 
 jobs:
   update-manifest:
@@ -15,36 +16,39 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Rebuild manifest.json
+      - name: Rebuild manifests
         run: |
           python3 - <<'EOF'
           import os, re, json
 
-          entries = []
-          digest_dir = 'digests'
-
-          for fname in sorted(os.listdir(digest_dir), reverse=True):
-              if not fname.endswith('.html'):
+          for digest_dir in ('digests', 'community_digests'):
+              if not os.path.isdir(digest_dir):
                   continue
-              date = fname.replace('.html', '')
-              if not re.match(r'^\d{4}-\d{2}-\d{2}$', date):
-                  continue
-              with open(os.path.join(digest_dir, fname), encoding='utf-8') as f:
-                  content = f.read()
-              m = re.search(r'<h1[^>]*>(.*?)</h1>', content, re.IGNORECASE | re.DOTALL)
-              title = re.sub(r'<[^>]+>', '', m.group(1)).strip() if m else 'Polkadot Daily Digest'
-              entries.append({'date': date, 'title': title})
 
-          with open(os.path.join(digest_dir, 'manifest.json'), 'w') as f:
-              json.dump(entries, f, indent=2)
+              entries = []
+              for fname in sorted(os.listdir(digest_dir), reverse=True):
+                  if not fname.endswith('.html'):
+                      continue
+                  date = fname.replace('.html', '')
+                  if not re.match(r'^\d{4}-\d{2}-\d{2}$', date):
+                      continue
+                  with open(os.path.join(digest_dir, fname), encoding='utf-8') as f:
+                      content = f.read()
+                  m = re.search(r'<h1[^>]*>(.*?)</h1>', content, re.IGNORECASE | re.DOTALL)
+                  title = re.sub(r'<[^>]+>', '', m.group(1)).strip() if m else 'Polkadot Daily Digest'
+                  entries.append({'date': date, 'title': title})
 
-          print(f'Manifest updated: {len(entries)} entries')
+              with open(os.path.join(digest_dir, 'manifest.json'), 'w') as f:
+                  json.dump(entries, f, indent=2)
+
+              print(f'{digest_dir}/manifest.json updated: {len(entries)} entries')
           EOF
 
-      - name: Commit manifest
+      - name: Commit manifests
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add digests/manifest.json
+          [ -f community_digests/manifest.json ] && git add community_digests/manifest.json
           git diff --staged --quiet || git commit -m "chore: update manifest for $(date +%Y-%m-%d)"
           git push

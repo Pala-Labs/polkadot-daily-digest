@@ -167,6 +167,20 @@ body {
 .nav-tab:hover  { color: var(--on-surface); }
 .nav-tab.active { color: var(--on-surface); border-bottom-color: var(--accent); }
 
+/* Hamburger — hidden on desktop, shown on mobile via media query */
+.nav-hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  width: 44px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--on-surface);
+  cursor: pointer;
+}
+
 /* Theme toggle — styled identically to nav tabs, floated to the right */
 .theme-toggle {
   position: absolute;
@@ -1008,10 +1022,35 @@ body {
 @media (max-width: 768px) {
   :root { --margin-page: 24px; }
   .theme-toggle span { display: none; }
-  /* Switch from absolute-right to flex space-between so toggle never overlaps tabs */
+  /* Collapse tabs into a hamburger dropdown so the nav never overflows */
   .nav-inner    { justify-content: space-between; }
   .theme-toggle { position: static; padding: 0 12px; }
-  .nav-tab      { padding: 0 14px; }
+  .nav-hamburger { display: flex; }
+  .nav-tabs {
+    position: absolute;
+    top: 48px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--surface-lowest);
+    border-bottom: 1px solid var(--outline-var);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    display: none;
+    z-index: 100;
+  }
+  .nav.open .nav-tabs { display: flex; }
+  .nav-tab {
+    height: 52px;
+    width: 100%;
+    padding: 0 var(--margin-page);
+    justify-content: flex-start;
+    border-bottom: 1px solid var(--outline-var);
+    border-left: 2px solid transparent;
+  }
+  .nav-tab:last-child { border-bottom: none; }
+  .nav-tab.active { border-bottom-color: var(--outline-var); border-left-color: var(--accent); }
   .method-sources { grid-template-columns: 1fr; }
   .method-stage   { grid-template-columns: 64px 1fr; gap: 20px; padding: 24px 0; }
   .method-stage-num { font-size: 40px; }
@@ -1019,7 +1058,7 @@ body {
 }
 @media (max-width: 480px) {
   :root { --margin-page: 16px; }
-  .nav-tab { padding: 0 10px; letter-spacing: 0.06em; }
+  .nav-tab { letter-spacing: 0.06em; }
   .chips, .log-chips { flex-wrap: wrap; }
   .chip, .log-chip { min-width: 45%; border-bottom: 1px solid var(--outline-var); }
   .masthead-brand { font-size: 36px; }
@@ -1050,9 +1089,12 @@ body {
 </header>
 
 <!-- Nav -->
-<nav class="nav">
+<nav class="nav" id="nav">
   <div class="nav-inner">
-    <div class="nav-tabs">
+    <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-tabs">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+    <div class="nav-tabs" id="nav-tabs">
       <button class="nav-tab active" id="tab-home"        onclick="nav('home')">Front Page</button>
       <button class="nav-tab"        id="tab-digests"     onclick="nav('digests')">Legacy Digest</button>
       <button class="nav-tab"        id="tab-community"   onclick="nav('community')">Community Edition</button>
@@ -1375,7 +1417,15 @@ function initTheme() {
 }
 
 // ─────────────────────────── Navigation ───────────────────────
+function toggleMenu(force) {
+  const navEl = document.getElementById('nav');
+  const open = force === undefined ? !navEl.classList.contains('open') : force;
+  navEl.classList.toggle('open', open);
+  document.getElementById('nav-hamburger').setAttribute('aria-expanded', open ? 'true' : 'false');
+}
+
 function nav(page) {
+  toggleMenu(false);  // close the mobile dropdown on selection
   ['home','digests','community','stats','detail','methodology'].forEach(p => {
     document.getElementById('page-'+p).classList.toggle('active', p === page);
   });
@@ -1914,6 +1964,12 @@ async function init() {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(); }
     });
   }
+
+  // Mobile nav: close the dropdown when tapping outside it
+  document.addEventListener('click', e => {
+    const navEl = document.getElementById('nav');
+    if (navEl.classList.contains('open') && !navEl.contains(e.target)) toggleMenu(false);
+  });
 
   const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   document.getElementById('masthead-date').textContent = today;

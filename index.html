@@ -241,6 +241,83 @@ body {
   color: var(--on-surface-var);
 }
 
+/* ── Stats ── */
+.stats-chart-wrap {
+  position: relative;
+  height: 340px;
+  border: 1px solid var(--outline-var);
+  background: var(--surface-lowest);
+  padding: 20px 20px 12px;
+}
+.lb {
+  border: 1px solid var(--outline-var);
+  background: var(--surface-lowest);
+}
+.lb-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--outline-var);
+  text-decoration: none;
+  color: var(--on-surface);
+  font-family: 'Work Sans', sans-serif;
+  transition: background 0.15s ease;
+}
+.lb-row:last-child { border-bottom: none; }
+.lb-row:hover { background: var(--surface-low); }
+.lb-rank {
+  font-family: 'Newsreader', serif;
+  font-size: 15px;
+  color: var(--outline);
+  width: 22px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.lb-handle {
+  font-size: 14px;
+  font-weight: 500;
+  width: 170px;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lb-bar {
+  flex: 1;
+  height: 8px;
+  min-width: 40px;
+  background: var(--surface-container);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.lb-bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--blue);
+  border-radius: 4px;
+}
+.lb-count {
+  font-family: 'Newsreader', serif;
+  font-size: 16px;
+  font-weight: 600;
+  width: 48px;
+  text-align: right;
+  flex-shrink: 0;
+}
+.stats-error {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  color: var(--orange);
+  padding: 20px;
+  border: 1px solid var(--outline-var);
+  background: var(--surface-lowest);
+}
+@media (max-width: 600px) {
+  .lb-handle { width: 110px; }
+  .stats-chart-wrap { height: 300px; padding: 14px 12px 8px; }
+}
+
 /* ── Shared page header — consistent across all three pages ── */
 .page-top {
   padding: 64px 0 40px;
@@ -272,10 +349,31 @@ body {
   color: var(--on-surface-var);
   line-height: 1.6;
   margin-top: 16px;
-  max-width: 600px;
+  max-width: 820px;
 }
 .accent { font-style: normal; }
 .home-block { margin-bottom: 56px; }
+
+/* Intro block with thumbnail beside the copy */
+.home-intro-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  gap: 48px;
+  align-items: center;
+}
+.home-intro-split .method-title,
+.home-intro-split .method-body { max-width: none; }
+.home-intro-media { margin: 0; }
+.home-intro-media img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--outline);
+  border-radius: 2px;
+}
+@media (max-width: 768px) {
+  .home-intro-split { grid-template-columns: 1fr; gap: 28px; }
+}
 
 /* Digest list row */
 .d-row {
@@ -957,6 +1055,7 @@ body {
       <button class="nav-tab active" id="tab-home"        onclick="nav('home')">Front Page</button>
       <button class="nav-tab"        id="tab-digests"     onclick="nav('digests')">Legacy Digest</button>
       <button class="nav-tab"        id="tab-community"   onclick="nav('community')">Community Edition</button>
+      <button class="nav-tab"        id="tab-stats"       onclick="nav('stats')">Stats</button>
       <button class="nav-tab"        id="tab-methodology" onclick="nav('methodology')">Methodology</button>
     </div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
@@ -975,11 +1074,16 @@ body {
       <div class="home-intro-headline">Polkadot <span class="accent">Ecosystem</span> Briefing</div>
       <div class="home-intro-sub">An authoritative overview of governance, development, and community activity across the Polkadot network. Curated and synthesised daily.</div>
     </div>
-    <div class="home-block">
-      <div class="eyebrow">Why This Exists</div>
-      <h2 class="method-title">Carrying forward a trusted tradition of Polkadot intelligence.</h2>
-      <p class="method-body">For years, the Web3 Foundation&rsquo;s <strong>Web3 Digest</strong> gave the ecosystem a single, dependable place to follow what mattered across Polkadot &mdash; governance, development, and community signal, distilled without the noise. As that cadence faded, the community lost a shared point of reference for keeping up with the network.</p>
-      <p class="method-body">The <strong>Polkadot Daily Digest</strong> is our effort to recreate that legacy and carry it forward. The intent is simple: give builders, delegates, and the wider community a clear, honest briefing of what is actually happening each day &mdash; sourced from the venues where the conversation lives, synthesised for clarity, and free for anyone to read. No hype, no paywall &mdash; just signal. The editions below pick up where the Web3 Digest left off.</p>
+    <div class="home-block home-intro-split">
+      <div class="home-intro-copy">
+        <div class="eyebrow">Why This Exists</div>
+        <h2 class="method-title">Carrying forward a trusted tradition of Polkadot intelligence.</h2>
+        <p class="method-body">For years, the Web3 Foundation&rsquo;s <strong>Web3 Digest</strong> gave the ecosystem a single, dependable place to follow what mattered across Polkadot &mdash; governance, development, and community signal, distilled without the noise. As that cadence faded, the community lost a shared point of reference for keeping up with the network.</p>
+        <p class="method-body">The <strong>Polkadot Daily Digest</strong> is our effort to recreate that legacy and carry it forward. The intent is simple: give builders, delegates, and the wider community a clear, honest briefing of what is actually happening each day &mdash; sourced from the venues where the conversation lives, synthesised for clarity, and free for anyone to read. No hype, no paywall &mdash; just signal. The editions below pick up where the Web3 Digest left off.</p>
+      </div>
+      <figure class="home-intro-media">
+        <img src="thumbnail.jpeg" alt="Polkadot Daily Digest — recreating the Web3 Digest legacy">
+      </figure>
     </div>
     <div class="home-block">
       <div class="eyebrow">Cumulative Data Points</div>
@@ -1020,6 +1124,28 @@ body {
       <div class="search-msg" id="community-search-msg" role="status" aria-live="polite"></div>
     </div>
     <div id="community-list-body"><div class="loading"><div class="spinner"></div></div></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div id="page-stats" class="page">
+  <div class="wrap">
+    <div class="page-top">
+      <h1 class="page-header-title">Stats</h1>
+      <div class="home-intro-sub">Activity across the Polkadot-related posts we track daily on X. Aggregated live from our database &mdash; filtered to ecosystem signal.</div>
+    </div>
+    <div class="home-block">
+      <div class="eyebrow">At a Glance</div>
+      <div class="chips" id="stats-totals"><div class="loading"><div class="spinner"></div></div></div>
+    </div>
+    <div class="home-block">
+      <div class="eyebrow">Posts Per Day</div>
+      <div class="stats-chart-wrap" id="stats-perday-wrap"><canvas id="stats-perday"></canvas></div>
+    </div>
+    <div class="home-block">
+      <div class="eyebrow">Most Active Handles</div>
+      <div id="stats-handles"><div class="loading"><div class="spinner"></div></div></div>
+    </div>
   </div>
 </div>
 
@@ -1162,6 +1288,7 @@ body {
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
 // ─────────────────────────── Config ───────────────────────────
 const STAT_DEFS = [
@@ -1232,6 +1359,7 @@ function toggleTheme() {
   document.documentElement.dataset.theme = next;
   localStorage.setItem('theme', next);
   updateThemeIcon();
+  if (perDayRows) renderPerDay(perDayRows); // recolor chart for the new theme
 }
 
 function initTheme() {
@@ -1246,18 +1374,122 @@ function initTheme() {
 
 // ─────────────────────────── Navigation ───────────────────────
 function nav(page) {
-  ['home','digests','community','detail','methodology'].forEach(p => {
+  ['home','digests','community','stats','detail','methodology'].forEach(p => {
     document.getElementById('page-'+p).classList.toggle('active', p === page);
   });
-  ['home','digests','community','methodology'].forEach(t => {
+  ['home','digests','community','stats','methodology'].forEach(t => {
     const el = document.getElementById('tab-'+t);
     if (el) el.classList.toggle('active', t === page);
   });
+  if (page === 'stats') loadStats();
   if (page !== 'detail') {
     prevPage = page;
     history.replaceState(null, '', location.pathname + location.search);
   }
   window.scrollTo(0, 0);
+}
+
+// ─────────────────────────── Stats ────────────────────────────
+const SB_URL = 'https://opthiqnmdvffhebpbddw.supabase.co';
+const SB_KEY = 'sb_publishable_Jjd1_dYKZf67KGnfIKkmdw_34C8WV6M';
+let statsLoaded = false;
+let perDayChart = null;
+let perDayRows  = null;
+
+function cssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+function fmtNum(n) { return Number(n).toLocaleString('en-US'); }
+
+async function sbFetch(path) {
+  const res = await fetch(SB_URL + '/rest/v1/' + path, {
+    headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY },
+  });
+  if (!res.ok) throw new Error('Supabase ' + res.status);
+  return res.json();
+}
+
+async function loadStats() {
+  if (statsLoaded) return;
+  statsLoaded = true;
+  try {
+    const [totals, perDay, handles] = await Promise.all([
+      sbFetch('v_post_totals?select=*'),
+      sbFetch('v_posts_per_day?select=*&order=day.asc'),
+      sbFetch('v_top_handles?select=*&limit=15'),
+    ]);
+    renderStatsTotals(totals[0]);
+    renderPerDay(perDay);
+    renderHandles(handles);
+  } catch (e) {
+    statsLoaded = false; // allow a retry on next visit
+    const msg = '<div class="stats-error">Couldn&rsquo;t load stats right now. Please try again later.</div>';
+    document.getElementById('stats-totals').innerHTML  = msg;
+    document.getElementById('stats-handles').innerHTML = '';
+  }
+}
+
+function renderStatsTotals(t) {
+  if (!t) return;
+  const days = Math.round((new Date(t.max_date) - new Date(t.min_date)) / 86400000) + 1;
+  const chips = [
+    [fmtNum(t.total_posts),     'Posts Tracked'],
+    [fmtNum(t.unique_handles),  'Unique Handles'],
+    [fmtNum(days),              'Days Covered'],
+  ];
+  document.getElementById('stats-totals').innerHTML = chips.map(c =>
+    '<div class="chip"><div class="chip-num">' + c[0] + '</div><div class="chip-lbl">' + c[1] + '</div></div>'
+  ).join('');
+}
+
+function renderPerDay(rows) {
+  perDayRows = rows;
+  const ctx = document.getElementById('stats-perday');
+  if (!ctx || typeof Chart === 'undefined') return;
+  const labels = rows.map(r => new Date(r.day + 'T00:00:00Z')
+    .toLocaleDateString('en-GB', { day: 'numeric', month: 'short', timeZone: 'UTC' }));
+  const data = rows.map(r => r.post_count);
+  const text = cssVar('--on-surface-var');
+  const grid = cssVar('--outline-var');
+  if (perDayChart) perDayChart.destroy();
+  perDayChart = new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [{
+      label: 'Posts', data,
+      backgroundColor: cssVar('--blue'), borderRadius: 2, maxBarThickness: 22,
+    }] },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: cssVar('--on-surface'), titleColor: cssVar('--surface'),
+          bodyColor: cssVar('--surface'), padding: 10, displayColors: false,
+          titleFont: { family: 'Work Sans' }, bodyFont: { family: 'Work Sans' },
+        },
+      },
+      scales: {
+        x: { ticks: { color: text, maxRotation: 0, autoSkip: true, maxTicksLimit: 12, font: { family: 'Work Sans' } }, grid: { display: false } },
+        y: { beginAtZero: true, ticks: { color: text, precision: 0, font: { family: 'Work Sans' } }, grid: { color: grid } },
+      },
+    },
+  });
+}
+
+function renderHandles(rows) {
+  if (!rows || !rows.length) { document.getElementById('stats-handles').innerHTML = ''; return; }
+  const max = Math.max.apply(null, rows.map(r => r.post_count));
+  const html = rows.map((r, i) => {
+    const pct = (r.post_count / max * 100).toFixed(1);
+    const h = r.author_username;
+    return '<a class="lb-row" href="https://twitter.com/' + encodeURIComponent(h) + '" target="_blank" rel="noopener noreferrer">'
+      + '<span class="lb-rank">' + (i + 1) + '</span>'
+      + '<span class="lb-handle">@' + h + '</span>'
+      + '<span class="lb-bar"><span class="lb-bar-fill" style="width:' + pct + '%"></span></span>'
+      + '<span class="lb-count">' + fmtNum(r.post_count) + '</span>'
+      + '</a>';
+  }).join('');
+  document.getElementById('stats-handles').innerHTML = '<div class="lb">' + html + '</div>';
 }
 
 // ─────────────────────────── Lightbox ─────────────────────────

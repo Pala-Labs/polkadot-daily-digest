@@ -1,0 +1,25 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*~
+
+# Node / tooling
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# Logs
+*.log
+
+# Secrets / environment
+.env
+.env.*
+!.env.example
+
+# Local Claude Code settings (machine-specific; shared config stays in settings.json)
+.claude/settings.local.json

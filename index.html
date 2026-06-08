@@ -294,7 +294,7 @@ body {
 .lb-bar-fill {
   display: block;
   height: 100%;
-  background: var(--blue);
+  background: var(--on-surface);
   border-radius: 4px;
 }
 .lb-count {
@@ -1056,7 +1056,7 @@ body {
       <button class="nav-tab active" id="tab-home"        onclick="nav('home')">Front Page</button>
       <button class="nav-tab"        id="tab-digests"     onclick="nav('digests')">Legacy Digest</button>
       <button class="nav-tab"        id="tab-community"   onclick="nav('community')">Community Edition</button>
-      <button class="nav-tab"        id="tab-stats"       onclick="nav('stats')">Stats</button>
+      <button class="nav-tab"        id="tab-stats"       onclick="nav('stats')">Twitter Activity</button>
       <button class="nav-tab"        id="tab-methodology" onclick="nav('methodology')">Methodology</button>
     </div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
@@ -1102,6 +1102,7 @@ body {
   <div class="wrap">
     <div class="page-top">
       <h1 class="page-header-title">Legacy Digest</h1>
+      <div class="home-intro-sub">Every edition of the Polkadot Daily Digest, archived and searchable by date &mdash; the full record of what mattered each day.</div>
     </div>
     <div class="search-bar">
       <label class="search-label" for="search-date">Jump to Date</label>
@@ -1132,7 +1133,7 @@ body {
 <div id="page-stats" class="page">
   <div class="wrap">
     <div class="page-top">
-      <h1 class="page-header-title">Stats</h1>
+      <h1 class="page-header-title">Twitter Activity</h1>
       <div class="home-intro-sub">Activity across the Polkadot-related posts we track daily on X. Aggregated live from our database &mdash; filtered to ecosystem signal.</div>
     </div>
     <div class="home-block">
@@ -1457,7 +1458,7 @@ function renderPerDay(rows) {
     type: 'bar',
     data: { labels, datasets: [{
       label: 'Posts', data,
-      backgroundColor: cssVar('--blue'), borderRadius: 2, maxBarThickness: 22,
+      backgroundColor: cssVar('--on-surface'), borderRadius: 2, maxBarThickness: 22,
     }] },
     options: {
       responsive: true, maintainAspectRatio: false,

@@ -611,7 +611,7 @@ body {
 }
 .footer a { color: var(--on-surface); text-decoration: none; font-weight: 600; }
 
-/* ── Search bar (All Editions) ── */
+/* ── Search bar (Legacy Digest) ── */
 .search-bar {
   margin-bottom: 32px;
   padding-bottom: 28px;
@@ -654,7 +654,7 @@ body {
 }
 .search-msg:empty { display: none; }
 
-/* ── Pagination (All Editions) ── */
+/* ── Pagination (Legacy Digest) ── */
 .pagi {
   margin-top: 40px;
   padding-top: 24px;
@@ -955,8 +955,8 @@ body {
   <div class="nav-inner">
     <div class="nav-tabs">
       <button class="nav-tab active" id="tab-home"        onclick="nav('home')">Front Page</button>
-      <button class="nav-tab"        id="tab-digests"     onclick="nav('digests')">All Editions</button>
-      <button class="nav-tab"        id="tab-community"   onclick="nav('community')">Community</button>
+      <button class="nav-tab"        id="tab-digests"     onclick="nav('digests')">Legacy Digest</button>
+      <button class="nav-tab"        id="tab-community"   onclick="nav('community')">Community Edition</button>
       <button class="nav-tab"        id="tab-methodology" onclick="nav('methodology')">Methodology</button>
     </div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
@@ -976,6 +976,12 @@ body {
       <div class="home-intro-sub">An authoritative overview of governance, development, and community activity across the Polkadot network. Curated and synthesised daily.</div>
     </div>
     <div class="home-block">
+      <div class="eyebrow">Why This Exists</div>
+      <h2 class="method-title">Carrying forward a trusted tradition of Polkadot intelligence.</h2>
+      <p class="method-body">For years, the Web3 Foundation&rsquo;s <strong>Web3 Digest</strong> gave the ecosystem a single, dependable place to follow what mattered across Polkadot &mdash; governance, development, and community signal, distilled without the noise. As that cadence faded, the community lost a shared point of reference for keeping up with the network.</p>
+      <p class="method-body">The <strong>Polkadot Daily Digest</strong> is our effort to recreate that legacy and carry it forward. The intent is simple: give builders, delegates, and the wider community a clear, honest briefing of what is actually happening each day &mdash; sourced from the venues where the conversation lives, synthesised for clarity, and free for anyone to read. No hype, no paywall &mdash; just signal. The editions below pick up where the Web3 Digest left off.</p>
+    </div>
+    <div class="home-block">
       <div class="eyebrow">Cumulative Data Points</div>
       <div class="chips" id="home-stats"><div class="loading"><div class="spinner"></div></div></div>
     </div>
@@ -990,7 +996,7 @@ body {
 <div id="page-digests" class="page">
   <div class="wrap">
     <div class="page-top">
-      <h1 class="page-header-title">All Editions</h1>
+      <h1 class="page-header-title">Legacy Digest</h1>
     </div>
     <div class="search-bar">
       <label class="search-label" for="search-date">Jump to Date</label>

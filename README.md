@@ -6,7 +6,7 @@ A daily, source-linked briefing on the Polkadot ecosystem — technical updates,
 
 The digest is a **pure static site** served from GitHub Pages. Every edition is a plain HTML file committed to this repository the moment it's generated, so the full archive is open, verifiable, scriptable, and self-hostable. Every claim links back to its primary source.
 
-> Maintained by [Pala Labs](https://palalabs.org) · Governance data via [OpenShore](https://openshore.io) · Powered by Polkadot
+> Maintained by [Pala Labs](https://palalabs.org) · Governance data via [OpenShore](https://openshore.io) · Powered by [Polkadot](https://polkadot.com/)
 
 ---
 

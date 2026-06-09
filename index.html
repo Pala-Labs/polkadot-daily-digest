@@ -1086,86 +1086,180 @@ body {
   .pagi-arrow { padding: 6px 12px; }
 }
 
-/* ── EXTRA · newsletter subscription card ── */
-.extra {
-  border: 3px double var(--on-surface);
-  background: var(--surface-lowest);
-  padding: 36px clamp(20px, 4vw, 56px) 30px;
-  text-align: center;
-  transition: background-color 0.2s, border-color 0.2s;
+/* ── Flier popup · "The Notices" ── */
+/* Parked paper-airplane button (corner) */
+.flier-fab {
+  position: fixed; right: 22px; bottom: 22px; z-index: 1200;
+  width: 58px; height: 58px; border-radius: 50%;
+  background: var(--on-surface); color: var(--surface-lowest);
+  border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.28);
+  transition: transform 0.25s ease, opacity 0.3s ease, box-shadow 0.2s;
+  animation: fab-bob 3.4s ease-in-out infinite;
 }
-.extra-rule { height: 2px; background: var(--on-surface); margin: 0 auto 14px; max-width: 520px; }
-.extra-rule-thin { height: 1px; background: var(--outline-var); margin: 16px auto 18px; max-width: 380px; }
-.extra-banner {
-  font-family: 'Chomsky', 'Times New Roman', Times, serif;
-  font-size: clamp(40px, 7vw, 74px);
-  line-height: 0.9; color: var(--on-surface);
-  display: flex; align-items: center; justify-content: center; gap: 20px;
+.flier-fab:hover { transform: translateY(-3px) scale(1.06); box-shadow: 0 10px 28px rgba(0,0,0,0.34); }
+.flier-fab svg { width: 26px; height: 26px; }
+.flier-fab .fab-badge {
+  position: absolute; top: -3px; right: -3px; min-width: 17px; height: 17px; padding: 0 4px;
+  background: var(--orange); color: #fff; border-radius: 9px;
+  font: 700 10px/17px 'Work Sans', sans-serif; text-align: center; box-shadow: 0 0 0 2px var(--surface);
 }
-.extra-star { font-size: 0.34em; transform: translateY(-0.4em); color: var(--outline); }
-.extra-dateline {
-  font-family: 'Work Sans', sans-serif; font-size: 12px; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.18em; color: var(--outline); margin-top: 12px;
+.flier-fab.hidden { opacity: 0; pointer-events: none; transform: scale(0.3) translate(20px, 20px); }
+@keyframes fab-bob { 0%,100% { translate: 0 0; } 50% { translate: 0 -5px; } }
+
+/* Overlay + backdrop */
+.flier-overlay {
+  position: fixed; inset: 0; z-index: 1300; display: none;
+  align-items: center; justify-content: center; padding: 24px;
 }
-.extra-bulletins {
-  font-family: 'Newsreader', Georgia, serif; font-style: italic;
-  font-size: clamp(15px, 1.7vw, 18px); line-height: 1.6;
-  color: var(--on-surface-var); max-width: 660px; margin: 0 auto;
+.flier-overlay.open { display: flex; }
+.flier-backdrop {
+  position: absolute; inset: 0; background: rgba(16,14,13,0.55);
+  -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
+  opacity: 0; transition: opacity 0.3s;
 }
-.extra-bulletins .b-sep { color: var(--outline-var); margin: 0 9px; font-style: normal; }
-.extra-bulletins .b-live {
-  font-style: normal; font-family: 'Work Sans', sans-serif; font-size: 10px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.08em; color: var(--surface-lowest);
-  background: var(--orange); padding: 2px 7px; border-radius: 3px; margin-right: 8px; vertical-align: 2px;
+.flier-overlay.open  .flier-backdrop { opacity: 1; }
+.flier-overlay.closing .flier-backdrop { opacity: 0; }
+
+/* Deck — flies in from / out to the bottom-right corner like a paper plane */
+.flier-deck {
+  position: relative; width: min(540px, 100%); height: min(620px, 84vh);
+  z-index: 2; transform-origin: bottom right;
 }
-.extra-pitch { max-width: 600px; margin: 22px auto 0; }
-.extra-headline {
-  font-family: 'Newsreader', Georgia, serif; font-weight: 600;
-  font-size: clamp(22px, 3vw, 30px); line-height: 1.2; color: var(--on-surface); margin-bottom: 10px;
+.flier-overlay.open    .flier-deck { animation: deck-fly-in  0.6s cubic-bezier(.22,.61,.36,1) both; }
+.flier-overlay.closing .flier-deck { animation: deck-fly-out 0.6s cubic-bezier(.55,.06,.68,.19) both; }
+@keyframes deck-fly-in {
+  0%   { opacity: 0; transform: translate(40vw, 40vh) scale(0.05) rotate(28deg); }
+  55%  { opacity: 1; }
+  100% { opacity: 1; transform: translate(0,0) scale(1) rotate(0); }
 }
-.extra-sub { font-family: 'Work Sans', sans-serif; font-size: 15px; line-height: 1.6; color: var(--on-surface-var); }
-.extra-form {
-  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: center; gap: 14px;
-  max-width: 640px; margin: 26px auto 0; text-align: left;
+@keyframes deck-fly-out {
+  0%   { opacity: 1; transform: translate(0,0) scale(1) rotate(0); }
+  30%  { opacity: 1; transform: translate(0,-10px) scale(1.02) rotate(-3deg); }
+  100% { opacity: 0; transform: translate(42vw, 42vh) scale(0.04) rotate(36deg); }
 }
-.extra-field { display: flex; flex-direction: column; gap: 7px; }
-.extra-field-email { flex: 1 1 240px; }
-.extra-label {
-  font-family: 'Work Sans', sans-serif; font-size: 11px; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.12em; color: var(--outline);
+
+.flier-close {
+  position: absolute; top: -14px; right: -14px; z-index: 30;
+  width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--on-surface); color: var(--surface-lowest); font-size: 21px; line-height: 1;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.3); transition: transform 0.15s;
 }
-.extra-input {
+.flier-close:hover { transform: scale(1.1) rotate(90deg); }
+
+/* Stack of flier pages */
+.flier-stack { position: absolute; inset: 0; }
+.flier-page {
+  position: absolute; inset: 0; display: flex; flex-direction: column;
+  background: var(--surface-lowest); border: 3px double var(--on-surface);
+  box-shadow: 0 18px 50px rgba(0,0,0,0.30);
+  padding: 30px clamp(20px, 4vw, 40px); overflow-y: auto;
+  transform-origin: center bottom;
+  transition: transform 0.5s cubic-bezier(.22,.61,.36,1), opacity 0.45s ease;
+  will-change: transform, opacity;
+}
+.flier-page[data-state="active"]  { transform: translate(0,0) scale(1) rotate(0); opacity: 1; z-index: 10; pointer-events: auto; }
+.flier-page[data-state="behind1"] { transform: translate(0,16px) scale(0.955) rotate(1.6deg); opacity: 1; z-index: 9; pointer-events: none; }
+.flier-page[data-state="behind2"] { transform: translate(0,32px) scale(0.91) rotate(-1.6deg); opacity: 1; z-index: 8; pointer-events: none; }
+.flier-page[data-state="gone"]    { transform: translate(-122%, -4%) rotate(-9deg); opacity: 0; z-index: 1; pointer-events: none; }
+.flier-page[data-state="hidden"]  { opacity: 0; pointer-events: none; z-index: 0; }
+
+/* Flier content */
+.flier-kicker {
+  font-family: 'Work Sans', sans-serif; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.16em; color: var(--outline);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 6px;
+}
+.flier-now {
+  font: 700 10px/1 'Work Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.08em;
+  color: #fff; background: var(--orange); padding: 3px 7px; border-radius: 3px;
+  animation: now-pulse 1.8s ease-in-out infinite;
+}
+@keyframes now-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+.flier-serif { font-family: 'Chomsky','Times New Roman',serif; font-size: clamp(34px,7vw,52px); line-height: 1; color: var(--on-surface); text-align: center; }
+.flier-rule { height: 2px; background: var(--on-surface); margin: 12px 0 18px; }
+.flier-h { font-family: 'Newsreader', Georgia, serif; font-weight: 600; font-size: clamp(23px, 3.4vw, 31px); line-height: 1.18; color: var(--on-surface); margin: 8px 0 10px; }
+.flier-h-lg { font-size: clamp(25px, 4vw, 35px); }
+.flier-body { font-family: 'Work Sans', sans-serif; font-size: 15px; line-height: 1.62; color: var(--on-surface-var); }
+.flier-body strong { color: var(--on-surface); }
+.flier-spacer { flex: 1 1 auto; min-height: 12px; }
+.flier-hint { font-family: 'Work Sans', sans-serif; font-size: 12px; color: var(--outline); text-align: center; margin-top: 14px; letter-spacing: 0.03em; }
+
+/* Forms shared across fliers */
+.flier-field { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
+.flier-label { font: 600 11px/1.3 'Work Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.12em; color: var(--outline); }
+.flier-input, .flier-textarea {
   font-family: 'Work Sans', sans-serif; font-size: 15px; color: var(--on-surface);
-  background: var(--surface); border: 1px solid var(--outline-var); border-radius: 6px;
-  padding: 11px 13px; width: 100%; transition: border-color 0.15s;
+  background: var(--surface); border: 1px solid var(--outline-var); border-radius: 7px;
+  padding: 11px 13px; width: 100%; transition: border-color 0.15s; resize: vertical;
 }
-.extra-input:focus { outline: none; border-color: var(--on-surface); }
-.extra-freq { display: flex; gap: 8px; }
-.extra-freq-opt {
-  display: flex; align-items: center; gap: 7px; cursor: pointer;
+.flier-input:focus, .flier-textarea:focus { outline: none; border-color: var(--on-surface); }
+.flier-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.flier-row > .flier-field { flex: 1 1 150px; }
+.flier-freq { display: flex; gap: 8px; }
+.flier-freq-opt {
+  display: flex; align-items: center; gap: 7px; cursor: pointer; flex: 1; justify-content: center;
   font-family: 'Work Sans', sans-serif; font-size: 14px; color: var(--on-surface);
-  border: 1px solid var(--outline-var); border-radius: 6px; padding: 10px 15px;
+  border: 1px solid var(--outline-var); border-radius: 7px; padding: 10px 14px;
   transition: border-color 0.15s, background-color 0.15s;
 }
-.extra-freq-opt:has(input:checked) { border-color: var(--on-surface); background: var(--surface-low); font-weight: 600; }
-.extra-freq-opt input { accent-color: var(--on-surface); margin: 0; }
-.extra-btn {
+.flier-freq-opt:has(input:checked) { border-color: var(--on-surface); background: var(--surface-low); font-weight: 600; }
+.flier-freq-opt input { accent-color: var(--on-surface); margin: 0; }
+.flier-btn {
   font-family: 'Work Sans', sans-serif; font-size: 14px; font-weight: 600;
-  text-transform: uppercase; letter-spacing: 0.08em;
+  text-transform: uppercase; letter-spacing: 0.07em;
   color: var(--surface-lowest); background: var(--on-surface);
-  border: none; border-radius: 6px; padding: 12px 28px; cursor: pointer;
+  border: none; border-radius: 7px; padding: 12px 24px; cursor: pointer;
   transition: opacity 0.15s; white-space: nowrap;
 }
-.extra-btn:hover { opacity: 0.85; }
-.extra-btn:disabled { opacity: 0.5; cursor: default; }
-.extra-msg { font-family: 'Work Sans', sans-serif; font-size: 14px; margin-top: 16px; min-height: 1px; }
-.extra-msg.ok  { color: var(--green); font-weight: 600; }
-.extra-msg.err { color: var(--orange); font-weight: 600; }
-.extra-fineprint { font-family: 'Work Sans', sans-serif; font-size: 12px; color: var(--outline); margin-top: 14px; }
+.flier-btn:hover { opacity: 0.85; }
+.flier-btn:disabled { opacity: 0.5; cursor: default; }
+.flier-btn-ghost { background: transparent; color: var(--on-surface); border: 1px solid var(--outline-var); }
+.flier-btn-ghost:hover { background: var(--surface-low); opacity: 1; }
+.flier-btns { display: flex; gap: 10px; margin-top: 18px; }
+.flier-btns .flier-btn { flex: 1; }
+.flier-msg { font-family: 'Work Sans', sans-serif; font-size: 14px; margin-top: 14px; min-height: 1px; }
+.flier-msg.ok  { color: var(--green); font-weight: 600; }
+.flier-msg.err { color: var(--orange); font-weight: 600; }
+.flier-hide { display: none !important; }
+
+/* Ad example card */
+.ad-card { border: 1px solid var(--outline-var); border-radius: 8px; background: var(--surface); padding: 16px 18px; margin-top: 16px; }
+.ad-card-tag { font: 700 10px/1 'Work Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.1em; color: var(--orange); margin-bottom: 6px; }
+.ad-card-title { font-family: 'Newsreader', Georgia, serif; font-weight: 600; font-size: 19px; color: var(--on-surface); }
+.ad-card-meta { font-family: 'Work Sans', sans-serif; font-size: 12.5px; color: var(--on-surface-var); margin: 2px 0 10px; }
+.ad-card-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.ad-link {
+  font: 600 12.5px/1 'Work Sans', sans-serif; text-decoration: none; color: var(--on-surface);
+  border: 1px solid var(--outline-var); border-radius: 999px; padding: 7px 12px;
+  display: inline-flex; align-items: center; gap: 6px; transition: background-color .15s, border-color .15s;
+}
+.ad-link:hover { background: var(--surface-low); border-color: var(--on-surface); }
+
+/* Navigation */
+.flier-nav { position: absolute; left: 0; right: 0; bottom: -52px; z-index: 20; display: flex; align-items: center; justify-content: center; gap: 18px; }
+.flier-arrow {
+  width: 42px; height: 42px; border-radius: 50%; border: none; cursor: pointer;
+  background: var(--surface-lowest); color: var(--on-surface); font-size: 22px; line-height: 1;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.22); transition: transform 0.15s, opacity 0.15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.flier-arrow:hover:not(:disabled) { transform: scale(1.08); }
+.flier-arrow:disabled { opacity: 0.35; cursor: default; }
+.flier-dots { display: flex; gap: 8px; }
+.flier-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--outline-var); border: none; padding: 0; cursor: pointer; transition: background-color 0.2s, transform 0.2s; }
+.flier-dot.active { background: var(--surface-lowest); transform: scale(1.4); box-shadow: 0 0 0 1px var(--outline); }
+
 @media (max-width: 560px) {
-  .extra-form { flex-direction: column; align-items: stretch; }
-  .extra-freq { justify-content: center; }
-  .extra-btn { width: 100%; }
+  .flier-overlay { padding: 16px; }
+  .flier-deck { height: 80vh; }
+  .flier-page { padding: 24px 18px; }
+  .flier-nav { bottom: -46px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .flier-fab { animation: none; }
+  .flier-overlay.open .flier-deck, .flier-overlay.closing .flier-deck { animation-duration: 0.01s; }
+  .flier-now { animation: none; }
 }
 </style>
 </head>
@@ -1225,38 +1319,6 @@ body {
       <figure class="home-intro-media">
         <img src="polkadot-post.png" alt="Polkadot Post — New Era on the Dot">
       </figure>
-    </div>
-    <div class="home-block">
-      <div class="extra" id="extra">
-        <div class="extra-banner">
-          <span class="extra-star">&#9733;</span>
-          <span>Extra! Extra!</span>
-          <span class="extra-star">&#9733;</span>
-        </div>
-        <div class="extra-dateline">Special Notice to Readers</div>
-        <div class="extra-rule-thin"></div>
-        <div class="extra-bulletins" id="extra-bulletins"></div>
-        <div class="extra-pitch">
-          <h2 class="extra-headline">Have the Digest delivered to your inbox.</h2>
-          <p class="extra-sub">Join the readers who get the Polkadot Daily Digest by email &mdash; governance, development, and community signal, distilled and sent on your schedule. No hype, no paywall &mdash; just signal.</p>
-        </div>
-        <form class="extra-form" id="extra-form" novalidate>
-          <div class="extra-field extra-field-email">
-            <label class="extra-label" for="extra-email">Your Email</label>
-            <input class="extra-input" id="extra-email" type="email" inputmode="email" autocomplete="email" placeholder="reader@example.com" required>
-          </div>
-          <div class="extra-field">
-            <span class="extra-label">Delivery</span>
-            <div class="extra-freq" role="radiogroup" aria-label="Delivery frequency">
-              <label class="extra-freq-opt"><input type="radio" name="extra-freq" value="daily" checked><span>Daily</span></label>
-              <label class="extra-freq-opt"><input type="radio" name="extra-freq" value="weekly"><span>Weekly</span></label>
-            </div>
-          </div>
-          <button class="extra-btn" id="extra-btn" type="submit">Subscribe</button>
-        </form>
-        <div class="extra-msg" id="extra-msg" role="status" aria-live="polite"></div>
-        <div class="extra-fineprint">Free &middot; one email per edition &middot; unsubscribe anytime.</div>
-      </div>
     </div>
     <div class="home-block">
       <div class="eyebrow">Cumulative Data Points</div>
@@ -1461,6 +1523,122 @@ body {
     OpenSourced at <a href="https://github.com/Pala-Labs/polkadot-daily-digest" target="_blank">GitHub</a>
   </div>
 </footer>
+
+<!-- ───────── Flier popup · "The Notices" ───────── -->
+<button class="flier-fab" id="flier-fab" aria-label="Open The Notices" title="The Notices">
+  <span class="fab-badge" id="fab-badge">3</span>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+</button>
+
+<div class="flier-overlay" id="flier-overlay" aria-hidden="true">
+  <div class="flier-backdrop" id="flier-backdrop"></div>
+  <div class="flier-deck" id="flier-deck" role="dialog" aria-modal="true" aria-label="The Notices — Polkadot Post">
+    <button class="flier-close" id="flier-close" aria-label="Close and send the flier to the corner">&times;</button>
+    <div class="flier-stack" id="flier-stack">
+
+      <!-- Page 1 · Breaking -->
+      <article class="flier-page" data-page="0">
+        <div class="flier-kicker"><span class="flier-now">Now</span> Breaking &middot; From the Wire</div>
+        <div class="flier-serif">Extra!</div>
+        <div class="flier-rule"></div>
+        <h2 class="flier-h flier-h-lg">Web3 Summit underway &mdash; builders convene to chart the open web.</h2>
+        <p class="flier-body">The ecosystem gathers as the Web3 Summit gets going. Two more notices inside.</p>
+        <div class="flier-spacer"></div>
+        <div class="flier-hint">Flip through the notices &rsaquo;</div>
+      </article>
+
+      <!-- Page 2 · Newsletter -->
+      <article class="flier-page" data-page="1">
+        <div class="flier-kicker">Subscriptions &middot; The Mailroom</div>
+        <div class="flier-rule"></div>
+        <h2 class="flier-h">A daily digest, delivered to your inbox?</h2>
+        <p class="flier-body">We&rsquo;re weighing up an <strong>email edition</strong> of the Polkadot Daily Digest. It isn&rsquo;t sending yet &mdash; we&rsquo;re gauging interest first. Would you want it?</p>
+
+        <div id="nl-choice" class="flier-btns">
+          <button class="flier-btn" id="nl-yes" type="button">Yes, I&rsquo;d like that</button>
+          <button class="flier-btn flier-btn-ghost" id="nl-no" type="button">Not now</button>
+        </div>
+
+        <div id="nl-ack" class="flier-hide">
+          <p class="flier-body" style="margin-top:16px;">No problem &mdash; the full archive is always free to read right here. &#128499;&#65039;</p>
+        </div>
+
+        <div id="nl-form-wrap" class="flier-hide">
+          <form id="nl-form" novalidate>
+            <div class="flier-field">
+              <span class="flier-label">How often?</span>
+              <div class="flier-freq" role="radiogroup" aria-label="Delivery frequency">
+                <label class="flier-freq-opt"><input type="radio" name="nl-freq" value="daily" checked><span>Daily</span></label>
+                <label class="flier-freq-opt"><input type="radio" name="nl-freq" value="weekly"><span>Weekly</span></label>
+              </div>
+            </div>
+            <div class="flier-field">
+              <label class="flier-label" for="nl-email">Your email</label>
+              <input class="flier-input" id="nl-email" type="email" inputmode="email" autocomplete="email" placeholder="reader@example.com" required>
+            </div>
+            <button class="flier-btn" id="nl-btn" type="submit" style="margin-top:16px;width:100%;">Count me in</button>
+          </form>
+          <div class="flier-msg" id="nl-msg" role="status" aria-live="polite"></div>
+          <div class="flier-hint" style="margin-top:10px;">We&rsquo;ll only email you when the edition launches.</div>
+        </div>
+      </article>
+
+      <!-- Page 3 · Place a Notice (Ad) -->
+      <article class="flier-page" data-page="2">
+        <div class="flier-kicker">Place a Notice &middot; Advertise</div>
+        <div class="flier-rule"></div>
+        <h2 class="flier-h">Have something to share with the ecosystem?</h2>
+        <p class="flier-body">Got a product, event, or announcement for the Polkadot community? Send us an enquiry and we may feature it here in <strong>The Notices</strong>.</p>
+
+        <div class="ad-card">
+          <div class="ad-card-tag">Featured Notice</div>
+          <div class="ad-card-title">Web3 Summit 2026</div>
+          <div class="ad-card-meta">18&ndash;19 June &middot; A gathering of builders charting the open web.</div>
+          <div class="ad-card-links">
+            <a class="ad-link" href="https://web3summit.com/" target="_blank" rel="noopener">Website &#8599;</a>
+            <a class="ad-link" href="https://www.youtube.com/watch?v=p6Bb1eTjVuo" target="_blank" rel="noopener">YouTube teaser &#8599;</a>
+            <a class="ad-link" href="https://coda.io/@manon-roux/web3-summit-2026-18-19-june" target="_blank" rel="noopener">More information &#8599;</a>
+          </div>
+        </div>
+
+        <form id="ad-form" novalidate>
+          <div class="flier-row">
+            <div class="flier-field">
+              <label class="flier-label" for="ad-name">Your name</label>
+              <input class="flier-input" id="ad-name" type="text" autocomplete="name" maxlength="120" placeholder="Jane Doe" required>
+            </div>
+            <div class="flier-field">
+              <label class="flier-label" for="ad-email">Email</label>
+              <input class="flier-input" id="ad-email" type="email" inputmode="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required>
+            </div>
+          </div>
+          <div class="flier-field">
+            <label class="flier-label" for="ad-org">Project / Organisation <span style="text-transform:none;font-weight:400;letter-spacing:0;">(optional)</span></label>
+            <input class="flier-input" id="ad-org" type="text" maxlength="160" placeholder="Web3 Summit">
+          </div>
+          <div class="flier-field">
+            <label class="flier-label" for="ad-message">What would you like to share?</label>
+            <textarea class="flier-textarea" id="ad-message" rows="3" maxlength="4000" placeholder="Tell us about your product, event, or announcement…" required></textarea>
+          </div>
+          <button class="flier-btn" id="ad-btn" type="submit" style="margin-top:16px;width:100%;">Send enquiry</button>
+        </form>
+        <div class="flier-msg" id="ad-status" role="status" aria-live="polite"></div>
+        <div class="flier-hint" style="margin-top:10px;">Goes to the Pala Labs desk &middot; contact@palalabs.org</div>
+      </article>
+
+    </div>
+
+    <div class="flier-nav">
+      <button class="flier-arrow" id="flier-prev" aria-label="Previous notice">&#8249;</button>
+      <div class="flier-dots" id="flier-dots">
+        <button class="flier-dot" data-dot="0" aria-label="Notice 1"></button>
+        <button class="flier-dot" data-dot="1" aria-label="Notice 2"></button>
+        <button class="flier-dot" data-dot="2" aria-label="Notice 3"></button>
+      </div>
+      <button class="flier-arrow" id="flier-next" aria-label="Next notice">&#8250;</button>
+    </div>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script>
@@ -2077,93 +2255,169 @@ window.addEventListener('popstate', e => {
 });
 
 // ─────────────────────────── Init ─────────────────────────────
-// ─────────────────────────── EXTRA · newsletter ───────────────
-// Ongoing-news bulletins shown in the EXTRA box. Edit this list freely:
-// short, current headlines. Set `live: true` to flag a happening-now item.
-const EXTRA_BULLETINS = [
-  { text: 'Web3 Summit underway — builders convene to chart the open web', live: true },
-  { text: 'Fresh OpenGov referenda approaching their decision deadlines' },
-  { text: 'New Polkadot SDK release tags land for builders' },
-];
+// ─────────────────────── Flier popup · The Notices ────────────
+// Three fliers shown in a flippable deck. Edit page 1's copy directly in the
+// HTML (article[data-page="0"]) to change the "Now / Breaking" headline.
+const FLIER_PAGES = 3;
+let flierIndex = 0;
 
-function escapeHtml(s) {
-  return String(s).replace(/[&<>"']/g, c =>
-    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+function flierSetStates() {
+  document.querySelectorAll('.flier-page').forEach(p => {
+    const off = (+p.dataset.page) - flierIndex;
+    p.dataset.state =
+      off < 0  ? 'gone'    :
+      off === 0 ? 'active'  :
+      off === 1 ? 'behind1' :
+      off === 2 ? 'behind2' : 'hidden';
+  });
+  document.querySelectorAll('.flier-dot').forEach((d, i) => d.classList.toggle('active', i === flierIndex));
+  const prev = document.getElementById('flier-prev');
+  const next = document.getElementById('flier-next');
+  if (prev) prev.disabled = flierIndex === 0;
+  if (next) next.disabled = flierIndex === FLIER_PAGES - 1;
+}
+function flierGo(i)   { flierIndex = Math.max(0, Math.min(FLIER_PAGES - 1, i)); flierSetStates(); }
+function flierNext()  { flierGo(flierIndex + 1); }
+function flierPrev()  { flierGo(flierIndex - 1); }
+
+function flierOpen() {
+  const ov  = document.getElementById('flier-overlay');
+  const fab = document.getElementById('flier-fab');
+  if (!ov) return;
+  ov.classList.remove('closing');
+  ov.classList.add('open');
+  ov.setAttribute('aria-hidden', 'false');
+  if (fab) fab.classList.add('hidden');
+  document.body.style.overflow = 'hidden';
+  flierGo(flierIndex);
+  try { localStorage.setItem('flierSeen', '1'); } catch (e) {}
 }
 
-function renderExtra() {
-  const wrap = document.getElementById('extra-bulletins');
-  if (wrap) {
-    wrap.innerHTML = EXTRA_BULLETINS.map(b =>
-      (b.live ? '<span class="b-live">Now</span>' : '') + escapeHtml(b.text)
-    ).join('<span class="b-sep">&middot;</span>');
-  }
-  const form = document.getElementById('extra-form');
-  if (form && !form.dataset.bound) {
-    form.dataset.bound = '1';
-    form.addEventListener('submit', subscribe);
-  }
+function flierClose() {
+  const ov  = document.getElementById('flier-overlay');
+  const fab = document.getElementById('flier-fab');
+  if (!ov || !ov.classList.contains('open')) return;
+  const deck = document.getElementById('flier-deck');
+  ov.classList.add('closing');           // triggers the fly-to-corner animation
+  let done = false;
+  const finish = () => {
+    if (done) return; done = true;
+    deck.removeEventListener('animationend', finish);
+    ov.classList.remove('open', 'closing');
+    ov.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (fab) fab.classList.remove('hidden');   // the parked paper plane reappears
+  };
+  deck.addEventListener('animationend', finish);
+  setTimeout(finish, 750);               // fallback if animationend doesn't fire
 }
 
-async function subscribe(e) {
+// Newsletter Yes / No branch (sending isn't live yet — we just collect interest).
+function flierNewsletterYes() {
+  document.getElementById('nl-choice').classList.add('flier-hide');
+  document.getElementById('nl-ack').classList.add('flier-hide');
+  document.getElementById('nl-form-wrap').classList.remove('flier-hide');
+  document.getElementById('nl-email').focus();
+}
+function flierNewsletterNo() {
+  document.getElementById('nl-choice').classList.add('flier-hide');
+  document.getElementById('nl-form-wrap').classList.add('flier-hide');
+  document.getElementById('nl-ack').classList.remove('flier-hide');
+}
+
+const EMAIL_RE = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
+async function sbInsert(table, row) {
+  return fetch(SB_URL + '/rest/v1/' + table, {
+    method: 'POST',
+    headers: { apikey: SB_KEY, Authorization: 'Bearer ' + SB_KEY, 'Content-Type': 'application/json', Prefer: 'return=minimal' },
+    body: JSON.stringify(row),
+  });
+}
+
+async function flierSubscribe(e) {
   e.preventDefault();
-  const emailEl = document.getElementById('extra-email');
-  const btn = document.getElementById('extra-btn');
-  const msg = document.getElementById('extra-msg');
+  const emailEl = document.getElementById('nl-email');
+  const btn = document.getElementById('nl-btn');
+  const msg = document.getElementById('nl-msg');
   const email = emailEl.value.trim();
-  const freq = (document.querySelector('input[name="extra-freq"]:checked') || {}).value || 'daily';
-  msg.className = 'extra-msg';
-
-  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-    msg.textContent = 'Please enter a valid email address.';
-    msg.classList.add('err');
-    emailEl.focus();
-    return;
-  }
-
-  const prevLabel = btn.textContent;
-  btn.disabled = true;
-  btn.textContent = 'Subscribing…';
+  const freq = (document.querySelector('input[name="nl-freq"]:checked') || {}).value || 'daily';
+  msg.className = 'flier-msg';
+  if (!EMAIL_RE.test(email)) { msg.textContent = 'Please enter a valid email address.'; msg.classList.add('err'); emailEl.focus(); return; }
+  const prev = btn.textContent; btn.disabled = true; btn.textContent = 'Saving…';
   try {
-    const res = await fetch(SB_URL + '/rest/v1/t_digest_subscribers', {
-      method: 'POST',
-      headers: {
-        apikey: SB_KEY,
-        Authorization: 'Bearer ' + SB_KEY,
-        'Content-Type': 'application/json',
-        Prefer: 'return=minimal',
-      },
-      body: JSON.stringify({
-        email: email.toLowerCase(),
-        frequency: freq,
-        source: 'web',
-        status: 'active',
-        confirmed: false,
-        user_agent: (navigator.userAgent || '').slice(0, 300),
-      }),
+    const res = await sbInsert('t_digest_subscribers', {
+      email: email.toLowerCase(), frequency: freq, source: 'web', status: 'active',
+      confirmed: false, user_agent: (navigator.userAgent || '').slice(0, 300),
     });
     if (res.ok) {
-      msg.textContent = '🗞️ You’re on the list — watch for the ' + freq + ' digest in your inbox.';
-      msg.classList.add('ok');
-      document.getElementById('extra-form').reset();
+      msg.textContent = '🗞️ You’re on the list — we’ll email the ' + freq + ' digest when it launches.';
+      msg.classList.add('ok'); document.getElementById('nl-form').reset();
     } else if (res.status === 409) {
-      msg.textContent = 'You’re already subscribed — thanks for reading!';
-      msg.classList.add('ok');
-    } else {
-      throw new Error('HTTP ' + res.status);
-    }
+      msg.textContent = 'You’re already on the list — thanks!'; msg.classList.add('ok');
+    } else { throw new Error('HTTP ' + res.status); }
   } catch (err) {
-    msg.textContent = 'Something went wrong on our end. Please try again in a moment.';
-    msg.classList.add('err');
-  } finally {
-    btn.disabled = false;
-    btn.textContent = prevLabel;
-  }
+    msg.textContent = 'Something went wrong. Please try again in a moment.'; msg.classList.add('err');
+  } finally { btn.disabled = false; btn.textContent = prev; }
+}
+
+async function flierEnquire(e) {
+  e.preventDefault();
+  const name    = document.getElementById('ad-name').value.trim();
+  const email   = document.getElementById('ad-email').value.trim();
+  const org     = document.getElementById('ad-org').value.trim();
+  const message = document.getElementById('ad-message').value.trim();
+  const btn = document.getElementById('ad-btn');
+  const msg = document.getElementById('ad-status');
+  msg.className = 'flier-msg';
+  if (!name)               { msg.textContent = 'Please tell us your name.';        msg.classList.add('err'); return; }
+  if (!EMAIL_RE.test(email)) { msg.textContent = 'Please enter a valid email address.'; msg.classList.add('err'); return; }
+  if (!message)            { msg.textContent = 'Please add a short message.';       msg.classList.add('err'); return; }
+  const prev = btn.textContent; btn.disabled = true; btn.textContent = 'Sending…';
+  try {
+    const res = await sbInsert('t_ad_enquiries', {
+      name, email: email.toLowerCase(), organization: org || null, message,
+      source: 'web', status: 'new', user_agent: (navigator.userAgent || '').slice(0, 300),
+    });
+    if (res.ok) {
+      msg.textContent = '✅ Thanks — your enquiry is in. We’ll be in touch from contact@palalabs.org.';
+      msg.classList.add('ok'); document.getElementById('ad-form').reset();
+    } else { throw new Error('HTTP ' + res.status); }
+  } catch (err) {
+    msg.textContent = 'Something went wrong. Please try again in a moment.'; msg.classList.add('err');
+  } finally { btn.disabled = false; btn.textContent = prev; }
+}
+
+function initFlier() {
+  const ov = document.getElementById('flier-overlay');
+  if (!ov) return;
+  document.getElementById('flier-fab').addEventListener('click', flierOpen);
+  document.getElementById('flier-close').addEventListener('click', flierClose);
+  document.getElementById('flier-backdrop').addEventListener('click', flierClose);
+  document.getElementById('flier-prev').addEventListener('click', flierPrev);
+  document.getElementById('flier-next').addEventListener('click', flierNext);
+  document.querySelectorAll('.flier-dot').forEach(d => d.addEventListener('click', () => flierGo(+d.dataset.dot)));
+  document.addEventListener('keydown', e => {
+    if (!ov.classList.contains('open')) return;
+    if (e.key === 'Escape')          flierClose();
+    else if (e.key === 'ArrowRight') flierNext();
+    else if (e.key === 'ArrowLeft')  flierPrev();
+  });
+  document.getElementById('nl-yes').addEventListener('click', flierNewsletterYes);
+  document.getElementById('nl-no').addEventListener('click', flierNewsletterNo);
+  document.getElementById('nl-form').addEventListener('submit', flierSubscribe);
+  document.getElementById('ad-form').addEventListener('submit', flierEnquire);
+  flierSetStates();
+
+  // Auto-open once per browser, a moment after load. After that, the parked
+  // paper plane in the corner is the way back in.
+  let seen = false;
+  try { seen = !!localStorage.getItem('flierSeen'); } catch (e) {}
+  if (!seen) setTimeout(flierOpen, 1400);
 }
 
 async function init() {
   initTheme();
-  renderExtra();
+  initFlier();
 
   // Lightbox: Escape closes, Enter/Space on plate opens
   document.addEventListener('keydown', e => {

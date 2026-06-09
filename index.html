@@ -374,7 +374,7 @@ body {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: 48px;
-  align-items: stretch;
+  align-items: start;
   padding-top: 64px;
 }
 .home-intro-hero-copy {
@@ -387,16 +387,13 @@ body {
 }
 .home-intro-hero .method-title,
 .home-intro-hero .method-body { max-width: none; }
-/* Tall poster spans the full height of both written sections without cropping. */
+/* Tall poster keeps its natural height beside the written sections. */
 .home-intro-media {
   margin: 0;
-  display: flex;
 }
 .home-intro-media img {
   width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: top;
+  height: auto;
   display: block;
   border: 1px solid var(--outline-var);
   border-radius: 2px;
@@ -1088,6 +1085,88 @@ body {
   .pagi-arrow, .pagi-num { padding: 6px 8px; }
   .pagi-arrow { padding: 6px 12px; }
 }
+
+/* ── EXTRA · newsletter subscription card ── */
+.extra {
+  border: 3px double var(--on-surface);
+  background: var(--surface-lowest);
+  padding: 36px clamp(20px, 4vw, 56px) 30px;
+  text-align: center;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+.extra-rule { height: 2px; background: var(--on-surface); margin: 0 auto 14px; max-width: 520px; }
+.extra-rule-thin { height: 1px; background: var(--outline-var); margin: 16px auto 18px; max-width: 380px; }
+.extra-banner {
+  font-family: 'Chomsky', 'Times New Roman', Times, serif;
+  font-size: clamp(40px, 7vw, 74px);
+  line-height: 0.9; color: var(--on-surface);
+  display: flex; align-items: center; justify-content: center; gap: 20px;
+}
+.extra-star { font-size: 0.34em; transform: translateY(-0.4em); color: var(--outline); }
+.extra-dateline {
+  font-family: 'Work Sans', sans-serif; font-size: 12px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.18em; color: var(--outline); margin-top: 12px;
+}
+.extra-bulletins {
+  font-family: 'Newsreader', Georgia, serif; font-style: italic;
+  font-size: clamp(15px, 1.7vw, 18px); line-height: 1.6;
+  color: var(--on-surface-var); max-width: 660px; margin: 0 auto;
+}
+.extra-bulletins .b-sep { color: var(--outline-var); margin: 0 9px; font-style: normal; }
+.extra-bulletins .b-live {
+  font-style: normal; font-family: 'Work Sans', sans-serif; font-size: 10px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.08em; color: var(--surface-lowest);
+  background: var(--orange); padding: 2px 7px; border-radius: 3px; margin-right: 8px; vertical-align: 2px;
+}
+.extra-pitch { max-width: 600px; margin: 22px auto 0; }
+.extra-headline {
+  font-family: 'Newsreader', Georgia, serif; font-weight: 600;
+  font-size: clamp(22px, 3vw, 30px); line-height: 1.2; color: var(--on-surface); margin-bottom: 10px;
+}
+.extra-sub { font-family: 'Work Sans', sans-serif; font-size: 15px; line-height: 1.6; color: var(--on-surface-var); }
+.extra-form {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: center; gap: 14px;
+  max-width: 640px; margin: 26px auto 0; text-align: left;
+}
+.extra-field { display: flex; flex-direction: column; gap: 7px; }
+.extra-field-email { flex: 1 1 240px; }
+.extra-label {
+  font-family: 'Work Sans', sans-serif; font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.12em; color: var(--outline);
+}
+.extra-input {
+  font-family: 'Work Sans', sans-serif; font-size: 15px; color: var(--on-surface);
+  background: var(--surface); border: 1px solid var(--outline-var); border-radius: 6px;
+  padding: 11px 13px; width: 100%; transition: border-color 0.15s;
+}
+.extra-input:focus { outline: none; border-color: var(--on-surface); }
+.extra-freq { display: flex; gap: 8px; }
+.extra-freq-opt {
+  display: flex; align-items: center; gap: 7px; cursor: pointer;
+  font-family: 'Work Sans', sans-serif; font-size: 14px; color: var(--on-surface);
+  border: 1px solid var(--outline-var); border-radius: 6px; padding: 10px 15px;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.extra-freq-opt:has(input:checked) { border-color: var(--on-surface); background: var(--surface-low); font-weight: 600; }
+.extra-freq-opt input { accent-color: var(--on-surface); margin: 0; }
+.extra-btn {
+  font-family: 'Work Sans', sans-serif; font-size: 14px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--surface-lowest); background: var(--on-surface);
+  border: none; border-radius: 6px; padding: 12px 28px; cursor: pointer;
+  transition: opacity 0.15s; white-space: nowrap;
+}
+.extra-btn:hover { opacity: 0.85; }
+.extra-btn:disabled { opacity: 0.5; cursor: default; }
+.extra-msg { font-family: 'Work Sans', sans-serif; font-size: 14px; margin-top: 16px; min-height: 1px; }
+.extra-msg.ok  { color: var(--green); font-weight: 600; }
+.extra-msg.err { color: var(--orange); font-weight: 600; }
+.extra-fineprint { font-family: 'Work Sans', sans-serif; font-size: 12px; color: var(--outline); margin-top: 14px; }
+@media (max-width: 560px) {
+  .extra-form { flex-direction: column; align-items: stretch; }
+  .extra-freq { justify-content: center; }
+  .extra-btn { width: 100%; }
+}
 </style>
 </head>
 <body>
@@ -1139,13 +1218,45 @@ body {
         <div class="home-intro-copy">
           <div class="eyebrow">Why This Exists</div>
           <h2 class="method-title">Carrying forward a trusted tradition of Polkadot intelligence.</h2>
-          <p class="method-body">For years, the Web3 Foundation&rsquo;s <strong>Web3 Digest</strong> gave the ecosystem a single, dependable place to follow what mattered across Polkadot &mdash; governance, development, and community signal, distilled without the noise. As that cadence faded, the community lost a shared point of reference for keeping up with the network.</p>
-          <p class="method-body">The <strong>Polkadot Daily Digest</strong> is our effort to recreate that legacy and carry it forward. The intent is simple: give builders, delegates, and the wider community a clear, honest briefing of what is actually happening each day &mdash; sourced from the venues where the conversation lives, synthesised for clarity, and free for anyone to read. No hype, no paywall &mdash; just signal. The editions below pick up where the Web3 Digest left off.</p>
+          <p class="method-body">For years, the Web3 Foundation&rsquo;s <strong>Daily Digest</strong> gave the ecosystem a single, dependable place to follow what mattered across Polkadot &mdash; governance, development, and community signal, distilled without the noise. As that cadence faded, the community lost a shared point of reference for keeping up with the network.</p>
+          <p class="method-body">The <strong>Polkadot Daily Digest</strong> is our effort to recreate that legacy and carry it forward. The intent is simple: give builders, delegates, and the wider community a clear, honest briefing of what is actually happening each day &mdash; sourced from the venues where the conversation lives, synthesised for clarity, and free for anyone to read. No hype, no paywall &mdash; just signal. The editions below pick up where the Daily Digest left off.</p>
         </div>
       </div>
       <figure class="home-intro-media">
         <img src="polkadot-post.png" alt="Polkadot Post — New Era on the Dot">
       </figure>
+    </div>
+    <div class="home-block">
+      <div class="extra" id="extra">
+        <div class="extra-banner">
+          <span class="extra-star">&#9733;</span>
+          <span>Extra! Extra!</span>
+          <span class="extra-star">&#9733;</span>
+        </div>
+        <div class="extra-dateline">Special Notice to Readers</div>
+        <div class="extra-rule-thin"></div>
+        <div class="extra-bulletins" id="extra-bulletins"></div>
+        <div class="extra-pitch">
+          <h2 class="extra-headline">Have the Digest delivered to your inbox.</h2>
+          <p class="extra-sub">Join the readers who get the Polkadot Daily Digest by email &mdash; governance, development, and community signal, distilled and sent on your schedule. No hype, no paywall &mdash; just signal.</p>
+        </div>
+        <form class="extra-form" id="extra-form" novalidate>
+          <div class="extra-field extra-field-email">
+            <label class="extra-label" for="extra-email">Your Email</label>
+            <input class="extra-input" id="extra-email" type="email" inputmode="email" autocomplete="email" placeholder="reader@example.com" required>
+          </div>
+          <div class="extra-field">
+            <span class="extra-label">Delivery</span>
+            <div class="extra-freq" role="radiogroup" aria-label="Delivery frequency">
+              <label class="extra-freq-opt"><input type="radio" name="extra-freq" value="daily" checked><span>Daily</span></label>
+              <label class="extra-freq-opt"><input type="radio" name="extra-freq" value="weekly"><span>Weekly</span></label>
+            </div>
+          </div>
+          <button class="extra-btn" id="extra-btn" type="submit">Subscribe</button>
+        </form>
+        <div class="extra-msg" id="extra-msg" role="status" aria-live="polite"></div>
+        <div class="extra-fineprint">Free &middot; one email per edition &middot; unsubscribe anytime.</div>
+      </div>
     </div>
     <div class="home-block">
       <div class="eyebrow">Cumulative Data Points</div>
@@ -1966,8 +2077,93 @@ window.addEventListener('popstate', e => {
 });
 
 // ─────────────────────────── Init ─────────────────────────────
+// ─────────────────────────── EXTRA · newsletter ───────────────
+// Ongoing-news bulletins shown in the EXTRA box. Edit this list freely:
+// short, current headlines. Set `live: true` to flag a happening-now item.
+const EXTRA_BULLETINS = [
+  { text: 'Web3 Summit underway — builders convene to chart the open web', live: true },
+  { text: 'Fresh OpenGov referenda approaching their decision deadlines' },
+  { text: 'New Polkadot SDK release tags land for builders' },
+];
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c =>
+    ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function renderExtra() {
+  const wrap = document.getElementById('extra-bulletins');
+  if (wrap) {
+    wrap.innerHTML = EXTRA_BULLETINS.map(b =>
+      (b.live ? '<span class="b-live">Now</span>' : '') + escapeHtml(b.text)
+    ).join('<span class="b-sep">&middot;</span>');
+  }
+  const form = document.getElementById('extra-form');
+  if (form && !form.dataset.bound) {
+    form.dataset.bound = '1';
+    form.addEventListener('submit', subscribe);
+  }
+}
+
+async function subscribe(e) {
+  e.preventDefault();
+  const emailEl = document.getElementById('extra-email');
+  const btn = document.getElementById('extra-btn');
+  const msg = document.getElementById('extra-msg');
+  const email = emailEl.value.trim();
+  const freq = (document.querySelector('input[name="extra-freq"]:checked') || {}).value || 'daily';
+  msg.className = 'extra-msg';
+
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    msg.textContent = 'Please enter a valid email address.';
+    msg.classList.add('err');
+    emailEl.focus();
+    return;
+  }
+
+  const prevLabel = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Subscribing…';
+  try {
+    const res = await fetch(SB_URL + '/rest/v1/t_digest_subscribers', {
+      method: 'POST',
+      headers: {
+        apikey: SB_KEY,
+        Authorization: 'Bearer ' + SB_KEY,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal',
+      },
+      body: JSON.stringify({
+        email: email.toLowerCase(),
+        frequency: freq,
+        source: 'web',
+        status: 'active',
+        confirmed: false,
+        user_agent: (navigator.userAgent || '').slice(0, 300),
+      }),
+    });
+    if (res.ok) {
+      msg.textContent = '🗞️ You’re on the list — watch for the ' + freq + ' digest in your inbox.';
+      msg.classList.add('ok');
+      document.getElementById('extra-form').reset();
+    } else if (res.status === 409) {
+      msg.textContent = 'You’re already subscribed — thanks for reading!';
+      msg.classList.add('ok');
+    } else {
+      throw new Error('HTTP ' + res.status);
+    }
+  } catch (err) {
+    msg.textContent = 'Something went wrong on our end. Please try again in a moment.';
+    msg.classList.add('err');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = prevLabel;
+  }
+}
+
 async function init() {
   initTheme();
+  renderExtra();
 
   // Lightbox: Escape closes, Enter/Space on plate opens
   document.addEventListener('keydown', e => {

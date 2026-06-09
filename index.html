@@ -368,26 +368,43 @@ body {
 .accent { font-style: normal; }
 .home-block { margin-bottom: 56px; }
 
-/* Intro block with thumbnail beside the copy */
-.home-intro-split {
+/* Intro hero: both written sections stacked in the left column,
+   the tall image spanning beside them on the right. */
+.home-intro-hero {
   display: grid;
   grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
   gap: 48px;
-  align-items: center;
+  align-items: stretch;
+  padding-top: 64px;
 }
-.home-intro-split .method-title,
-.home-intro-split .method-body { max-width: none; }
-.home-intro-media { margin: 0; }
+.home-intro-hero-copy {
+  display: flex;
+  flex-direction: column;
+}
+/* The header section sits flush at the top of the left column. */
+.home-intro-hero-copy .page-top {
+  padding-top: 0;
+}
+.home-intro-hero .method-title,
+.home-intro-hero .method-body { max-width: none; }
+/* Tall poster spans the full height of both written sections without cropping. */
+.home-intro-media {
+  margin: 0;
+  display: flex;
+}
 .home-intro-media img {
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: contain;
+  object-position: top;
   display: block;
   border: 1px solid var(--outline-var);
   border-radius: 2px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 @media (max-width: 768px) {
-  .home-intro-split { grid-template-columns: 1fr; gap: 28px; }
+  .home-intro-hero { grid-template-columns: 1fr; gap: 28px; padding-top: 40px; }
+  .home-intro-media img { height: auto; }
 }
 
 /* Digest list row */
@@ -1112,17 +1129,19 @@ body {
 <!-- HOME -->
 <div id="page-home" class="page active">
   <div class="wrap">
-    <div class="page-top">
-      <div class="home-intro-date" id="home-date"></div>
-      <div class="home-intro-headline">Polkadot <span class="accent">Ecosystem</span> Briefing</div>
-      <div class="home-intro-sub">An authoritative overview of governance, development, and community activity across the Polkadot network. Curated and synthesised daily.</div>
-    </div>
-    <div class="home-block home-intro-split">
-      <div class="home-intro-copy">
-        <div class="eyebrow">Why This Exists</div>
-        <h2 class="method-title">Carrying forward a trusted tradition of Polkadot intelligence.</h2>
-        <p class="method-body">For years, the Web3 Foundation&rsquo;s <strong>Web3 Digest</strong> gave the ecosystem a single, dependable place to follow what mattered across Polkadot &mdash; governance, development, and community signal, distilled without the noise. As that cadence faded, the community lost a shared point of reference for keeping up with the network.</p>
-        <p class="method-body">The <strong>Polkadot Daily Digest</strong> is our effort to recreate that legacy and carry it forward. The intent is simple: give builders, delegates, and the wider community a clear, honest briefing of what is actually happening each day &mdash; sourced from the venues where the conversation lives, synthesised for clarity, and free for anyone to read. No hype, no paywall &mdash; just signal. The editions below pick up where the Web3 Digest left off.</p>
+    <div class="home-block home-intro-hero">
+      <div class="home-intro-hero-copy">
+        <div class="page-top">
+          <div class="home-intro-date" id="home-date"></div>
+          <div class="home-intro-headline">Polkadot <span class="accent">Ecosystem</span> Briefing</div>
+          <div class="home-intro-sub">An authoritative overview of governance, development, and community activity across the Polkadot network. Curated and synthesised daily.</div>
+        </div>
+        <div class="home-intro-copy">
+          <div class="eyebrow">Why This Exists</div>
+          <h2 class="method-title">Carrying forward a trusted tradition of Polkadot intelligence.</h2>
+          <p class="method-body">For years, the Web3 Foundation&rsquo;s <strong>Web3 Digest</strong> gave the ecosystem a single, dependable place to follow what mattered across Polkadot &mdash; governance, development, and community signal, distilled without the noise. As that cadence faded, the community lost a shared point of reference for keeping up with the network.</p>
+          <p class="method-body">The <strong>Polkadot Daily Digest</strong> is our effort to recreate that legacy and carry it forward. The intent is simple: give builders, delegates, and the wider community a clear, honest briefing of what is actually happening each day &mdash; sourced from the venues where the conversation lives, synthesised for clarity, and free for anyone to read. No hype, no paywall &mdash; just signal. The editions below pick up where the Web3 Digest left off.</p>
+        </div>
       </div>
       <figure class="home-intro-media">
         <img src="polkadot-post.png" alt="Polkadot Post — New Era on the Dot">

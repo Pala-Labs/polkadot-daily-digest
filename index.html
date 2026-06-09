@@ -1812,11 +1812,10 @@ function nextBlockquote(el) {
 function renderNewsItem(li, cls) {
   const strong = li.querySelector('strong');
   const title  = strong ? strong.textContent.replace(/:$/, '').trim() : '';
-  const clone  = li.cloneNode(true);
-  clone.querySelector('strong') && clone.querySelector('strong').remove();
-  // Strip the leading ": " separator, whether inline (daily) or inside a
-  // markdown-wrapped paragraph (community: "<li><p><strong>..</strong>: ..</p>").
-  const body = clone.innerHTML.replace(/^(\s*<p[^>]*>)?\s*:\s*/i, '$1').trim();
+  // Keep the strong word in the body so the original sentence stays intact —
+  // it's surfaced as the title, but removing it from the paragraph leaves a
+  // dangling ": ..." fragment and breaks the prose.
+  const body = li.innerHTML.trim();
   return '<div class="news-card"><div class="news-inner ' + (cls || '') + '">' +
     '<div class="news-title">' + title + '</div>' +
     '<div class="news-body">'  + body  + '</div>' +

@@ -1086,8 +1086,8 @@ body {
   .pagi-arrow { padding: 6px 12px; }
 }
 
-/* ── Flier popup · "The Notices" ── */
-/* Parked paper-airplane button (corner) */
+/* ── Flier popup · "The Fliers" ── */
+/* Parked envelope button (corner) */
 .flier-fab {
   position: fixed; right: 22px; bottom: 22px; z-index: 1200;
   width: 58px; height: 58px; border-radius: 50%;
@@ -1151,7 +1151,7 @@ body {
 .flier-stack { position: absolute; inset: 0; }
 .flier-page {
   position: absolute; inset: 0; display: flex; flex-direction: column;
-  background: var(--surface-lowest); border: 3px double var(--on-surface);
+  background: var(--surface-lowest); border-radius: 6px;
   box-shadow: 0 18px 50px rgba(0,0,0,0.30);
   padding: 30px clamp(20px, 4vw, 40px); overflow-y: auto;
   transform-origin: center bottom;
@@ -1170,12 +1170,7 @@ body {
   text-transform: uppercase; letter-spacing: 0.16em; color: var(--outline);
   display: flex; align-items: center; gap: 10px; margin-bottom: 6px;
 }
-.flier-now {
-  font: 700 10px/1 'Work Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.08em;
-  color: #fff; background: var(--orange); padding: 3px 7px; border-radius: 3px;
-  animation: now-pulse 1.8s ease-in-out infinite;
-}
-@keyframes now-pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
+.flier-tag { font: 700 10px/1 'Work Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; color: #fff; background: var(--orange); padding: 3px 7px; border-radius: 3px; }
 .flier-serif { font-family: 'Chomsky','Times New Roman',serif; font-size: clamp(34px,7vw,52px); line-height: 1; color: var(--on-surface); text-align: center; }
 .flier-rule { height: 2px; background: var(--on-surface); margin: 12px 0 18px; }
 .flier-h { font-family: 'Newsreader', Georgia, serif; font-weight: 600; font-size: clamp(23px, 3.4vw, 31px); line-height: 1.18; color: var(--on-surface); margin: 8px 0 10px; }
@@ -1259,7 +1254,6 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .flier-fab { animation: none; }
   .flier-overlay.open .flier-deck, .flier-overlay.closing .flier-deck { animation-duration: 0.01s; }
-  .flier-now { animation: none; }
 }
 </style>
 </head>
@@ -1524,27 +1518,32 @@ body {
   </div>
 </footer>
 
-<!-- ───────── Flier popup · "The Notices" ───────── -->
-<button class="flier-fab" id="flier-fab" aria-label="Open The Notices" title="The Notices">
+<!-- ───────── Flier popup · "The Fliers" ───────── -->
+<button class="flier-fab" id="flier-fab" aria-label="Open The Fliers" title="The Fliers">
   <span class="fab-badge" id="fab-badge">3</span>
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
 </button>
 
 <div class="flier-overlay" id="flier-overlay" aria-hidden="true">
   <div class="flier-backdrop" id="flier-backdrop"></div>
-  <div class="flier-deck" id="flier-deck" role="dialog" aria-modal="true" aria-label="The Notices — Polkadot Post">
+  <div class="flier-deck" id="flier-deck" role="dialog" aria-modal="true" aria-label="The Fliers — Polkadot Post">
     <button class="flier-close" id="flier-close" aria-label="Close and send the flier to the corner">&times;</button>
     <div class="flier-stack" id="flier-stack">
 
-      <!-- Page 1 · Breaking -->
+      <!-- Page 1 · Featured flier (Web3 Summit). Each ad/notice = its own flier card. -->
       <article class="flier-page" data-page="0">
-        <div class="flier-kicker"><span class="flier-now">Now</span> Breaking &middot; From the Wire</div>
+        <div class="flier-kicker"><span class="flier-tag">Featured</span> Web3 Summit &middot; The Fliers</div>
         <div class="flier-serif">Extra!</div>
         <div class="flier-rule"></div>
-        <h2 class="flier-h flier-h-lg">Web3 Summit underway &mdash; builders convene to chart the open web.</h2>
-        <p class="flier-body">The ecosystem gathers as the Web3 Summit gets going. Two more notices inside.</p>
+        <h2 class="flier-h flier-h-lg">Web3 Summit 2026 &mdash; builders convene to chart the open web.</h2>
+        <p class="flier-body">Happening <strong>18&ndash;19 June</strong>. Two days of talks and connection across the open web. Save the dates.</p>
+        <div class="ad-card-links" style="margin-top:18px;">
+          <a class="ad-link" href="https://web3summit.com/" target="_blank" rel="noopener">Website &#8599;</a>
+          <a class="ad-link" href="https://www.youtube.com/watch?v=p6Bb1eTjVuo" target="_blank" rel="noopener">YouTube teaser &#8599;</a>
+          <a class="ad-link" href="https://coda.io/@manon-roux/web3-summit-2026-18-19-june" target="_blank" rel="noopener">More information &#8599;</a>
+        </div>
         <div class="flier-spacer"></div>
-        <div class="flier-hint">Flip through the notices &rsaquo;</div>
+        <div class="flier-hint">Flip through the fliers &rsaquo;</div>
       </article>
 
       <!-- Page 2 · Newsletter -->
@@ -1583,23 +1582,12 @@ body {
         </div>
       </article>
 
-      <!-- Page 3 · Place a Notice (Ad) -->
+      <!-- Page 3 · Submit a flier (enquiry only). Featured ads live as their own flier cards. -->
       <article class="flier-page" data-page="2">
-        <div class="flier-kicker">Place a Notice &middot; Advertise</div>
+        <div class="flier-kicker">Submit a Flier &middot; Advertise</div>
         <div class="flier-rule"></div>
         <h2 class="flier-h">Have something to share with the ecosystem?</h2>
-        <p class="flier-body">Got a product, event, or announcement for the Polkadot community? Send us an enquiry and we may feature it here in <strong>The Notices</strong>.</p>
-
-        <div class="ad-card">
-          <div class="ad-card-tag">Featured Notice</div>
-          <div class="ad-card-title">Web3 Summit 2026</div>
-          <div class="ad-card-meta">18&ndash;19 June &middot; A gathering of builders charting the open web.</div>
-          <div class="ad-card-links">
-            <a class="ad-link" href="https://web3summit.com/" target="_blank" rel="noopener">Website &#8599;</a>
-            <a class="ad-link" href="https://www.youtube.com/watch?v=p6Bb1eTjVuo" target="_blank" rel="noopener">YouTube teaser &#8599;</a>
-            <a class="ad-link" href="https://coda.io/@manon-roux/web3-summit-2026-18-19-june" target="_blank" rel="noopener">More information &#8599;</a>
-          </div>
-        </div>
+        <p class="flier-body">Got a product, event, or announcement for the Polkadot community? Send us an enquiry and we may feature it as its own flier.</p>
 
         <form id="ad-form" novalidate>
           <div class="flier-row">
@@ -2255,9 +2243,10 @@ window.addEventListener('popstate', e => {
 });
 
 // ─────────────────────────── Init ─────────────────────────────
-// ─────────────────────── Flier popup · The Notices ────────────
-// Three fliers shown in a flippable deck. Edit page 1's copy directly in the
-// HTML (article[data-page="0"]) to change the "Now / Breaking" headline.
+// ─────────────────────── Flier popup · The Fliers ─────────────
+// Flippable deck of fliers. Each ad/notice is its own flier card — edit page 1
+// (article[data-page="0"]) for the featured Web3 Summit flier; add another
+// <article class="flier-page" data-page="N"> + a dot + bump FLIER_PAGES to add one.
 const FLIER_PAGES = 3;
 let flierIndex = 0;
 

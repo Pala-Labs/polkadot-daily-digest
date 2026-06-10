@@ -220,6 +220,17 @@ body {
   color: var(--outline);
   margin-bottom: 12px;
 }
+.eyebrow-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.eyebrow-row .eyebrow { margin-bottom: 0; }
+/* Segmented toggle (e.g. All Time / This Month) */
+.seg { display: inline-flex; border: 1px solid var(--outline-var); border-radius: 999px; padding: 2px; gap: 2px; }
+.seg-btn {
+  font: 600 11px/1 'Work Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--on-surface-var); background: transparent; border: none; cursor: pointer;
+  padding: 6px 12px; border-radius: 999px; transition: background 0.15s, color 0.15s;
+}
+.seg-btn:hover { color: var(--on-surface); }
+.seg-btn.active { background: var(--on-surface); color: var(--surface); }
 
 /* ── Stat chips ── */
 .chips {
@@ -1126,8 +1137,8 @@ body {
   position: relative; width: min(540px, 100%); height: min(620px, 84vh);
   z-index: 2; transform-origin: bottom right;
 }
-.flier-overlay.open    .flier-deck { animation: deck-fly-in  0.6s cubic-bezier(.22,.61,.36,1) both; }
-.flier-overlay.closing .flier-deck { animation: deck-fly-out 0.6s cubic-bezier(.55,.06,.68,.19) both; }
+.flier-overlay.open    .flier-deck { animation: deck-fly-in  0.95s cubic-bezier(.22,.61,.36,1) both; }
+.flier-overlay.closing .flier-deck { animation: deck-fly-out 0.9s cubic-bezier(.55,.06,.68,.19) both; }
 @keyframes deck-fly-in {
   0%   { opacity: 0; transform: translate(40vw, 40vh) scale(0.05) rotate(28deg); }
   55%  { opacity: 1; }
@@ -1373,7 +1384,13 @@ body {
       <div class="stats-chart-wrap" id="stats-perday-wrap"><canvas id="stats-perday"></canvas></div>
     </div>
     <div class="home-block">
-      <div class="eyebrow">Most Active Handles</div>
+      <div class="eyebrow-row" style="margin-bottom:12px;">
+        <div class="eyebrow">Most Active Handles</div>
+        <div class="seg" id="handles-range" role="group" aria-label="Time range for most active handles">
+          <button class="seg-btn active" data-range="month" type="button">This Month</button>
+          <button class="seg-btn" data-range="all" type="button">All Time</button>
+        </div>
+      </div>
       <div id="stats-handles"><div class="loading"><div class="spinner"></div></div></div>
     </div>
   </div>
@@ -1520,7 +1537,7 @@ body {
 
 <!-- ───────── Flier popup · "The Fliers" ───────── -->
 <button class="flier-fab" id="flier-fab" aria-label="Open The Fliers" title="The Fliers">
-  <span class="fab-badge" id="fab-badge">3</span>
+  <span class="fab-badge" id="fab-badge">2</span>
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
 </button>
 
@@ -1582,38 +1599,6 @@ body {
         </div>
       </article>
 
-      <!-- Page 3 · Submit a flier (enquiry only). Featured ads live as their own flier cards. -->
-      <article class="flier-page" data-page="2">
-        <div class="flier-kicker">Submit a Flier &middot; Advertise</div>
-        <div class="flier-rule"></div>
-        <h2 class="flier-h">Have something to share with the ecosystem?</h2>
-        <p class="flier-body">Got a product, event, or announcement for the Polkadot community? Send us an enquiry and we may feature it as its own flier.</p>
-
-        <form id="ad-form" novalidate>
-          <div class="flier-row">
-            <div class="flier-field">
-              <label class="flier-label" for="ad-name">Your name</label>
-              <input class="flier-input" id="ad-name" type="text" autocomplete="name" maxlength="120" placeholder="Jane Doe" required>
-            </div>
-            <div class="flier-field">
-              <label class="flier-label" for="ad-email">Email</label>
-              <input class="flier-input" id="ad-email" type="email" inputmode="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required>
-            </div>
-          </div>
-          <div class="flier-field">
-            <label class="flier-label" for="ad-org">Project / Organisation <span style="text-transform:none;font-weight:400;letter-spacing:0;">(optional)</span></label>
-            <input class="flier-input" id="ad-org" type="text" maxlength="160" placeholder="Web3 Summit">
-          </div>
-          <div class="flier-field">
-            <label class="flier-label" for="ad-message">What would you like to share?</label>
-            <textarea class="flier-textarea" id="ad-message" rows="3" maxlength="4000" placeholder="Tell us about your product, event, or announcement…" required></textarea>
-          </div>
-          <button class="flier-btn" id="ad-btn" type="submit" style="margin-top:16px;width:100%;">Send enquiry</button>
-        </form>
-        <div class="flier-msg" id="ad-status" role="status" aria-live="polite"></div>
-        <div class="flier-hint" style="margin-top:10px;">Goes to the Pala Labs desk &middot; contact@palalabs.org</div>
-      </article>
-
     </div>
 
     <div class="flier-nav">
@@ -1621,7 +1606,6 @@ body {
       <div class="flier-dots" id="flier-dots">
         <button class="flier-dot" data-dot="0" aria-label="Notice 1"></button>
         <button class="flier-dot" data-dot="1" aria-label="Notice 2"></button>
-        <button class="flier-dot" data-dot="2" aria-label="Notice 3"></button>
       </div>
       <button class="flier-arrow" id="flier-next" aria-label="Next notice">&#8250;</button>
     </div>
@@ -1757,18 +1741,35 @@ async function sbFetch(path) {
   return res.json();
 }
 
+// Top-handles leaderboard range: 'month' (trailing 30 days) or 'all'.
+const HANDLE_VIEWS = { month: 'v_top_handles_month', all: 'v_top_handles' };
+let handlesRange = 'month';
+
+async function loadHandles(range) {
+  handlesRange = range;
+  document.querySelectorAll('#handles-range .seg-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.range === range));
+  const el = document.getElementById('stats-handles');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+  try {
+    const rows = await sbFetch(HANDLE_VIEWS[range] + '?select=*&limit=10');
+    renderHandles(rows);
+  } catch (e) {
+    el.innerHTML = '<div class="stats-error">Couldn&rsquo;t load handles right now.</div>';
+  }
+}
+
 async function loadStats() {
   if (statsLoaded) return;
   statsLoaded = true;
   try {
-    const [totals, perDay, handles] = await Promise.all([
+    const [totals, perDay] = await Promise.all([
       sbFetch('v_post_totals?select=*'),
       sbFetch('v_posts_per_day?select=*&order=day.asc'),
-      sbFetch('v_top_handles?select=*&limit=15'),
     ]);
     renderStatsTotals(totals[0]);
     renderPerDay(perDay);
-    renderHandles(handles);
+    loadHandles(handlesRange);
   } catch (e) {
     statsLoaded = false; // allow a retry on next visit
     const msg = '<div class="stats-error">Couldn&rsquo;t load stats right now. Please try again later.</div>';
@@ -2247,7 +2248,7 @@ window.addEventListener('popstate', e => {
 // Flippable deck of fliers. Each ad/notice is its own flier card — edit page 1
 // (article[data-page="0"]) for the featured Web3 Summit flier; add another
 // <article class="flier-page" data-page="N"> + a dot + bump FLIER_PAGES to add one.
-const FLIER_PAGES = 3;
+const FLIER_PAGES = 2;
 let flierIndex = 0;
 
 function flierSetStates() {
@@ -2298,7 +2299,7 @@ function flierClose() {
     if (fab) fab.classList.remove('hidden');   // the parked paper plane reappears
   };
   deck.addEventListener('animationend', finish);
-  setTimeout(finish, 750);               // fallback if animationend doesn't fire
+  setTimeout(finish, 1100);              // fallback if animationend doesn't fire
 }
 
 // Newsletter Yes / No branch (sending isn't live yet — we just collect interest).
@@ -2349,33 +2350,6 @@ async function flierSubscribe(e) {
   } finally { btn.disabled = false; btn.textContent = prev; }
 }
 
-async function flierEnquire(e) {
-  e.preventDefault();
-  const name    = document.getElementById('ad-name').value.trim();
-  const email   = document.getElementById('ad-email').value.trim();
-  const org     = document.getElementById('ad-org').value.trim();
-  const message = document.getElementById('ad-message').value.trim();
-  const btn = document.getElementById('ad-btn');
-  const msg = document.getElementById('ad-status');
-  msg.className = 'flier-msg';
-  if (!name)               { msg.textContent = 'Please tell us your name.';        msg.classList.add('err'); return; }
-  if (!EMAIL_RE.test(email)) { msg.textContent = 'Please enter a valid email address.'; msg.classList.add('err'); return; }
-  if (!message)            { msg.textContent = 'Please add a short message.';       msg.classList.add('err'); return; }
-  const prev = btn.textContent; btn.disabled = true; btn.textContent = 'Sending…';
-  try {
-    const res = await sbInsert('t_ad_enquiries', {
-      name, email: email.toLowerCase(), organization: org || null, message,
-      source: 'web', status: 'new', user_agent: (navigator.userAgent || '').slice(0, 300),
-    });
-    if (res.ok) {
-      msg.textContent = '✅ Thanks — your enquiry is in. We’ll be in touch from contact@palalabs.org.';
-      msg.classList.add('ok'); document.getElementById('ad-form').reset();
-    } else { throw new Error('HTTP ' + res.status); }
-  } catch (err) {
-    msg.textContent = 'Something went wrong. Please try again in a moment.'; msg.classList.add('err');
-  } finally { btn.disabled = false; btn.textContent = prev; }
-}
-
 function initFlier() {
   const ov = document.getElementById('flier-overlay');
   if (!ov) return;
@@ -2394,7 +2368,6 @@ function initFlier() {
   document.getElementById('nl-yes').addEventListener('click', flierNewsletterYes);
   document.getElementById('nl-no').addEventListener('click', flierNewsletterNo);
   document.getElementById('nl-form').addEventListener('submit', flierSubscribe);
-  document.getElementById('ad-form').addEventListener('submit', flierEnquire);
   flierSetStates();
 
   // Auto-open once per browser, a moment after load. After that, the parked
@@ -2421,6 +2394,10 @@ async function init() {
       if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(); }
     });
   }
+
+  // Most Active Handles: All Time / This Month toggle
+  document.querySelectorAll('#handles-range .seg-btn').forEach(b =>
+    b.addEventListener('click', () => { if (b.dataset.range !== handlesRange) loadHandles(b.dataset.range); }));
 
   // Mobile nav: close the dropdown when tapping outside it
   document.addEventListener('click', e => {

@@ -1,8 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(git push *)",
-      "Bash(python -m http.server 8765)"
-    ]
-  }
-}

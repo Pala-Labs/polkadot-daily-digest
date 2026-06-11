@@ -9,10 +9,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link href="https://fonts.cdnfonts.com/css/chomsky" rel="stylesheet">
 <style>
-/* ── Light theme (default) — warm soft off-white palette ── */
+/* ── Light theme (default) - warm soft off-white palette ── */
 :root {
-  --surface:          #f2efe9;   /* warm linen — main page bg */
-  --surface-lowest:   #faf8f4;   /* warmer white — cards, masthead, nav */
+  --surface:          #f2efe9;   /* warm linen - main page bg */
+  --surface-lowest:   #faf8f4;   /* warmer white - cards, masthead, nav */
   --surface-low:      #ebe7e0;   /* hover tint */
   --surface-container:#e2ddd5;   /* code blocks, containers */
   --on-surface:       #1c1916;   /* near-black with warm undertone */
@@ -28,7 +28,7 @@
   --margin-page:      64px;
 }
 
-/* ── Dark theme — deep warm charcoal palette ── */
+/* ── Dark theme - deep warm charcoal palette ── */
 [data-theme="dark"] {
   --surface:          #100e0d;
   --surface-lowest:   #181513;
@@ -167,7 +167,7 @@ body {
 .nav-tab:hover  { color: var(--on-surface); }
 .nav-tab.active { color: var(--on-surface); border-bottom-color: var(--accent); }
 
-/* Hamburger — hidden on desktop, shown on mobile via media query */
+/* Hamburger - hidden on desktop, shown on mobile via media query */
 .nav-hamburger {
   display: none;
   align-items: center;
@@ -181,7 +181,7 @@ body {
   cursor: pointer;
 }
 
-/* Theme toggle — styled identically to nav tabs, floated to the right */
+/* Theme toggle - styled identically to nav tabs, floated to the right */
 .theme-toggle {
   position: absolute;
   right: var(--margin-page);
@@ -343,7 +343,7 @@ body {
   .stats-chart-wrap { height: 300px; padding: 14px 12px 8px; }
 }
 
-/* ── Shared page header — consistent across all three pages ── */
+/* ── Shared page header - consistent across all three pages ── */
 .page-top {
   padding: 64px 0 40px;
   border-bottom: 1px solid var(--outline-var);
@@ -1132,7 +1132,7 @@ body {
 .flier-overlay.open  .flier-backdrop { opacity: 1; }
 .flier-overlay.closing .flier-backdrop { opacity: 0; }
 
-/* Deck — flies in from / out to the bottom-right corner like a paper plane */
+/* Deck - flies in from / out to the bottom-right corner like a paper plane */
 .flier-deck {
   position: relative; width: min(540px, 100%); height: min(620px, 84vh);
   z-index: 2; transform-origin: bottom right;
@@ -1322,7 +1322,7 @@ body {
         </div>
       </div>
       <figure class="home-intro-media">
-        <img src="polkadot-post.png" alt="Polkadot Post — New Era on the Dot">
+        <img src="polkadot-post.png" alt="Polkadot Post - New Era on the Dot">
       </figure>
     </div>
     <div class="home-block">
@@ -1357,7 +1357,7 @@ body {
   <div class="wrap">
     <div class="page-top">
       <h1 class="page-header-title">Community Edition</h1>
-      <div class="home-intro-sub">Community voices from across X — ecosystem chatter, developer activity, and grassroots signal, curated daily.</div>
+      <div class="home-intro-sub">Community voices from across X - ecosystem chatter, developer activity, and grassroots signal, curated daily.</div>
     </div>
     <div class="search-bar">
       <label class="search-label" for="community-search-date">Jump to Date</label>
@@ -1543,7 +1543,7 @@ body {
 
 <div class="flier-overlay" id="flier-overlay" aria-hidden="true">
   <div class="flier-backdrop" id="flier-backdrop"></div>
-  <div class="flier-deck" id="flier-deck" role="dialog" aria-modal="true" aria-label="The Fliers — Polkadot Post">
+  <div class="flier-deck" id="flier-deck" role="dialog" aria-modal="true" aria-label="The Fliers - Polkadot Post">
     <button class="flier-close" id="flier-close" aria-label="Close and send the flier to the corner">&times;</button>
     <div class="flier-stack" id="flier-stack">
 
@@ -2109,7 +2109,7 @@ function nextBlockquote(el) {
 function renderNewsItem(li, cls) {
   const strong = li.querySelector('strong');
   const title  = strong ? strong.textContent.replace(/:$/, '').trim() : '';
-  // Keep the strong word in the body so the original sentence stays intact —
+  // Keep the strong word in the body so the original sentence stays intact -
   // it's surfaced as the title, but removing it from the paragraph leaves a
   // dangling ": ..." fragment and breaks the prose.
   const body = li.innerHTML.trim();
@@ -2245,7 +2245,7 @@ window.addEventListener('popstate', e => {
 
 // ─────────────────────────── Init ─────────────────────────────
 // ─────────────────────── Flier popup · The Fliers ─────────────
-// Flippable deck of fliers. Each ad/notice is its own flier card — edit page 1
+// Flippable deck of fliers. Each ad/notice is its own flier card - edit page 1
 // (article[data-page="0"]) for the featured Web3 Summit flier; add another
 // <article class="flier-page" data-page="N"> + a dot + bump FLIER_PAGES to add one.
 const FLIER_PAGES = 2;
@@ -2302,7 +2302,7 @@ function flierClose() {
   setTimeout(finish, 1100);              // fallback if animationend doesn't fire
 }
 
-// Newsletter Yes / No branch (sending isn't live yet — we just collect interest).
+// Newsletter Yes / No branch (sending isn't live yet - we just collect interest).
 function flierNewsletterYes() {
   document.getElementById('nl-choice').classList.add('flier-hide');
   document.getElementById('nl-ack').classList.add('flier-hide');
@@ -2340,10 +2340,10 @@ async function flierSubscribe(e) {
       confirmed: false, user_agent: (navigator.userAgent || '').slice(0, 300),
     });
     if (res.ok) {
-      msg.textContent = '🗞️ You’re on the list — we’ll email the ' + freq + ' digest when it launches.';
+      msg.textContent = '🗞️ You’re on the list - we’ll email the ' + freq + ' digest when it launches.';
       msg.classList.add('ok'); document.getElementById('nl-form').reset();
     } else if (res.status === 409) {
-      msg.textContent = 'You’re already on the list — thanks!'; msg.classList.add('ok');
+      msg.textContent = 'You’re already on the list - thanks!'; msg.classList.add('ok');
     } else { throw new Error('HTTP ' + res.status); }
   } catch (err) {
     msg.textContent = 'Something went wrong. Please try again in a moment.'; msg.classList.add('err');

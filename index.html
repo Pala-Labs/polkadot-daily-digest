@@ -20,6 +20,7 @@
   --outline:          #87817a;   /* muted labels */
   --outline-var:      #cdc7be;   /* subtle borders */
   --accent:           #1c1916;
+  --tab-active-color: #000;
   --green:            #2d7a47;
   --orange:           #b85c00;
   --blue:             #1a5fa8;
@@ -39,6 +40,7 @@
   --outline:          #7a736b;
   --outline-var:      #2e2924;
   --accent:           #ede8e2;
+  --tab-active-color: #fff;
   --green:            #4caf72;
   --orange:           #e07b1a;
   --blue:             #5b9bd5;
@@ -57,6 +59,7 @@
     --outline:          #7a736b;
     --outline-var:      #2e2924;
     --accent:           #ede8e2;
+    --tab-active-color: #fff;
     --green:            #4caf72;
     --orange:           #e07b1a;
     --blue:             #5b9bd5;
@@ -165,7 +168,7 @@ body {
   transition: color 0.15s, border-color 0.15s;
 }
 .nav-tab:hover  { color: var(--on-surface); }
-.nav-tab.active { color: var(--on-surface); border-bottom-color: var(--accent); }
+.nav-tab.active { color: var(--tab-active-color); border-bottom-color: var(--accent); }
 
 /* Hamburger - hidden on desktop, shown on mobile via media query */
 .nav-hamburger {
@@ -1703,10 +1706,12 @@ function nav(page) {
   ['home','digests','community','detail','methodology'].forEach(p => {
     document.getElementById('page-'+p).classList.toggle('active', p === page);
   });
-  ['home','digests','community'].forEach(t => {
-    const el = document.getElementById('tab-'+t);
-    if (el) el.classList.toggle('active', t === page);
-  });
+  if (page !== 'detail') {
+    ['home','digests','community'].forEach(t => {
+      const el = document.getElementById('tab-'+t);
+      if (el) el.classList.toggle('active', t === page);
+    });
+  }
   if (page === 'community') loadStats();
   if (page !== 'detail') {
     prevPage = page;

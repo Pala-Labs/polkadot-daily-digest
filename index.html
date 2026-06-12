@@ -1290,11 +1290,9 @@ body {
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
     </button>
     <div class="nav-tabs" id="nav-tabs">
-      <button class="nav-tab active" id="tab-home"        onclick="nav('home')">Front Page</button>
-      <button class="nav-tab"        id="tab-digests"     onclick="nav('digests')">Legacy Digest</button>
-      <button class="nav-tab"        id="tab-community"   onclick="nav('community')">Community Edition</button>
-      <button class="nav-tab"        id="tab-stats"       onclick="nav('stats')">Twitter Activity</button>
-      <button class="nav-tab"        id="tab-methodology" onclick="nav('methodology')">Methodology</button>
+      <button class="nav-tab active" id="tab-home"      onclick="nav('home')">Home Page</button>
+      <button class="nav-tab"        id="tab-digests"   onclick="nav('digests')">Legacy Digest</button>
+      <button class="nav-tab"        id="tab-community" onclick="nav('community')">Community Digest</button>
     </div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
       <svg id="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1356,7 +1354,7 @@ body {
 <div id="page-community" class="page">
   <div class="wrap">
     <div class="page-top">
-      <h1 class="page-header-title">Community Edition</h1>
+      <h1 class="page-header-title">Community Digest</h1>
       <div class="home-intro-sub">Community voices from across X - ecosystem chatter, developer activity, and grassroots signal, curated daily.</div>
     </div>
     <div class="search-bar">
@@ -1365,14 +1363,9 @@ body {
       <div class="search-msg" id="community-search-msg" role="status" aria-live="polite"></div>
     </div>
     <div id="community-list-body"><div class="loading"><div class="spinner"></div></div></div>
-  </div>
-</div>
 
-<!-- STATS -->
-<div id="page-stats" class="page">
-  <div class="wrap">
-    <div class="page-top">
-      <h1 class="page-header-title">Twitter Activity</h1>
+    <div class="page-top" style="margin-top:48px;">
+      <h2 class="page-header-title" style="font-size:1.5rem;">Twitter Activity</h2>
       <div class="home-intro-sub">Activity across the Polkadot-related posts we track daily on X. Aggregated live from our database &mdash; filtered to ecosystem signal.</div>
     </div>
     <div class="home-block">
@@ -1531,7 +1524,8 @@ body {
     Powered by <a href="https://polkadot.com/" target="_blank">Polkadot</a> ·
     Maintained by <a href="https://palalabs.org" target="_blank">Pala Labs</a> ·
     Governance data via <a href="https://openshore.io" target="_blank">OpenShore</a> ·
-    OpenSourced at <a href="https://github.com/Pala-Labs/polkadot-daily-digest" target="_blank">GitHub</a>
+    OpenSourced at <a href="https://github.com/Pala-Labs/polkadot-daily-digest" target="_blank">GitHub</a> ·
+    <a href="#" onclick="nav('methodology');return false;">Methodology</a>
   </div>
 </footer>
 
@@ -1706,14 +1700,14 @@ function toggleMenu(force) {
 
 function nav(page) {
   toggleMenu(false);  // close the mobile dropdown on selection
-  ['home','digests','community','stats','detail','methodology'].forEach(p => {
+  ['home','digests','community','detail','methodology'].forEach(p => {
     document.getElementById('page-'+p).classList.toggle('active', p === page);
   });
-  ['home','digests','community','stats','methodology'].forEach(t => {
+  ['home','digests','community'].forEach(t => {
     const el = document.getElementById('tab-'+t);
     if (el) el.classList.toggle('active', t === page);
   });
-  if (page === 'stats') loadStats();
+  if (page === 'community') loadStats();
   if (page !== 'detail') {
     prevPage = page;
     history.replaceState(null, '', location.pathname + location.search);

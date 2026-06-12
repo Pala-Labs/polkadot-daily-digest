@@ -2438,6 +2438,12 @@ async function init() {
 
   const ref = parseHash(location.hash.slice(1));
   if (ref) {
+    const parentTab = ref.colKey === 'community' ? 'community' : 'digests';
+    prevPage = parentTab;
+    ['home','digests','community'].forEach(t => {
+      const el = document.getElementById('tab-'+t);
+      if (el) el.classList.toggle('active', t === parentTab);
+    });
     openDigest(ref.colKey, ref.date);
   }
 }

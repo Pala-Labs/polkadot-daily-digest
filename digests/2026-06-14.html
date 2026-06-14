@@ -1,0 +1,51 @@
+<h1 id="polkadotdailydigesthttpsnewsopenshoreio2026061420260614"><a href="https://news.openshore.io/#2026-06-14">Polkadot Daily Digest</a>: 2026-06-14</h1>
+<h1 id="summary">Summary</h1>
+<p>The Polkadot SDK database roadmap remains unsettled, with RocksDB still the default and no clear path for ParityDB or NOMT adoption due to unresolved issues and lack of ownership; FlowFarm perpetuals protocol enters review and audit phase ahead of testnet launch.</p>
+<h1 id="report">Report</h1>
+<h2 id="governance">Governance</h2>
+<ul>
+<li>Two community-driven DOT staking UX proposals have surfaced: one suggests a loyalty-based tiered staking system with APR increases tied to stake size (at 10k DOT milestones) and lock-up duration, while another launches a community survey on desired staking dashboard features (via <a href="https://x.com/">x</a>, <a href="#">internal team summary report</a>).</li>
+</ul>
+<h2 id="technical">Technical</h2>
+<ul>
+<li>The current Polkadot SDK database landscape remains unsettled: <strong>RocksDB</strong> is still the default backend, <strong>ParityDB</strong> is supported but not default due to unresolved performance and archive-sync issues, and <strong>NOMT/binary-trie</strong> support is under discussion but not committed. Key blockers include open PRs (#1792, #3386, #4176), unresolved ParityDB issues (parity-db#199), and a lack of clear ownership or roadmap for storage evolution. JAM’s storage model diverges from Substrate’s, with no prescribed canonical database, and public Rust JAM clients do not yet expose a production-ready state DB choice (via <a href="https://forum.polkadot.network/t/clarifying-the-polkadot-sdk-database-roadmap-rocksdb-paritydb-and-nomt/17877">forum</a>).</li>
+<li>Community discussion projects that <strong>JAM Chain</strong> could achieve 1,000,000+ functional TPS if run across all 341 parallel cores, with multiple independent client implementations in Rust, Go, and Zig under development (via <a href="#">internal team summary report</a>).</li>
+<li>Developer commentary notes that the <strong>JAR Chain</strong> “Lanes” architecture claims to double JAM Chain throughput, representing an intra-ecosystem performance benchmark (via <a href="#">internal team summary report</a>).</li>
+<li>JAM’s architecture, featuring 341 parallel cores, a RISC-V PVM, and off-chain compute with on-chain proofs, is being discussed as a foundation for decentralized AI inference and agent coordination, with XCM cited as a potential bridge for Polkadot–BNB Chain AI agent interoperability (via <a href="#">internal team summary report</a>).</li>
+<li>Parity has shipped a “superapp” stack: smoldot now resolves .dot domains on-chain, applications load directly from the Bulletin chain, and w3spay has been split into its own repository with scan-and-pay-cash functionality (via <a href="#">internal team summary report</a>).</li>
+<li>ParityTech highlighted that @Polkdot indexes content by hash rather than server location, enabling decentralized content retrieval without platform lock-in; storage expires when no longer needed and can be renewed as required (via <a href="https://x.com/paritytech/status/2065720903099617611">x</a>).</li>
+</ul>
+<h2 id="ecosystem">Ecosystem</h2>
+<ul>
+<li>The <strong>FlowFarm</strong> perpetuals protocol is entering a review and hardening phase, including deeper testing, risk logic tightening, and external audit preparation, with a live testnet launch imminent (via <a href="#">internal team summary report</a>).</li>
+<li>Commentary positions <strong>Moonbeam</strong> as a multi-chain AI agent hub, leveraging its EVM compatibility and Polkadot’s shared security for cross-chain autonomous agent operations (via <a href="#">internal team summary report</a>).</li>
+<li>The <strong>Rialo</strong> team includes contributors with backgrounds at Parity, Diem, Linera, and major Web2 companies, indicating strong technical credentials for this Polkadot-adjacent project (via <a href="#">internal team summary report</a>).</li>
+<li>A recap of <strong>Astar Network</strong> and <strong>Startale</strong> milestones highlights Sota Watanabe’s journey from founding Astar as Japan’s first Polkadot parachain and earning Forbes 30 Under 30 Asia recognition to pivoting toward Startale (via <a href="#">internal team summary report</a>).</li>
+</ul>
+<h2 id="marketadoption">Market &amp; Adoption</h2>
+<ul>
+<li>A technical post-mortem details the April 13 <strong>Hyperbridge</strong> exploit, in which ISMP message verification on the EVM side was manipulated to drain approximately $2.5M from the Ethereum–Polkadot bridge (via <a href="#">internal team summary report</a>).</li>
+</ul>
+<h2 id="opengovupdates">OpenGov Updates</h2>
+<h3 id="newreferendumslast24h">New Referendums (Last 24H)</h3>
+<p>No new referendums in last 24 Hours</p>
+<h3 id="referendumsapproachingdecisionpleasevote">Referendums Approaching Decision (Please Vote)</h3>
+<blockquote>
+  <p><strong><a href="https://polkadot.subsquare.io/referenda/1903">Referendum 1903</a>:</strong> Vibly Short-Term Repayable Bridge Funding Request ➖
+  <strong>Proposer:</strong> <a href="https://openshore.io/govern/voting-tool?address=12gj7WyRWVAbmUXk1nLoGaK1Um47tcmxdd138DSuYZgngetP">ArcheLabs</a> ➖ <strong>Requested Amount:</strong> $8,497 USDt ➖ <strong>Current Aye:</strong> 0.00% ➖ <strong>Decision In:</strong> 6.0 days</p>
+  <p><strong><a href="https://polkadot.subsquare.io/referenda/1899">Referendum 1899</a>:</strong> Closeout of Bounty 22 (Polkadot Assurance Legion / DotPAL) and Bounty 36 (DeFi Infrastructure &amp; Tooling) ➖
+  <strong>Proposer:</strong> <a href="https://openshore.io/govern/voting-tool?address=138bU3vLAuBkJJ9ujdpjMpZpkT5AKakVnXmQBVZNMCgfjtxp">Gov Advisory Group</a> ➖ <strong>Requested Amount:</strong>  ➖ <strong>Current Aye:</strong> 79.18% ➖ <strong>Decision In:</strong> 10.0 days</p>
+</blockquote>
+<hr />
+<h2 id="processinglogs">Processing Logs</h2>
+<p><strong>Report Generated:</strong> 2026-06-14</p>
+<p><strong>Data Source (Data points curated & analysed):</strong></p>
+<ul>
+<li>Polkadot Forum: 61</li>
+<li>Medium: 15</li>
+<li>X(Twitter): 617</li>
+<li>GitHub (Release only): 1</li>
+<li>OpenGov: 3</li>
+</ul>
+<hr />
+<p>This is an auto-generated report by <strong>Pala Labs</strong></p>

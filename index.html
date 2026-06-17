@@ -1295,7 +1295,7 @@ body {
     <div class="nav-tabs" id="nav-tabs">
       <button class="nav-tab active" id="tab-home"      onclick="nav('home')">Home Page</button>
       <button class="nav-tab"        id="tab-digests"   onclick="nav('digests')">Legacy Digest</button>
-      <button class="nav-tab"        id="tab-community" onclick="nav('community')">Community Digest</button>
+      <button class="nav-tab"        id="tab-community" onclick="nav('community')">Pulse Digest</button>
     </div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
       <svg id="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1357,7 +1357,7 @@ body {
 <div id="page-community" class="page">
   <div class="wrap">
     <div class="page-top">
-      <h1 class="page-header-title">Community Digest</h1>
+      <h1 class="page-header-title">Pulse Digest</h1>
       <div class="home-intro-sub">Community voices from across X - ecosystem chatter, developer activity, and grassroots signal, curated daily.</div>
     </div>
     <div class="search-bar">
@@ -1641,7 +1641,7 @@ const COLLECTIONS = {
     sectionIcons: SECTION_ICONS,
   },
   community: {
-    dir: 'community_digests', label: 'Polkadot Community Digest', editionLabel: 'Community Edition',
+    dir: 'community_digests', label: 'Polkadot Pulse Digest', editionLabel: 'Pulse Edition',
     listBody: 'community-list-body', searchInput: 'community-search-date', searchMsg: 'community-search-msg',
     statDefs: [
       { key: 'Total X posts curated',       label: 'X Posts Curated' },

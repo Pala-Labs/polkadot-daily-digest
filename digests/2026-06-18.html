@@ -1,26 +1,20 @@
 <h1 id="polkadotdailydigesthttpsnewsopenshoreio2026061820260618"><a href="https://news.openshore.io/#2026-06-18">Polkadot Daily Digest</a>: 2026-06-18</h1>
 <h1 id="summary">Summary</h1>
-<p>A community member raised concerns about Referendum 1890 remaining in "Deciding" status despite unanimous approval and a completed decision period, highlighting potential OpenGov process issues. Polkadot SDK also released a patch update with xcmp-queue performance improvements.</p>
+<p>Polkadot SDK also released a patch update with xcmp-queue performance improvements.</p>
 <h1 id="report">Report</h1>
 <h2 id="governance">Governance</h2>
 <ul>
-<li>⚡ A community member highlighted that <strong>Referendum 1890</strong> has reached 28/28 days in the Decision Period with 100% approval but remains in "Deciding" status, raising questions about OpenGov mechanics (via <a href="#">Internal Team Summary Report</a>).</li>
 <li><strong>Staking rewards</strong> are being distributed correctly at the protocol level; a reported issue with Wealthsimple was confirmed by Bill Laboon to be on the exchange’s side, not the Polkadot protocol (via <a href="#">Internal Team Summary Report</a>).</li>
 </ul>
 <h2 id="technical">Technical</h2>
 <ul>
 <li><strong>cargo-pvm-contract</strong>, a Rust SDK for writing smart contracts targeting PVM and running on Polkadot via pallet-revive, has reached a public preview stage. The SDK offers two authoring styles (macro and DSL), both compatible with Solidity’s ABI and storage, enabling direct use of Ethereum tooling and cross-contract calls. Early benchmarks show the Rust SDK DSL produces PVM bytecode about a third smaller than Solidity (PVM) for token contracts, with macro mode in a similar size range. The SDK is not yet 1.0, with features like deeper storage composition and reentrancy guards still in development (via <a href="https://forum.polkadot.network/t/update-on-cargo-pvm-contract-a-rust-sdk-for-smart-contracts/17896">Polkadot Forum Article</a>).</li>
 <li><strong>Polkadot SDK</strong> released patch version <code>polkadot-stable2512-6</code> (tagged as <code>polkadot-v1.21.6</code>), updating several runtime crates including cumulus-pallet-xcmp-queue, collectives-westend-runtime, and asset-hub-rococo-runtime. The release includes a performance improvement for xcmp-queue by storing bytes in the channel status, and was built with Rust 1.88.0. No new binaries or Docker images are provided for this patch (via <a href="https://api.github.com/repos/paritytech/polkadot-sdk/releases/340707177">GitHub</a>).</li>
-<li>Validator self-stake requirement of 10,000 DOT is now live, intended to reduce risk and improve network security; Bifrost notes this complements their vDOT liquid staking product (via <a href="#">Internal Team Summary Report</a>).</li>
-<li>Parity Technologies has published technical breakdowns of two proof-of-concepts, including "Coinage," ahead of the Web3 Summit (via <a href="#">Internal Team Summary Report</a>).</li>
-<li>SubWallet published an explainer on Agile Coretime, describing how it replaced the parachain slot auction model and allows teams to rent blockspace on demand instead of locking millions of DOT for multi-year leases (via <a href="#">Internal Team Summary Report</a>).</li>
 </ul>
 <h2 id="ecosystem">Ecosystem</h2>
 <ul>
 <li>The <strong>Web3 Summit</strong> opens tomorrow at Funkhaus Berlin, with Parity set to showcase "Playground . dot" as a sandbox environment for developers to experiment and test new ideas (via <a href="https://x.com/paritytech/status/2067132642240446828">X</a>).</li>
 <li>The official <strong>Web3 Summit app</strong> will allow attendees to join sessions, check in, and collect badges in a self-custodial and secure manner, demonstrating practical blockchain use cases (via <a href="https://x.com/Polkadot/status/2067291919558869214">X</a>, <a href="https://x.com/Polkadot/status/2067291922897445169">X</a>, <a href="https://x.com/Polkadot/status/2067291925682454759">X</a>).</li>
-<li>The Web3 Summit is being positioned as a significant milestone for Polkadot’s visibility and momentum, with new tooling and PoC releases timed for the event (via <a href="#">Internal Team Summary Report</a>).</li>
-<li>Ongoing community discussion continues around the JAM protocol’s potential, with some comparing its trajectory to Ethereum’s early development (via <a href="#">Internal Team Summary Report</a>).</li>
 </ul>
 <h2 id="opengovupdates">OpenGov Updates</h2>
 <h3 id="newreferendumslast24h">New Referendums (Last 24H)</h3>

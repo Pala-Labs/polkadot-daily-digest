@@ -663,6 +663,7 @@ body {
 .aye-track { width: 40px; height: 3px; background: var(--outline-var); overflow: hidden; }
 .aye-fill  { height: 100%; background: var(--green); }
 .aye-pct   { font-weight: 700; color: var(--green); }
+.ref-amount { font-weight: 600; color: var(--on-surface); }
 .ref-by    { color: var(--on-surface-var); }
 .ref-by a  { color: var(--accent); text-decoration: none; font-weight: 600; }
 .ref-by a:hover { text-decoration: underline; }
@@ -2060,14 +2061,15 @@ function parseRef(p) {
   const prLink  = links[1];
   const text    = p.textContent;
 
-  const id     = (text.match(/Referendum\s+(\d+)/)                    || [])[1] || '';
-  const rawT   = (text.match(/Referendum\s+\d+[:\s]+([^➖\n]+)/)       || [])[1] || '';
-  const aye    = (text.match(/Current Aye:\s*([\d.]+%)/)               || [])[1] || '0%';
-  const status = (text.match(/Status:\s*([^➖\n]+?)(?:\s*➖|$)/)        || [])[1]?.trim() || '';
-  const dl     = (text.match(/Decision In:\s*([^➖\n]+?)(?:\s*➖|$)/)   || [])[1]?.trim() || '';
+  const id     = (text.match(/Referendum\s+(\d+)/)                       || [])[1] || '';
+  const rawT   = (text.match(/Referendum\s+\d+[:\s]+([^➖\n]+)/)          || [])[1] || '';
+  const aye    = (text.match(/Current Aye:\s*([\d.]+%)/)                  || [])[1] || '0%';
+  const status = (text.match(/Status:\s*([^➖\n]+?)(?:\s*➖|$)/)           || [])[1]?.trim() || '';
+  const dl     = (text.match(/Decision In:\s*([^➖\n]+?)(?:\s*➖|$)/)      || [])[1]?.trim() || '';
+  const amount = (text.match(/Requested Amount:\s*([^➖\n]+?)(?:\s*➖|$)/) || [])[1]?.trim() || '';
 
   return {
-    id, status, dl,
+    id, status, dl, amount,
     aye:    aye,
     ayePct: parseFloat(aye) || 0,
     title:  rawT.replace(/[:\s]+$/, '').trim(),
@@ -2091,6 +2093,7 @@ function renderRef(r) {
         '<span class="aye-pct">' + r.aye + '</span>' +
         '<span style="color:var(--on-surface-var)">Aye</span>' +
       '</div>' +
+      (r.amount ? '<div class="ref-amount">Requested: ' + r.amount + '</div>' : '') +
       (r.prName ? '<div class="ref-by">by <a href="' + r.prUrl + '" target="_blank">' + r.prName + '</a></div>' : '') +
       (r.dl     ? '<div class="ref-dl">⏱ ' + r.dl + '</div>' : '') +
     '</div>' +

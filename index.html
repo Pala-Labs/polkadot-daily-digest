@@ -85,6 +85,66 @@ body {
   transition: background-color 0.2s, color 0.2s;
 }
 
+/* ── Activity Bar (Scrolling Ticker) ── */
+.activity-bar {
+  background: #000;
+  color: #fff;
+  padding: 10px 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 110;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+[data-theme="dark"] .activity-bar {
+  background: #fff;
+  color: #000;
+  border-bottom-color: rgba(0, 0, 0, 0.15);
+}
+[data-theme="auto"] .activity-bar {
+  background: #000;
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.15);
+}
+@media (prefers-color-scheme: dark) {
+  [data-theme="auto"] .activity-bar {
+    background: #fff;
+    color: #000;
+    border-bottom-color: rgba(0, 0, 0, 0.15);
+  }
+}
+.activity-bar-track {
+  display: flex;
+  animation: scroll-ticker 25s linear infinite;
+  white-space: nowrap;
+}
+.activity-bar-text {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0 60px;
+  display: inline-block;
+  flex-shrink: 0;
+}
+.activity-bar-link {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  transition: opacity 0.2s ease;
+}
+.activity-bar-link:hover {
+  opacity: 0.8;
+}
+@keyframes scroll-ticker {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
 /* ── Masthead ── */
 .masthead {
   background: var(--surface-lowest);
@@ -743,7 +803,7 @@ body {
 .footer {
   border-top: 1px solid var(--outline-var);
   background: var(--surface-lowest);
-  padding: 24px 0;
+  padding: 40px 0;
   text-align: center;
   font-family: 'Work Sans', sans-serif;
   font-size: 12px;
@@ -752,6 +812,19 @@ body {
   transition: background-color 0.2s, border-color 0.2s;
 }
 .footer a { color: var(--on-surface); text-decoration: none; font-weight: 600; }
+.footer-methodology {
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--outline-var);
+}
+.footer-methodology a {
+  font-family: 'Newsreader', serif;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.footer-credits { font-size: 12px; }
+.footer-credits a { font-size: 12px; }
 
 /* ── Search bar (Legacy Digest) ── */
 .search-bar {
@@ -1101,6 +1174,190 @@ body {
   .pagi-arrow { padding: 6px 12px; }
 }
 
+/* ── Summit Modal ── */
+.summit-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1400;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.summit-modal.open {
+  display: flex;
+}
+.summit-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(16,14,13,0.7);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.summit-modal.open .summit-backdrop {
+  opacity: 1;
+}
+.summit-content {
+  position: relative;
+  width: min(900px, 100%);
+  height: min(85vh, 900px);
+  z-index: 2;
+  background: var(--surface-lowest);
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+  overflow-y: auto;
+  animation: summit-slide-in 0.4s cubic-bezier(.22,.61,.36,1);
+}
+@keyframes summit-slide-in {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.summit-inner {
+  padding: 48px 40px;
+  max-width: 100%;
+}
+.summit-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  z-index: 30;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: var(--on-surface);
+  color: var(--surface-lowest);
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s;
+}
+.summit-close:hover {
+  transform: scale(1.1) rotate(90deg);
+}
+.summit-section {
+  margin-bottom: 40px;
+}
+.summit-section:last-child {
+  margin-bottom: 0;
+}
+.summit-header {
+  text-align: center;
+  margin-bottom: 48px;
+  padding-bottom: 32px;
+  border-bottom: 2px solid var(--outline-var);
+}
+.summit-title {
+  font-family: 'Newsreader', serif;
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--on-surface);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+.summit-subtitle {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 16px;
+  color: var(--on-surface-var);
+  font-weight: 400;
+}
+.summit-section-title {
+  font-family: 'Newsreader', serif;
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--on-surface);
+  margin-bottom: 20px;
+}
+.summit-card {
+  background: var(--surface);
+  border: 1px solid var(--outline-var);
+  padding: 20px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+}
+.summit-card-title {
+  font-family: 'Newsreader', serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--on-surface);
+  margin-bottom: 8px;
+}
+.summit-card-body {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  color: var(--on-surface-var);
+  line-height: 1.65;
+}
+.summit-card-body strong {
+  color: var(--on-surface);
+  font-weight: 600;
+}
+.summit-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--outline-var);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.summit-btn {
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-block;
+}
+.summit-btn-primary {
+  background: var(--on-surface);
+  color: var(--surface-lowest);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.summit-btn-primary:hover {
+  background: var(--on-surface);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+.summit-btn-secondary {
+  background: transparent;
+  color: var(--on-surface);
+  border: 1px solid var(--outline-var);
+}
+.summit-btn-secondary:hover {
+  background: var(--surface-low);
+  border-color: var(--on-surface);
+}
+@media (max-width: 768px) {
+  .summit-content {
+    width: 100%;
+    height: 90vh;
+  }
+  .summit-inner {
+    padding: 32px 24px;
+  }
+  .summit-close {
+    width: 36px;
+    height: 36px;
+    font-size: 24px;
+    top: 16px;
+    right: 16px;
+  }
+}
+
 /* ── Flier popup · "The Fliers" ── */
 /* Parked envelope button (corner) */
 .flier-fab {
@@ -1273,6 +1530,14 @@ body {
 </style>
 </head>
 <body>
+
+<!-- Activity Bar -->
+<div class="activity-bar">
+  <div class="activity-bar-track">
+    <span class="activity-bar-text">🔔 The Web3 Summit Concluded Last week  - <a href="web3-summit-2026-recap.html" class="activity-bar-link">Checkout the Summary ➡️</a></span>
+    <span class="activity-bar-text">🔔 The Web3 Summit Concluded Last week  - <a href="web3-summit-2026-recap.html" class="activity-bar-link">Checkout the Summary ➡️</a></span>
+  </div>
+</div>
 
 <!-- Masthead -->
 <header class="masthead">
@@ -1525,11 +1790,15 @@ body {
 
 <footer class="footer">
   <div class="wrap">
-    Powered by <a href="https://polkadot.com/" target="_blank">Polkadot</a> ·
-    Maintained by <a href="https://palalabs.org" target="_blank">Pala Labs</a> ·
-    Governance data via <a href="https://openshore.io" target="_blank">OpenShore</a> ·
-    OpenSourced at <a href="https://github.com/Pala-Labs/polkadot-daily-digest" target="_blank">GitHub</a> ·
-    <a href="#" onclick="nav('methodology');return false;">Methodology</a>
+    <div class="footer-methodology">
+      <a href="#" onclick="nav('methodology');return false;">Methodology</a>
+    </div>
+    <div class="footer-credits">
+      Powered by <a href="https://polkadot.com/" target="_blank">Polkadot</a> ·
+      Maintained by <a href="https://palalabs.org" target="_blank">Pala Labs</a> ·
+      Governance data via <a href="https://openshore.io" target="_blank">OpenShore</a> ·
+      OpenSourced at <a href="https://github.com/Pala-Labs/polkadot-daily-digest" target="_blank">GitHub</a>
+    </div>
   </div>
 </footer>
 
@@ -1545,23 +1814,22 @@ body {
     <button class="flier-close" id="flier-close" aria-label="Close and send the flier to the corner">&times;</button>
     <div class="flier-stack" id="flier-stack">
 
-      <!-- Page 1 · Featured flier (Web3 Summit). Each ad/notice = its own flier card. -->
+      <!-- Page 0: Web3 Summit 2026 -->
       <article class="flier-page" data-page="0">
-        <div class="flier-kicker"><span class="flier-tag">Featured</span> Web3 Summit &middot; The Fliers</div>
-        <div class="flier-serif">Extra!</div>
+        <div class="flier-kicker"><span class="flier-tag">Featured</span> Web3 Summit 2026 &middot; The Fliers</div>
+        <div class="flier-serif">Concluded</div>
         <div class="flier-rule"></div>
-        <h2 class="flier-h flier-h-lg">Web3 Summit 2026 &mdash; builders convene to chart the open web.</h2>
-        <p class="flier-body">Happening <strong>18&ndash;19 June</strong>. Two days of talks and connection across the open web. Save the dates.</p>
+        <h2 class="flier-h flier-h-lg">The Web3 Summit has concluded &mdash; here's the full breakdown of what went down.</h2>
+        <p class="flier-body">Held between <strong>18–19 June</strong> in Berlin. Two days of talks, prototypes, and vision for privacy, sovereignty, and censorship-resistant tools for human coordination.</p>
         <div class="ad-card-links" style="margin-top:18px;">
-          <a class="ad-link" href="https://web3summit.com/" target="_blank" rel="noopener">Website &#8599;</a>
-          <a class="ad-link" href="https://www.youtube.com/watch?v=p6Bb1eTjVuo" target="_blank" rel="noopener">YouTube teaser &#8599;</a>
-          <a class="ad-link" href="https://coda.io/@manon-roux/web3-summit-2026-18-19-june" target="_blank" rel="noopener">More information &#8599;</a>
+          <a class="ad-link" href="web3-summit-2026-recap.html">Full Report &#8599;</a>
+          <a class="ad-link" href="https://web3summit.com/" target="_blank" rel="noopener">Web3 Summit &#8599;</a>
         </div>
         <div class="flier-spacer"></div>
         <div class="flier-hint">Flip through the fliers &rsaquo;</div>
       </article>
 
-      <!-- Page 2 · Newsletter -->
+      <!-- Page 1: Newsletter Subscription -->
       <article class="flier-page" data-page="1">
         <div class="flier-kicker">Subscriptions &middot; The Mailroom</div>
         <div class="flier-rule"></div>
@@ -1602,8 +1870,8 @@ body {
     <div class="flier-nav">
       <button class="flier-arrow" id="flier-prev" aria-label="Previous notice">&#8249;</button>
       <div class="flier-dots" id="flier-dots">
-        <button class="flier-dot" data-dot="0" aria-label="Notice 1"></button>
-        <button class="flier-dot" data-dot="1" aria-label="Notice 2"></button>
+        <button class="flier-dot" data-dot="0" aria-label="Web3 Summit"></button>
+        <button class="flier-dot" data-dot="1" aria-label="Newsletter"></button>
       </div>
       <button class="flier-arrow" id="flier-next" aria-label="Next notice">&#8250;</button>
     </div>
@@ -2247,9 +2515,9 @@ window.addEventListener('popstate', e => {
 
 // ─────────────────────────── Init ─────────────────────────────
 // ─────────────────────── Flier popup · The Fliers ─────────────
-// Flippable deck of fliers. Each ad/notice is its own flier card - edit page 1
-// (article[data-page="0"]) for the featured Web3 Summit flier; add another
-// <article class="flier-page" data-page="N"> + a dot + bump FLIER_PAGES to add one.
+// Flippable deck of fliers. Page 0 = Web3 Summit 2026; Page 1 = Newsletter.
+// Add new pages by creating <article class="flier-page" data-page="N"> + adding
+// a corresponding .flier-dot + bumping FLIER_PAGES.
 const FLIER_PAGES = 2;
 let flierIndex = 0;
 

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="auto">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web3 Summit 2026 — Comprehensive Recap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --surface: #f2efe9;
+      --surface-lowest: #faf8f4;
+      --surface-container: #e2ddd5;
+      --on-surface: #1c1916;
+      --on-surface-var: #524e49;
+      --outline: #87817a;
+      --outline-var: #cdc7be;
+      --accent: #1c1916;
+      --green: #2d7a47;
+      --orange: #b85c00;
+      --blue: #1a5fa8;
+      --container: 820px;
+      --margin-page: 48px;
+    }
+    [data-theme="dark"] {
+      --surface: #100e0d;
+      --surface-lowest: #181513;
+      --surface-container: #2a2522;
+      --on-surface: #ede8e2;
+      --on-surface-var: #a09890;
+      --outline: #7a736b;
+      --outline-var: #2e2924;
+      --accent: #ede8e2;
+      --green: #4caf72;
+      --orange: #e07b1a;
+      --blue: #5b9bd5;
+    }
+    @media (prefers-color-scheme: dark) {
+      [data-theme="auto"] {
+        --surface: #100e0d;
+        --surface-lowest: #181513;
+        --surface-container: #2a2522;
+        --on-surface: #ede8e2;
+        --on-surface-var: #a09890;
+        --outline: #7a736b;
+        --outline-var: #2e2924;
+        --accent: #ede8e2;
+        --green: #4caf72;
+        --orange: #e07b1a;
+        --blue: #5b9bd5;
+      }
+    }
+    html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+    body {
+      background: var(--surface);
+      color: var(--on-surface);
+      font-family: 'Work Sans', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+      min-height: 100vh;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--margin-page); }
+    .header-bar {
+      background: var(--surface-lowest);
+      border-bottom: 1px solid var(--outline-var);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .header-bar .wrap {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .back-link {
+      color: var(--on-surface-var);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: color 0.15s;
+    }
+    .back-link:hover { color: var(--accent); }
+    .theme-toggle-btn {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--outline-var);
+      background: var(--surface-lowest);
+      color: var(--on-surface);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      transition: all 0.2s;
+    }
+    .theme-toggle-btn:hover {
+      border-color: var(--on-surface);
+      background: var(--surface-container);
+    }
+    .masthead {
+      background: var(--surface-lowest);
+      border-bottom: 1px solid var(--outline-var);
+      padding: 56px 0;
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .masthead-meta {
+      font-size: 12px;
+      color: var(--outline);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 16px;
+    }
+    .masthead-title {
+      font-family: 'Newsreader', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .masthead-subtitle {
+      font-family: 'Work Sans', sans-serif;
+      font-size: 16px;
+      color: var(--on-surface-var);
+      font-weight: 400;
+    }
+    .section {
+      margin-bottom: 72px;
+    }
+    .section:last-child { margin-bottom: 0; }
+    .section-title {
+      font-family: 'Newsreader', serif;
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 24px;
+      color: var(--on-surface);
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--outline-var);
+    }
+    .item {
+      margin-bottom: 28px;
+      padding: 24px;
+      background: var(--surface-lowest);
+      border: 1px solid var(--outline-var);
+      border-radius: 4px;
+    }
+    .item-title {
+      font-family: 'Newsreader', serif;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--on-surface);
+    }
+    .item-body {
+      font-family: 'Work Sans', sans-serif;
+      font-size: 15px;
+      color: var(--on-surface-var);
+      line-height: 1.75;
+    }
+    .item-body strong { color: var(--on-surface); font-weight: 600; }
+    .item-body p { margin-bottom: 12px; }
+    .item-body p:last-child { margin-bottom: 0; }
+    .highlight {
+      background: var(--surface-container);
+      padding: 24px;
+      border-left: 4px solid var(--accent);
+      margin: 24px 0;
+      border-radius: 2px;
+    }
+    .highlight strong { color: var(--on-surface); }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 28px 0;
+    }
+    .stat-card {
+      background: var(--surface-lowest);
+      border: 1px solid var(--outline-var);
+      padding: 20px;
+      text-align: center;
+      border-radius: 4px;
+    }
+    .stat-number {
+      font-family: 'Newsreader', serif;
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--on-surface);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-family: 'Work Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--on-surface-var);
+    }
+    .footer {
+      border-top: 1px solid var(--outline-var);
+      padding: 48px 0;
+      text-align: center;
+      font-size: 13px;
+      color: var(--outline);
+      margin-top: 80px;
+    }
+    .footer a { color: var(--on-surface); text-decoration: none; font-weight: 600; }
+    .footer a:hover { text-decoration: underline; }
+    a { color: var(--blue); }
+    a:hover { text-decoration: underline; }
+    @media (max-width: 768px) {
+      :root { --margin-page: 24px; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .header-bar { padding: 16px 0; }
+      .masthead { padding: 40px 0; margin-bottom: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header with Back Button & Theme Toggle -->
+<div class="header-bar">
+  <div class="wrap">
+    <a href="index.html" class="back-link">← Back to Polkadot Daily Digest</a>
+    <button class="theme-toggle-btn" id="theme-toggle-recap" onclick="toggleThemeRecap()" title="Toggle theme">
+      <span id="theme-icon">🌙</span>
+    </button>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="masthead">
+    <div class="masthead-meta">Web3 Summit 2026 • Berlin • June 18–21</div>
+    <div class="masthead-title">Web3 Summit 2026<br/><span style="font-style: italic; font-size: 0.8em;">Complete Recap</span></div>
+    <div class="masthead-subtitle">Comprehensive breakdown for those who couldn't attend</div>
+  </div>
+
+  <!-- SECTION 1: SUMMARY OVERVIEW -->
+  <div class="section">
+    <div class="section-title">📋 Summary Overview</div>
+
+    <div class="item">
+      <div class="item-title">Event Context</div>
+      <div class="item-body">
+        <p><strong>Location:</strong> Funkhaus, Berlin, Germany<br/>
+        <strong>Dates:</strong> June 18–21, 2026<br/>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-title">Polkadot Trinity — The Flagship Consumer Product</div>
+      <div class="item-body">
+        <p><strong>What:</strong> A unified multi-platform application ecosystem built jointly by Parity and Novasama.</p>
+        <p><strong>Components:</strong> Mobile app • Desktop app • Web gateway</p>
+        <p><strong>Core Features:</strong>
+        <ul style="margin: 12px 0 0 20px; color: var(--on-surface-var);">
+          <li>Private-by-default messaging and payments</li>
+          <li>Audio/video calling without phone or email</li>
+          <li>On-chain identity via People Chain (usernames instead of raw addresses)</li>
+          <li>Self-custodial key management (keys generated and stored on-device)</li>
+          <li>Proof-of-personhood for human verification without revealing identity</li>
+        </ul></p>
+        <p><strong>Ownership:</strong> Polkadot Community Foundation to take formal ownership; Parity continues open-source development.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-title">JAM: Joint Accumulation Machine — General-Purpose Compute</div>
+      <div class="item-body">
+        <p><strong>Technical Achievement:</strong> Live demonstrations showed Quake and Doom running on JAM—proving the architecture can handle general-purpose workloads beyond blockchain-specific tasks.</p>
+        <p><strong>Economic Model:</strong> $DOT becomes the currency for coretime access. No new tokens issued under current model. JAM introduces its own compute resource allocation mechanism.</p>
+        <p><strong>Competition:</strong> 43 independent teams competing to implement JAM for a 10M DOT prize pool. Live testnet running. Q3–Q4 2026 milestones targeted.</p>
+        <p><strong>Vision:</strong> Transforms Polkadot into a "Massive Global Decentralised Supercomputer" with indefinite, high-performance synchronous compute capabilities.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-title">Proof-of-Personhood Protocol — AI-Resistant Authentication</div>
+      <div class="item-body">
+        <p><strong>Innovation:</strong> A cryptographic, decentralized authentication layer that proves humanness without revealing personal identity.</p>
+        <p><strong>Technology:</strong> Live demos showcased real-time speech transcription to counter AI deepfakes, enabling genuine human participation in digital systems.</p>
+        <p><strong>Use Cases:</strong> One-human-one-vote systems • Preventing AI deepfakes • Proving human authorship on-chain • Access control for sensitive ecosystems.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-title">Playground.dot — Developer Testnet Environment</div>
+      <div class="item-body">
+        <p><strong>Purpose:</strong> A time-limited, event-specific testnet where attendees could pick challenges, remix real applications, and deploy their own versions in real time.</p>
+        <p><strong>Experience:</strong> Zero setup friction. Developers worked directly with Parity's open-source repositories (paritytech/w3s-conference-app) and guidance on leveraging upstream code efficiently.</p>
+        <p><strong>Outcome:</strong> Attendees stress-tested proof-of-concept deployments live, proving the developer experience is production-ready.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-title">T3rminal & Private Payments at Scale</div>
+      <div class="item-body">
+        <p><strong>Demonstration:</strong> Real payments for food and drink at the summit using Polkadot's fully private payment rail—faster than credit cards.</p>
+        <p><strong>Privacy Feature:</strong> Transactions are opaque to external observers but fully verifiable by merchants.</p>
+        <p><strong>Significance:</strong> Proof-of-concept that private, usable digital cash can work reliably at scale in real-world commerce.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-title">Strategic Vision: The Polkadot Trinity Framework</div>
+      <div class="item-body">
+        <p>Gavin Wood articulated Polkadot's guiding three-pillar framework:</p>
+        <p><strong>1. Privacy:</strong> Data and communications hidden by default.</p>
+        <p><strong>2. Agency:</strong> Users own and control their own data and identity.</p>
+        <p><strong>3. Usability:</strong> Consumer tools that rival or exceed Web2 in ease-of-use.</p>
+        <p><strong>Reframed Mission:</strong> "Tools for human coordination"—infrastructure for censorship-resistant collaboration and privacy-preserving cooperation, not just financial transactions.</p>
+        <p><strong>Web3 ≠ Crypto:</strong> Consistent theme: Polkadot is positioning Web3 as fundamentally distinct from cryptocurrency and speculation.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-title">Governance Rebrand: DOTDAO</div>
+      <div class="item-body">
+        <p><strong>Update:</strong> Polkadot's governance layer is being formally rebranded as "DOTDAO."</p>
+        <p><strong>Purpose:</strong> Sets the stage for future token mechanisms, particularly around JAM's compute resource allocation and broader ecosystem coordination.</p>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>Key Metrics from the Summit</strong>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">1,900+</div>
+          <div class="stat-label">X Posts during the Summit</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">43</div>
+          <div class="stat-label">Teams Competing for JAM</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">#1</div>
+          <div class="stat-label">Developer Activity During Summit</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: THE ROAD AHEAD -->
+  <div class="section">
+    <div class="section-title">🚀 The Road Ahead</div>
+
+    <div class="item">
+      <div class="item-title">Key Takeaways</div>
+      <div class="item-body">
+        <p><strong>1. Execution is the New Story</strong><br/>
+        After years of research and vision-setting, Trinity, Playground.dot, and T3rminal demonstrate working prototypes—not vapourware. The summit was a shift from "what we're building" to "here's what we've built."</p>
+
+        <p><strong>2. Definitive Turning Point in Product Strategy</strong><br/>
+        Community feedback consistently describes the summit as marking a pivot toward shipping. The focus on real, usable tools rather than protocol layer abstractions resonated strongly with attendees. 1,900+ X posts across 3 days reflect genuine excitement and engagement.</p>
+
+        <p><strong>3. JAM is Real General-Purpose Compute</strong><br/>
+        Quake and Doom running on-chain aren't parlor tricks—they prove Polkadot's architecture can handle any computational workload. This removes a fundamental technical doubt: can blockchain actually deliver on the promise of decentralized compute at scale?</p>
+
+        <p><strong>5. Privacy is a Competitive Advantage</strong><br/>
+        In a world of surveillance capitalism, Polkadot's emphasis on privacy-by-default and user agency differentiates it sharply from other ecosystems. The proof-of-personhood protocol and private payment demonstrations showed concrete technical approaches, not just rhetoric.</p>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-title">What to Expect Next</div>
+      <div class="item-body">
+        <p><strong>Immediate (Q2 2026)</strong></p>
+        <ul style="margin: 12px 0 0 20px; color: var(--on-surface-var);">
+          <li>Full session recordings from Web3 Summit released to YouTube (no livestream was available during the event)</li>
+          <li>Polkadot Trinity app begins broader rollout beyond initial conference-pass-holder gating</li>
+          <li>Parity and Web3 Foundation release detailed developer documentation and tutorials based on summit learnings</li>
+        </ul>
+
+        <p style="margin-top: 16px;"><strong>Q3–Q4 2026</strong></p>
+        <ul style="margin: 12px 0 0 20px; color: var(--on-surface-var);">
+          <li>JAM competition reaches key implementation milestones; winning approaches surface</li>
+          <li>Playground.dot may remain open or return periodically as a developer playground</li>
+          <li>DOTDAO governance framework formally finalized and deployed</li>
+          <li>Proof-of-personhood protocol undergoes broader audits and integrations</li>
+        </ul>
+
+        <p style="margin-top: 16px;"><strong>2027 and Beyond</strong></p>
+        <ul style="margin: 12px 0 0 20px; color: var(--on-surface-var);">
+          <li>Trinity becomes the primary consumer gateway to Polkadot for mainstream users</li>
+          <li>Proof-of-personhood tooling integrated into everyday consumer and governance applications</li>
+          <li>JAM resource market becomes operational; coretime trading and resource allocation active</li>
+          <li>Privacy-first communication and coordination tools become expected components of digital infrastructure</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <strong>The Momentum Ahead</strong>
+      <p>The Web3 Summit 2026 marked a fundamental shift: from "Polkadot is building something" to "Polkadot has built something real." The challenge now is scaling Trinity, JAM, and proof-of-personhood to millions of users while maintaining the privacy and agency that define the vision.</p>
+      <p>The next 12 months will be crucial for Polkadot Product adoption.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>
+      This recap is compiled from Polkadot Daily Digest reports (June 19–21, 2026) and community reactions tracked across X (Twitter).<br/>
+      <br/>
+      For official event details, visit <a href="https://web3summit.com" target="_blank">web3summit.com</a><br/>
+      Curated by <a href="https://palalabs.org" target="_blank">Pala Labs</a> • Data via <a href="https://openshore.io" target="_blank">OpenShore</a>
+    </p>
+  </div>
+</div>
+
+<script>
+function resolvedTheme() {
+  const t = document.documentElement.dataset.theme;
+  if (t === 'auto') {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  return t;
+}
+
+function updateThemeIcon() {
+  const dark = resolvedTheme() === 'dark';
+  document.getElementById('theme-icon').textContent = dark ? '☀️' : '🌙';
+}
+
+function toggleThemeRecap() {
+  const dark = resolvedTheme() === 'dark';
+  const next = dark ? 'light' : 'dark';
+  document.documentElement.dataset.theme = next;
+  localStorage.setItem('theme', next);
+  updateThemeIcon();
+}
+
+function initTheme() {
+  const saved = localStorage.getItem('theme');
+  document.documentElement.dataset.theme = saved || 'auto';
+  updateThemeIcon();
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+    if (document.documentElement.dataset.theme === 'auto') updateThemeIcon();
+  });
+}
+
+initTheme();
+</script>
+
+</body>
+</html>

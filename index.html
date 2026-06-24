@@ -1535,7 +1535,9 @@ body {
 <div class="activity-bar">
   <div class="activity-bar-track">
     <span class="activity-bar-text">🔔 The Web3 Summit Concluded Last week  - <a href="web3-summit-2026-recap.html" class="activity-bar-link">Checkout the Summary ➡️</a></span>
+    <span class="activity-bar-text">📬 Get the Polkadot Daily Digest in your inbox — <button onclick="flierOpen()" class="activity-bar-link" style="background:none;border:none;border-bottom:1px solid currentColor;cursor:pointer;font:inherit;color:inherit;padding:0;letter-spacing:inherit;">Register your interest ➡️</button></span>
     <span class="activity-bar-text">🔔 The Web3 Summit Concluded Last week  - <a href="web3-summit-2026-recap.html" class="activity-bar-link">Checkout the Summary ➡️</a></span>
+    <span class="activity-bar-text">📬 Get the Polkadot Daily Digest in your inbox — <button onclick="flierOpen()" class="activity-bar-link" style="background:none;border:none;border-bottom:1px solid currentColor;cursor:pointer;font:inherit;color:inherit;padding:0;letter-spacing:inherit;">Register your interest ➡️</button></span>
   </div>
 </div>
 
@@ -1804,8 +1806,8 @@ body {
     <button class="flier-close" id="flier-close" aria-label="Close and send the flier to the corner">&times;</button>
     <div class="flier-stack" id="flier-stack">
 
-      <!-- Page 0: Web3 Summit 2026 -->
-      <article class="flier-page" data-page="0">
+      <!-- Page 1: Web3 Summit 2026 -->
+      <article class="flier-page" data-page="1">
         <div class="flier-kicker"><span class="flier-tag">Featured</span> Web3 Summit 2026 &middot; The Fliers</div>
         <div class="flier-serif">Concluded</div>
         <div class="flier-rule"></div>
@@ -1819,8 +1821,8 @@ body {
         <div class="flier-hint">Flip through the fliers &rsaquo;</div>
       </article>
 
-      <!-- Page 1: Newsletter Subscription -->
-      <article class="flier-page" data-page="1">
+      <!-- Page 0: Newsletter Subscription -->
+      <article class="flier-page" data-page="0">
         <div class="flier-kicker">Subscriptions &middot; The Mailroom</div>
         <div class="flier-rule"></div>
         <h2 class="flier-h">A daily digest, delivered to your inbox?</h2>
@@ -1860,8 +1862,8 @@ body {
     <div class="flier-nav">
       <button class="flier-arrow" id="flier-prev" aria-label="Previous notice">&#8249;</button>
       <div class="flier-dots" id="flier-dots">
-        <button class="flier-dot" data-dot="0" aria-label="Web3 Summit"></button>
-        <button class="flier-dot" data-dot="1" aria-label="Newsletter"></button>
+        <button class="flier-dot" data-dot="0" aria-label="Newsletter"></button>
+        <button class="flier-dot" data-dot="1" aria-label="Web3 Summit"></button>
       </div>
       <button class="flier-arrow" id="flier-next" aria-label="Next notice">&#8250;</button>
     </div>
@@ -2505,7 +2507,7 @@ window.addEventListener('popstate', e => {
 
 // ─────────────────────────── Init ─────────────────────────────
 // ─────────────────────── Flier popup · The Fliers ─────────────
-// Flippable deck of fliers. Page 0 = Web3 Summit 2026; Page 1 = Newsletter.
+// Flippable deck of fliers. Page 0 = Newsletter; Page 1 = Web3 Summit 2026.
 // Add new pages by creating <article class="flier-page" data-page="N"> + adding
 // a corresponding .flier-dot + bumping FLIER_PAGES.
 const FLIER_PAGES = 2;
@@ -2667,7 +2669,8 @@ async function init() {
 
   const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
   document.getElementById('masthead-date').textContent = today;
-  document.getElementById('home-date').textContent     = today;
+  const homeDateEl = document.getElementById('home-date');
+  if (homeDateEl) homeDateEl.textContent = today;
 
   // Load both editions in parallel.
   [manifestsBy.daily, manifestsBy.community] = await Promise.all([
@@ -2683,8 +2686,8 @@ async function init() {
     .map(r => extractStats(r.value));
   const totals   = mergeStats(allStats);
 
-  document.getElementById('home-stats').innerHTML =
-    renderChips(totals, COLLECTIONS.daily.statDefs);
+  const homeStatsEl = document.getElementById('home-stats');
+  if (homeStatsEl) homeStatsEl.innerHTML = renderChips(totals, COLLECTIONS.daily.statDefs);
 
   const recent     = manifestsBy.daily.slice(0, 5);
   const homeRecent = document.getElementById('home-recent');

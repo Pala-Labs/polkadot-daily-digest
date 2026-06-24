@@ -494,6 +494,21 @@ body {
 .d-row:first-child { border-top: 1px solid var(--outline-var); }
 .d-row:last-child  { border-bottom: 1px solid var(--outline-var); }
 .d-row:hover { border-left-color: var(--accent); background: var(--surface-low); }
+.d-row--latest { border-left-color: var(--on-surface); background: var(--surface-low); }
+.d-row--latest:hover { border-left-color: var(--on-surface); }
+.d-row-latest-tag {
+  display: inline-block;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--surface-lowest);
+  background: var(--on-surface);
+  padding: 2px 8px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
 .d-row-main { display: flex; align-items: center; gap: 16px; }
 .d-row-info { flex: 1; min-width: 0; }
 .d-row-date {
@@ -521,10 +536,10 @@ body {
   max-height: 0;
   opacity: 0;
   margin-top: 0;
-  transition: max-height 0.4s ease, opacity 0.35s ease, margin-top 0.3s ease;
+  transition: max-height 0.5s ease, opacity 0.35s ease, margin-top 0.3s ease;
 }
 .d-row-summary.visible {
-  max-height: 80px;
+  max-height: 600px;
   opacity: 1;
   margin-top: 10px;
 }
@@ -1852,7 +1867,6 @@ body {
           <a class="ad-link" href="https://web3summit.com/" target="_blank" rel="noopener">Web3 Summit &#8599;</a>
         </div>
         <div class="flier-spacer"></div>
-        <div class="flier-hint">Flip through the fliers &rsaquo;</div>
       </article>
 
       <!-- Page 0: Newsletter Subscription -->
@@ -2245,17 +2259,18 @@ function renderChips(totals, statDefs) {
   }).join('');
 }
 
-function renderDigestRow(colKey, m) {
+function renderDigestRow(colKey, m, isLatest) {
   const col     = COLLECTIONS[colKey];
   const doc     = docCache[col.dir + '/' + m.date];
   const summary = doc ? extractSummary(doc) : '';
   const summaryHtml = summary
     ? '<div class="d-row-summary" data-text="' + summary.replace(/&/g, '&amp;').replace(/"/g, '&quot;') + '"></div>'
     : '';
-  return '<button class="d-row" onclick="openDigest(\'' + colKey + '\',\'' + m.date + '\')">' +
+  const latestTag = isLatest ? '<span class="d-row-latest-tag">Latest</span>' : '';
+  return '<button class="d-row' + (isLatest ? ' d-row--latest' : '') + '" onclick="openDigest(\'' + colKey + '\',\'' + m.date + '\')">' +
     '<div class="d-row-main">' +
       '<div class="d-row-info">' +
-        '<div class="d-row-date">' + fmtDate(m.date) + '</div>' +
+        '<div class="d-row-date">' + fmtDate(m.date) + latestTag + '</div>' +
         '<div class="d-row-sub">' + col.label + '</div>' +
       '</div>' +
       '<div class="d-arrow">&#8250;</div>' +
@@ -2308,7 +2323,7 @@ function renderDigestsList(colKey) {
 
   const start = (pageBy[colKey] - 1) * DIGESTS_PER_PAGE;
   const slice = manifests.slice(start, start + DIGESTS_PER_PAGE);
-  const rows  = slice.map(m => renderDigestRow(colKey, m)).join('') ||
+  const rows  = slice.map((m, i) => renderDigestRow(colKey, m, i === 0 && pageBy[colKey] === 1)).join('') ||
                 '<div class="loading">No editions found.</div>';
 
   const listBody = document.getElementById(COLLECTIONS[colKey].listBody);
@@ -2726,7 +2741,7 @@ async function init() {
   const recent     = manifestsBy.daily.slice(0, 5);
   const homeRecent = document.getElementById('home-recent');
   homeRecent.innerHTML =
-    recent.map(m => renderDigestRow('daily', m)).join('') || '<div class="loading">No editions found.</div>';
+    recent.map((m, i) => renderDigestRow('daily', m, i === 0)).join('') || '<div class="loading">No editions found.</div>';
   populateSummaries(homeRecent);
 
   renderDigestsList('daily');

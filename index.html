@@ -1574,9 +1574,9 @@ body {
 <div class="activity-bar">
   <div class="activity-bar-track">
     <span class="activity-bar-text">🔔 The Web3 Summit Concluded Last week  - <a href="web3-summit-2026-recap.html" class="activity-bar-link">Checkout the Summary ➡️</a></span>
-    <span class="activity-bar-text">📬 Get the Polkadot Daily Digest in your inbox — <button onclick="flierOpen()" class="activity-bar-link" style="background:none;border:none;border-bottom:1px solid currentColor;cursor:pointer;font:inherit;color:inherit;padding:0;letter-spacing:inherit;">Register your interest ➡️</button></span>
+    <span class="activity-bar-text">📬 Get the Polkadot Daily Digest in your inbox - <button onclick="flierOpen()" class="activity-bar-link" style="background:none;border:none;border-bottom:1px solid currentColor;cursor:pointer;font:inherit;color:inherit;padding:0;letter-spacing:inherit;">Register your interest ➡️</button></span>
     <span class="activity-bar-text">🔔 The Web3 Summit Concluded Last week  - <a href="web3-summit-2026-recap.html" class="activity-bar-link">Checkout the Summary ➡️</a></span>
-    <span class="activity-bar-text">📬 Get the Polkadot Daily Digest in your inbox — <button onclick="flierOpen()" class="activity-bar-link" style="background:none;border:none;border-bottom:1px solid currentColor;cursor:pointer;font:inherit;color:inherit;padding:0;letter-spacing:inherit;">Register your interest ➡️</button></span>
+    <span class="activity-bar-text">📬 Get the Polkadot Daily Digest in your inbox - <button onclick="flierOpen()" class="activity-bar-link" style="background:none;border:none;border-bottom:1px solid currentColor;cursor:pointer;font:inherit;color:inherit;padding:0;letter-spacing:inherit;">Register your interest ➡️</button></span>
   </div>
 </div>
 
@@ -1711,7 +1711,7 @@ body {
       <div class="home-intro-sub">In-depth reports on specific events and developments in the Polkadot ecosystem, published outside the daily digest cadence.</div>
     </div>
     <div id="reports-list">
-      <button class="d-row d-row--latest" onclick="openReport('web3-summit-2026','Web3 Summit 2026 — Recap','web3-summit-2026-recap.html')">
+      <button class="d-row d-row--latest" onclick="openReport('web3-summit-2026','Web3 Summit 2026 - Recap','web3-summit-2026-recap.html')">
         <div class="d-row-main">
           <div class="d-row-info">
             <div class="d-row-date">Web3 Summit 2026 <span class="d-row-latest-tag">Featured</span></div>
@@ -2623,7 +2623,7 @@ async function openReport(id, title, file) {
 window.addEventListener('popstate', e => {
   const hash = location.hash.slice(1);
   const reportMatch = hash.match(/^report\/(.+)$/);
-  if (reportMatch) return; // report detail — stay on detail page
+  if (reportMatch) return; // report detail - stay on detail page
   const ref = parseHash(hash);
   if (ref) {
     openDigest(ref.colKey, ref.date);

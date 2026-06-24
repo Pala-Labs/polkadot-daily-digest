@@ -16,15 +16,15 @@ The digest is a **pure static site** served from GitHub Pages. Every edition is 
 
 Hi Polkadot community! 👋
 
-We're [Pala Labs](https://palalabs.org/), and we're thrilled to announce the revival of the **Polkadot Daily Digest**. Governance proposals, SDK releases, community debates — there's so much happening every single day, and most of it gets scattered across forums, feeds, and social media before anyone has had their first coffee. We wanted to change that.
+We're [Pala Labs](https://palalabs.org/), and we're thrilled to announce the revival of the **Polkadot Daily Digest**. Governance proposals, SDK releases, community debates - there's so much happening every single day, and most of it gets scattered across forums, feeds, and social media before anyone has had their first coffee. We wanted to change that.
 
-This digest picks up the tradition started by the Web3 Foundation's original Daily Digest: one clear, source-linked briefing every morning (CET), free for anyone to read. We rebuilt the curation process from the ground up as a fully automated pipeline — studied how the original worked, defined editorial standards at the system level, and tested it quietly for a month before going live.
+This digest picks up the tradition started by the Web3 Foundation's original Daily Digest: one clear, source-linked briefing every morning (CET), free for anyone to read. We rebuilt the curation process from the ground up as a fully automated pipeline - studied how the original worked, defined editorial standards at the system level, and tested it quietly for a month before going live.
 
-But what makes us feel good about it is that every single edition, though built automatically, is read, checked, and corrected by a real human on our team before it ever goes live. We believe this best-of-both-worlds approach is the only way to do this right — automation gives us the coverage to track everything the ecosystem produces at scale, while the human review ensures that what reaches you is actually worth your time.
+But what makes us feel good about it is that every single edition, though built automatically, is read, checked, and corrected by a real human on our team before it ever goes live. We believe this best-of-both-worlds approach is the only way to do this right - automation gives us the coverage to track everything the ecosystem produces at scale, while the human review ensures that what reaches you is actually worth your time.
 
 We publish two editions daily: the **Community Edition**, which focuses on community voices and X (Twitter) activity across the ecosystem, posted on the Polkadot Forum; and the **Legacy Digest**, a more authoritative brief covering governance, SDK releases, and ecosystem updates, shared on the Element channel. Both are available in full at [news.openshore.io](https://news.openshore.io/).
 
-Our [Methodology](https://news.openshore.io/#methodology) is public, every claim links back to its source, and the full archive lives openly at [news.openshore.io](https://news.openshore.io/). Straight from the ecosystem, nothing inflated, nothing left out. We're also open to feedback — please create a GitHub Issue [here](https://github.com/Pala-Labs/polkadot-daily-digest/issues).
+Our [Methodology](https://news.openshore.io/#methodology) is public, every claim links back to its source, and the full archive lives openly at [news.openshore.io](https://news.openshore.io/). Straight from the ecosystem, nothing inflated, nothing left out. We're also open to feedback - please create a GitHub Issue [here](https://github.com/Pala-Labs/polkadot-daily-digest/issues).
 
 Thank you for reading this far. We hope you love the new digest as much as we loved building it.
 

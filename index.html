@@ -437,7 +437,6 @@ body {
   color: var(--on-surface-var);
   line-height: 1.6;
   margin-top: 16px;
-  max-width: 820px;
 }
 .accent { font-style: normal; }
 .home-block { margin-bottom: 56px; }
@@ -459,8 +458,9 @@ body {
 .home-intro-hero-copy .page-top {
   padding-top: 0;
 }
-.home-intro-hero .method-title,
-.home-intro-hero .method-body { max-width: none; }
+.home-intro-copy .method-title,
+.home-intro-copy .method-body { max-width: none; }
+#page-home .page-top .home-intro-sub { max-width: none; }
 /* Tall poster keeps its natural height beside the written sections. */
 .home-intro-media {
   margin: 0;
@@ -1548,7 +1548,7 @@ body {
       <span id="masthead-date">By Pala Labs</span>
     </div>
     <div class="masthead-brand"><span class="dot-word">Polkadot</span> Daily Digest</div>
-    <div class="masthead-tagline">Ecosystem intelligence, curated daily</div>
+    <div class="masthead-tagline">Ecosystem intelligence for DOTDAO, curated daily</div>
   </div>
 </header>
 
@@ -1574,27 +1574,17 @@ body {
 <!-- HOME -->
 <div id="page-home" class="page active">
   <div class="wrap">
-    <div class="home-block home-intro-hero">
-      <div class="home-intro-hero-copy">
-        <div class="page-top">
-          <div class="home-intro-date" id="home-date"></div>
-          <div class="home-intro-headline">Polkadot <span class="accent">Ecosystem</span> Briefing</div>
-          <div class="home-intro-sub">An authoritative overview of governance, development, and community activity across the Polkadot network. Curated and synthesised daily.</div>
-        </div>
-        <div class="home-intro-copy">
-          <div class="eyebrow">Why This Exists</div>
-          <h2 class="method-title">Carrying forward a trusted tradition of Polkadot intelligence.</h2>
-          <p class="method-body">For years, the Web3 Foundation&rsquo;s <strong>Daily Digest</strong> gave the ecosystem a single, dependable place to follow what mattered across Polkadot &mdash; governance, development, and community signal, distilled without the noise. As that cadence faded, the community lost a shared point of reference for keeping up with the network.</p>
-          <p class="method-body">The <strong>Polkadot Daily Digest</strong> is our effort to recreate that legacy and carry it forward. The intent is simple: give builders, delegates, and the wider community a clear, honest briefing of what is actually happening each day &mdash; sourced from the venues where the conversation lives, synthesised for clarity, and free for anyone to read. No hype, no paywall &mdash; just signal. The editions below pick up where the Daily Digest left off.</p>
-        </div>
-      </div>
-      <figure class="home-intro-media">
-        <img src="polkadot-post.png" alt="Polkadot Post - New Era on the Dot">
-      </figure>
-    </div>
     <div class="home-block">
-      <div class="eyebrow">Cumulative Data Points</div>
-      <div class="chips" id="home-stats"><div class="loading"><div class="spinner"></div></div></div>
+      <div class="page-top">
+        <div class="home-intro-headline">Polkadot Ecosystem Overview</div>
+        <div class="home-intro-sub">Governance proposals, SDK releases, community debates &mdash; there&rsquo;s a lot happening every single day, and most of it gets scattered across forums, feeds, and social media before anyone has had their first coffee. We built this to change that.</div>
+      </div>
+      <div class="home-intro-copy">
+        <h2 class="method-title">About This Digest</h2>
+        <p class="method-body">We at <a href="https://palalabs.org/" style="color:inherit;border-bottom:1px solid var(--outline);text-decoration:none;font-weight:600;">Pala Labs</a> are reviving the Polkadot Daily Digest, picking up the format started by the Web3 Foundation&rsquo;s original Daily Digest. We rebuilt the curation process from the ground up as a fully automated pipeline, studied how the original worked, defined editorial standards, and tested it for a month before going live. What makes this digest complete is that every single edition &mdash; though built automatically &mdash; is read and checked by a real human on our team before it ever goes live.</p>
+        <p class="method-body">We publish two editions daily. The <strong>Pulse Digest</strong> focuses purely on <strong>X (Twitter)</strong> activity across the ecosystem, posted on the Polkadot Forum. The <strong>Legacy Digest</strong> is a curated brief covering <strong>OpenGov, SDK releases, X (Twitter), Medium, and the Polkadot Forum</strong>, shared on the Element channel. Our <a href="#methodology">Methodology</a> is public, every claim links back to its source, and the full archive lives openly on this website.</p>
+        <p class="method-body">For feedback or comments, please create a GitHub Issue <a href="https://github.com/Pala-Labs/polkadot-daily-digest/issues">here</a>.</p>
+      </div>
     </div>
     <div class="home-block">
       <div class="eyebrow">Recent Editions</div>
@@ -1608,7 +1598,7 @@ body {
   <div class="wrap">
     <div class="page-top">
       <h1 class="page-header-title">Legacy Digest</h1>
-      <div class="home-intro-sub">Every edition of the Polkadot Daily Digest, archived and searchable by date &mdash; the full record of what mattered each day.</div>
+      <div class="home-intro-sub">A curated daily brief covering <strong>OpenGov, SDK releases, X (Twitter), Medium, and the Polkadot Forum</strong> &mdash; shared on the Element channel. Every edition is built by an automated pipeline and reviewed by a human before going live.</div>
     </div>
     <div class="search-bar">
       <label class="search-label" for="search-date">Jump to Date</label>
@@ -1624,7 +1614,7 @@ body {
   <div class="wrap">
     <div class="page-top">
       <h1 class="page-header-title">Pulse Digest</h1>
-      <div class="home-intro-sub">Community voices from across X - ecosystem chatter, developer activity, and grassroots signal, curated daily.</div>
+      <div class="home-intro-sub">A daily brief focused purely on <strong>X (Twitter)</strong> activity across the Polkadot ecosystem &mdash; posted on the Polkadot Forum. Every edition is built by an automated pipeline and reviewed by a human before going live.</div>
     </div>
     <div class="search-bar">
       <label class="search-label" for="community-search-date">Jump to Date</label>

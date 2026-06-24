@@ -1127,6 +1127,35 @@ body {
 }
 .lightbox-close:hover { border-color: #ede8e2; background: rgba(237, 232, 226, 0.08); }
 
+/* ── Report iframe ── */
+/* ── Standalone report content ── */
+.standalone-report .masthead { border-bottom: 1px solid var(--outline-var); padding: 40px 0; text-align: center; margin-bottom: 48px; }
+.standalone-report .masthead-meta { font-family: 'Work Sans', sans-serif; font-size: 12px; color: var(--outline); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+.standalone-report .masthead-title { font-family: 'Newsreader', serif; font-size: clamp(28px, 4vw, 44px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 12px; color: var(--on-surface); }
+.standalone-report .masthead-subtitle { font-family: 'Work Sans', sans-serif; font-size: 16px; color: var(--on-surface-var); }
+.standalone-report .section { margin-bottom: 60px; }
+.standalone-report .section:last-child { margin-bottom: 0; }
+.standalone-report .section-title { font-family: 'Newsreader', serif; font-size: 28px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 24px; color: var(--on-surface); padding-bottom: 12px; border-bottom: 2px solid var(--outline-var); }
+.standalone-report .item { margin-bottom: 20px; padding: 24px; background: var(--surface-lowest); border: 1px solid var(--outline-var); }
+.standalone-report .item-title { font-family: 'Newsreader', serif; font-size: 18px; font-weight: 600; margin-bottom: 10px; color: var(--on-surface); }
+.standalone-report .item-body { font-family: 'Work Sans', sans-serif; font-size: 15px; color: var(--on-surface-var); line-height: 1.75; }
+.standalone-report .item-body strong { color: var(--on-surface); font-weight: 600; }
+.standalone-report .item-body p { margin-bottom: 12px; }
+.standalone-report .item-body p:last-child { margin-bottom: 0; }
+.standalone-report .item-body ul { margin: 8px 0 12px 20px; color: var(--on-surface-var); }
+.standalone-report .item-body li { margin-bottom: 4px; }
+.standalone-report .highlight { background: var(--surface-container); padding: 24px; border-left: 4px solid var(--accent); margin: 24px 0; font-family: 'Work Sans', sans-serif; font-size: 15px; color: var(--on-surface-var); line-height: 1.75; }
+.standalone-report .highlight strong { color: var(--on-surface); font-weight: 600; }
+.standalone-report .highlight p { margin-bottom: 10px; }
+.standalone-report .highlight p:last-child { margin-bottom: 0; }
+.standalone-report .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin: 28px 0; }
+.standalone-report .stat-card { background: var(--surface-lowest); border: 1px solid var(--outline-var); padding: 20px; text-align: center; }
+.standalone-report .stat-number { font-family: 'Newsreader', serif; font-size: 36px; font-weight: 600; color: var(--on-surface); line-height: 1; margin-bottom: 8px; }
+.standalone-report .stat-label { font-family: 'Work Sans', sans-serif; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--on-surface-var); }
+.standalone-report .footer { border-top: 1px solid var(--outline-var); padding: 40px 0; text-align: center; font-size: 13px; color: var(--outline); margin-top: 60px; }
+.standalone-report .footer a { color: var(--on-surface); text-decoration: none; font-weight: 600; }
+.standalone-report .wrap { max-width: none; padding: 0; }
+
 /* ── Responsive ── */
 @media (max-width: 1024px) {
   :root { --margin-page: 40px; }
@@ -1674,6 +1703,28 @@ body {
   </div>
 </div>
 
+<!-- REPORTS -->
+<div id="page-reports" class="page">
+  <div class="wrap">
+    <div class="page-top">
+      <h1 class="page-header-title">Standalone Reports</h1>
+      <div class="home-intro-sub">In-depth reports on specific events and developments in the Polkadot ecosystem, published outside the daily digest cadence.</div>
+    </div>
+    <div id="reports-list">
+      <button class="d-row d-row--latest" onclick="openReport('web3-summit-2026','Web3 Summit 2026 — Recap','web3-summit-2026-recap.html')">
+        <div class="d-row-main">
+          <div class="d-row-info">
+            <div class="d-row-date">Web3 Summit 2026 <span class="d-row-latest-tag">Featured</span></div>
+            <div class="d-row-sub">Special Report &middot; Berlin, 18–19 June 2026</div>
+          </div>
+          <div class="d-arrow">&#8250;</div>
+        </div>
+        <div class="d-row-summary visible" style="max-height:none;">Two days of talks, prototypes, and vision for privacy, sovereignty, and censorship-resistant tools for human coordination. Full breakdown of sessions, speakers, and key takeaways from the summit.</div>
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- METHODOLOGY -->
 <div id="page-methodology" class="page">
   <div class="wrap">
@@ -1833,6 +1884,8 @@ body {
       <a href="#" onclick="nav('methodology');return false;">Methodology</a>
       &nbsp;&middot;&nbsp;
       <a href="#" onclick="nav('disclaimer');return false;">Disclaimer</a>
+      &nbsp;&middot;&nbsp;
+      <a href="#" onclick="nav('reports');return false;">Standalone Reports</a>
     </div>
     <div class="footer-credits">
       Powered by <a href="https://polkadot.com/" target="_blank">Polkadot</a> ·
@@ -2012,7 +2065,7 @@ function toggleMenu(force) {
 
 function nav(page) {
   toggleMenu(false);  // close the mobile dropdown on selection
-  ['home','digests','community','detail','methodology','disclaimer'].forEach(p => {
+  ['home','digests','community','detail','methodology','disclaimer','reports'].forEach(p => {
     document.getElementById('page-'+p).classList.toggle('active', p === page);
   });
   if (page !== 'detail') {
@@ -2545,8 +2598,33 @@ async function openDigest(colKey, date) {
   }
 }
 
+async function openReport(id, title, file) {
+  history.pushState({ report: id }, '', '#report/' + id);
+  nav('detail');
+  document.getElementById('detail-edition').textContent = 'Standalone Report';
+  document.getElementById('detail-title').textContent = title;
+  const body = document.getElementById('detail-body');
+  body.innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+  document.getElementById('back-btn').onclick = () => { nav('reports'); history.replaceState(null,'',location.pathname); };
+
+  try {
+    const res = await fetch(file);
+    if (!res.ok) throw new Error('Not found');
+    const doc = new DOMParser().parseFromString(await res.text(), 'text/html');
+    const headerBar = doc.querySelector('.header-bar');
+    if (headerBar) headerBar.remove();
+    const wrap = doc.querySelector('body > .wrap');
+    body.innerHTML = '<div class="standalone-report">' + (wrap ? wrap.innerHTML : doc.body.innerHTML) + '</div>';
+  } catch(e) {
+    body.innerHTML = '<div class="loading">Could not load report.</div>';
+  }
+}
+
 window.addEventListener('popstate', e => {
-  const ref = parseHash(location.hash.slice(1));
+  const hash = location.hash.slice(1);
+  const reportMatch = hash.match(/^report\/(.+)$/);
+  if (reportMatch) return; // report detail — stay on detail page
+  const ref = parseHash(hash);
   if (ref) {
     openDigest(ref.colKey, ref.date);
   } else {

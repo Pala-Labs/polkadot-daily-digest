@@ -458,9 +458,6 @@ body {
 .home-intro-hero-copy .page-top {
   padding-top: 0;
 }
-.home-intro-copy .method-title,
-.home-intro-copy .method-body { max-width: none; }
-#page-home .page-top .home-intro-sub { max-width: none; }
 /* Tall poster keeps its natural height beside the written sections. */
 .home-intro-media {
   margin: 0;
@@ -940,7 +937,6 @@ body {
   line-height: 1.25;
   color: var(--on-surface);
   margin-bottom: 20px;
-  max-width: 720px;
 }
 .method-body {
   font-family: 'Work Sans', sans-serif;
@@ -948,7 +944,6 @@ body {
   font-weight: 400;
   color: var(--on-surface-var);
   line-height: 1.75;
-  max-width: 720px;
   margin-bottom: 16px;
 }
 .method-body:last-child { margin-bottom: 0; }
@@ -1774,6 +1769,43 @@ body {
   </div>
 </div>
 
+<!-- DISCLAIMER -->
+<div id="page-disclaimer" class="page">
+  <div class="wrap">
+    <div class="page-top">
+      <div class="home-intro-date">Legal &amp; Editorial</div>
+      <div class="home-intro-headline">Disclaimer</div>
+      <div class="home-intro-sub">Please read before relying on content from the Polkadot Daily Digest.</div>
+    </div>
+
+    <section class="method-section">
+      <div class="eyebrow">Nature of Content</div>
+      <h2 class="method-title">Auto-generated and informational only.</h2>
+      <p class="method-body">The Polkadot Daily Digest is produced by an automated pipeline and provided for <strong>informational purposes only</strong> by <strong>OpenShore</strong>, a <a href="https://palalabs.org/" target="_blank" rel="noopener">Pala Labs</a> initiative. It is not financial, legal, or investment advice, and should not be treated as such.</p>
+      <p class="method-body">While every edition is reviewed by a human team member before publication, the digest is assembled from a large volume of community-generated content on a tight daily schedule. Errors, omissions, and inaccuracies can and do occur.</p>
+    </section>
+
+    <section class="method-section">
+      <div class="eyebrow">Sources</div>
+      <h2 class="method-title">Based on community posts and public feeds.</h2>
+      <p class="method-body">The content in this digest is sourced from publicly available community posts, including posts on <strong>X (Twitter)</strong>, the <strong>Polkadot Forum</strong>, and <strong>Medium</strong>, as well as on-chain governance data and SDK release feeds. These sources are third-party and outside our control.</p>
+      <p class="method-body">We do not verify the accuracy of underlying source material beyond what is surfaced by our pipeline. Posts and statements from community members reflect their own views and not those of Pala Labs or OpenShore.</p>
+    </section>
+
+    <section class="method-section">
+      <div class="eyebrow">No Guarantees</div>
+      <h2 class="method-title">We do not guarantee completeness or correctness.</h2>
+      <p class="method-body">Pala Labs and OpenShore make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, or suitability of the information contained in any edition of this digest. Any reliance you place on such information is strictly at your own risk.</p>
+    </section>
+
+    <section class="method-section">
+      <div class="eyebrow">Corrections</div>
+      <h2 class="method-title">Found something wrong?</h2>
+      <p class="method-body">If you spot an inaccuracy, a misattribution, or content that should not have been included, please <a href="https://github.com/Pala-Labs/polkadot-daily-digest/issues" target="_blank" rel="noopener">open a GitHub Issue</a>. We review all reports and issue corrections where warranted.</p>
+    </section>
+  </div>
+</div>
+
 <!-- Lightbox for architecture diagram -->
 <div class="lightbox" id="lightbox" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-label="Architecture diagram full size">
   <button class="lightbox-close" onclick="closeLightbox(event)" aria-label="Close">Close &times;</button>
@@ -1784,6 +1816,8 @@ body {
   <div class="wrap">
     <div class="footer-methodology">
       <a href="#" onclick="nav('methodology');return false;">Methodology</a>
+      &nbsp;&middot;&nbsp;
+      <a href="#" onclick="nav('disclaimer');return false;">Disclaimer</a>
     </div>
     <div class="footer-credits">
       Powered by <a href="https://polkadot.com/" target="_blank">Polkadot</a> ·
@@ -1964,7 +1998,7 @@ function toggleMenu(force) {
 
 function nav(page) {
   toggleMenu(false);  // close the mobile dropdown on selection
-  ['home','digests','community','detail','methodology'].forEach(p => {
+  ['home','digests','community','detail','methodology','disclaimer'].forEach(p => {
     document.getElementById('page-'+p).classList.toggle('active', p === page);
   });
   if (page !== 'detail') {

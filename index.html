@@ -2855,7 +2855,7 @@ function initTicker() {
   if (!track) return;
 
   function speed() {
-    if (window.innerWidth <= 768)  return 220;   // mobile
+    if (window.innerWidth <= 768)  return 160;   // mobile (~5s)
     if (window.innerWidth <= 1024) return 140;   // tablet
     return 90;                                    // desktop
   }

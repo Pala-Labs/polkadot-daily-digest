@@ -114,8 +114,8 @@ body {
 }
 .activity-bar-track {
   display: flex;
-  animation: scroll-ticker 9s linear infinite;
   white-space: nowrap;
+  will-change: transform;
 }
 .activity-bar-text {
   font-family: 'Work Sans', sans-serif;
@@ -135,20 +135,6 @@ body {
 }
 .activity-bar-link:hover {
   opacity: 0.8;
-}
-@keyframes scroll-ticker {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-@media (max-width: 768px) {
-  .activity-bar-track { animation-duration: 3s; }
-}
-@media (min-width: 769px) and (max-width: 1024px) {
-  .activity-bar-track { animation-duration: 6s; }
 }
 
 /* ── Masthead ── */
@@ -2867,6 +2853,36 @@ async function init() {
 }
 
 init();
+
+// ── Seamless ticker (rAF-driven, no CSS keyframe reset) ──
+function initTicker() {
+  const track = document.querySelector('.activity-bar-track');
+  if (!track) return;
+
+  function speed() {
+    if (window.innerWidth <= 768)  return 220;   // mobile
+    if (window.innerWidth <= 1024) return 140;   // tablet
+    return 90;                                    // desktop
+  }
+
+  let loopWidth = track.scrollWidth / 2;
+  let pos = 0;
+  let last = null;
+
+  window.addEventListener('resize', () => { loopWidth = track.scrollWidth / 2; });
+
+  function tick(ts) {
+    if (last !== null) {
+      pos += speed() * (ts - last) / 1000;
+      if (pos >= loopWidth) pos -= loopWidth;
+      track.style.transform = `translateX(-${pos}px)`;
+    }
+    last = ts;
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+initTicker();
 </script>
 </body>
 </html>

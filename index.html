@@ -2763,11 +2763,6 @@ function initFlier() {
   document.getElementById('nl-form').addEventListener('submit', flierSubscribe);
   flierSetStates();
 
-  // Auto-open once per browser, a moment after load. After that, the parked
-  // paper plane in the corner is the way back in.
-  let seen = false;
-  try { seen = !!localStorage.getItem('flierSeen'); } catch (e) {}
-  if (!seen) setTimeout(flierOpen, 1400);
 }
 
 async function init() {

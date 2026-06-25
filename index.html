@@ -114,7 +114,7 @@ body {
 }
 .activity-bar-track {
   display: flex;
-  animation: scroll-ticker 25s linear infinite;
+  animation: scroll-ticker 9s linear infinite;
   white-space: nowrap;
 }
 .activity-bar-text {
@@ -143,6 +143,12 @@ body {
   100% {
     transform: translateX(-50%);
   }
+}
+@media (max-width: 768px) {
+  .activity-bar-track { animation-duration: 3s; }
+}
+@media (min-width: 769px) and (max-width: 1024px) {
+  .activity-bar-track { animation-duration: 6s; }
 }
 
 /* ── Masthead ── */
@@ -440,6 +446,12 @@ body {
 }
 .accent { font-style: normal; }
 .home-block { margin-bottom: 56px; }
+.home-latest-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 56px;
+}
 
 /* Intro hero: both written sections stacked in the left column,
    the tall image spanning beside them on the right. */
@@ -495,7 +507,7 @@ body {
 .d-row:last-child  { border-bottom: 1px solid var(--outline-var); }
 .d-row:hover { border-left-color: var(--accent); background: var(--surface-low); }
 .d-row--latest { border-left-color: var(--on-surface); background: var(--surface-low); }
-.d-row--latest:hover { border-left-color: var(--on-surface); }
+.d-row--latest:hover { border-left-color: var(--accent); background: var(--surface-low); }
 .d-row-latest-tag {
   display: inline-block;
   font-family: 'Work Sans', sans-serif;
@@ -1582,13 +1594,12 @@ body {
 
 <!-- Masthead -->
 <header class="masthead">
-  <div class="masthead-rule-top"></div>
   <div class="masthead-inner">
     <div class="masthead-meta">
       <span>Est. 2026</span>
       <span id="masthead-date">By Pala Labs</span>
     </div>
-    <div class="masthead-brand"><span class="dot-word">Polkadot</span> Daily Digest</div>
+    <div class="masthead-brand"><a href="https://openshore.io/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none;"><span class="dot-word">Polkadot</span> Daily Digest</a></div>
     <div class="masthead-tagline">Ecosystem intelligence for DOTDAO</div>
   </div>
 </header>
@@ -1602,7 +1613,8 @@ body {
     <div class="nav-tabs" id="nav-tabs">
       <button class="nav-tab active" id="tab-home"      onclick="nav('home')">Home Page</button>
       <button class="nav-tab"        id="tab-digests"   onclick="nav('digests')">Legacy Digest</button>
-      <button class="nav-tab"        id="tab-community" onclick="nav('community')">Pulse Digest</button>
+      <button class="nav-tab"        id="tab-community" onclick="nav('community')">Socials Digest</button>
+      <button class="nav-tab"        id="tab-reports"   onclick="nav('reports')">Ad-hoc Reports</button>
     </div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
       <svg id="icon-moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1617,19 +1629,27 @@ body {
   <div class="wrap">
     <div class="home-block">
       <div class="page-top">
-        <div class="home-intro-headline">Polkadot Ecosystem Overview</div>
+        <div class="home-intro-headline">DOTDAO Overview</div>
         <div class="home-intro-sub">Governance proposals, SDK releases, community debates - there&rsquo;s a lot happening every single day, and most of it gets scattered across forums, feeds, and social media before anyone has had their first coffee. We built this to change that.</div>
       </div>
-      <div class="home-intro-copy">
-        <h2 class="method-title">About This Digest</h2>
-        <p class="method-body">We at <a href="https://palalabs.org/" style="color:inherit;border-bottom:1px solid var(--outline);text-decoration:none;font-weight:600;">Pala Labs</a> are reviving the Polkadot Daily Digest, picking up the format started by the Web3 Foundation&rsquo;s original Daily Digest. We rebuilt the curation process from the ground up as a fully automated pipeline, studied how the original worked, defined editorial standards, and tested it for a month before going live. What makes this digest complete is that every single edition - though built automatically - is read and checked by a real human on our team before it ever goes live.</p>
-        <p class="method-body">We publish two editions daily. The <strong>Pulse Digest</strong> focuses purely on <strong>X (Twitter)</strong> activity across the ecosystem, posted on the Polkadot Forum. The <strong>Legacy Digest</strong> is a curated brief covering <strong>OpenGov, SDK releases, X (Twitter), Medium, and the Polkadot Forum</strong>, shared on the Element channel. Our <a href="#methodology">Methodology</a> is public, every claim links back to its source, and the full archive lives openly on this website.</p>
-        <p class="method-body">For feedback or comments, please create a GitHub Issue <a href="https://github.com/Pala-Labs/polkadot-daily-digest/issues">here</a>.</p>
+    </div>
+    <div class="home-latest-grid">
+      <div>
+        <div class="eyebrow">Latest Legacy Digest</div>
+        <div id="home-recent-daily"><div class="loading"><div class="spinner"></div></div></div>
+      </div>
+      <div>
+        <div class="eyebrow">Latest Socials Digest</div>
+        <div id="home-recent-community"><div class="loading"><div class="spinner"></div></div></div>
       </div>
     </div>
     <div class="home-block">
-      <div class="eyebrow">Recent Editions</div>
-      <div id="home-recent"><div class="loading"><div class="spinner"></div></div></div>
+      <div class="home-intro-copy">
+        <h2 class="method-title">About This Digest</h2>
+        <p class="method-body">We at <a href="https://palalabs.org/" style="color:inherit;border-bottom:1px solid var(--outline);text-decoration:none;font-weight:600;">Pala Labs</a> are reviving the Polkadot Daily Digest, picking up the format started by the Web3 Foundation&rsquo;s original Daily Digest. We rebuilt the curation process from the ground up as a fully automated pipeline, studied how the original worked, defined editorial standards, and tested it for a month before going live. What makes this digest complete is that every single edition - though built automatically - is read and checked by a real human on our team before it ever goes live.</p>
+        <p class="method-body">We publish two editions daily. The <strong>Socials Digest</strong> focuses purely on <strong>X (Twitter)</strong> activity across the ecosystem, posted on the Polkadot Forum. The <strong>Legacy Digest</strong> is a curated brief covering <strong>OpenGov, SDK releases, X (Twitter), Medium, and the Polkadot Forum</strong>, shared on the Element channel. Our <a href="#methodology">Methodology</a> is public, every claim links back to its source, and the full archive lives openly on this website.</p>
+        <p class="method-body">For feedback or comments, please create a GitHub Issue <a href="https://github.com/Pala-Labs/polkadot-daily-digest/issues">here</a>.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -1654,7 +1674,7 @@ body {
 <div id="page-community" class="page">
   <div class="wrap">
     <div class="page-top">
-      <h1 class="page-header-title">Pulse Digest</h1>
+      <h1 class="page-header-title">Socials Digest</h1>
       <div class="home-intro-sub">A daily brief focused purely on <strong>X (Twitter)</strong> activity across the Polkadot ecosystem - posted on the Polkadot Forum. Every edition is built by an automated pipeline and reviewed by a human before going live.</div>
     </div>
     <div class="search-bar">
@@ -1707,7 +1727,7 @@ body {
 <div id="page-reports" class="page">
   <div class="wrap">
     <div class="page-top">
-      <h1 class="page-header-title">Standalone Reports</h1>
+      <h1 class="page-header-title">Ad-hoc Reports</h1>
       <div class="home-intro-sub">In-depth reports on specific events and developments in the Polkadot ecosystem, published outside the daily digest cadence.</div>
     </div>
     <div id="reports-list">
@@ -1884,8 +1904,6 @@ body {
       <a href="#" onclick="nav('methodology');return false;">Methodology</a>
       &nbsp;&middot;&nbsp;
       <a href="#" onclick="nav('disclaimer');return false;">Disclaimer</a>
-      &nbsp;&middot;&nbsp;
-      <a href="#" onclick="nav('reports');return false;">Standalone Reports</a>
     </div>
     <div class="footer-credits">
       Powered by <a href="https://polkadot.com/" target="_blank">Polkadot</a> ·
@@ -2003,7 +2021,7 @@ const COLLECTIONS = {
     sectionIcons: SECTION_ICONS,
   },
   community: {
-    dir: 'community_digests', label: 'Polkadot Pulse Digest', editionLabel: 'Pulse Edition',
+    dir: 'community_digests', label: 'Polkadot Socials Digest', editionLabel: 'Socials Edition',
     listBody: 'community-list-body', searchInput: 'community-search-date', searchMsg: 'community-search-msg',
     statDefs: [
       { key: 'Total X posts curated',       label: 'X Posts Curated' },
@@ -2069,7 +2087,7 @@ function nav(page) {
     document.getElementById('page-'+p).classList.toggle('active', p === page);
   });
   if (page !== 'detail') {
-    ['home','digests','community'].forEach(t => {
+    ['home','digests','community','reports'].forEach(t => {
       const el = document.getElementById('tab-'+t);
       if (el) el.classList.toggle('active', t === page);
     });
@@ -2816,11 +2834,20 @@ async function init() {
   const homeStatsEl = document.getElementById('home-stats');
   if (homeStatsEl) homeStatsEl.innerHTML = renderChips(totals, COLLECTIONS.daily.statDefs);
 
-  const recent     = manifestsBy.daily.slice(0, 5);
-  const homeRecent = document.getElementById('home-recent');
-  homeRecent.innerHTML =
-    recent.map((m, i) => renderDigestRow('daily', m, i === 0)).join('') || '<div class="loading">No editions found.</div>';
-  populateSummaries(homeRecent);
+  const recentDaily = document.getElementById('home-recent-daily');
+  if (recentDaily) {
+    recentDaily.innerHTML = manifestsBy.daily.length
+      ? renderDigestRow('daily', manifestsBy.daily[0], true)
+      : '<div class="loading">No editions found.</div>';
+    populateSummaries(recentDaily);
+  }
+  const recentCommunity = document.getElementById('home-recent-community');
+  if (recentCommunity) {
+    recentCommunity.innerHTML = manifestsBy.community.length
+      ? renderDigestRow('community', manifestsBy.community[0], true)
+      : '<div class="loading">No editions found.</div>';
+    populateSummaries(recentCommunity);
+  }
 
   renderDigestsList('daily');
   initDigestSearch('daily');

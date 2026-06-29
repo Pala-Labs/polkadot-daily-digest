@@ -1462,7 +1462,7 @@ body {
 
 /* Deck - flies in from / out to the bottom-right corner like a paper plane */
 .flier-deck {
-  position: relative; width: min(540px, 100%); height: min(620px, 84vh);
+  position: relative; width: min(540px, 100%); height: min(496px, 67vh);
   z-index: 2; transform-origin: bottom right;
 }
 .flier-overlay.open    .flier-deck { animation: deck-fly-in  0.95s cubic-bezier(.22,.61,.36,1) both; }
@@ -1586,7 +1586,7 @@ body {
 
 @media (max-width: 560px) {
   .flier-overlay { padding: 16px; }
-  .flier-deck { height: 80vh; }
+  .flier-deck { height: 64vh; }
   .flier-page { padding: 24px 18px; }
   .flier-nav { bottom: -46px; }
 }

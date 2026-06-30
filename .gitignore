@@ -23,3 +23,6 @@ package-lock.json
 
 # Claude Code (AI assistant tooling - machine-specific)
 .claude/
+
+# Design handoff assets (source files, not served)
+OpenShore-logo/

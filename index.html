@@ -176,6 +176,13 @@ body {
 .masthead-openshore { display: flex; align-items: center; opacity: 0.65; transition: opacity 0.2s; }
 .masthead-openshore:hover { opacity: 1; }
 .masthead-openshore img { height: 26px; width: auto; display: block; }
+.masthead-openshore .logo-for-dark { display: none; }
+[data-theme="dark"] .masthead-openshore .logo-for-light { display: none; }
+[data-theme="dark"] .masthead-openshore .logo-for-dark  { display: block; }
+@media (prefers-color-scheme: dark) {
+  [data-theme="auto"] .masthead-openshore .logo-for-light { display: none; }
+  [data-theme="auto"] .masthead-openshore .logo-for-dark  { display: block; }
+}
 .masthead-brand {
   font-family: 'Chomsky', 'Times New Roman', Times, serif;
   font-size: clamp(44px, 5.5vw, 72px);
@@ -1618,9 +1625,9 @@ body {
   <div class="masthead-inner">
     <div class="masthead-meta">
       <a href="https://openshore.io/" target="_blank" rel="noopener" class="masthead-openshore">
-        <img src="assets/openshore-horizontal.svg" alt="OpenShore">
+        <img src="assets/openshore-horizontal-dark.svg" alt="OpenShore" class="logo-for-light">
+        <img src="assets/openshore-horizontal.svg"      alt="OpenShore" class="logo-for-dark">
       </a>
-      <span id="masthead-date">By Pala Labs</span>
       <span>Est. 2026</span>
     </div>
     <div class="masthead-brand"><span class="dot-word">Polkadot</span> Daily Digest</div>
@@ -2833,7 +2840,6 @@ async function init() {
   });
 
   const today = new Date().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
-  document.getElementById('masthead-date').textContent = today;
   const homeDateEl = document.getElementById('home-date');
   if (homeDateEl) homeDateEl.textContent = today;
 

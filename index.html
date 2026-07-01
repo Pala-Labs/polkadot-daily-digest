@@ -2885,25 +2885,38 @@ function initTicker() {
   const track = document.querySelector('.activity-bar-track');
   if (!track) return;
 
+  const bar = track.closest('.activity-bar') || track.parentElement;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
   function speed() {
-    if (window.innerWidth <= 768)  return 50;    // mobile - slowed further (was 160, then 80)
-    if (window.innerWidth <= 1024) return 140;   // tablet
-    return 90;                                    // desktop
+    let s;
+    if (window.innerWidth <= 768)       s = 20;   // mobile  (~2.5x slower, was 50)
+    else if (window.innerWidth <= 1024) s = 55;   // tablet  (~2.5x slower, was 140)
+    else                                s = 35;   // desktop (~2.5x slower, was 90)
+    // Respect users who opt out of motion: crawl, so notices stay reachable but near-static.
+    return reduceMotion.matches ? s * 0.2 : s;
   }
 
   let loopWidth = track.scrollWidth / 2;
   let pos = 0;
   let last = null;
+  let paused = false;
+
+  // Pause on hover so the links can actually be read / clicked.
+  if (bar) {
+    bar.addEventListener('mouseenter', () => { paused = true; });
+    bar.addEventListener('mouseleave', () => { paused = false; });
+  }
 
   window.addEventListener('resize', () => { loopWidth = track.scrollWidth / 2; });
 
   function tick(ts) {
-    if (last !== null) {
+    if (last !== null && !paused) {
       pos += speed() * (ts - last) / 1000;
       if (pos >= loopWidth) pos -= loopWidth;
       track.style.transform = `translateX(-${pos}px)`;
     }
-    last = ts;
+    last = ts;   // keep advancing the clock even while paused so there is no jump on resume
     requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);

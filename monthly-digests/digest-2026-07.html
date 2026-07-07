@@ -1,0 +1,310 @@
+<!doctype html> 
+<h1>Polkadot July Wrap </h1>
+<hr>
+
+<section>
+  <h2>Executive Summary</h2>
+  <p>
+    June was a high-activity month for the Polkadot ecosystem, shaped by three dominant arcs:
+    the public unveiling of Polkadot’s next product direction at Web3 Summit 2026, continued technical progress around JAM and developer tooling, and a governance cycle focused on staking reform, treasury accountability, liquidity infrastructure, and protocol economics.
+  </p>
+  <p>
+    The month’s most visible milestone was <strong>Web3 Summit 2026 in Berlin</strong>, where Polkadot showcased a more product-oriented strategy centered on the <strong>Polkadot App “Trinity”</strong>, <strong>Playground . dot</strong>, proof-of-personhood work under <strong>Humanity</strong>, and practical demonstrations of on-chain event participation, private payments, decentralized hosting, and app deployment. The summit also sharpened the ecosystem narrative around privacy, agency, human coordination, censorship resistance, and making Web3 usable for mainstream audiences.
+  </p>
+  <p>
+    On the technical side, <strong>JAM</strong> remained the central long-term theme. Multiple independent implementations advanced through conformance testing, Gavin Wood published new explanations of JAM and the proposed <strong>JAMKB</strong> resource-access token, and the community debated how JAM should price state footprint and route value back to DOT holders. Meanwhile, the Polkadot SDK saw a steady cadence of releases, including runtime patches, XCMP queue improvements, security hardening, database-roadmap discussions, and tooling updates for PVM, Revive, XCM, and Solidity compatibility.
+  </p>
+  <p>
+    Governance activity was equally consequential. <strong>Referendum 1890</strong> was executed, introducing a <strong>10,000 DOT validator self-stake minimum</strong> and enabling the next phase of staking reforms. Subsequent staking referenda proposed nominator slashing and unbonding-parameter changes. The <strong>Bifrost DOT liquidity loan renewal</strong> moved toward passage with near-unanimous support, while dotID gained registrar approvals, and several treasury, explorer, bounty, and infrastructure proposals prompted discussion about transparency, accountability, and long-term sustainability.
+  </p>
+</section>
+
+<section>
+  <h2>Major Themes and Trends</h2>
+
+  <h3>Polkadot Repositioned Around Usability, Privacy, and Human Coordination</h3>
+  <p>
+    A clear narrative shift emerged during the month: Polkadot is no longer being framed only as infrastructure for parachains and builders, but increasingly as a platform for user-facing, privacy-preserving, human-centered applications. Web3 Summit messaging repeatedly emphasized user sovereignty, ownership, identity, privacy, and tools for coordination.
+  </p>
+  <ul>
+    <li><strong>Polkadot App “Trinity”</strong> was unveiled as a multi-platform gateway developed by Parity and Novasama, with the Polkadot Community Foundation positioned to take ownership of the app and related products.</li>
+    <li><strong>Humanity</strong>, Parity’s proof-of-personhood prototype, demonstrated anonymous on-chain verification of humanness without exposing personal identity.</li>
+    <li><strong>Playground . dot</strong> became a central showcase for reducing developer onboarding friction, letting users modify and deploy apps in roughly 30 minutes.</li>
+    <li>Web3 Summit messaging increasingly described Polkadot as infrastructure for “tools for human coordination,” not just blockchain scalability.</li>
+  </ul>
+
+  <h3>JAM Became the Month’s Core Technical and Economic Debate</h3>
+  <p>
+    JAM moved from a technical roadmap item into a broader ecosystem debate about execution, state, compute, token design, and DOT value capture. The discussion expanded across engineering, governance, and economics.
+  </p>
+  <ul>
+    <li>Polkadot JAM’s virtual machine work progressed toward full <strong>RISC-V standard compliance</strong>, improving compatibility with industry tooling and opening the path to hardware-level execution possibilities.</li>
+    <li>Independent JAM implementations including <strong>JAM Brains</strong>, <strong>JavaJAM</strong>, <strong>JamZig</strong>, <strong>FastRoll</strong>, <strong>JAMneration</strong>, and <strong>ChainSafe’s JAM Go implementation</strong> passed major conformance milestones.</li>
+    <li>JAM was described as a generalization of the Relay Chain, enabling direct execution of code including smart contracts, agents, and conventional software.</li>
+    <li>Gavin Wood proposed <strong>JAMKB</strong> as a fixed-supply resource-access token for JAM state footprint, sparking debate over distribution, pricing, recurring rent, decaying deposits, and whether value should return to the DOT DAO.</li>
+    <li>Community posts explored whether JAM state should be managed through perpetual storage rights or metered recurring flows, highlighting concerns about idle state, scarcity, hoarding, and long-term economic efficiency.</li>
+  </ul>
+
+  <h3>Governance Focused on Staking Reform and Treasury Accountability</h3>
+  <p>
+    OpenGov activity showed a maturing governance environment: tokenholders were not only voting on runtime and treasury decisions, but also increasingly asking for clearer reporting, product ownership, delivery milestones, and incentive alignment.
+  </p>
+  <ul>
+    <li><strong>Referendum 1890</strong> was executed, introducing a 10,000 DOT minimum validator self-stake and enabling later staking reforms.</li>
+    <li>New staking-related referenda, including <strong>1909</strong> and <strong>1910</strong>, proposed updates to staking parameters, nominator slashing, unbonding settings, and budget configuration.</li>
+    <li>Community members questioned delays around the expected <strong>two-day unbonding period</strong>, requesting clearer communication from Parity or the Web3 Foundation.</li>
+    <li>Several posts called for stronger transparency from treasury-funded initiatives, including progress reports from the Polkadot Community Foundation and clearer paths from demos to production-ready products.</li>
+    <li>The month ended with governance attention shifting toward Chainflip-related referenda and continued discussion of treasury-funded infrastructure maintenance.</li>
+  </ul>
+
+  <h3>Developer Experience Became a Primary Strategic Priority</h3>
+  <p>
+    Developer tooling was a recurring theme across nearly every week. The ecosystem worked to reduce friction in XCM, PVM contracts, Substrate runtime development, repository navigation, and application deployment.
+  </p>
+  <ul>
+    <li><strong>ParaSpell</strong> expanded its XCM tooling stack, including SDK support, an API, an analyser, and a visualizer for cross-chain messaging.</li>
+    <li><strong>xcm-lens</strong> was proposed as a TypeScript CLI and library for XCM debugging, simulation, dry runs, and fee estimation.</li>
+    <li><strong>FRAME Suite</strong> and <strong>Pallet-XP</strong> were introduced by Auguth Labs to provide reusable runtime components and non-monetary reputation/progression primitives.</li>
+    <li><strong>cargo-pvm-contract</strong> entered public preview as a Rust SDK for writing smart contracts targeting PVM via pallet-revive.</li>
+    <li><strong>Resolv v1.3.0</strong> reduced Solidity contract code sizes for PVM deployments, with typical reductions of 20–50%.</li>
+    <li>A proposal to enable GitHub Discussions in the polkadot-sdk repository highlighted ongoing concerns about issue-tracker noise and contributor onboarding.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Technical Highlights</h2>
+
+  <h3>Polkadot SDK Releases and Runtime Updates</h3>
+  <p>
+    The Polkadot SDK received frequent maintenance and patch releases throughout the month, reflecting continued emphasis on runtime stability, XCM performance, security, and developer-facing improvements.
+  </p>
+  <ul>
+    <li><strong>polkadot-unstable2604-rc4</strong> introduced a broad pre-release update with changes across node, runtime, statement-store, light-client support, experimental collator protocol work, and developer APIs.</li>
+    <li><strong>stable2506</strong>, <strong>stable2509</strong>, <strong>stable2512</strong>, and <strong>stable2603</strong> patch lines received updates, often without new binaries or Docker images but with important crate-level fixes.</li>
+    <li>Multiple releases improved <strong>xcmp-queue</strong> by storing bytes in channel status for better performance.</li>
+    <li>The Asset Hub 2.3 runtime upgrade encountered a minor technical issue, but a fix was expected quickly.</li>
+    <li>A later patch release delivered security and performance hardening across Snowbridge, XCMP Queue, Aura, and BEEFY.</li>
+  </ul>
+
+  <h3>Database Roadmap Remained Unsettled</h3>
+  <p>
+    A significant technical discussion centered on the future of Polkadot SDK storage backends. The current landscape remains unresolved, with RocksDB still the default and alternative approaches not yet fully mature.
+  </p>
+  <ul>
+    <li><strong>RocksDB</strong> remains the default backend.</li>
+    <li><strong>ParityDB</strong> is supported but not default due to unresolved performance and archive-sync concerns.</li>
+    <li><strong>NOMT / binary-trie</strong> support is under discussion but not committed.</li>
+    <li>Community commentary stressed the need for clearer ownership and a storage-evolution roadmap.</li>
+    <li>JAM’s storage model differs from Substrate’s, and public JAM clients do not yet expose a production-ready canonical database choice.</li>
+  </ul>
+
+  <h3>Runtime Upgrade Safety and Finality Risks</h3>
+  <p>
+    A late-month simulation of Substrate runtime upgrade failures highlighted a critical safety threshold. If a migration bug affects less than one-third of validators, the network can quarantine faulty nodes and continue cleanly. If two-thirds or more finalize corrupted state, GRANDPA finality can lock in the error irreversibly.
+  </p>
+  <p>
+    This reinforced the importance of governance delays, staged testnets, dry-run validation, runtime simulation, and conservative deployment practices before mainnet upgrades.
+  </p>
+
+  <h3>Bridges, XCM, and Cross-Chain Infrastructure</h3>
+  <ul>
+    <li><strong>Snowbridge V1</strong> entered a deprecation path in favor of V2, which offers lower fees, off-chain fee estimation, unordered message execution, and improved XCM integration.</li>
+    <li><strong>Hyperbridge</strong> published a post-mortem on an April exploit involving ISMP message verification on the EVM side, which drained roughly $2.5M from the Ethereum–Polkadot bridge.</li>
+    <li><strong>Bulletin Chain</strong> was highlighted as a content-addressed storage chain using authorized extrinsics, Blake2b-256 hashes, and retrieval via IPFS or nodes.</li>
+    <li>Parity continued to emphasize content retrieval by hash rather than server location, reducing platform lock-in.</li>
+  </ul>
+
+  <h3>Security, Cryptography, and Resilience Tooling</h3>
+  <ul>
+    <li><strong>QuantumScan v1.9.1</strong> launched as an open-source CLI scanner for post-quantum cryptography risks in Substrate and Polkadot codebases, detecting 19 ecosystem-specific patterns across consensus, pallet crypto, XCM, ink!, and dependencies.</li>
+    <li>A draft <strong>validator monitoring tool</strong> proposed real-time alerts for nominators when validators change commission, identity, or compliance posture.</li>
+    <li>Kusama Society discussions identified vulnerabilities and governance risks, including bid/claim gaps, Proof-of-Ink bypasses, and concentrated emergency powers.</li>
+    <li>Kusama Asset Hub ETH RPC instability raised concerns about reliability of public endpoints.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Governance and OpenGov Developments</h2>
+
+  <h3>Staking Reform Advanced Significantly</h3>
+  <p>
+    Staking reform was one of the most consequential governance themes of the month.
+  </p>
+  <ul>
+    <li><strong>Referendum 1890</strong> was executed, setting a <strong>10,000 DOT validator self-stake minimum</strong>.</li>
+    <li>This enabled the next phase of reforms, including unslashable nominators and an unbonding period reduction from 28 days to under 48 hours.</li>
+    <li>Later referenda <strong>1909</strong> and <strong>1910</strong> proposed additional staking parameter and budget updates aimed at improving validator incentives, lowering overall security costs, and improving user experience.</li>
+    <li>Nomination pools remained highlighted as a low-barrier entry point, requiring only 1 DOT to participate in staking.</li>
+    <li>By month-end, Polkadot’s registered validator count reached an all-time high of <strong>1,421</strong>, while the staking rate recovered to around <strong>51%</strong>.</li>
+  </ul>
+
+  <h3>Bifrost Liquidity Loan Renewal and vDOT Fee Changes</h3>
+  <p>
+    Bifrost remained one of the month’s major governance and DeFi topics.
+  </p>
+  <ul>
+    <li>Bifrost proposed renewing its <strong>1,000,000 DOT Treasury loan</strong> for a second year after completing the first year under Referendum 1538.</li>
+    <li>The first-year loan generated <strong>53,185.39 DOT</strong> in interest, which Bifrost committed to repaying to the Treasury.</li>
+    <li>The Year 2 proposal lowered the blended interest rate to about 3%, removed Bifrost’s commission, and added governance features for vDOT holders.</li>
+    <li>Referendum <strong>1904</strong> moved toward decision with near-unanimous support through the latter part of the month.</li>
+    <li>Bifrost also proposed removing vDOT fees entirely, cutting commission from 10% to 0% and unstake fees from 0.1% to 0%.</li>
+  </ul>
+
+  <h3>Identity and Registrar Governance</h3>
+  <ul>
+    <li><strong>dotID</strong> was approved as registrar #5 on Polkadot and #7 on Kusama.</li>
+    <li>dotID provides free identity management, KYC verification, and public directory services for People Chain identities.</li>
+    <li>The team audited registries and flagged 978 accounts as out of date due to stale contact fields.</li>
+    <li>At month-end, dotID also requested registrar authority on Kusama People Chain, expanding its identity hub beyond Polkadot mainnet.</li>
+  </ul>
+
+  <h3>Treasury, Bounties, and Accountability</h3>
+  <p>
+    Treasury governance saw a mix of funding requests, closeouts, and demands for stronger accountability.
+  </p>
+  <ul>
+    <li>ParaSpell reported a treasury-supported bug bounty pool that distributed $4,409.38 out of a $10,000 allocation for XCM tool improvements.</li>
+    <li>Vibly requested short-term repayable bridge funding and later finalized its stablecoin-based governance design.</li>
+    <li>Subscan submitted multiple enterprise explorer license and invoice-related referenda for Polkadot and Westend services.</li>
+    <li>Chainflip submitted several referenda related to continued Asset Hub integration and maintenance.</li>
+    <li>Community voices called for consolidated reporting from the Polkadot Community Foundation and clearer delivery milestones for treasury-funded work.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Ecosystem and Product Developments</h2>
+
+  <h3>Web3 Summit 2026 Became the Month’s Ecosystem Anchor</h3>
+  <p>
+    Web3 Summit dominated the middle of the month and served as the primary launchpad for Polkadot’s refreshed product direction.
+  </p>
+  <ul>
+    <li>The event gathered around <strong>900 attendees</strong>, including students, builders, researchers, artists, and digital-freedom advocates.</li>
+    <li>Roughly <strong>190 developers</strong> participated in app development activities.</li>
+    <li>Playground . dot enabled <strong>187 developers</strong> to create, test, and deploy decentralized apps in under 30 minutes.</li>
+    <li>A private payment system reportedly processed over <strong>2,000 transactions</strong> during the summit.</li>
+    <li>The event hosted 13 artist installations and showcased proof-of-concept products from Parity, the Polkadot Community Foundation, and ecosystem contributors.</li>
+  </ul>
+
+  <h3>Polkadot App, Playground . dot, and Super-App Ambitions</h3>
+  <p>
+    The ecosystem’s user-facing ambitions became clearer through several related product announcements.
+  </p>
+  <ul>
+    <li><strong>Polkadot App “Trinity”</strong> was presented as a new gateway for users across platforms.</li>
+    <li><strong>Playground . dot</strong> provided a temporary event-specific testnet and sandbox for building decentralized apps without heavy setup.</li>
+    <li>Parity described a broader “superapp” stack: smoldot resolving .dot domains on-chain, apps loading from Bulletin Chain, and w3spay split into a dedicated repository with scan-and-pay cash functionality.</li>
+    <li>The official Web3 Summit app allowed attendees to join sessions, check in, and collect badges self-custodially.</li>
+  </ul>
+
+  <h3>Asset Hub, DeFi, and Application Momentum</h3>
+  <ul>
+    <li><strong>Launchly</strong>, a multichain token-launch platform previously active on Solana, BNB Chain, and Base, launched on Polkadot Hub EVM with DOT-denominated trades and 60% of fees going to creators.</li>
+    <li><strong>Asset Hub TVL</strong> reportedly doubled within 10 days late in the month.</li>
+    <li><strong>FlowFarm</strong> introduced a Polkadot-native perpetual derivatives parachain design using USDC liquidity, runtime-level risk controls, keepers, and oracle-priced execution.</li>
+    <li><strong>Polkamarkt</strong> was discussed as a potential DeFi primitive to be integrated as a pallet across parachains, DEXs, lending protocols, and DAOs.</li>
+    <li><strong>Vibly</strong> finalized a design involving a non-liquidation stablecoin, VUSD, and governance integrated with Polkadot OpenGov.</li>
+  </ul>
+
+  <h3>Identity, Names, Copyright, and Social Applications</h3>
+  <ul>
+    <li><strong>Plaza Names</strong> went live as a read-only interface for discovering .dot names on Polkadot Hub, checking dotNS rule tiers, verifying ownership via Asset Hub, and assessing availability.</li>
+    <li><strong>ARKAIN</strong> showcased on-chain generative art based on wallet history and identity narratives.</li>
+    <li><strong>SoftLaw</strong> proposed censorship-resistant copyright licensing using Polkadot technology and smart-contract arbitration.</li>
+    <li><strong>Vibly</strong> launched its Phase 0 testnet, Lumen, as an agent-based social collaboration network with identity, reputation, and incentives.</li>
+    <li><strong>SimpleX Chat</strong> presented privacy-oriented community credits work supported by Web3 Foundation.</li>
+  </ul>
+
+  <h3>Parachain and Infrastructure Updates</h3>
+  <ul>
+    <li><strong>Bifrost</strong> warned users of the Interlay and Kintsugi chain shutdowns, urging vDOT, vKSM, and BNC holders to withdraw assets before July 22, 2026.</li>
+    <li><strong>Robonomics</strong> delayed its Kusama parachain sunset by 1–2 months to align with Kraken withdrawal timelines.</li>
+    <li><strong>XODE</strong> expanded mainnet infrastructure globally across five continents.</li>
+    <li><strong>Moonbeam</strong> was repeatedly positioned as a multi-chain AI agent hub and teased a significant update.</li>
+    <li><strong>Astar / Startale</strong> milestones resurfaced in ecosystem recaps, emphasizing the evolution from Astar’s early Polkadot role to Startale’s broader direction.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Market, Adoption, and Ecosystem Health</h2>
+
+  <h3>Developer Activity Remained a Strength</h3>
+  <p>
+    Polkadot continued to rank highly in developer activity comparisons. Late-month commentary cited approximately <strong>9,065 developers</strong>, placing Polkadot third globally behind Solana and Ethereum according to Chainspect data referenced in ecosystem posts.
+  </p>
+  <p>
+    The month also showed a strong builder funnel: Web3 Summit’s hands-on activities, Playground . dot participation, GitHub discussion proposals, PVM tooling, and SDK improvements all aimed to turn technical capacity into usable applications.
+  </p>
+
+  <h3>Validator and Staking Metrics Improved</h3>
+  <ul>
+    <li>The validator set reached <strong>1,421 registered validators</strong>, an all-time high.</li>
+    <li>The DOT staking rate recovered to approximately <strong>51%</strong> after dipping near 49%.</li>
+    <li>The growing validator queue, despite the new 10,000 DOT self-stake requirement, was interpreted as a sign of continued conviction in network participation.</li>
+  </ul>
+
+  <h3>Brand and Narrative Shift</h3>
+  <p>
+    Polkadot refreshed its public positioning to appeal to a broader audience beyond core protocol engineers. The brand narrative increasingly included builders, artists, regulators, gamers, journalists, and privacy advocates.
+  </p>
+  <p>
+    A recurring message from Parity, Polkadot, and Web3 Foundation channels was that Web3 must address real societal concerns: data ownership, identity, AI accountability, platform control, and user sovereignty, rather than focusing only on speculation and markets.
+  </p>
+</section>
+
+<section>
+  <h2>Key Risks and Open Questions</h2>
+
+  <h3>From Demos to Production</h3>
+  <p>
+    Web3 Summit generated strong momentum, but community members explicitly questioned how quickly showcased prototypes can become production-grade products. This concern applied to the Polkadot App, Playground . dot, proof-of-personhood systems, payment tools, and other summit demonstrations.
+  </p>
+
+  <h3>JAM Economics Remain Unresolved</h3>
+  <p>
+    The JAMKB debate exposed unresolved design questions around state pricing, token distribution, protocol revenue, and DOT value capture. The community is still weighing fixed-supply storage rights against dynamic rent-like systems and decaying deposits.
+  </p>
+
+  <h3>Infrastructure Reliability and Migration Risk</h3>
+  <ul>
+    <li>Kusama Asset Hub RPC instability highlighted the importance of reliable public infrastructure.</li>
+    <li>Interlay/Kintsugi shutdown warnings and Robonomics migration delays showed that parachain lifecycle management remains a user-risk area.</li>
+    <li>Snowbridge V1 deprecation and V2 migration require careful communication to avoid stranded users.</li>
+  </ul>
+
+  <h3>Governance Accountability</h3>
+  <p>
+    Several discussions showed increasing community demand for clearer reporting from treasury-funded teams, better milestone discipline, and formal ownership of products introduced under the Polkadot brand.
+  </p>
+
+  <h3>Runtime Upgrade Safety</h3>
+  <p>
+    The simulation of failed runtime upgrades underscored that Polkadot’s upgradeability is powerful but must be paired with careful testing, staged rollouts, governance delays, and robust tooling.
+  </p>
+</section>
+
+<section>
+  <h2>Notable Referenda and Governance Items</h2>
+  <ul>
+    <li><strong>Referendum 1890:</strong> Executed; introduced 10,000 DOT validator self-stake minimum and enabled next staking reform phase.</li>
+    <li><strong>Referendum 1898:</strong> dotID username authority registration for the dotID identity registrar showed strong support earlier in the month.</li>
+    <li><strong>Referendum 1899:</strong> Closeout of Bounty 22 and Bounty 36 moved toward approval late in the month.</li>
+    <li><strong>Referendum 1900:</strong> PCF 2.0 strategic website and tooling renewal appeared as a small-spender item.</li>
+    <li><strong>Referendum 1903:</strong> Vibly short-term repayable bridge funding request.</li>
+    <li><strong>Referendum 1904:</strong> Bifrost DOT Liquidity Loan Year 2 renewal, with near-unanimous support near month-end.</li>
+    <li><strong>Referenda 1905–1907:</strong> Subscan explorer invoices and enterprise license proposals for Polkadot and Westend services.</li>
+    <li><strong>Referendum 1908:</strong> Hub runtime upgrade 2.3.1.</li>
+    <li><strong>Referenda 1909–1910:</strong> Staking parameter, budget, nominator slashing, and unbonding parameter updates.</li>
+    <li><strong>Referenda 1911–1913:</strong> Chainflip-related submissions, including continued Asset Hub integration and maintenance.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Overall Assessment</h2>
+  <p>
+    June was one of the more strategically important months for Polkadot in 2026. The ecosystem combined strong protocol progress with a public-facing product push, giving clearer shape to Polkadot’s next chapter: JAM as the long-term execution and compute layer, Trinity and Playground . dot as user and developer gateways, and OpenGov as the mechanism for coordinating funding, staking reform, identity, infrastructure, and protocol economics.
+  </p>
+  <p>
+    The strongest signal was that Polkadot is moving from infrastructure-first messaging toward an integrated stack for builders and users. The main challenge is execution discipline: turning summit demos into maintained products, finalizing JAM economics, improving governance transparency, and ensuring that frequent runtime and SDK upgrades remain safe and predictable.
+  </p>
+</section>

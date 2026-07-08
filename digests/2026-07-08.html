@@ -1,0 +1,57 @@
+<h1 id="polkadotdailydigesthttpsnewsopenshoreio2026070820260708"><a href="https://news.openshore.io/#2026-07-08">Polkadot Daily Digest</a>: 2026-07-08</h1>
+<h1 id="summary">Summary</h1>
+<p>A major validator election stall on Polkadot Asset Hub was resolved after Referendum 1914 lowered the MinimumScore threshold, restoring normal staking operations and highlighting the need for improved safeguards around staking parameter changes. Moonbeam also announced its migration from Polkadot to Base, prompting Bifrost to sunset vGLMR liquid staking.</p>
+<h1 id="report">Report</h1>
+<h2 id="governance">Governance</h2>
+<ul>
+<li><strong>Polkadot Asset Hub validator election stall and remediation:</strong> On 2026-06-30, the validator election on Polkadot Asset Hub stalled at round 238 (era 2220) after Referendum 1909 lowered ChillThreshold to 32%, triggering a wave of permissionless chilling that removed 67 under-bonded validators. This dropped the achievable election score below the static MinimumScore floor, causing all submitted solutions to be rejected and slashed, freezing validator set rotation, staking rewards, and unbonding. Referendum 1914, fast-tracked via the Fellowship Whitelisted-Caller track, lowered MinimumScore.minimal_stake from 789,555 to 500,000 DOT, unblocking the election and restoring normal era cadence. No user funds were lost, and only two staking-miner deposits were slashed (one already reimbursed via Referendum 1915). The incident highlighted the need for improved simulation, monitoring, and process around staking parameter changes and score floor adjustments. An open question remains on how to redistribute the ~115,350 DOT self-stake incentive budget from the long transition era 2219, which defaults to the DAP buffer in ~84 days unless otherwise decided (via <a href="https://forum.polkadot.network/t/2026-06-30-staking-election-stall-postmortem/18077">forum - sigurpol</a>).</li>
+<li><strong>PolkaVision pre-proposal discussion:</strong> A community member is seeking feedback on a potential Treasury proposal for PolkaVision, a live visual explorer for the Polkadot ecosystem. The prototype indexes mainnet data hourly and provides an interactive graph of the relay chain and parachains. The proposed Phase 1 would focus on backend reliability, improved visualization, mobile UX, and parachain discovery, with a tentative funding range of $15k–$20k USDC/USDT for 6–8 weeks. Community input is requested on scope, priorities, and evaluation metrics before submitting on-chain (via <a href="https://forum.polkadot.network/t/pre-proposal-discussion-polkavision-a-live-visual-explorer-for-the-polkadot-ecosystem/18081">forum - akhtarshahnawaz</a>).</li>
+</ul>
+<h2 id="technical">Technical</h2>
+<ul>
+<li><strong>Nominator slashing removed and unbonding period reduced:</strong> Polkadot Referendum 1910 has been enacted, removing slashing risk for nominators and reducing the unbonding period from 28 days to approximately 2 days. Validators retain slashing risk on their own self-stake, maintaining the network’s security model. Some wallet UIs, such as Nova Wallet, have not yet updated to reflect these changes (via <a href="https://forum.polkadot.network/t/polkadot-socials-daily-digest-2026-07-07/18076">forum - OpenShore</a>).</li>
+<li><strong>Substrate4j Java client nearing completion:</strong> Substrate4j, a Java client for Substrate-based chains including Polkadot, Kusama, and Asset Hub, is in its final stages. It offers static, type-safe runtime APIs generated from metadata, pure Java cryptography (SR25519, Ed25519, ECDSA), a robust SCALE module, and a resilient, non-blocking RPC layer. The client and supporting libraries are published to Maven Central, and the project aims to provide production-grade, feature-rich chain interaction for Java developers (via <a href="https://forum.polkadot.network/t/introducing-substrate4j-a-java-client-for-substrate-based-chains/18074">forum - mhrsalehi</a>).</li>
+</ul>
+<h2 id="ecosystem">Ecosystem</h2>
+<ul>
+<li><strong>Moonbeam migrates from Polkadot to Base:</strong> Moonbeam has announced a full migration of GLMR from its Polkadot parachain to Base, relaunching as a decentralized AI agent communication and settlement network. The migration deadline is 31 July 2026, with the team citing Base’s liquidity and Ethereum’s developer ecosystem as key motivations (via <a href="https://forum.polkadot.network/t/polkadot-socials-daily-digest-2026-07-07/18076">forum - OpenShore</a>).</li>
+<li><strong>Bifrost sunsets vGLMR liquid staking:</strong> In response to Moonbeam’s departure, Bifrost has wound down its vGLMR liquid staking service and is urging holders to redeem vGLMR and migrate GLMR before the 31 July deadline (via <a href="https://forum.polkadot.network/t/polkadot-socials-daily-digest-2026-07-07/18076">forum - OpenShore</a>).</li>
+<li><strong>Polkadot at Web3 Summit 2026:</strong> Academy Polkadot’s visual recap highlighted the ecosystem’s shift toward private, user-facing applications, framing the network’s future as “Web3 becoming more human and usable” (via <a href="https://forum.polkadot.network/t/polkadot-socials-daily-digest-2026-07-07/18076">forum - OpenShore</a>).</li>
+<li><strong>Polkadot Cloud Pools launch:</strong> Polkadot Cloud’s nomination pool product now offers managed validator nominations, automatic reward claiming, and reward analytics with a 1 DOT minimum entry, accessible via a Staking Companion mobile app (via <a href="https://forum.polkadot.network/t/polkadot-socials-daily-digest-2026-07-07/18076">forum - OpenShore</a>).</li>
+</ul>
+<h2 id="marketadoption">Market &amp; Adoption</h2>
+<ul>
+<li><strong>Kusama validator commission warning:</strong> Following the reduction of Kusama’s active validator set from 1,000 to 700, some validators have set commission rates as high as 50–85%, drawing community criticism for extracting excessive value from nominators. Nominators are urged to review their nominations and avoid supporting validators with high commissions to maintain a healthy ecosystem (via <a href="https://forum.polkadot.network/t/warning-to-all-kusama-nominators/18078">forum - Megadot</a>).</li>
+</ul>
+<h2 id="other">Other</h2>
+<ul>
+<li><strong>Open letter to Gavin Wood:</strong> A community member has published an open letter urging Gavin Wood to take a more public leadership role in advocating for Polkadot, arguing that visible founder engagement is needed to compete with centralized networks that leverage strong personalities for adoption (via <a href="https://forum.polkadot.network/t/open-letter-to-gavin-wood/18082">forum - LuckyLuciano</a>).</li>
+<li><strong>Community sentiment:</strong> Despite concerns about Polkadot’s current trajectory, some community voices highlight ongoing engagement and care for the protocol’s future as a positive sign (via <a href="https://forum.polkadot.network/t/on-a-positive-note/18075">forum - Nukeme3</a>).</li>
+<li><strong>Privacy policy research shared:</strong> Parity Technologies shared research from Web3 Foundation indicating that 90% of people accept privacy policies in under ten seconds, with only 1–3% reading them in full, underscoring challenges around informed consent in digital ecosystems (via <a href="https://x.com/paritytech/status/2074403131224637600">x - paritytech</a>).</li>
+</ul>
+<h2 id="opengovupdates">OpenGov Updates</h2>
+<h3 id="newreferendumlast24h">New Referendum (Last 24H)</h3>
+<blockquote>
+  <p><strong><a href="https://polkadot.subsquare.io/referenda/1919">Referendum 1919</a>:</strong> Paseo Testnet Operations H2 2026 - USDC Funding via Multi-Asset Bounty ➖
+  <strong>Current Aye:</strong> 100.00% ➖ <strong>Status:</strong> Submitted ➖ <strong>Proposer:</strong> <a href="https://openshore.io/govern/voting-tool?address=14z2CnmqMX2kcWGp5VT68sovjKXZipjkNUPtaMMnz6cjXW3q">OTAR</a></p>
+</blockquote>
+<h3 id="referendumapproachingdecisionpleasevote">Referendum Approaching Decision (Please Vote)</h3>
+<blockquote>
+  <p><strong><a href="https://polkadot.subsquare.io/referenda/1918">Referendum 1918</a>:</strong> Adding Invulnerable Collators to Bulletin (ParaId 1010) on Polkadot ➖
+  <strong>Proposer:</strong> <a href="https://openshore.io/govern/voting-tool?address=1556APd4jcMDRod9SUxfTwGLasqFy3y3QFMGokkBwTdk2tev">Karol Kokoszka</a> ➖ <strong>Requested Amount:</strong>  ➖ <strong>Current Aye:</strong> 99.87% ➖ <strong>Decision In:</strong> 6.3 days</p>
+  <p><strong><a href="https://polkadot.subsquare.io/referenda/1916">Referendum 1916</a>:</strong> ParaSpell✨ XCM Tools - 12 Months of Maintenance and Server cost coverage ➖
+  <strong>Proposer:</strong> <a href="https://openshore.io/govern/voting-tool?address=16MLAothZi5pE1ZcZZnBfAVer8h6CXTENnomThFuzi1pqPRa">ParaSpell✨ XCM Tools</a> ➖ <strong>Requested Amount:</strong> $57,592 USDC ➖ <strong>Current Aye:</strong> 62.66% ➖ <strong>Decision In:</strong> 6.9 days</p>
+</blockquote>
+<hr />
+<h2 id="processinglogs">Processing Logs</h2>
+<p><strong>Report Generated:</strong> 2026-07-08</p>
+<p><strong>Data Source (Data points curated & analysed):</strong></p>
+<ul>
+<li>Polkadot Forum: 65</li>
+<li>Medium: 15</li>
+<li>X(Twitter): 3</li>
+<li>GitHub (Release only): 1</li>
+<li>OpenGov: 3</li>
+</ul>
+<hr />
+<p><sup>This report is auto-generated and provided for informational purposes only by OpenShore, a Pala Labs initiative. The content is based on community posts (incl. X, Forum & Medium) and may contain inaccuracies. We do not guarantee its completeness or correctness.</sup></p>

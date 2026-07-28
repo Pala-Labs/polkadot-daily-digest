@@ -1,0 +1,41 @@
+<h1 id="polkadotdailydigesthttpsnewsopenshoreio2026072820260728"><a href="https://news.openshore.io/#2026-07-28">Polkadot Daily Digest</a>: 2026-07-28</h1>
+<h1 id="summary">Summary</h1>
+<p>The Technical Fellowship call said the salary migration from USDT to Hollar is complete, while warning Asset Hub payouts could fail silently for fellows without DOT until Hollar is sufficient there. RFC 174 and RFC 173 covered light-client inclusion proofs and nonce-replay fixes.</p>
+<h1 id="report">Report</h1>
+<h2 id="governance">Governance</h2>
+<ul>
+<li>The 21 July call noted that the salary migration from <strong>USDT</strong> to <strong>Hollar</strong> is complete; it also flagged that fellows with no <strong>DOT</strong> on <strong>Asset Hub</strong> would have had payouts fail silently because Hollar had not yet been made a sufficient asset there. The next call is scheduled for <strong>18 August 2026</strong>. (via <a href="https://forum.polkadot.network/t/polkadot-technical-fellowship-opendev-call-proceedings-21-july-2026/18261">Polkadot Forum Article - Doordashcon</a>)</li>
+</ul>
+<h2 id="technical">Technical</h2>
+<ul>
+<li><strong>RFC 174</strong> proposes a light-client request for extrinsics-trie inclusion proofs: instead of downloading a full block body, a client would receive the trie hashes needed to recompute the extrinsics root and check whether tracked transactions were included. The write-up says an implementation is already open against <strong>polkadot-sdk #12644</strong>, with a dedicated RPC method and client-library updates planned after the RFC lands. (via <a href="https://forum.polkadot.network/t/polkadot-technical-fellowship-opendev-call-proceedings-21-july-2026/18261">Polkadot Forum Article - Doordashcon</a>)</li>
+<li><strong>RFC 173</strong> addresses transaction replay after an account is reaped and later refunded, causing its nonce to reset to zero. Josep M Sobrepere’s preferred design adds a <strong>CheckCreatedAtHeight</strong> transaction extension carrying the account creation height alongside the explicit nonce, while the call also discussed Oliver Tale-Yazdi’s earlier <strong>runtimes#248</strong> approach and migration concerns for roughly <strong>three million</strong> existing accounts and offline signers. (via <a href="https://forum.polkadot.network/t/polkadot-technical-fellowship-opendev-call-proceedings-21-july-2026/18261">Polkadot Forum Article - Doordashcon</a>)</li>
+</ul>
+<h2 id="ecosystem">Ecosystem</h2>
+<ul>
+<li><strong>Parity Technologies</strong> described <strong>Levity</strong> as Polkadot’s decentralized hosting and storage layer for products, comprising <strong>Bulletin Chain</strong> and <strong>HOP Content</strong>, positioning it as an alternative to app front ends and files hosted on centralized services or unpinned IPFS content. (via <a href="https://x.com/paritytech/status/2081725284068298840">X Posts - paritytech</a>)</li>
+</ul>
+<h2 id="opengovupdates">OpenGov Updates</h2>
+<h3 id="newreferendumlast24h">New Referendum (Last 24H)</h3>
+<blockquote>
+  <p><strong><a href="https://polkadot.subsquare.io/referenda/1926">Referendum 1926</a>:</strong> Wish for Change: 100% of DOT revenue from JAMKB sales to be burned —  no treasury build-up and no grants ➖
+  <strong>Current Aye:</strong> 100.00% ➖ <strong>Status:</strong> Decision ➖ <strong>Proposer:</strong> <a href="https://openshore.io/govern/voting-tool?address=14x5RbyJxD6KvNyncbJQuJJJ3zHinXg57YKwhJ7q9T9aJq4n">Max_HIC</a></p>
+</blockquote>
+<h3 id="referendumapproachingdecisionpleasevote">Referendum Approaching Decision (Please Vote)</h3>
+<blockquote>
+  <p><strong><a href="https://polkadot.subsquare.io/referenda/1917">Referendum 1917</a>:</strong> [Small Spender] Referendum #1917 Polkadot Toronto Offline Meetup during the Blockchain Futurist Conference &amp; Canada Crypto Week 2026 ➖
+  <strong>Proposer:</strong> <a href="https://openshore.io/govern/voting-tool?address=13wTSVm9AMpWfAyureZo2vqzZzkpvZpVhmKkzGb29hyEsDMo">Giki</a> ➖ <strong>Requested Amount:</strong> $2,665 DOT ➖ <strong>Current Aye:</strong> 0.03% ➖ <strong>Decision In:</strong> 6.0 days</p>
+</blockquote>
+<hr />
+<h2 id="processinglogs">Processing Logs</h2>
+<p><strong>Report Generated:</strong> 2026-07-28</p>
+<p><strong>Data Source (Data points curated & analysed):</strong></p>
+<ul>
+<li>Polkadot Forum: 63</li>
+<li>Medium: 15</li>
+<li>X(Twitter): 3</li>
+<li>GitHub (Release only): 1</li>
+<li>OpenGov: 2</li>
+</ul>
+<hr />
+<p><sup>This report is auto-generated and provided for informational purposes only by OpenShore, a Pala Labs initiative. The content is based on community posts (incl. X, Forum & Medium) and may contain inaccuracies. We do not guarantee its completeness or correctness.</sup></p>

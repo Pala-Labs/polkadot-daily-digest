@@ -1,0 +1,453 @@
+<!doctype html> 
+<h1>Polkadot August Wrap </h1>
+<hr>
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+  <section>
+    <h2>Executive Overview</h2>
+    <p>
+      July 2026 was a transitional month for the Polkadot ecosystem. The network saw major governance-driven changes to staking, testnet operations, treasury processes, product strategy, and developer infrastructure. The strongest themes were simplification, productization, privacy-first application development, more rigorous funding oversight, and a gradual shift from infrastructure-only messaging toward end-user products.
+    </p>
+    <p>
+      The month opened with a major restructuring of the Paseo testnet and closed with Gavin Wood announcing he would directly lead technical delivery at Parity, with an emphasis on hardening proof-of-concept work into robust open-source software. In between, the ecosystem advanced the Polkadot Products Devnet, showcased a decentralized product stack at Web3 Summit, processed important staking changes, debated treasury accountability, and saw several ecosystem projects reposition or migrate.
+    </p>
+  </section>
+
+  <section>
+    <h2>Key Monthly Themes</h2>
+
+    <h3>Polkadot’s Product Strategy Became More Concrete</h3>
+    <p>
+      A central storyline was Polkadot’s pivot from being framed mainly as multi-chain infrastructure toward a full user-facing Web3 product stack. Parity and Polkadot communications repeatedly emphasized products that improve user agency, privacy, and control rather than simply offering blockchain rails.
+    </p>
+    <ul>
+      <li>
+        The <strong>Polkadot Products Devnet</strong> went live as a public environment for developers to build and test against Polkadot’s new product stack using real workflows without real money.
+      </li>
+      <li>
+        Parity described Polkadot Products as <strong>static web apps published to a decentralized stack</strong>, using <strong>.dot names</strong> and host-provided wallet, signing, storage, and chain-access services.
+      </li>
+      <li>
+        The product stack terminology became clearer: <strong>Trinity</strong> as an app platform, <strong>Celerity</strong> for messaging, <strong>Levity</strong> for blob/data storage, <strong>Avidity</strong> for notifications, and <strong>Humanity</strong> for unique users.
+      </li>
+      <li>
+        <strong>Polkadot Chat</strong> was highlighted as a privacy-first messaging app requiring no phone number, email, or address book, with end-to-end encryption and no central media uploads.
+      </li>
+      <li>
+        The <strong>Product SDK</strong> was introduced as a way to package common app needs such as chain reads, transaction signing, content-addressed storage, pub/sub, key management, and local persistence.
+      </li>
+    </ul>
+    <p>
+      The strategic implication is that Polkadot is attempting to make decentralized applications feel more like normal products while keeping hosting, identity, payments, messaging, and storage decentralized by default.
+    </p>
+
+    <h3>Web3 Summit Served as the Month’s Product Demonstration Layer</h3>
+    <p>
+      Web3 Summit 2026 was one of the month’s most important ecosystem events. It was repeatedly cited as evidence that Polkadot’s product stack is moving from concept to practical usage.
+    </p>
+    <ul>
+      <li>
+        Around <strong>900 people</strong> tested Polkadot product proofs-of-concept deployed by the Polkadot Community Foundation and built by Parity engineers.
+      </li>
+      <li>
+        A Playground.dot event saw <strong>190 participants</strong> deploy decentralized apps, with reported activity including <strong>272 .dot domains</strong>, <strong>22,820 XP</strong>, and <strong>49 app forks</strong>.
+      </li>
+      <li>
+        Parity highlighted that attendees used decentralized services for conference apps, maps, agendas, payments, proof of humanity, .dot publishing, and app deployment.
+      </li>
+      <li>
+        <strong>Levity</strong> reported event-load performance of <strong>25,754 blocks</strong>, <strong>55,412 extrinsics</strong>, and <strong>3,891 user-signed storage operations</strong> with a stated 100% success rate.
+      </li>
+      <li>
+        Playground.dot was framed not only as a deployment demo but as a collaborative environment where participants debugged, forked, explained, and remixed each other’s work.
+      </li>
+    </ul>
+    <p>
+      The key insight is that the ecosystem used Web3 Summit to validate developer and user experience assumptions: rapid onboarding, frictionless app deployment, AI-assisted building, decentralized hosting under load, and minimal friction around identity, gas, storage, and consensus.
+    </p>
+
+    <h3>Governance Focused on Cost Discipline, Treasury Oversight, and Process Maturity</h3>
+    <p>
+      Governance activity throughout the month showed a stronger concern for operational efficiency, treasury accountability, and removing unused or overly complex mechanisms.
+    </p>
+    <ul>
+      <li>
+        <strong>Multi-asset bounties</strong> came on-chain, enabling bounty creation in assets beyond DOT.
+      </li>
+      <li>
+        A salary migration from <strong>USDT to Hollar</strong> was completed, though the Technical Fellowship warned that Asset Hub payouts could fail silently for fellows without DOT while Hollar was not yet sufficient there.
+      </li>
+      <li>
+        RFC discussions covered <strong>asset-based storage deposit payments</strong>, continuing the shift away from hardcoded DOT-only assumptions.
+      </li>
+      <li>
+        A proposal suggested removing the <strong>Bounties pallet</strong> from the Polkadot runtime, arguing that bounties add governance complexity and lock treasury capital while offering limited advantage over direct OpenGov treasury spending.
+      </li>
+      <li>
+        Treasury oversight became a recurring issue, especially after concerns about <strong>Bounty 22</strong> and the difficulty of independently verifying delivery against durable scopes.
+      </li>
+      <li>
+        Onepebble proposed stronger delegated-treasury standards, including on-chain scope, acceptance criteria, tranche verification, release delays, identifiable entities, and consequences for approvers.
+      </li>
+      <li>
+        A permanent cryptographically inaccessible <strong>burn account</strong> was proposed as an implementation path for burning DOT revenue from JAMKB sales under Wish for Change #1926.
+      </li>
+    </ul>
+    <p>
+      The month’s governance trend was not merely “more proposals,” but a push toward clearer accountability, less runtime complexity, more predictable asset handling, and stronger public verification of funded work.
+    </p>
+  </section>
+
+  <section>
+    <h2>Network Operations and Infrastructure</h2>
+
+    <h3>Paseo Testnet Was Resized and Relaunched</h3>
+    <p>
+      Paseo was one of the month’s earliest and most consequential operational stories. The testnet underwent a major restructuring to reduce its footprint and align costs with current ecosystem needs.
+    </p>
+    <ul>
+      <li>
+        The old Paseo relay was wound down and replaced by a new right-sized chain.
+      </li>
+      <li>
+        Validator count was reduced from roughly <strong>152 to 20</strong>, with a transition window and temporary slower parachain block production.
+      </li>
+      <li>
+        The old relay chain was fully shut down after migration, while more than ten parachains were already running on the new network.
+      </li>
+      <li>
+        A beta Paseo dashboard was introduced, showing RPC endpoints, chain specs, Bulletin storage metrics, Coretime allocations, and relay/system-chain liveness.
+      </li>
+      <li>
+        The H2 cost proposal for Paseo operations was approved and executed, while cost-reduction measures included removing Subscan-related costs.
+      </li>
+    </ul>
+    <p>
+      Paseo’s restructuring reflected a broader ecosystem theme: infrastructure should be operationally useful but economically lean.
+    </p>
+
+    <h3>Staking Rules Changed Significantly</h3>
+    <p>
+      July brought major staking changes and several second-order effects.
+    </p>
+    <ul>
+      <li>
+        <strong>Referendum 1910</strong> was enacted, making nominators no longer slashable and reducing the nominator unbonding period from 28 days to roughly two days.
+      </li>
+      <li>
+        A validator election stall on Polkadot Asset Hub was resolved via <strong>Referendum 1914</strong>, which lowered the MinimumScore floor and restored normal staking operations.
+      </li>
+      <li>
+        Community discussions noted that validator rewards increased while nominator rewards fell after staking-model changes, prompting questions about incentives and sustainability.
+      </li>
+      <li>
+        Kusama nominators were warned after active-set reduction led some validators to raise commissions as high as roughly 50–85%.
+      </li>
+      <li>
+        Roughly <strong>20M DOT</strong> left nomination pools over ten days, but total staking later climbed back to around <strong>50.9%</strong>, suggesting direct staking absorbed much of the outflow.
+      </li>
+      <li>
+        ECH0.RE announced it would sunset its Polkadot validators due to insufficient nominations after the end of the Decentralised Nodes program and the introduction of a 10,000 DOT minimum nomination requirement.
+      </li>
+    </ul>
+    <p>
+      The month showed that staking reforms improved speed and reduced nominator risk, but also exposed questions about validator economics, nomination distribution, and smaller operator viability.
+    </p>
+
+    <h3>Performance and Reliability Signals Were Strong</h3>
+    <p>
+      Technical performance was a bright spot. During Kusama’s “Spammening” stress test, Polkadot infrastructure reportedly reached <strong>143,000 TPS</strong>, nearly six times Visa’s estimated peak throughput, while using only about <strong>23%</strong> of available cores.
+    </p>
+    <p>
+      This stress-test result reinforced the message that Polkadot’s shared-security and core-based architecture has significant unused capacity. Meanwhile, Levity’s Web3 Summit performance metrics suggested that the product stack can support real event-load usage without relying on centralized infrastructure.
+    </p>
+  </section>
+
+  <section>
+    <h2>Developer Tooling and Technical Progress</h2>
+
+    <h3>SDK, Runtime, and Client Releases Advanced</h3>
+    <ul>
+      <li>
+        <strong>Polkadot SDK stable2606-rc3</strong> was released as a pre-release for testing, including block bundling logic, Bitswap client API updates, staking reward changes, pallet-revive storage deposit updates, PSM integration, emergency governance tracks, bug fixes, and migrations.
+      </li>
+      <li>
+        <strong>polkadot-stable2603-5</strong> was released as a patch update, with crate updates and fixes including RC PeerId signaling and PersistentDb background-writer channel sizing.
+      </li>
+      <li>
+        <strong>Referendum 1924</strong> submitted Runtime Upgrade 2.3.2 with 100% Aye at the time of reporting.
+      </li>
+      <li>
+        <strong>Substrate4j</strong>, a type-safe Java client for Substrate-based chains, neared completion and later sought funding for completion and maintenance.
+      </li>
+      <li>
+        Supercomputing Systems AG posted a pre-proposal for maintenance of <strong>substrate-api-client</strong>, a Rust RPC client library used for no_std environments.
+      </li>
+    </ul>
+
+    <h3>Light Clients and Ethereum Compatibility Received Attention</h3>
+    <ul>
+      <li>
+        <strong>Pine-RPC</strong> launched as an ETH-RPC compatibility layer built on smoldot, enabling Ethereum tooling to interact with Polkadot and Paseo Asset Hub nodes through a self-contained light client.
+      </li>
+      <li>
+        RFC 174 proposed allowing light clients to verify transaction inclusion using extrinsics-trie proofs rather than full block bodies.
+      </li>
+      <li>
+        RFC 173 proposed a fix for replay attacks involving reaped-then-refunded accounts whose nonce resets to zero, using a CheckCreatedAtHeight extension.
+      </li>
+      <li>
+        WebSocket RPC connection guidance was published, covering keepalive patterns and reconnection handling for Polkadot API and subxt users.
+      </li>
+    </ul>
+
+    <h3>Security, Fuzzing, and Runtime Quality Were Active Topics</h3>
+    <p>
+      The Security Working Group reported ongoing fuzzing of runtime calls and XCM transfers to catch memory and invariant issues. AI-assisted auditing was described as effective enough to warrant expansion. An incident-response plan is also being developed, and runtime disclosures are being tracked in a members-only repository.
+    </p>
+
+    <h3>Zero-Knowledge and PolkaVM Tooling Improved</h3>
+    <ul>
+      <li>
+        KusamaShield released a Python package for Poseidon hashing compatible with the PolkaVM Poseidon hasher, lowering barriers for ZK app development.
+      </li>
+      <li>
+        KusamaShield later upgraded its PolkaVM Poseidon hasher for the latest Polkadot and Kusama PVM builder tooling, enabling contract optimizations.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>JAM, Compute, and New Execution Models</h2>
+
+    <h3>JAM Narrative Expanded</h3>
+    <p>
+      JAM remained a recurring topic, especially around Web3 Summit presentations. Gavin Wood framed JAM as a “collective computer” for Polkadot, emphasizing stateless rollups, a unified security model, a single data availability layer, and a fixed pipeline.
+    </p>
+    <ul>
+      <li>
+        <strong>MiniJAM</strong> was introduced as a streamlined JAM version planned as a Polkadot parachain with its own MINI token, targeting testnet in one to two months and mainnet in three to four months.
+      </li>
+      <li>
+        <strong>Polana</strong>, a JAM-ecosystem project, generated discussion by blending Solana-style performance ideas with Polkadot’s modular architecture and continuous execution.
+      </li>
+      <li>
+        A Code8 AMA was announced around JAM, Polana, and blockchain scalability.
+      </li>
+    </ul>
+
+    <h3>Compute and AI Became Stronger Ecosystem Themes</h3>
+    <ul>
+      <li>
+        <strong>Polkadot Compute</strong> was proposed as a system parachain coordinating decentralized CPU and GPU compute providers using DOT staking and cryptoeconomic incentives.
+      </li>
+      <li>
+        <strong>ComputeFlux</strong> open-sourced and deployed an OpenAI-compatible AI gateway on Polkadot testnet, aiming to provide model routing, Polkadot wallet authentication, and native payment flows.
+      </li>
+      <li>
+        Private AI on Polkadot gained attention through references to <strong>Kimi K3</strong>, private inference, cheaper compute, and on-chain model usability.
+      </li>
+    </ul>
+    <p>
+      Together, these items suggest that Polkadot’s technical roadmap is increasingly being positioned around scalable execution, decentralized compute, and privacy-preserving AI infrastructure.
+    </p>
+  </section>
+
+  <section>
+    <h2>Ecosystem Changes, Launches, and Migrations</h2>
+
+    <h3>Moonbeam’s Polkadot Parachain Wind-Down Was a Major Ecosystem Event</h3>
+    <p>
+      Moonbeam announced a full 1:1 GLMR migration to Base and the sunset of its Polkadot parachain by <strong>31 July 2026</strong>. This triggered multiple ecosystem warnings and service wind-downs.
+    </p>
+    <ul>
+      <li>
+        Moonwell warned users that assets and positions remaining on Moonbeam after the deadline may no longer be accessible.
+      </li>
+      <li>
+        StellaSwap issued an urgent withdrawal warning before 31 July.
+      </li>
+      <li>
+        Astar urged users to withdraw ASTR or vASTR held in Moonbeam DeFi.
+      </li>
+      <li>
+        Bifrost wound down vGLMR liquid staking and urged users to redeem and migrate GLMR before the deadline.
+      </li>
+    </ul>
+    <p>
+      The event underscored the importance of user migration communication, bridge/asset clarity, and careful ecosystem dependency management.
+    </p>
+
+    <h3>Projects Repositioned or Paused</h3>
+    <ul>
+      <li>
+        <strong>FlowFarm</strong> paused its planned Polkadot-native perpetual-markets parachain due to launch-readiness constraints around funding, liquidity, audits, and infrastructure, shifting focus to non-custodial DOT and KSM staking infrastructure.
+      </li>
+      <li>
+        <strong>Hyperbridge</strong> went live on Polkadot Hub mainnet, enabling cross-chain bridging to 14+ networks with cross-chain messaging, verified state queries, and asset transfers.
+      </li>
+      <li>
+        <strong>Station</strong>, a self-hosted peer-to-peer music distribution platform, launched on the new Paseo Asset Hub with plans to expand to Kusama and Polkadot.
+      </li>
+      <li>
+        <strong>Launchly</strong> announced expansion to Polkadot as a token-launch creator platform.
+      </li>
+      <li>
+        <strong>Endstate</strong>, a Polkadot-based simulation game, sought community feedback before testnet.
+      </li>
+    </ul>
+
+    <h3>Identity and Naming Infrastructure Matured</h3>
+    <ul>
+      <li>
+        <strong>dotID</strong> gained registrar status for Polkadot and Kusama identity judgments and launched dotID v2 with improved UI/UX, on-chain identity features, avatars, verified PGP, and automated email/social/PGP verification.
+      </li>
+      <li>
+        <strong>.id usernames</strong> on Polkadot People Chain went live on a first-come, first-served basis.
+      </li>
+      <li>
+        Optional KnownGood judgments were framed as a yes/no identity check without storing additional data.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>OpenGov Activity and Referendum Trends</h2>
+
+    <h3>Important Referenda and Proposal Themes</h3>
+    <ul>
+      <li>
+        <strong>Referendum 1910</strong>: Enacted major staking changes, including non-slashable nominators and much faster unbonding.
+      </li>
+      <li>
+        <strong>Referendum 1914</strong>: Fast-tracked remediation for the Asset Hub validator election stall.
+      </li>
+      <li>
+        <strong>Referendum 1916</strong>: ParaSpell XCM Tools requested roughly $57.6k USDC for 12 months of maintenance and server costs.
+      </li>
+      <li>
+        <strong>Referendum 1917</strong>: Requested funding for a Polkadot Toronto offline meetup, but showed very low support during multiple reporting days.
+      </li>
+      <li>
+        <strong>Referendum 1918</strong>: Proposed adding invulnerable collators to Bulletin, initially showing strong support before later reporting much lower Aye percentages.
+      </li>
+      <li>
+        <strong>Referendum 1919</strong>: Sought USDC funding for Paseo Testnet Operations H2 2026 via multi-asset bounty.
+      </li>
+      <li>
+        <strong>Referendum 1920</strong>: Proposed making Hollar a sufficient asset on Hub.
+      </li>
+      <li>
+        <strong>Referendum 1922</strong>: Addressed staking election stall incentive-pot redistribution.
+      </li>
+      <li>
+        <strong>Referendum 1923</strong>: JUST Ventures submitted a final retroactive treasury request.
+      </li>
+      <li>
+        <strong>Referendum 1924</strong>: Runtime Upgrade 2.3.2 was submitted with unanimous support at the time of reporting.
+      </li>
+      <li>
+        <strong>Referendum 1925</strong>: Orbinum Network proposed treasury funding for security audit, XCM integration, and infrastructure for a native privacy layer.
+      </li>
+      <li>
+        <strong>Referendum 1926</strong>: Wish for Change proposed burning 100% of DOT revenue from JAMKB sales rather than building treasury reserves or grants.
+      </li>
+      <li>
+        <strong>Referendum 1928</strong>: Proposed a moderation team bounty top-up for August 2026 through January 2027.
+      </li>
+    </ul>
+
+    <h3>Governance Mood</h3>
+    <p>
+      OpenGov activity was often quiet in terms of daily referendum volume, but the proposals that did appear showed a more skeptical and process-oriented community. Treasury spend, bounty design, delegated authority, retroactive payments, and proposal verification all received increased scrutiny.
+    </p>
+  </section>
+
+  <section>
+    <h2>Community, Education, and Adoption</h2>
+
+    <h3>Community Engagement Was Both Critical and Constructive</h3>
+    <p>
+      Several forum discussions reflected concern about Polkadot’s trajectory, messaging, and user adoption. However, many community voices framed ongoing engagement, builder participation, and care for the protocol’s future as positive signals.
+    </p>
+    <ul>
+      <li>
+        Discussions asked whether Polkadot should evolve its narrative beyond multi-chain infrastructure to compete with themes such as AI, privacy, and stablecoins.
+      </li>
+      <li>
+        Builder-engagement discussions suggested that more founders, educators, and app teams should be empowered to tell Polkadot’s story through real applications.
+      </li>
+      <li>
+        Community members argued that early-stage teams often need conversation, feedback, and ecosystem attention as much as funding.
+      </li>
+    </ul>
+
+    <h3>Local and Social Experiments Emerged</h3>
+    <ul>
+      <li>
+        <strong>NYOTA</strong>, a local community currency in Mburahati, Dar es Salaam, was showcased as a Kusama-based experiment using in-person uniqueness verification and rewards to support neighborhood circulation and savings.
+      </li>
+      <li>
+        <strong>Birdbrain</strong> introduced itself as a shared memory system for the Kusama/Polkadot ecosystem, making project knowledge, discussions, and artifacts queryable and interconnected, with membership managed on-chain via Kreivo.
+      </li>
+      <li>
+        Polkadot Blockchain Academy published a Web3 Summit recap, including panels, workshops, and community moments.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Notable Risks and Open Questions</h2>
+
+    <h3>Operational and Migration Risks</h3>
+    <ul>
+      <li>
+        Moonbeam’s parachain sunset created time-sensitive user withdrawal and migration risks across multiple DeFi integrations.
+      </li>
+      <li>
+        Ledger controller-account issues on Kusama Asset Hub suggested unresolved friction around fee handling, asset conversion, and legacy Ledger apps.
+      </li>
+      <li>
+        Asset Hub RPC reliability concerns were raised after intermittent <code>chain_getHeader</code> failures.
+      </li>
+      <li>
+        Salary payout and sufficient-asset handling on Asset Hub showed that cross-asset operational changes can produce silent failure modes if not carefully managed.
+      </li>
+    </ul>
+
+    <h3>Economic and Governance Risks</h3>
+    <ul>
+      <li>
+        Staking changes improved flexibility but raised questions about validator concentration, nominator incentives, high commissions, and smaller validator viability.
+      </li>
+      <li>
+        Bounty and treasury debates showed that the ecosystem still lacks universally accepted standards for delegated spending, milestone verification, and proposer accountability.
+      </li>
+      <li>
+        Several proposals showed very low support, indicating increased voter selectivity or skepticism toward certain funding categories.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Overall Assessment</h2>
+    <p>
+      July 2026 was a month of consolidation and redirection for Polkadot. Technically, the ecosystem demonstrated high throughput, active SDK development, light-client progress, product-stack experimentation, and new compute/JAM-related proposals. Operationally, Paseo was resized, Asset Hub issues were remediated, and several runtime and governance changes moved forward.
+    </p>
+    <p>
+      Strategically, the clearest shift was toward user-owned products: decentralized hosting, app deployment, messaging, storage, identity, wallet abstraction, and developer environments. Governance simultaneously moved toward cost control and stronger oversight, with several discussions questioning whether existing treasury and bounty mechanisms remain fit for purpose.
+    </p>
+    <p>
+      The month also showed that ecosystem maturity brings trade-offs. Some projects migrated or paused, staking changes produced winners and losers, and treasury processes faced renewed scrutiny. Still, Web3 Summit demonstrations, the Polkadot Products Devnet, and Gavin Wood’s renewed focus on technical delivery suggest a strong push to convert Polkadot’s infrastructure depth into accessible, usable, and verifiable products.
+    </p>
+  </section>
+</body>
+</html>
+```

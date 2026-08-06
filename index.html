@@ -453,9 +453,9 @@ body {
 .accent { font-style: normal; }
 .home-block { margin-bottom: 56px; }
 .home-latest-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
   margin-bottom: 56px;
 }
 
@@ -629,7 +629,6 @@ body {
   gap: 10px;
   margin: 36px 0 16px;
 }
-.section-banner-icon { font-size: 14px; flex-shrink: 0; }
 .section-banner-title {
   font-family: 'Atkinson Hyperlegible', sans-serif;
   font-size: 12px;
@@ -640,42 +639,58 @@ body {
   white-space: nowrap;
 }
 
-/* ── News grid ── */
-.news-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.news-card {
+/* ── Continuous reading box ── */
+.reading-box {
   border: 1px solid var(--outline-var);
-  padding: 24px 28px;
   background: var(--surface-lowest);
+  padding: 32px 36px;
   transition: background-color 0.2s, border-color 0.2s;
 }
-.news-inner { padding: 0; }
-.news-title {
+.reading-h2 {
   font-family: 'Newsreader', serif;
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 600;
-  line-height: 1.35;
-  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
   color: var(--on-surface);
+  margin: 36px 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--outline-var);
 }
-.news-body {
+.reading-h2:first-child { margin-top: 0; }
+.reading-box p {
   font-family: 'Atkinson Hyperlegible', sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: var(--on-surface-var);
   line-height: 1.75;
+  margin-bottom: 12px;
 }
-.news-body code {
+.reading-box ul,
+.reading-box ol {
+  margin: 0 0 12px;
+  padding-left: 22px;
+}
+.reading-box li {
+  font-family: 'Atkinson Hyperlegible', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--on-surface-var);
+  line-height: 1.75;
+  margin-bottom: 10px;
+}
+.reading-box li::marker { color: var(--outline); }
+.reading-box li:last-child,
+.reading-box p:last-child { margin-bottom: 0; }
+.reading-box strong { color: var(--on-surface); }
+.reading-box code {
   font-family: 'SF Mono', 'Menlo', monospace;
   font-size: 13px;
   background: var(--surface-container);
   padding: 1px 6px;
   color: var(--on-surface);
 }
-.news-body a {
+.reading-box a {
   color: var(--on-surface);
   text-decoration: none;
   font-family: 'Atkinson Hyperlegible', sans-serif;
@@ -689,7 +704,7 @@ body {
   display: inline;
   transition: border-color 0.1s, opacity 0.1s;
 }
-.news-body a:hover { border-color: var(--on-surface); opacity: 0.7; }
+.reading-box a:hover { border-color: var(--on-surface); opacity: 0.7; }
 
 /* ── Gov sub-label ── */
 .gov-sub-label {
@@ -1241,7 +1256,8 @@ body {
   .pagi-arrow { padding: 6px 12px; }
   /* Denser, slightly smaller type on phones - tighter columns read better */
   /* Body copy */
-  .news-body, .method-body { font-size: 15px; line-height: 1.45; }
+  .reading-box li, .reading-box p, .method-body { font-size: 15px; line-height: 1.45; }
+  .reading-box { padding: 20px 18px; }
   .standalone-report .item-body { font-size: 14px; line-height: 1.45; }
   /* Intro / lede text */
   .home-intro-sub { font-size: 16px; line-height: 1.45; }
@@ -1249,7 +1265,7 @@ body {
   .home-intro-headline { font-size: 28px; line-height: 1.1; }
   .page-header-title { font-size: 30px; }
   .detail-header h1 { font-size: 26px; line-height: 1.12; }
-  .news-title { font-size: 17px; line-height: 1.25; }
+  .reading-h2 { font-size: 19px; line-height: 1.25; }
   .method-title { font-size: 22px; line-height: 1.15; }
 }
 
@@ -1606,6 +1622,89 @@ body {
   .flier-fab { animation: none; }
   .flier-overlay.open .flier-deck, .flier-overlay.closing .flier-deck { animation-duration: 0.01s; }
 }
+
+/* ── Monthly Wraps - X-style post cards in a carousel ── */
+.mw-carousel { position: relative; margin-bottom: 48px; }
+.mw-track {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  padding: 4px 2px 12px;
+  scrollbar-width: none;
+}
+.mw-track::-webkit-scrollbar { display: none; }
+.mw-track .mw-card { flex: 0 0 360px; scroll-snap-align: start; }
+.mw-arrow {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid var(--outline-var);
+  background: var(--surface-lowest);
+  color: var(--on-surface);
+  font-size: 1.5rem; line-height: 1; font-family: inherit;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 2;
+  box-shadow: 0 2px 10px rgba(0,0,0,.18);
+  transition: background .15s ease, opacity .15s ease;
+}
+.mw-arrow:hover { background: var(--surface-low); }
+.mw-arrow[disabled] { opacity: .35; cursor: default; }
+.mw-arrow--prev { left: -20px; }
+.mw-arrow--next { right: -20px; }
+.mw-card {
+  display: flex; flex-direction: column; gap: 12px;
+  background: var(--surface-lowest);
+  border: 1px solid var(--outline-var);
+  border-radius: 16px;
+  padding: 16px;
+  text-decoration: none;
+  color: var(--on-surface);
+  transition: background .15s ease, border-color .15s ease, transform .15s ease;
+}
+.mw-card:hover { background: var(--surface-low); border-color: var(--outline); transform: translateY(-2px); }
+.mw-head { display: flex; align-items: center; gap: 10px; }
+.mw-avatar { width: 40px; height: 40px; border-radius: 8px; flex: none; }
+.mw-id { flex: 1; min-width: 0; }
+.mw-name { font-weight: 700; font-size: .95rem; display: flex; align-items: center; gap: 4px; line-height: 1.3; }
+.mw-badge { width: 15px; height: 15px; flex: none; }
+.mw-handle { color: var(--outline); font-size: .85rem; }
+.mw-x-logo { width: 17px; height: 17px; color: var(--on-surface); flex: none; align-self: flex-start; }
+.mw-article { border: 1px solid var(--outline-var); border-radius: 12px; overflow: hidden; background: var(--surface); }
+.mw-cover { width: 100%; aspect-ratio: 2.5 / 1; object-fit: cover; display: block; }
+.mw-article-body { padding: 12px 14px 14px; }
+.mw-article-kicker { color: var(--outline); font-size: .72rem; font-weight: 600; text-transform: uppercase; letter-spacing: .07em; margin-bottom: 5px; }
+.mw-article-title { font-weight: 700; font-size: 1rem; line-height: 1.35; margin-bottom: 6px; }
+.mw-article-preview { color: var(--on-surface-var); font-size: .875rem; line-height: 1.5; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+.mw-text { font-size: .92rem; line-height: 1.5; white-space: pre-line; color: var(--on-surface); }
+.mw-media { width: 100%; border-radius: 12px; border: 1px solid var(--outline-var); display: block; }
+.mw-foot { color: var(--outline); font-size: .8rem; font-weight: 600; margin-top: auto; }
+@media (max-width: 640px) {
+  .mw-track .mw-card { flex: 0 0 85%; }
+  .mw-arrow--prev { left: 6px; }
+  .mw-arrow--next { right: 6px; }
+}
+
+/* ── Home: latest-edition boxes, side by side, mw-card structure ── */
+.home-latest-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.home-latest-card .eyebrow { margin-bottom: 0; }
+.home-latest-body { flex: 1; display: flex; flex-direction: column; }
+.home-latest-body .d-row,
+.home-latest-body .d-row:first-child,
+.home-latest-body .d-row:last-child {
+  flex: 1;
+  border: 1px solid var(--outline-var);
+  border-left: 3px solid var(--on-surface);
+  border-radius: 12px;
+  overflow: hidden;
+}
+@media (max-width: 760px) {
+  .home-latest-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
@@ -1665,15 +1764,109 @@ body {
       </div>
     </div>
     <div class="home-latest-grid">
-      <div>
+      <div class="home-latest-card">
         <div class="eyebrow">Latest Legacy Digest</div>
-        <div id="home-recent-daily"><div class="loading"><div class="spinner"></div></div></div>
+        <div id="home-recent-daily" class="home-latest-body"><div class="loading"><div class="spinner"></div></div></div>
       </div>
-      <div>
+      <div class="home-latest-card">
         <div class="eyebrow">Latest Socials Digest</div>
-        <div id="home-recent-community"><div class="loading"><div class="spinner"></div></div></div>
+        <div id="home-recent-community" class="home-latest-body"><div class="loading"><div class="spinner"></div></div></div>
       </div>
     </div>
+    <!-- MONTHLY WRAPS -->
+    <div class="page-top" style="margin-top:56px;">
+      <h2 class="page-header-title" style="font-size:1.5rem;">Monthly Wraps</h2>
+      <div class="home-intro-sub">Monthly recap articles published by the official <a href="https://x.com/Polkadot" target="_blank" rel="noopener" class="text-link">@Polkadot</a> account on X - each card opens the full article on X.</div>
+    </div>
+    <div class="mw-carousel">
+      <button class="mw-arrow mw-arrow--prev" id="mw-prev" aria-label="Previous monthly wrap" onclick="mwScroll(-1)" disabled>&#8249;</button>
+      <div class="mw-track" id="monthly-wraps-list">
+      <!-- Add new monthly wrap cards here (newest first) -->
+      <a class="mw-card" href="https://x.com/Polkadot/status/2074891062376792290" target="_blank" rel="noopener" aria-label="Polkadot in June 2026 - monthly wrap article on X">
+        <div class="mw-head">
+          <img class="mw-avatar" src="assets/monthly-wraps/polkadot-avatar.jpg" alt="Polkadot" loading="lazy">
+          <div class="mw-id">
+            <div class="mw-name">Polkadot
+              <svg class="mw-badge" viewBox="0 0 24 24" aria-label="Verified account"><path fill="#D9A404" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg>
+            </div>
+            <div class="mw-handle">@Polkadot &middot; Jul 8, 2026</div>
+          </div>
+          <svg class="mw-x-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </div>
+        <div class="mw-article">
+          <img class="mw-cover" src="assets/monthly-wraps/2026-06-cover.jpg" alt="Polkadot in June - article cover" loading="lazy">
+          <div class="mw-article-body">
+            <div class="mw-article-kicker">June 2026 &middot; Article on X</div>
+            <div class="mw-article-title">Polkadot in June. W3S, Polkadot app POC tested and staking updates</div>
+            <div class="mw-article-preview">In 1964, Radio Caroline began broadcasting from a ship anchored in international waters off the UK coast. The reason was straightforward. The UK&rsquo;s radio system was controlled by the BBC back then&hellip;</div>
+          </div>
+        </div>
+        <div class="mw-foot">Read the full wrap on X &#8599;</div>
+      </a>
+      <a class="mw-card" href="https://x.com/Polkadot/status/2062509237381513283" target="_blank" rel="noopener" aria-label="Polkadot May 2026 Recap - monthly wrap article on X">
+        <div class="mw-head">
+          <img class="mw-avatar" src="assets/monthly-wraps/polkadot-avatar.jpg" alt="Polkadot" loading="lazy">
+          <div class="mw-id">
+            <div class="mw-name">Polkadot
+              <svg class="mw-badge" viewBox="0 0 24 24" aria-label="Verified account"><path fill="#D9A404" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg>
+            </div>
+            <div class="mw-handle">@Polkadot &middot; Jun 4, 2026</div>
+          </div>
+          <svg class="mw-x-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </div>
+        <div class="mw-article">
+          <img class="mw-cover" src="assets/monthly-wraps/2026-05-cover.jpg" alt="Polkadot May 2026 Recap - article cover" loading="lazy">
+          <div class="mw-article-body">
+            <div class="mw-article-kicker">May 2026 &middot; Article on X</div>
+            <div class="mw-article-title">Polkadot May 2026 Recap</div>
+            <div class="mw-article-preview">Polkadot turned 6 this May. A milestone that offers more than a reason to celebrate. It is a reminder of why it was built in the first place. The internet was built on you, not for you&hellip;</div>
+          </div>
+        </div>
+        <div class="mw-foot">Read the full wrap on X &#8599;</div>
+      </a>
+      <a class="mw-card" href="https://x.com/Polkadot/status/2052726493462061465" target="_blank" rel="noopener" aria-label="Polkadot April 2026 Recap - monthly wrap article on X">
+        <div class="mw-head">
+          <img class="mw-avatar" src="assets/monthly-wraps/polkadot-avatar.jpg" alt="Polkadot" loading="lazy">
+          <div class="mw-id">
+            <div class="mw-name">Polkadot
+              <svg class="mw-badge" viewBox="0 0 24 24" aria-label="Verified account"><path fill="#D9A404" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg>
+            </div>
+            <div class="mw-handle">@Polkadot &middot; May 8, 2026</div>
+          </div>
+          <svg class="mw-x-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </div>
+        <div class="mw-article">
+          <img class="mw-cover" src="assets/monthly-wraps/2026-04-cover.jpg" alt="Polkadot April 2026 Recap - article cover" loading="lazy">
+          <div class="mw-article-body">
+            <div class="mw-article-kicker">April 2026 &middot; Article on X</div>
+            <div class="mw-article-title">Polkadot April 2026 Recap</div>
+            <div class="mw-article-preview">April was the first full month under Polkadot&rsquo;s new economic model, as approved via OpenGov. The new economic model went live on March 14 and introduced revised issuance parameters for DOT&hellip;</div>
+          </div>
+        </div>
+        <div class="mw-foot">Read the full wrap on X &#8599;</div>
+      </a>
+      <a class="mw-card" href="https://x.com/Polkadot/status/2039751048374403093" target="_blank" rel="noopener" aria-label="Polkadot March 2026 monthly wrap post on X">
+        <div class="mw-head">
+          <img class="mw-avatar" src="assets/monthly-wraps/polkadot-avatar.jpg" alt="Polkadot" loading="lazy">
+          <div class="mw-id">
+            <div class="mw-name">Polkadot
+              <svg class="mw-badge" viewBox="0 0 24 24" aria-label="Verified account"><path fill="#D9A404" d="M22.25 12c0-1.43-.88-2.67-2.19-3.34.46-1.39.2-2.9-.81-3.91s-2.52-1.27-3.91-.81c-.66-1.31-1.91-2.19-3.34-2.19s-2.67.88-3.33 2.19c-1.4-.46-2.91-.2-3.92.81s-1.26 2.52-.8 3.91c-1.31.67-2.2 1.91-2.2 3.34s.89 2.67 2.2 3.34c-.46 1.39-.21 2.9.8 3.91s2.52 1.26 3.91.81c.67 1.31 1.91 2.19 3.34 2.19s2.68-.88 3.34-2.19c1.39.45 2.9.2 3.91-.81s1.27-2.52.81-3.91c1.31-.67 2.19-1.91 2.19-3.34zm-11.71 4.2L6.8 12.46l1.41-1.42 2.26 2.26 4.8-5.23 1.47 1.36-6.2 6.77z"/></svg>
+            </div>
+            <div class="mw-handle">@Polkadot &middot; Apr 2, 2026</div>
+          </div>
+          <svg class="mw-x-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </div>
+        <div class="mw-article-kicker">March 2026 &middot; Post on X</div>
+        <div class="mw-text">March 2026 brought about a significant set of protocol-level changes for the Polkadot network. Several upgrades have been implemented this month, and more are planned going forward.
+
+Here&rsquo;s what you need to know&#128071;&#65039;</div>
+        <img class="mw-media" src="assets/monthly-wraps/2026-03-photo.jpg" alt="Polkadot March 2026 wrap graphic" loading="lazy">
+        <div class="mw-foot">Read the full wrap on X &#8599;</div>
+      </a>
+      </div>
+      <button class="mw-arrow mw-arrow--next" id="mw-next" aria-label="Next monthly wrap" onclick="mwScroll(1)">&#8250;</button>
+    </div>
+
     <div class="home-block">
       <div class="home-intro-copy">
         <h2 class="method-title">About This Digest</h2>
@@ -2031,12 +2224,6 @@ const STAT_DEFS = [
   { key: 'OpenGov',                label: 'OpenGov Referendums' },
 ];
 
-const SECTION_ICONS = {
-  'technical': '⚙️', 'ecosystem': '🌐', 'other': '📋', 'opengov updates': '🗳️'
-};
-const SECTION_CLS = {
-  'technical': 'tech', 'ecosystem': 'ecosystem', 'other': 'other'
-};
 const BADGE_CLS = {
   submitted: 'b-submitted', decision: 'b-decision',
   executed:  'b-executed',  timeout: 'b-timeout', confirmed: 'b-confirmed'
@@ -2049,7 +2236,6 @@ const COLLECTIONS = {
     dir: 'digests', label: 'Polkadot Daily Digest', editionLabel: 'Polkadot Daily Digest',
     listBody: 'list-body', searchInput: 'search-date', searchMsg: 'search-msg',
     statDefs: STAT_DEFS,
-    sectionIcons: SECTION_ICONS,
   },
   community: {
     dir: 'community_digests', label: 'Polkadot Socials Digest', editionLabel: 'Socials Edition',
@@ -2058,7 +2244,6 @@ const COLLECTIONS = {
       { key: 'Total X posts curated',       label: 'X Posts Curated' },
       { key: 'Posts Filtered and Analysed', label: 'Filtered & Analysed' },
     ],
-    sectionIcons: { 'ecosystem & community': '🌐', 'technical & developer activity': '⚙️' },
   },
 };
 
@@ -2520,45 +2705,45 @@ function nextBlockquote(el) {
   return cur && cur.tagName === 'BLOCKQUOTE' ? cur : null;
 }
 
-function renderNewsItem(li, cls) {
-  const strong = li.querySelector('strong');
-  const title  = strong ? strong.textContent.replace(/:$/, '').trim() : '';
-  // Keep the strong word in the body so the original sentence stays intact -
-  // it's surfaced as the title, but removing it from the paragraph leaves a
-  // dangling ": ..." fragment and breaks the prose.
-  const body = li.innerHTML.trim();
-  return '<div class="news-card"><div class="news-inner ' + (cls || '') + '">' +
-    '<div class="news-title">' + title + '</div>' +
-    '<div class="news-body">'  + body  + '</div>' +
-  '</div></div>';
-}
-
-function sectionBanner(icon, label) {
+function sectionBanner(label) {
   return '<div class="section-banner">' +
-    '<span class="section-banner-icon">' + icon + '</span>' +
     '<div class="section-banner-title">' + label + '</div>' +
   '</div>';
 }
 
-function renderNewsSection(h2, sectionIcons) {
-  const key   = h2.textContent.trim().toLowerCase();
-  const icon  = (sectionIcons || SECTION_ICONS)[key] || '📌';
-  const cls   = SECTION_CLS[key]   || '';
-  const items = [];
+function readingHeader(label) {
+  return '<div class="reading-h2">' + label + '</div>';
+}
+
+// The digest's optional "Summary" h1 block, rendered as the opening section
+// of the reading box (full text - not the truncated list-row teaser).
+function renderSummarySection(doc) {
+  const h1 = Array.from(doc.querySelectorAll('h1'))
+    .find(h => h.textContent.trim().toLowerCase() === 'summary');
+  if (!h1) return '';
+  let body = '';
+  let el = h1.nextElementSibling;
+  while (el && el.tagName !== 'H1' && el.tagName !== 'H2') {
+    if (el.tagName === 'P') body += el.outerHTML;
+    el = el.nextElementSibling;
+  }
+  if (!body) return '';
+  return readingHeader('Summary') + body;
+}
+
+// One reading section: the h2 as a header plus its lists/paragraphs verbatim,
+// flowing continuously inside the shared reading box.
+function renderReadingSection(h2) {
+  let body = '';
 
   let el = h2.nextElementSibling;
   while (el && el.tagName !== 'H2') {
-    if (el.tagName === 'UL') el.querySelectorAll('li').forEach(li => items.push(li));
+    if (el.tagName === 'UL' || el.tagName === 'OL' || el.tagName === 'P') body += el.outerHTML;
     el = el.nextElementSibling;
   }
-  if (!items.length) return '';
+  if (!body) return '';
 
-  return '<div class="report-section">' +
-    sectionBanner(icon, h2.textContent.trim()) +
-    '<div class="news-grid">' +
-      items.map(li => renderNewsItem(li, cls)).join('') +
-    '</div>' +
-  '</div>';
+  return readingHeader(h2.textContent.trim()) + body;
 }
 
 function renderGovSection(h2) {
@@ -2580,7 +2765,7 @@ function renderGovSection(h2) {
   if (!inner) return '';
 
   return '<div class="report-section">' +
-    sectionBanner('🗳️', h2.textContent.trim()) +
+    sectionBanner(h2.textContent.trim()) +
     inner +
   '</div>';
 }
@@ -2600,17 +2785,20 @@ function renderLogChips(stats, statDefs) {
 }
 
 function renderReport(doc, colKey) {
-  const col   = COLLECTIONS[colKey] || COLLECTIONS.daily;
-  let out     = '';
-  let govHTML = '';
+  const col     = COLLECTIONS[colKey] || COLLECTIONS.daily;
+  let reading   = renderSummarySection(doc);
+  let govHTML   = '';
 
   doc.querySelectorAll('h2').forEach(h2 => {
     const key = h2.textContent.trim().toLowerCase();
     if (key.startsWith('processing log')) return;
     if (key === 'opengov updates') { govHTML = renderGovSection(h2); return; }
-    out += renderNewsSection(h2, col.sectionIcons);
+    reading += renderReadingSection(h2);
   });
 
+  let out = reading
+    ? '<div class="report-section"><div class="reading-box">' + reading + '</div></div>'
+    : '';
   out += govHTML;
   out += renderLogChips(extractStats(doc), col.statDefs);
 
@@ -2681,6 +2869,31 @@ window.addEventListener('popstate', e => {
     nav(prevPage);
   }
 });
+
+// ─────────────────── Monthly Wraps carousel ───────────────────
+function mwScroll(dir) {
+  const track = document.getElementById('monthly-wraps-list');
+  if (!track) return;
+  const card = track.querySelector('.mw-card');
+  const step = card ? card.getBoundingClientRect().width + 20 : 380;
+  track.scrollBy({ left: dir * step, behavior: 'smooth' });
+}
+function mwUpdateArrows() {
+  const track = document.getElementById('monthly-wraps-list');
+  const prev = document.getElementById('mw-prev');
+  const next = document.getElementById('mw-next');
+  if (!track || !prev || !next || track.clientWidth === 0) return;
+  const max = track.scrollWidth - track.clientWidth - 1;
+  prev.disabled = track.scrollLeft <= 0;
+  next.disabled = track.scrollLeft >= max;
+}
+(function() {
+  const track = document.getElementById('monthly-wraps-list');
+  if (!track) return;
+  track.addEventListener('scroll', mwUpdateArrows, { passive: true });
+  window.addEventListener('resize', mwUpdateArrows);
+  mwUpdateArrows();
+})();
 
 // ─────────────────────────── Init ─────────────────────────────
 // ─────────────────────── Flier popup · The Fliers ─────────────

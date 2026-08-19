@@ -614,30 +614,12 @@ body {
 #page-detail .page-top { padding: 12px 0 12px; margin-bottom: 16px; }
 #page-detail .back-btn { margin-bottom: 12px; }
 #page-detail .detail-edition { margin-bottom: 6px; }
-#page-detail .report-section:first-child .section-banner { margin-top: 0; }
 /* Compact the brand masthead while reading a single edition (full masthead
    stays on the home/list pages). Reclaims ~130px above the date. */
 [data-page="detail"] .masthead-inner { padding-top: 10px; padding-bottom: 10px; }
 [data-page="detail"] .masthead-meta { display: none; }
 [data-page="detail"] .masthead-brand { font-size: clamp(22px, 4vw, 30px); margin-bottom: 0; }
 [data-page="detail"] .masthead-tagline { display: none; }
-
-/* ── Section banner ── */
-.section-banner {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin: 36px 0 16px;
-}
-.section-banner-title {
-  font-family: 'Atkinson Hyperlegible', sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--outline);
-  white-space: nowrap;
-}
 
 /* ── Continuous reading box ── */
 .reading-box {
@@ -723,6 +705,28 @@ body {
   flex-direction: column;
   gap: 12px;
 }
+
+/* Gov lives inside the shared reading box: the h3 sub-labels sit below the
+   "OpenGov Updates" header, and the ref cards inset against the box. */
+.reading-box .gov-sub-label {
+  font-size: 17px;
+  margin: 22px 0 10px;
+}
+.reading-box .gov-grid { margin-bottom: 12px; }
+.reading-box .gov-grid:last-child { margin-bottom: 0; }
+.reading-box .ref-card { background: var(--surface); }
+/* Undo the reading-box link treatment (uppercase, underlined) inside ref cards. */
+.reading-box .ref-card a {
+  font-size: inherit;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: normal;
+  border-bottom: none;
+  padding-bottom: 0;
+  margin: 0;
+  color: var(--accent);
+}
+.reading-box .ref-card a:hover { text-decoration: underline; opacity: 1; }
 .ref-card {
   border: 1px solid var(--outline-var);
   padding: 20px 24px;
@@ -1547,6 +1551,57 @@ body {
 .flier-spacer { flex: 1 1 auto; min-height: 12px; }
 .flier-hint { font-family: 'Atkinson Hyperlegible', sans-serif; font-size: 12px; color: var(--outline); text-align: center; margin-top: 14px; letter-spacing: 0.03em; }
 
+/* "Live" variant of the kicker tag - green with a breathing dot */
+.flier-tag-live { background: var(--green); display: inline-flex; align-items: center; gap: 5px; }
+.flier-tag-live::before {
+  content: ''; width: 5px; height: 5px; border-radius: 50%; background: #fff;
+  animation: flier-live-pulse 1.6s ease-in-out infinite;
+}
+@keyframes flier-live-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+/* Headline stat + "what you get" list, used by the Devnet flier */
+.flier-stat {
+  display: flex; align-items: baseline; gap: 10px;
+  border-left: 3px solid var(--green); padding: 2px 0 2px 12px; margin: 16px 0 4px;
+}
+.flier-stat-n { font-family: 'Newsreader', Georgia, serif; font-weight: 600; font-size: 34px; line-height: 1; color: var(--on-surface); }
+.flier-stat-l { font-family: 'Atkinson Hyperlegible', sans-serif; font-size: 13px; line-height: 1.4; color: var(--on-surface-var); }
+.flier-steps { list-style: none; margin: 14px 0 0; padding: 0; counter-reset: flier-step; }
+.flier-steps li {
+  position: relative; counter-increment: flier-step; padding: 0 0 0 30px; margin-bottom: 9px;
+  font-family: 'Atkinson Hyperlegible', sans-serif; font-size: 14px; line-height: 1.5; color: var(--on-surface-var);
+}
+.flier-steps li::before {
+  content: counter(flier-step); position: absolute; left: 0; top: 1px;
+  width: 20px; height: 20px; border-radius: 50%; border: 1px solid var(--outline-var);
+  font: 700 11px/19px 'Atkinson Hyperlegible', sans-serif; text-align: center; color: var(--on-surface);
+}
+.flier-steps li strong { color: var(--on-surface); }
+
+/* Compact page - tightened type + spacing so the flier fits the deck without scrolling */
+.flier-compact .flier-serif  { font-size: clamp(28px, 5.5vw, 40px); }
+.flier-compact .flier-rule   { margin: 10px 0 12px; }
+.flier-compact .flier-h      { font-size: clamp(21px, 3vw, 26px); margin: 4px 0 8px; }
+.flier-compact .flier-stat   { margin: 12px 0 2px; }
+.flier-compact .flier-stat-n { font-size: 30px; }
+.flier-compact .flier-steps  { margin-top: 10px; }
+.flier-compact .flier-steps li { margin-bottom: 6px; }
+@media (max-width: 560px) {
+  .flier-compact .flier-serif    { font-size: 26px; }
+  .flier-compact .flier-body     { font-size: 14px; }
+  .flier-compact .flier-steps li { font-size: 13px; }
+  .flier-compact .flier-stat-l   { font-size: 12px; }
+}
+@media (max-width: 380px) {
+  .flier-compact .flier-serif    { font-size: 21px; }
+  .flier-compact .flier-rule     { margin: 8px 0 10px; }
+  .flier-compact .flier-h        { font-size: 19px; }
+  .flier-compact .flier-body     { font-size: 13px; line-height: 1.5; }
+  .flier-compact .flier-stat     { margin: 10px 0 0; }
+  .flier-compact .flier-stat-n   { font-size: 24px; }
+  .flier-compact .flier-steps li { font-size: 12px; margin-bottom: 5px; }
+}
+
 /* Forms shared across fliers */
 .flier-field { display: flex; flex-direction: column; gap: 6px; margin-top: 14px; }
 .flier-label { font: 600 11px/1.3 'Atkinson Hyperlegible', sans-serif; text-transform: uppercase; letter-spacing: 0.12em; color: var(--outline); }
@@ -1617,6 +1672,33 @@ body {
   .flier-deck { height: 64vh; }
   .flier-page { padding: 24px 18px; }
   .flier-nav { bottom: -46px; }
+}
+/* Very narrow phones - more deck, less padding, so the notices stay unscrolled */
+@media (max-width: 380px) {
+  .flier-deck { height: 76vh; }
+  .flier-page { padding: 20px 16px; }
+}
+/* Short desktop / tablet windows. Scoped to min-width so the phone rules above
+   (which already tighten type) stay in charge on narrow screens. */
+@media (min-width: 561px) and (max-height: 720px) {
+  .flier-page { padding: 22px clamp(18px, 3vw, 32px); }
+  .flier-h-lg { font-size: clamp(21px, 3vw, 26px); }
+  .flier-compact .flier-serif    { font-size: 30px; }
+  .flier-compact .flier-h        { font-size: 22px; }
+  .flier-compact .flier-body     { font-size: 14px; }
+  .flier-compact .flier-stat-n   { font-size: 26px; }
+  .flier-compact .flier-steps li { font-size: 13px; margin-bottom: 5px; }
+}
+@media (min-width: 561px) and (max-height: 620px) {
+  .flier-deck { height: 76vh; }
+  .flier-page { padding: 16px 18px; }
+  .flier-compact .flier-serif    { font-size: 24px; }
+  .flier-compact .flier-rule     { margin: 8px 0 10px; }
+  .flier-compact .flier-h        { font-size: 19px; }
+  .flier-compact .flier-body     { font-size: 13px; line-height: 1.5; }
+  .flier-compact .flier-stat     { margin: 8px 0 0; }
+  .flier-compact .flier-stat-n   { font-size: 22px; }
+  .flier-compact .flier-steps li { font-size: 12px; margin-bottom: 4px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .flier-fab { animation: none; }
@@ -1712,10 +1794,12 @@ body {
 <!-- Activity Bar -->
 <div class="activity-bar">
   <div class="activity-bar-track">
+    <span class="activity-bar-text">🟢 The Polkadot Products Devnet is live. 200+ apps deployed already - <button onclick="flierOpen(1)" class="activity-bar-link" style="background:none;border:none;border-bottom:1px solid currentColor;cursor:pointer;font:inherit;color:inherit;padding:0;letter-spacing:inherit;">Start building ➡️</button></span>
     <span class="activity-bar-text">🔔 The Web3 Summit Concluded Last week  - <a href="adhoc-reports/web3-summit-2026-recap.html" class="activity-bar-link">Checkout the Summary ➡️</a></span>
-    <span class="activity-bar-text">📬 Get the Polkadot Daily Digest in your inbox - <button onclick="flierOpen()" class="activity-bar-link" style="background:none;border:none;border-bottom:1px solid currentColor;cursor:pointer;font:inherit;color:inherit;padding:0;letter-spacing:inherit;">Register your interest ➡️</button></span>
+    <span class="activity-bar-text">📬 Get the Polkadot Daily Digest in your inbox - <button onclick="flierOpen(0)" class="activity-bar-link" style="background:none;border:none;border-bottom:1px solid currentColor;cursor:pointer;font:inherit;color:inherit;padding:0;letter-spacing:inherit;">Register your interest ➡️</button></span>
+    <span class="activity-bar-text">🟢 The Polkadot Products Devnet is live. 200+ apps deployed already - <button onclick="flierOpen(1)" class="activity-bar-link" style="background:none;border:none;border-bottom:1px solid currentColor;cursor:pointer;font:inherit;color:inherit;padding:0;letter-spacing:inherit;">Start building ➡️</button></span>
     <span class="activity-bar-text">🔔 The Web3 Summit Concluded Last week  - <a href="adhoc-reports/web3-summit-2026-recap.html" class="activity-bar-link">Checkout the Summary ➡️</a></span>
-    <span class="activity-bar-text">📬 Get the Polkadot Daily Digest in your inbox - <button onclick="flierOpen()" class="activity-bar-link" style="background:none;border:none;border-bottom:1px solid currentColor;cursor:pointer;font:inherit;color:inherit;padding:0;letter-spacing:inherit;">Register your interest ➡️</button></span>
+    <span class="activity-bar-text">📬 Get the Polkadot Daily Digest in your inbox - <button onclick="flierOpen(0)" class="activity-bar-link" style="background:none;border:none;border-bottom:1px solid currentColor;cursor:pointer;font:inherit;color:inherit;padding:0;letter-spacing:inherit;">Register your interest ➡️</button></span>
   </div>
 </div>
 
@@ -1870,9 +1954,9 @@ Here&rsquo;s what you need to know&#128071;&#65039;</div>
     <div class="home-block">
       <div class="home-intro-copy">
         <h2 class="method-title">About This Digest</h2>
-        <p class="method-body">We at <a href="https://palalabs.org/" style="color:inherit;border-bottom:1px solid var(--outline);text-decoration:none;font-weight:600;">Pala Labs</a> are reviving the Polkadot Daily Digest, picking up the format started by the Web3 Foundation&rsquo;s original Daily Digest. We rebuilt the curation process from the ground up as a fully automated pipeline, studied how the original worked, defined editorial standards, and tested it for a month before going live. What makes this digest complete is that every single edition - though built automatically - is read and checked by a real human on our team before it ever goes live.</p>
-        <p class="method-body">We publish two editions daily. The <strong>Socials Digest</strong> focuses purely on <strong>X (Twitter)</strong> activity across the ecosystem, posted on the Polkadot Forum. The <strong>Legacy Digest</strong> is a curated brief covering <strong>OpenGov, SDK releases, X (Twitter), Medium, and the Polkadot Forum</strong>, shared on the Element channel. Our <a href="#methodology">Methodology</a> is public, every claim links back to its source, and the full archive lives openly on this website.</p>
-        <p class="method-body">For feedback or comments, please create a GitHub Issue <a href="https://github.com/Pala-Labs/polkadot-daily-digest/issues">here</a>.</p>
+        <p class="method-body">The Polkadot Daily Digest began at the Web3 Foundation. We at <a href="https://palalabs.org/" style="color:inherit;border-bottom:1px solid var(--outline);text-decoration:none;font-weight:600;">Pala Labs</a> picked it back up in May, and it has gone out every day since. The gathering and curation run automatically now - but nothing publishes until someone on the team has actually read it.</p>
+        <p class="method-body">There are two editions a day. The <strong>Socials Digest</strong> follows what the ecosystem is saying on <strong>X (Twitter)</strong>, and goes up on the Polkadot Forum. The <strong>Legacy Digest</strong> is the wider brief - <strong>OpenGov, SDK releases, X (Twitter), Medium, and the Polkadot Forum</strong> - shared on the Element channel.</p>
+        <p class="method-body">How we put it together is written up in our <a href="#methodology">Methodology</a>, every claim points back to where it came from, and the whole archive sits here, open to anyone. If something looks off, tell us on <a href="https://github.com/Pala-Labs/polkadot-daily-digest/issues">GitHub</a>.</p>
       </div>
     </div>
   </div>
@@ -2140,7 +2224,7 @@ Here&rsquo;s what you need to know&#128071;&#65039;</div>
 
 <!-- ───────── Flier popup · "The Fliers" ───────── -->
 <button class="flier-fab" id="flier-fab" aria-label="Open The Fliers" title="The Fliers">
-  <span class="fab-badge" id="fab-badge">2</span>
+  <span class="fab-badge" id="fab-badge">3</span>
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
 </button>
 
@@ -2150,8 +2234,34 @@ Here&rsquo;s what you need to know&#128071;&#65039;</div>
     <button class="flier-close" id="flier-close" aria-label="Close and send the flier to the corner">&times;</button>
     <div class="flier-stack" id="flier-stack">
 
-      <!-- Page 1: Web3 Summit 2026 -->
-      <article class="flier-page" data-page="1">
+      <!-- Page 1: Polkadot Products Devnet -->
+      <article class="flier-page flier-compact" data-page="1">
+        <div class="flier-kicker"><span class="flier-tag flier-tag-live">Live</span> Polkadot Products Devnet</div>
+        <div class="flier-serif">Devnet is Live</div>
+        <div class="flier-rule"></div>
+        <h2 class="flier-h">Ship a real app - no chain, no server.</h2>
+        <p class="flier-body">Build a static web app, give it a <strong>.dot</strong> name, publish the bundle. It runs in the Polkadot app or any browser.</p>
+
+        <div class="flier-stat">
+          <span class="flier-stat-n">~200</span>
+          <span class="flier-stat-l">apps already deployed on the Devnet</span>
+        </div>
+
+        <ol class="flier-steps">
+          <li><strong>Scaffold</strong> with the SDK - contracts run on PolkaVM.</li>
+          <li><strong>Register</strong> a <strong>.dot</strong> name, tied to your identity.</li>
+          <li><strong>Publish</strong> - and it&rsquo;s live. No real funds at risk.</li>
+        </ol>
+
+        <div class="ad-card-links" style="margin-top:16px;">
+          <a class="ad-link" href="https://x.com/Polkadot/article/2080276840443224236" target="_blank" rel="noopener">Announcement &#8599;</a>
+          <a class="ad-link" href="https://docs.polkadotcommunity.foundation/getting-started/developers/" target="_blank" rel="noopener">Quickstart &#8599;</a>
+        </div>
+        <div class="flier-spacer"></div>
+      </article>
+
+      <!-- Page 2: Web3 Summit 2026 -->
+      <article class="flier-page" data-page="2">
         <div class="flier-kicker"><span class="flier-tag">Featured</span> Web3 Summit 2026 &middot; The Fliers</div>
         <div class="flier-serif">Concluded</div>
         <div class="flier-rule"></div>
@@ -2206,7 +2316,8 @@ Here&rsquo;s what you need to know&#128071;&#65039;</div>
       <button class="flier-arrow" id="flier-prev" aria-label="Previous notice">&#8249;</button>
       <div class="flier-dots" id="flier-dots">
         <button class="flier-dot" data-dot="0" aria-label="Newsletter"></button>
-        <button class="flier-dot" data-dot="1" aria-label="Web3 Summit"></button>
+        <button class="flier-dot" data-dot="1" aria-label="Polkadot Products Devnet"></button>
+        <button class="flier-dot" data-dot="2" aria-label="Web3 Summit"></button>
       </div>
       <button class="flier-arrow" id="flier-next" aria-label="Next notice">&#8250;</button>
     </div>
@@ -2705,12 +2816,6 @@ function nextBlockquote(el) {
   return cur && cur.tagName === 'BLOCKQUOTE' ? cur : null;
 }
 
-function sectionBanner(label) {
-  return '<div class="section-banner">' +
-    '<div class="section-banner-title">' + label + '</div>' +
-  '</div>';
-}
-
 function readingHeader(label) {
   return '<div class="reading-h2">' + label + '</div>';
 }
@@ -2746,6 +2851,8 @@ function renderReadingSection(h2) {
   return readingHeader(h2.textContent.trim()) + body;
 }
 
+// OpenGov flows inside the same reading box as the rest of the report - its h2
+// gets the same header treatment, the h3s become sub-labels above each grid.
 function renderGovSection(h2) {
   let inner = '';
 
@@ -2764,10 +2871,7 @@ function renderGovSection(h2) {
   }
   if (!inner) return '';
 
-  return '<div class="report-section">' +
-    sectionBanner(h2.textContent.trim()) +
-    inner +
-  '</div>';
+  return readingHeader(h2.textContent.trim()) + inner;
 }
 
 function renderLogChips(stats, statDefs) {
@@ -2787,19 +2891,16 @@ function renderLogChips(stats, statDefs) {
 function renderReport(doc, colKey) {
   const col     = COLLECTIONS[colKey] || COLLECTIONS.daily;
   let reading   = renderSummarySection(doc);
-  let govHTML   = '';
 
   doc.querySelectorAll('h2').forEach(h2 => {
     const key = h2.textContent.trim().toLowerCase();
     if (key.startsWith('processing log')) return;
-    if (key === 'opengov updates') { govHTML = renderGovSection(h2); return; }
-    reading += renderReadingSection(h2);
+    reading += key === 'opengov updates' ? renderGovSection(h2) : renderReadingSection(h2);
   });
 
   let out = reading
     ? '<div class="report-section"><div class="reading-box">' + reading + '</div></div>'
     : '';
-  out += govHTML;
   out += renderLogChips(extractStats(doc), col.statDefs);
 
   return out || '<div class="loading">No content found.</div>';
@@ -2897,11 +2998,14 @@ function mwUpdateArrows() {
 
 // ─────────────────────────── Init ─────────────────────────────
 // ─────────────────────── Flier popup · The Fliers ─────────────
-// Flippable deck of fliers. Page 0 = Newsletter; Page 1 = Web3 Summit 2026.
+// Flippable deck of fliers. Page 0 = Newsletter; Page 1 = Polkadot Products
+// Devnet; Page 2 = Web3 Summit 2026.
 // Add new pages by creating <article class="flier-page" data-page="N"> + adding
-// a corresponding .flier-dot + bumping FLIER_PAGES.
-const FLIER_PAGES = 2;
-let flierIndex = 0;
+// a corresponding .flier-dot + bumping FLIER_PAGES + the FAB badge count.
+const FLIER_PAGES = 3;
+// The notice the deck opens on; the ticker links pass an explicit page instead.
+const FLIER_DEFAULT = 1;
+let flierIndex = FLIER_DEFAULT;
 
 function flierSetStates() {
   document.querySelectorAll('.flier-page').forEach(p => {
@@ -2922,7 +3026,9 @@ function flierGo(i)   { flierIndex = Math.max(0, Math.min(FLIER_PAGES - 1, i)); 
 function flierNext()  { flierGo(flierIndex + 1); }
 function flierPrev()  { flierGo(flierIndex - 1); }
 
-function flierOpen() {
+// `page` is optional - the ticker links pass the flier they advertise. The FAB
+// binds this as a listener, so anything that isn't an integer means "as-is".
+function flierOpen(page) {
   const ov  = document.getElementById('flier-overlay');
   const fab = document.getElementById('flier-fab');
   if (!ov) return;
@@ -2931,7 +3037,7 @@ function flierOpen() {
   ov.setAttribute('aria-hidden', 'false');
   if (fab) fab.classList.add('hidden');
   document.body.style.overflow = 'hidden';
-  flierGo(flierIndex);
+  flierGo(Number.isInteger(page) ? page : flierIndex);
   try { localStorage.setItem('flierSeen', '1'); } catch (e) {}
 }
 

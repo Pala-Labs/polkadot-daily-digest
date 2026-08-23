@@ -1,0 +1,25 @@
+{
+  "domain": "dailydigest",
+  "env": "devnet",
+
+  "windowDays": 7,
+  "anchor": "latest",
+
+  "collections": [
+    { "key": "daily", "dir": "digests" },
+    { "key": "community", "dir": "community_digests" }
+  ],
+
+  "include": {
+    "analytics": false,
+    "adhocReports": false,
+    "monthlyWraps": true
+  },
+
+  "archiveNotice": {
+    "enabled": true,
+    "text": "Devnet edition - carrying the last 7 days of both editions.",
+    "linkText": "Full archive at news.openshore.io",
+    "href": "https://news.openshore.io"
+  }
+}

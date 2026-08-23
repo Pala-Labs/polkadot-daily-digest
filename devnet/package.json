@@ -1,0 +1,28 @@
+{
+  "name": "polkadot-daily-digest-devnet",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Devnet deployment tooling for the Polkadot Daily Digest. Isolated from the production site - see devnet/README.md.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "vendor": "node scripts/vendor.mjs",
+    "build": "node scripts/build.mjs",
+    "verify": "node scripts/verify.mjs",
+    "preview": "python3 -m http.server 8899 --directory dist",
+    "deploy": "node scripts/deploy.mjs",
+    "deploy:execute": "node scripts/deploy.mjs --execute"
+  },
+  "devDependencies": {
+    "@polkadot-community-foundation/dotns-cli": "^0.8.1",
+    "@polkadot-community-foundation/polkadot-app-deploy": "^0.13.1"
+  },
+  "overridesReason": "@novasamatech/host-papp declares polkadot-api '>=2' but imports 'polkadot-api/signer', an export dropped in 3.0.0. Left unpinned, npm resolves 3.x and `pad` dies at startup with ERR_PACKAGE_PATH_NOT_EXPORTED. 2.2.2 is the newest release that still provides it. Drop this override once host-papp tightens its range.",
+  "overrides": {
+    "@novasamatech/host-papp": {
+      "polkadot-api": "2.2.2"
+    }
+  }
+}

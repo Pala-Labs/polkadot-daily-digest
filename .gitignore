@@ -19,10 +19,27 @@ package-lock.json
 # Secrets / environment
 .env
 .env.*
+# Also catch prefixed env files (devnet.env, local.env, …). The devnet signing
+# mnemonic lives in one of these; it must never reach a commit.
+*.env
 !.env.example
+*.mnemonic
+secrets/
 
 # Claude Code (AI assistant tooling - machine-specific)
 .claude/
 
 # Design handoff assets (source files, not served)
 OpenShore-logo/
+
+# Devnet deployment (see devnet/README.md)
+# Build output only. Everything else under devnet/ is committed on purpose:
+# scripts/, config.json, polkadot-app-deploy.config.ts, app-icon.svg|png and
+# vendor/ (Chart.js + webfonts, so builds are offline and reproducible).
+devnet/dist/
+# The devnet lockfile IS committed: it pins the polkadot-api override that keeps
+# `pad` runnable. Overrides the blanket package-lock.json rule above.
+!devnet/package-lock.json
+# pad/dotns scratch state, if either CLI ever writes into the project.
+devnet/.pad/
+devnet/.dotns/

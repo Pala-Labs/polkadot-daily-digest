@@ -1,0 +1,44 @@
+<h1 id="polkadotdailydigesthttpsnewsopenshoreio2026082520260825"><a href="https://news.openshore.io/#2026-08-25">Polkadot Daily Digest</a>: 2026-08-25</h1>
+<h1 id="summary">Summary</h1>
+<p>RFC 166 proposed a permissionless Snowbridge emergency pause backed by a configurable deposit currently pencilled in around 100,000 DOT, with OpenGov deciding refunds or slashing. RFC 175 also advanced moving on-demand coretime sales to the Coretime chain.</p>
+<h1 id="report">Report</h1>
+<h2 id="governance">Governance</h2>
+<ul>
+<li><p><strong>RFC 166: Snowbridge Emergency Pause</strong> was presented by Clara van Staden, proposing a permissionless bridge-freeze mechanism backed by a configurable deposit “currently pencilled in at around <strong>100,000 DOT</strong>”; OpenGov would later decide whether to refund or slash the deposit. The discussion framed it as a trade-off between censorship risk and emergency response speed, with Snowbridge described as securing roughly <strong>$20 million</strong>. (via <a href="https://forum.polkadot.network/t/polkadot-technical-fellowship-opendev-call-proceedings-18-august-2026/18459">Polkadot Forum Article - Doordashcon</a>)</p></li>
+<li><p>Fellowship participants discussed validator retention metrics work by Ross Bulat, described as showing which validators immediately liquidate DOT rewards. Domenico argued that publishing the metrics could influence validator behaviour, while Bastian Köcher pushed back that validators have infrastructure costs and suggested stable-asset cost coverage plus DOT incentives as a better model. (via <a href="https://forum.polkadot.network/t/polkadot-technical-fellowship-opendev-call-proceedings-18-august-2026/18459">Polkadot Forum Article - Doordashcon</a>)</p></li>
+</ul>
+<h2 id="technical">Technical</h2>
+<ul>
+<li><p><strong>RFC 175: On demand as core scheduling</strong> was presented by Sergej Sakac, following <strong>RFC-32</strong> by moving on-demand coretime sales off the relay chain: orders would be placed, priced, and paid on the Coretime chain, while the relay chain’s <code>on_demand</code> pallet would be removed. The proposal remains open for review after clarification that one-shot assignments cover a single block, aligning directionally with keeping core-side logic simple for JAM. (via <a href="https://forum.polkadot.network/t/polkadot-technical-fellowship-opendev-call-proceedings-18-august-2026/18459">Polkadot Forum Article - Doordashcon</a>)</p></li>
+<li><p>Clara van Staden noted that implementation of <strong>RFC 166</strong> has not started because her team has been focused on other security work, and said a second RFC on Snowbridge circuit breakers would be deferred to a later call. That circuit-breaker design would aim to detect anomalous bridge flows and delay transactions rather than only reacting after the fact. (via <a href="https://forum.polkadot.network/t/polkadot-technical-fellowship-opendev-call-proceedings-18-august-2026/18459">Polkadot Forum Article - Doordashcon</a>)</p></li>
+<li><p>Fellowship participants discussed repository permissioning friction around testing individuality integration, including whether a Polkadot-native, non-public Git host could support Fellowship permissions. Bastian Köcher said he knew of a prototype from around the turn of the year but saw no active effort, while Domenico Valles said he had time to look into feasibility. (via <a href="https://forum.polkadot.network/t/polkadot-technical-fellowship-opendev-call-proceedings-18-august-2026/18459">Polkadot Forum Article - Doordashcon</a>)</p></li>
+<li><p>Bastian Köcher updated the call on the parachain service design for <strong>JAM</strong>, saying that writing a <strong>Quint</strong> formal specification alongside the written spec had surfaced small issues and corner cases, making the system requirements materially clearer. The topic is expected to receive a fuller slot on the next call. (via <a href="https://forum.polkadot.network/t/polkadot-technical-fellowship-opendev-call-proceedings-18-august-2026/18459">Polkadot Forum Article - Doordashcon</a>)</p></li>
+</ul>
+<h2 id="ecosystem">Ecosystem</h2>
+<ul>
+<li><strong>Parity Technologies</strong> said the <strong>Polkadot Devnet stack</strong> now has <strong>205 apps live and counting</strong>, positioning it as a stack more developers are discovering for building decentralized web applications. (via <a href="https://x.com/paritytech/status/2091854354055659975">X Posts - paritytech</a>)</li>
+</ul>
+<h2 id="opengovupdates">OpenGov Updates</h2>
+<h3 id="newreferendumlast24h">New Referendum (Last 24H)</h3>
+<blockquote>
+  <p><strong><a href="https://polkadot.subsquare.io/referenda/1935">Referendum 1935</a>:</strong> Approving bkchr at Fellowship rank 6 ➖
+  <strong>Current Aye:</strong> 0.00% ➖ <strong>Status:</strong> Decision ➖ <strong>Proposer:</strong> <a href="https://openshore.io/govern/voting-tool?address=13fvj4bNfrTo8oW6U8525soRp6vhjAFLum6XBdtqq9yP22E7">bkchr</a></p>
+</blockquote>
+<h3 id="referendumapproachingdecisionpleasevote">Referendum Approaching Decision (Please Vote)</h3>
+<blockquote>
+  <p><strong><a href="https://polkadot.subsquare.io/referenda/1927">Referendum 1927</a>:</strong>  ➖
+  <strong>Proposer:</strong> <a href="https://openshore.io/govern/voting-tool?address=143Uk3RFxt1u9ZFsPmZkA2KLeqwYCJTmjGNto21kohfZMgJU">143Uk3RFxt1u9ZFsPmZkA2KLeqwYCJTmjGNto21kohfZMgJU</a> ➖ <strong>Requested Amount:</strong>  ➖ <strong>Current Aye:</strong> 0.30% ➖ <strong>Decision In:</strong> 1.4 days</p>
+</blockquote>
+<hr />
+<h2 id="processinglogs">Processing Logs</h2>
+<p><strong>Report Generated:</strong> 2026-08-25</p>
+<p><strong>Data Source (Data points curated & analysed):</strong></p>
+<ul>
+<li>Polkadot Forum: 62</li>
+<li>Medium: 15</li>
+<li>X(Twitter): 2</li>
+<li>GitHub (Release only): 1</li>
+<li>OpenGov: 2</li>
+</ul>
+<hr />
+<p><sup>This report is auto-generated and provided for informational purposes only by OpenShore, a Pala Labs initiative. The content is based on community posts (incl. X, Forum & Medium) and may contain inaccuracies. We do not guarantee its completeness or correctness.</sup></p>

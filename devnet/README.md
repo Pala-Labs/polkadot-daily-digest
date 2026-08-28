@@ -35,7 +35,7 @@ removal steps below.
 | Google Analytics | On | Removed |
 | Ad-hoc Reports tab | On | Removed |
 | Monthly Wraps, Methodology, Twitter Activity | On | On |
-| Archive notice strip | — | Added, links back to the full archive |
+| Archive notice strip | - | Added, links back to the full archive |
 | Devnet flier link | Points at `dailydigest.dev-dot.li` | Same (self-referential) |
 
 Everything else - layout, navigation, theming, the Socials/Legacy editions, the

@@ -1,0 +1,33 @@
+<h1 id="polkadotdailydigesthttpsnewsopenshoreio2026091020260910"><a href="https://news.openshore.io/#2026-09-10">Polkadot Daily Digest</a>: 2026-09-10</h1>
+<h1 id="summary">Summary</h1>
+<p>Polkadot Product Devnet is rolling out a major update with new mobile and desktop apps, requiring users to back up recovery phrases, reinstall, and create new usernames while losing contacts/messages; DotNS and the CDM registry also moved to new contracts.</p>
+<h1 id="report">Report</h1>
+<h2 id="technical">Technical</h2>
+<ul>
+<li><p><strong>Polkadot Product Devnet</strong> is rolling out a major update alongside new mobile and desktop apps; users are told to back up recovery phrases if they want to retain access to published <strong>.dot</strong> domains, delete backups, uninstall, and reinstall, with the update requiring new usernames and causing loss of contacts/messages. (via <a href="https://forum.polkadot.network/t/polkadot-product-devnet-update/18602">Polkadot Forum Article - pcf_network</a>, <a href="https://x.com/Polkadot/status/2097584767696834659">X Posts - Polkadot</a>, <a href="https://x.com/paritytech/status/2097585920975245402">X Posts - paritytech</a>)</p></li>
+<li><p>The Devnet update changes chat encryption from <strong>P-256</strong> to <strong>X25519</strong>, updates the cryptographic context for personhood pseudonyms, and redeploys the <strong>CDM</strong> registry to fix failures when publishing new contract names. Desktop adds audio/video calls and chat search; mobile adds chat search, a new tab bar UI, transfer replies inside chat, improved multimedia downloads, an audio-device picker, registration progress states, error-message improvements, coinage-management improvements, and improved <strong>PGAS</strong>. (via <a href="https://forum.polkadot.network/t/polkadot-product-devnet-update/18602">Polkadot Forum Article - pcf_network</a>)</p></li>
+<li><p><strong>DotNS</strong> has migrated to a new set of contracts: every <strong>.dot</strong> name was migrated, but app records were recreated from a snapshot and may need republishing if they fail to load or show older versions. Developers are told to use <code>@parity/polkadot-app-deploy@latest</code> with <strong>pad 0.16.1 or later</strong> and <code>@polkadot-community-foundation/dotns-cli@latest</code> with <strong>0.9.1 or later</strong>, because older releases still point at retired DotNS contracts. (via <a href="https://forum.polkadot.network/t/polkadot-product-devnet-update/18602">Polkadot Forum Article - pcf_network</a>)</p></li>
+<li><p>The <strong>CDM</strong> contract registry is moving to <strong>0x05662b3dbd5dd9f2ff92d67630477e84b0b37c1f</strong>; developers should update <code>@polkadot-community-foundation/cdm-cli</code> and <code>@polkadot-community-foundation/cdm-env</code>, regenerate <code>cdm.json</code>, and avoid registering new contract names on the old registry. The old registry remains readable after the switch, but anything registered there after the snapshot will not appear in the new registry. (via <a href="https://forum.polkadot.network/t/polkadot-product-devnet-update/18602">Polkadot Forum Article - pcf_network</a>)</p></li>
+<li><p>After runtime upgrades land, developers need to regenerate and re-pin chain descriptors for <strong>Bulletin</strong>, <strong>Asset Hub</strong>, and <strong>People</strong>, because stale descriptors will fail at decode. The Bulletin authorization structure changes shape, with <code>bytesPermanent</code> moving from the top level into a nested <code>extra</code> field; published data is not affected, only how it is read. (via <a href="https://forum.polkadot.network/t/polkadot-product-devnet-update/18602">Polkadot Forum Article - pcf_network</a>)</p></li>
+</ul>
+<h2 id="opengovupdates">OpenGov Updates</h2>
+<h3 id="newreferendumlast24h">New Referendum (Last 24H)</h3>
+<p>No new referendum in last 24 Hours</p>
+<h3 id="referendumapproachingdecisionpleasevote">Referendum Approaching Decision (Please Vote)</h3>
+<blockquote>
+  <p><strong><a href="https://polkadot.subsquare.io/referenda/1934">Referendum 1934</a>:</strong> [Small Spender] Referendum #1934 ➖
+  <strong>Proposer:</strong> <a href="https://openshore.io/govern/voting-tool?address=14mY9eUFJT615yWz2G7x4NP53svJVXvTzdpWDsmaXFAN7uYN">Supercomputing Systems</a> ➖ <strong>Requested Amount:</strong> $38,488 USDt ➖ <strong>Current Aye:</strong> 2.24% ➖ <strong>Decision In:</strong> 6.6 days</p>
+</blockquote>
+<hr />
+<h2 id="processinglogs">Processing Logs</h2>
+<p><strong>Report Generated:</strong> 2026-09-10</p>
+<p><strong>Data Source (Data points curated & analysed):</strong></p>
+<ul>
+<li>Polkadot Forum: 63</li>
+<li>Medium: 15</li>
+<li>X(Twitter): 3</li>
+<li>GitHub (Release only): 1</li>
+<li>OpenGov: 2</li>
+</ul>
+<hr />
+<p><sup>This report is auto-generated and provided for informational purposes only by OpenShore, a Pala Labs initiative. The content is based on community posts (incl. X, Forum & Medium) and may contain inaccuracies. We do not guarantee its completeness or correctness.</sup></p>

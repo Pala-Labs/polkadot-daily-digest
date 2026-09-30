@@ -1,0 +1,414 @@
+<!doctype html> 
+<h1>Polkadot September Wrap </h1>
+<hr>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Polkadot Monthly Summary - September 2026</title>
+</head>
+<body>
+
+  <section>
+    <h2>Executive Summary</h2>
+    <p>
+      September was a technically active and governance-heavy month for the Polkadot ecosystem. The strongest recurring themes were the push toward <strong>JAM</strong>, continued build-out of the <strong>Polkadot Products Devnet</strong>, deeper work on <strong>privacy and personhood primitives</strong>, and renewed attention to <strong>Treasury operations, stablecoins, and governance accountability</strong>.
+    </p>
+    <p>
+      Governance activity centered on several major referendum threads: the cancellation of a large Technical Fellowship salary replenishment proposal, dotUSD moving to vote with very high support, the keyless burn-account Wish for Change nearing decision, and ongoing debates about Kusama’s future, System Chain collator allocation, staking incentives, and Treasury-funded ecosystem initiatives.
+    </p>
+    <p>
+      On the technical side, Polkadot’s direction became clearer: simplify the Relay Chain, move more functionality toward JAM services, expand light-client access, improve developer tooling, and make privacy-preserving infrastructure a default part of the product stack.
+    </p>
+  </section>
+
+  <section>
+    <h2>Key Themes and Trends</h2>
+
+    <h3>Governance Became More Strategic and More Scrutinized</h3>
+    <p>
+      OpenGov discussions this month showed a maturing governance culture. Large funding requests and structural changes faced closer review, while infrastructure and Treasury decisions increasingly focused on long-term sustainability.
+    </p>
+    <ul>
+      <li>
+        <strong>Technical Fellowship funding became a flashpoint.</strong> Referendum 1940, which sought to replenish the Technical Fellowship salary account with <strong>4.8M DOT</strong>, was challenged and effectively canceled through Referendum 1941, which reached very high support. Web3 Foundation later indicated that tighter conditions would be needed before supporting a future Fellowship salary proposal.
+      </li>
+      <li>
+        <strong>dotUSD gained strong momentum.</strong> Referendum 1944 proposed dotUSD as a native stablecoin for Polkadot and reached roughly <strong>98% Aye</strong> late in the month. Phase 1 focused on USDT-to-dotUSD swaps and a DOT x USDT pool on the Hub, with $2M added to the pool.
+      </li>
+      <li>
+        <strong>Keyless burn-account confirmation remained contested.</strong> Referendum 1939, a Wish for Change to confirm a canonical keyless burn account for Polkadot, hovered around <strong>18.8% Aye</strong> while approaching decision.
+      </li>
+      <li>
+        <strong>Treasury stablecoin management became more visible.</strong> Multiple stablecoin transfers from legacy Treasury accounts were reported, including approximately $310k, $610k, $840k, and $450k worth of stablecoins across the month.
+      </li>
+      <li>
+        <strong>Kusama’s strategic role came under discussion.</strong> After Referendum 498 and lower observed activity, Kusama stakeholders debated whether Kusama should refocus on cypherpunk experimentation, privacy, digital freedom, and creative work.
+      </li>
+    </ul>
+
+    <h3>JAM Moved from Vision to Concrete Planning</h3>
+    <p>
+      JAM was one of the month’s most persistent themes. Discussions shifted from high-level positioning to implementation pathways, developer tooling, migration plans, and Kusama’s possible role in the JAM era.
+    </p>
+    <ul>
+      <li>
+        Parity and ecosystem contributors outlined the <strong>Road to JAM</strong>, including PolkaJAM, Minimal Relay, offchain messaging, and moving parachain functionality into a JAM service model.
+      </li>
+      <li>
+        The long-term direction points toward a <strong>Minimal Relay</strong> end state with zero DOT on the Relay Chain and parachain functions moving toward the <strong>Coretime</strong> chain.
+      </li>
+      <li>
+        Parity stated that bringing JAM to production is a major focus for <strong>2027</strong>.
+      </li>
+      <li>
+        <strong>JamScript</strong> was introduced as a TypeScript-like language and SDK for building JAM applications without directly handling Refine/Accumulate.
+      </li>
+      <li>
+        A Kusama JAM Prime position paper proposed a five-year JAM Prime package, using <strong>US$8.64M</strong> as a reference point and suggesting discussion before a formal direction-setting Wish for Change.
+      </li>
+    </ul>
+
+    <h3>Polkadot Products Devnet Became a Major Builder Surface</h3>
+    <p>
+      The Products Devnet received a major update and became a central environment for experimentation. The update shipped new mobile and desktop apps, X25519 chat encryption, a DotNS migration, and contract and registry changes that required developers to reinstall and possibly republish apps.
+    </p>
+    <ul>
+      <li>
+        Builders began experimenting with encrypted dead drops, industrial-process ZK proofs, AI-agent identity and escrow flows, and machine-economy use cases such as token-based door access.
+      </li>
+      <li>
+        <strong>ComputeFlux</strong> went live on the Products Devnet, offering a single interface for users and AI agents to access multiple AI models and compute providers.
+      </li>
+      <li>
+        Parity promoted the Devnet as a cypherpunk environment for strong cryptography, privacy-enhancing technologies, and app experimentation.
+      </li>
+      <li>
+        The Product SDK gained visibility through integrations with <strong>Claude Code</strong>, helping developers scaffold apps and work with signing, contracts, storage, transactions, and chain connections.
+      </li>
+    </ul>
+
+    <h3>Privacy, Personhood, and Human Verification Advanced</h3>
+    <p>
+      Privacy-preserving identity and proof-of-personhood were recurring topics across governance, tooling, and ecosystem projects.
+    </p>
+    <ul>
+      <li>
+        <strong>Polkadot Humanity</strong> was presented as a proof-of-personhood primitive that lets apps verify a real human is present through open Polkadot-based protocols.
+      </li>
+      <li>
+        <strong>dotID</strong> was framed as a way to bring verified on-chain identity and human-readable <code>.id</code> usernames to Polkadot while keeping users’ keys under their control.
+      </li>
+      <li>
+        <strong>DotNS</strong> was described as able to use Humanity proof-of-personhood in name registration and transfer rules.
+      </li>
+      <li>
+        <strong>Jollity</strong> experimented with personhood verification via short random video meetups.
+      </li>
+      <li>
+        <strong>ZK Email</strong> completed Milestone 1 for a DKIM Registry port to PolkaVM and deployed on Paseo Asset Hub, aiming to let Polkadot-native apps verify email proofs on-chain without revealing email contents.
+      </li>
+      <li>
+        <strong>WonderZK</strong> was proposed as a new Polkadot protocol architecture, with the author seeking collaborators in zero knowledge, cryptography, proving systems, and Polkadot architecture.
+      </li>
+    </ul>
+
+    <h3>Light Clients and Trust-Minimized Access Became a Core Product Direction</h3>
+    <p>
+      A major technical throughline was the movement away from reliance on centralized RPC endpoints and toward light-client-first access.
+    </p>
+    <ul>
+      <li>
+        Polkadot and Parity highlighted light-client demos running on small devices, including a microcontroller and an <strong>ESP32 powered by a 9V battery</strong>.
+      </li>
+      <li>
+        These demos showed devices following the Relay Chain and verifying finality proofs locally, enabling state reads without trusting an RPC provider.
+      </li>
+      <li>
+        Robonomics demonstrated running without public RPC endpoints using a subxt-based API over a light client, targeting IoT and edge devices.
+      </li>
+      <li>
+        Parity said upcoming JAM work includes an <strong>in-browser light node</strong>.
+      </li>
+      <li>
+        Operator tooling also moved in this direction: <strong>Suno</strong>, a terminal tool for node operators, was described as connecting through light clients and avoiding manual RPC endpoint configuration.
+      </li>
+    </ul>
+
+    <h3>Infrastructure Reliability and Node Operations Drew Attention</h3>
+    <p>
+      Several posts focused on operational bottlenecks and the need to simplify infrastructure.
+    </p>
+    <ul>
+      <li>
+        EasyCrypto reported production bottlenecks for dApps using <strong>pallet-revive</strong> EVM compatibility on Asset Hub, citing rate limits, timeouts, intermittent <code>CALL_EXCEPTION</code> results, and the lack of dedicated Asset Hub EVM endpoints.
+      </li>
+      <li>
+        A <strong>Metanode</strong> discussion proposed consolidating node services for the Polkadot Products Platform, arguing that separate funding for RPCs, collators, and bootnodes is hard to scale.
+      </li>
+      <li>
+        The proposed near-term model would have validator operators also run collators for Asset Hub and likely People Chain, with Bulletin Chain opt-in over time.
+      </li>
+      <li>
+        The Polkadot Cloud Validator Browser was highlighted as a tool for viewing validator infrastructure performance and operating costs.
+      </li>
+      <li>
+        KusamaShield reported nearly <strong>3 TB</strong> of data served through its Kusama RPC over the previous month, indicating continued infrastructure usage.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Governance and Treasury Snapshot</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Status / Outcome</th>
+          <th>Monthly Significance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Referendum 1940</td>
+          <td>Technical Fellowship salary replenishment proposal for 4.8M DOT was challenged and canceled.</td>
+          <td>Triggered broader discussion about Fellowship funding conditions and accountability.</td>
+        </tr>
+        <tr>
+          <td>Referendum 1941</td>
+          <td>Cancellation of Referendum 1940 reached very high support.</td>
+          <td>Showed strong community appetite for revisiting large recurring funding requests.</td>
+        </tr>
+        <tr>
+          <td>Referendum 1929</td>
+          <td>Spanish Education by Polkadot Mexico had very low Aye support while approaching decision.</td>
+          <td>Highlighted scrutiny around educational funding proposals.</td>
+        </tr>
+        <tr>
+          <td>Referendum 1934</td>
+          <td>Small Spender proposal from Supercomputing Systems remained low-support while approaching decision.</td>
+          <td>Reflected difficulty for smaller funding proposals to gain traction without broad backing.</td>
+        </tr>
+        <tr>
+          <td>Referendum 1939</td>
+          <td>Wish for Change to confirm a canonical keyless burn account hovered around 18.8% Aye.</td>
+          <td>Raised questions about symbolic governance decisions, burn-account standards, and community consensus.</td>
+        </tr>
+        <tr>
+          <td>Referendum 1944</td>
+          <td>dotUSD proposal reached roughly 98% Aye late in the month.</td>
+          <td>One of the month’s clearest governance signals, supporting native stablecoin infrastructure.</td>
+        </tr>
+        <tr>
+          <td>Treasury Stablecoin Transfers</td>
+          <td>Multiple stablecoin inflows were moved from legacy or other accounts into current Treasury holdings.</td>
+          <td>Improved visibility around Treasury liquidity and stablecoin reserves.</td>
+        </tr>
+        <tr>
+          <td>Kusama Strategy Discussion</td>
+          <td>Governance coordinator Luuu opened a post-Referendum 498 strategy discussion.</td>
+          <td>Focused attention on Kusama’s identity, reduced activity, coretime utilization, and future role.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>Technical Highlights</h2>
+
+    <h3>Runtime, System Chains, and Protocol Upgrades</h3>
+    <ul>
+      <li>
+        <strong>Polkadot v2.5.0</strong> entered community vote for system-chain upgrades, adding <code>technical_maintenance</code> and <code>prosperity_emergency</code> OpenGov tracks and integrating the Individuality SDK into People Polkadot and AssetHub Polkadot.
+      </li>
+      <li>
+        <strong>Polkadot Runtime Upgrade 2.5</strong> was proposed for all system chains.
+      </li>
+      <li>
+        <strong>Robonomics 5.0</strong> began with Release 50, “Runtime-First,” splitting the repo so the Robonomics repository holds only the runtime while collators run the generic <strong>polkadot-omni-node</strong>.
+      </li>
+      <li>
+        <strong>Robonomics 5.1</strong> plans included replacing developer-multisig Sudo with two-track OpenGov and later removing Sudo by referendum.
+      </li>
+      <li>
+        <strong>stable2612</strong> will move Polkadot release and CI binaries from Debian Bullseye to Debian Bookworm, requiring Debian 12 or Ubuntu 22.04+ after 2026-12-21.
+      </li>
+    </ul>
+
+    <h3>Developer Tooling and Product Infrastructure</h3>
+    <ul>
+      <li>
+        <strong>Merkelized Metadata</strong> was promoted as a way for parachain apps to provide clearer hardware-wallet transaction approvals and reduce blind signing.
+      </li>
+      <li>
+        <strong>Celerity</strong> was described as an app-messaging system where messages are signed, kept off-chain, and propagated between nodes without a central service; Trinity already uses it for decentralized chat.
+      </li>
+      <li>
+        <strong>Relaycode v0.3.0</strong> expanded into a browser-based developer platform with Relaycode Studio, a Polkadot Hub smart-contract workspace for writing, compiling, and deploying Solidity contracts.
+      </li>
+      <li>
+        <strong>Subscan</strong> added Asset Conversion DEX analytics for Asset Hub, including swaps, pools, liquidity, and prices.
+      </li>
+      <li>
+        <strong>Subsquare</strong> added referendum comment filters that hide spam, zero-DOT, and no-identity accounts by default while keeping all comments accessible.
+      </li>
+      <li>
+        Parity added an RSS feed to its blog after community requests, improving access to posts about JAM, Trinity, the Products Platform, and Statement Store.
+      </li>
+    </ul>
+
+    <h3>Data, Storage, and Application Architecture</h3>
+    <ul>
+      <li>
+        Parity outlined app-storage design choices: shared state and logic in contract storage, larger files on Levitiy, live signals in Celerity, and device-specific data stored locally.
+      </li>
+      <li>
+        The Polkadot Devnet app model was described as using <code>.dot</code> apps through the Polkadot App, with a Host API for accounts, signing, chain connections, storage, and permissions while user keys remain under user control.
+      </li>
+      <li>
+        A shared geospatial service or SDK was proposed for Polkadot Products and JAM, including reusable primitives such as proximity queries, geofencing, spatial indexing, and verifiable location claims.
+      </li>
+      <li>
+        <strong>Avidity</strong> was described as using signed, backend-verified events checked against user whitelists before push notifications are delivered.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Ecosystem and Adoption</h2>
+
+    <h3>Public Sector and Real-World Use Cases</h3>
+    <ul>
+      <li>
+        <strong>Catamarca On-Chain</strong> officially launched at Casa de Gobierno in Argentina, with Catamarca’s provincial government receiving blockchain and digital governance training from PBA_Polkadot.
+      </li>
+      <li>
+        Polkadot Academy worked with Catamarca government officials on blockchain use cases for public institutions.
+      </li>
+      <li>
+        <strong>Decidimos</strong> sought feedback before a planned US$190,000 Medium Spender preimage to build a Polkadot payment rail for Potosí lithium revenue distribution, citing roughly US$104M/year in stablecoin settlement and 10M+ annual transactions.
+      </li>
+      <li>
+        Polkadot promoted machine-economy examples on the Devnet, such as token-based door access.
+      </li>
+    </ul>
+
+    <h3>Education, Arts, and Community Programs</h3>
+    <ul>
+      <li>
+        The Kusama Vision program was highlighted for allocating <strong>10M DOT</strong> across bounty pillars including privacy-preserving proof of personhood and zero-knowledge work.
+      </li>
+      <li>
+        The Kusama Vision Arts &amp; Social Experiments initiative began restructuring, with a curator stepping down.
+      </li>
+      <li>
+        The <strong>KSM Arts Initiative</strong> announced its first three supported projects: New Cryptographic Imaginaries, Minor Index, and Bankanga InterTropical, while reporting 44 proposals reviewed.
+      </li>
+      <li>
+        Polkadot Mexico’s education proposal remained a visible governance item, though with low reported support.
+      </li>
+      <li>
+        Polkadot Vibe Check episodes covered the Road to JAM, Kusama’s role in the JAM era, AI use cases, Polkadot Mexico’s university pilot, and Catamarca On-Chain updates.
+      </li>
+    </ul>
+
+    <h3>Parachains, App Chains, and Ecosystem Projects</h3>
+    <ul>
+      <li>
+        <strong>Robonomics</strong> wound down its Kusama parachain, para 2048, after final block #12,268,835 and moved production to Polkadot, with final Kusama XRT balances moving to Polkadot plus a 20% bonus.
+      </li>
+      <li>
+        A developer proposed an open-source Substrate/Polkadot DAO parachain template targeting Kusama and asked how third-party parachains could consume Individuality or proof-of-personhood results for one-person-one-vote governance.
+      </li>
+      <li>
+        <strong>Orbinum</strong> discussed joining the Polkadot ecosystem, contributing to Frontier around EVM compatibility, and later connected to Hyperbridge’s Gargantua testnet.
+      </li>
+      <li>
+        <strong>ArthNeura</strong> described a pre-testnet Substrate solo-chain for AI-agent identity, escrow, and disputes.
+      </li>
+      <li>
+        <strong>PoUC Network 1.0</strong> launched as an independent, unofficial Polkadot SDK experiment for verifiable useful contribution, with runtime pallets, a TypeScript SDK, and an Android edge-node app.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Kusama Developments</h2>
+    <p>
+      Kusama appeared repeatedly as both an experimental environment and a network in search of sharper direction.
+    </p>
+    <ul>
+      <li>
+        Strategy discussions questioned Kusama’s future after lower observed activity, including <strong>17 parachains</strong>, <strong>41 allocated cores</strong>, and roughly <strong>27% coretime use</strong>.
+      </li>
+      <li>
+        A proposed Kusama JAM Prime future suggested 16 total cores for five years, 450,000 JAMKB-equivalent footprint, protected KSM control, and Fellowship-led migration and maintenance.
+      </li>
+      <li>
+        A Kusama ParaID 2270 manager requested a Root-origin referendum to deregister an inactive parachain and unlock approximately <strong>235 KSM</strong>, while noting they could not cover the much larger Root-track decision deposit.
+      </li>
+      <li>
+        KusamaShield shipped stability and wallet-support improvements and later published a revised audit proposal after a previous referendum failed late in confirmation.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Market, Treasury, and Stablecoin Direction</h2>
+    <p>
+      Stablecoins became more prominent both as Treasury assets and as protocol infrastructure.
+    </p>
+    <ul>
+      <li>
+        dotUSD emerged as the main stablecoin governance item, with very strong support by month end.
+      </li>
+      <li>
+        Treasury stablecoin transfers improved visibility into non-DOT liquidity, with reported holdings including <strong>24.3M DOT</strong>, <strong>4.7M USDT</strong>, <strong>1.18M USDC</strong>, <strong>3M MYTH</strong>, and other assets.
+      </li>
+      <li>
+        A recurring payments proposal explored subscriptions for SaaS, node/RPC services, and DAO dues using stablecoin payments on Asset Hub.
+      </li>
+      <li>
+        Decidimos and Potosí lithium revenue distribution showed how Polkadot payment rails could be positioned for institutional or public-sector settlement flows.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Risks and Watch Items</h2>
+    <ul>
+      <li>
+        <strong>Governance legitimacy and accountability:</strong> The Fellowship salary debate, System Chain collator allocation concerns, and Kusama strategy discussions all point to growing demand for transparent selection criteria, measurable outcomes, and tighter funding conditions.
+      </li>
+      <li>
+        <strong>Infrastructure readiness:</strong> EVM RPC bottlenecks on Asset Hub and fragmented node-service funding suggest that production-grade developer experience still depends on stronger infrastructure coordination.
+      </li>
+      <li>
+        <strong>JAM migration complexity:</strong> The Road to JAM is becoming clearer, but implementation will require careful sequencing across Minimal Relay, offchain messaging, parachain services, Coretime, developer tooling, and Kusama/Polkadot coordination.
+      </li>
+      <li>
+        <strong>Devnet migration friction:</strong> The Product Devnet update required app reinstallations and possible republishing, showing that fast iteration still carries developer coordination costs.
+      </li>
+      <li>
+        <strong>Kusama utilization:</strong> Lower coretime usage and parachain activity make Kusama’s next strategic role an important unresolved question.
+      </li>
+      <li>
+        <strong>Stablecoin rollout execution:</strong> dotUSD had strong support, but its success will depend on liquidity, integrations, swaps, governance-managed risk, and user trust.
+      </li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Outlook</h2>
+    <p>
+      The coming month is likely to continue the same major threads: dotUSD implementation, the outcome of the keyless burn-account Wish for Change, further discussion around Fellowship funding, and more concrete JAM planning. The ecosystem also appears poised for continued experimentation on the Products Devnet, especially around AI agents, privacy-preserving identity, light-client access, and app infrastructure.
+    </p>
+    <p>
+      Overall, September showed Polkadot moving toward a more product-oriented and infrastructure-conscious phase: less emphasis on abstract roadmap discussion alone, and more emphasis on governance controls, developer surfaces, usable stablecoin rails, light-client UX, and privacy-first primitives.
+    </p>
+  </section>
+
+</body>
+</html>
